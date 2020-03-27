@@ -26,9 +26,9 @@ FORMS += \
     mainwindow.ui
 
 INCLUDEPATH += \
-        ../core
+    $$PWD/../core
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+win32-g++: LIBS += -L$$OUT_PWD/../core/ -lcore
+else:win32:!win32-g++:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -lcore
+else:win32:!win32-g++:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../core/debug/ -lcore
+else:unix: LIBS += -L$$OUT_PWD/../core/ -lcore

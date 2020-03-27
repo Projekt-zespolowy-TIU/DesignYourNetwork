@@ -11,17 +11,17 @@ namespace core {
     {
     }
 
-    const std::string ipv4add::asStringDec() const
+    std::string ipv4add::asStringDec() const
     {
         return ipv4parser::octetsToString(_ipAddress);
     }
 
-    const std::string ipv4add::asStringOct() const
+    std::string ipv4add::asStringOct() const
     {
         return ipv4parser::octetsToString(_ipAddress);
     }
 
-    const std::bitset<32> ipv4add::asBin() const
+    std::bitset<32> ipv4add::asBin() const
     {
         return _ipAddress;
     }

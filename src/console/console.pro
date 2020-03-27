@@ -18,20 +18,9 @@ SOURCES += \
         main.cpp
 
 INCLUDEPATH += \
-        ../core
+        $$PWD/../core
 
-CONFIG(release, debug|release) {
-    MY_VAR = "release"
-    message($$MY_VAR)
-}
-CONFIG(debug, debug|release) {
-    MY_VAR = "debug"
-    message($$MY_VAR)
-}
-
-LIBS += -L$$OUT_PWD/../core/$$MY_VAR -lcore
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+win32-g++: LIBS += -L$$OUT_PWD/../core/ -lcore
+else:win32:!win32-g++:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -lcore
+else:win32:!win32-g++:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../core/debug/ -lcore
+else:unix: LIBS += -L$$OUT_PWD/../core/ -lcore

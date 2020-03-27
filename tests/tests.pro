@@ -3,6 +3,7 @@ TEMPLATE = app
 CONFIG -= app_bundle
 CONFIG += console
 CONFIG += c++17
+CONFIG += testcase
 
 
 SOURCES += \
@@ -11,15 +12,10 @@ SOURCES += \
 
 INCLUDEPATH += \
         ../external \
-        ../src/core
+        $$PWD/../src/core
 
-CONFIG(release, debug|release) {
-    MY_VAR = "release"
-    message($$MY_VAR)
-}
-CONFIG(debug, debug|release) {
-    MY_VAR = "debug"
-    message($$MY_VAR)
-}
+win32-g++: LIBS += -L$$OUT_PWD/../src/core/ -lcore
+else:win32:!win32-g++:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/core/release/ -lcore
+else:win32:!win32-g++:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/core/debug/ -lcore
+else:unix: LIBS += -L$$OUT_PWD/../src/core/ -lcore
 
-LIBS += -L$$OUT_PWD/../src/core/$$MY_VAR -lcore

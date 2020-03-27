@@ -6,7 +6,7 @@ CONFIG += c++17
 
 
 SOURCES += \
-    ipv4addTests.cpp \
+    ipv4parserTests.cpp \
     main.cpp
 
 INCLUDEPATH += \

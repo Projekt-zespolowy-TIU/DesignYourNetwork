@@ -9,7 +9,7 @@ namespace core{
     {
     public:
         static std::bitset<32> stringDecimal2octets(std::string decimalDottedAddress);
-        static std::string octetsToString(const std::bitset<32> &octetsIP);
+        static std::string octetsToString(const std::bitset<32>& octetsIP);
     };
 }
 

@@ -21,13 +21,13 @@ namespace core {
         return _ipAddress;
     }
 
-    std::ostream & operator << (std::ostream &out, const ipv4add &c)
+    std::ostream& operator << (std::ostream& out, const ipv4add& c)
     {
         out << ipv4parser::octetsToString(c.asBin()) << std::endl;
         return out;
     }
 
-    std::istream & operator >> (std::istream &in,  ipv4add &c)
+    std::istream& operator >> (std::istream& in, ipv4add& c)
     {
         std::string a;
         in >> a;

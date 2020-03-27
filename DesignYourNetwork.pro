@@ -1,11 +1,17 @@
 TEMPLATE = subdirs
 
-SUBDIRS += \    
-    src/core \
-    src/console \
-    src/widgetApp \
-    tests
+core.subdir = src/core
 
-tests.depends = src/core
-src/console.depends = src/core
-src/widgetApp.depends = src/core
+console.subdir = src/console
+
+widgetApp.subdir = src/widgetApp
+
+SUBDIRS += \
+    core \
+    console \
+    widgetApp \
+    tests \
+
+tests.depends = core
+console.depends = core
+widgetApp.depends = core

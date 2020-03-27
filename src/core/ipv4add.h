@@ -13,9 +13,9 @@ namespace core{
         ipv4add(const std::bitset<32>& ipaddress): _ipAddress(ipaddress) {}
         ipv4add(std::string ipaddress);
 
-        const std::string asStringDec() const;
-        const std::string asStringOct() const;
-        const std::bitset<32> asBin() const;
+        std::string asStringDec() const;
+        std::string asStringOct() const;
+        std::bitset<32> asBin() const;
 
         friend std::ostream& operator << (std::ostream& out, const ipv4add& c);
         friend std::istream& operator >> (std::istream& in,  ipv4add& c);

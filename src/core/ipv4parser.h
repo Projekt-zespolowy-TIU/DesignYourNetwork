@@ -2,14 +2,14 @@
 #define IPV4PARSER_H
 
 #include <string>
-#include <bitset>
+#include <boost/dynamic_bitset.hpp>
 
 namespace core{
     class ipv4parser
     {
     public:
-        static std::bitset<32> stringDecimal2octets(std::string decimalDottedAddress);
-        static std::string octetsToString(const std::bitset<32>& octetsIP);
+        static boost::dynamic_bitset<> stringDecimal2octets(std::string decimalDottedAddress);
+        static std::string octetsToString(const boost::dynamic_bitset<>& octetsIP);
     };
 }
 

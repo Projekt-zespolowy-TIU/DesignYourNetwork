@@ -1,9 +1,10 @@
 #include "ipv4add.h"
-#include "ipv4parser.h"
 
 #include <string>
-#include <bitset>
 #include <iostream>
+#include <boost/dynamic_bitset.hpp>
+
+#include "ipv4parser.h"
 
 namespace core {
     ipv4add::ipv4add(std::string ipaddress):
@@ -21,7 +22,7 @@ namespace core {
         return ipv4parser::octetsToString(_ipAddress);
     }
 
-    std::bitset<32> ipv4add::asBin() const
+    boost::dynamic_bitset<> ipv4add::asBin() const
     {
         return _ipAddress;
     }

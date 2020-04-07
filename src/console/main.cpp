@@ -1,8 +1,8 @@
 #include <QCoreApplication>
 #include <iostream>
 
-#include "ipv4add.h"
-#include "ipv4parser.h"
+#include "IPv4address.h"
+#include "IPv4parser.h"
 
 using namespace core;
 
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ipv4add addressIPv4;
+    IPv4address addressIPv4;
 
     std::cout << "Podaj adres IPv4: ";    
     std::cin >> addressIPv4;

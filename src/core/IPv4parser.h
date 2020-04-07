@@ -5,7 +5,7 @@
 #include <boost/dynamic_bitset.hpp>
 
 namespace core{
-    class ipv4parser
+    class IPv4parser
     {
     public:
         static boost::dynamic_bitset<> stringDecimal2octets(std::string decimalDottedAddress);

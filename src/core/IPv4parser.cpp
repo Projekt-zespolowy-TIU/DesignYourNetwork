@@ -1,10 +1,10 @@
-#include "ipv4parser.h"
+#include "IPv4parser.h"
 
 #include <string>
 #include <boost/dynamic_bitset.hpp>
 
 namespace core {
-    boost::dynamic_bitset<> ipv4parser::stringDecimal2octets(std::string IP)
+    boost::dynamic_bitset<> IPv4parser::stringDecimal2octets(std::string IP)
     {
         boost::dynamic_bitset<> octetContainer(32);
             for(short i = 0; i < 4; i++)
@@ -18,7 +18,7 @@ namespace core {
             return octetContainer;
     }
 
-    std::string ipv4parser::octetsToString(const boost::dynamic_bitset<>& octetsIP)
+    std::string IPv4parser::octetsToString(const boost::dynamic_bitset<>& octetsIP)
     {
         std::string stringBinary;
         boost::to_string(octetsIP, stringBinary);

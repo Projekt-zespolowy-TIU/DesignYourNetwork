@@ -6,11 +6,11 @@ CONFIG += staticlib
 include(../../common.pri)
 
 SOURCES += \
-    ipv4add.cpp \
-    ipv4parser.cpp
+    IPv4address.cpp \
+    IPv4parser.cpp
 
 HEADERS += \
-    ipv4add.h \
-    ipv4parser.h
+    IPv4address.h \
+    IPv4parser.h
 
 TARGET = core

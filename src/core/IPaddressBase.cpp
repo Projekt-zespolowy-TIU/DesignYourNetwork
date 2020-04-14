@@ -7,6 +7,7 @@
 #include "coreUtils.h"
 #include "IPv4address.h"
 #include "IPv4parser.h"
+#include "IPv4mask.h"
 
 namespace core {
     IPaddressBase IPaddressBase::operator& (const IPaddressBase& var) const
@@ -18,11 +19,17 @@ namespace core {
     {
         std::string tempS;
         in >> tempS;
+        IPv4parser parser4;
 
-        if(dynamic_cast<IPv4address*>(&b))
+        if(dynamic_cast<IPv4mask*>(&b))
         {
-            IPv4parser parser;
-            b = parser.ipFromString(tempS);
+            auto regularV4address = parser4.ipFromString(tempS);
+            IPv4mask mask_constraints{regularV4address._IpAddress};
+            b = mask_constraints;
+        }
+        else if(dynamic_cast<IPv4address*>(&b))
+        {
+            b = parser4.ipFromString(tempS);
         }
         //else if(dynamic_cast<IPv6address*>(&b))
         else throw NotImplemented{}; //TODO: error handling

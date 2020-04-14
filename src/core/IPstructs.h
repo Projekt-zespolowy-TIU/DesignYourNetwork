@@ -7,8 +7,8 @@
 namespace core {
     struct NetworkBase
     {
-        std::unique_ptr<IPaddressBase> Ip;
-        std::unique_ptr<IPaddressBase> NetMask;
+        std::shared_ptr<IPaddressBase> Ip;
+        std::shared_ptr<IPaddressBase> NetMask;
     };
 
     struct Subnet: public NetworkBase
@@ -18,12 +18,12 @@ namespace core {
 
     struct Networkv4: NetworkBase
     {
-        Networkv4() { Ip = std::make_unique<IPv4address>(); NetMask = std::make_unique<IPv4mask>(); };
+        Networkv4() { Ip = std::make_shared<IPv4address>(); NetMask = std::make_shared<IPv4mask>(); };
     };
 
     struct Subnetv4: public Subnet
     {
-        Subnetv4() { Ip = std::make_unique<IPv4address>(); NetMask = std::make_unique<IPv4mask>(); };
+        Subnetv4() { Ip = std::make_shared<IPv4address>(); NetMask = std::make_shared<IPv4mask>(); };
     };
 }
 

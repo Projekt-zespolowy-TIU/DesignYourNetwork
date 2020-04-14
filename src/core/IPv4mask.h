@@ -11,6 +11,7 @@ namespace core {
     public:
         IPv4mask() {};
         IPv4mask(const boost::dynamic_bitset<>& maskAddress);
+        short getPrefix();
     };
 }
 

@@ -21,4 +21,9 @@ namespace core {
         }
         throw std::invalid_argument("IP is not a mask");
     }
+
+    short IPv4mask::getPrefix()
+    {
+        return _IpAddress.count();
+    }
 }

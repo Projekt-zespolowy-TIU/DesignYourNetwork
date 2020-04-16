@@ -3,10 +3,10 @@
 #include <exception>
 #include <boost/dynamic_bitset.hpp>
 
-#include "IPv4address.h"
+#include "IPmaskBase.h"
 
 namespace core {
-    IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress): IPv4address{maskAddress}
+    IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress): IPmaskBase{maskAddress}
     {
         boost::dynamic_bitset<> bits(32);
         bits.set(); //255.255.255.255
@@ -20,10 +20,5 @@ namespace core {
             }
         }
         throw std::invalid_argument("IP is not a mask");
-    }
-
-    short IPv4mask::getPrefix()
-    {
-        return _IpAddress.count();
     }
 }

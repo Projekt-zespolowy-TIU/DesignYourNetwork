@@ -3,15 +3,14 @@
 
 #include <boost/dynamic_bitset.hpp>
 
-#include "IPv4address.h"
+#include "IPmaskBase.h"
 
 namespace core {
-    class IPv4mask final: public IPv4address
+    class IPv4mask final: public IPmaskBase
     {
     public:
-        IPv4mask() {};
+        IPv4mask() : IPmaskBase(boost::dynamic_bitset<>(32)) {};
         IPv4mask(const boost::dynamic_bitset<>& maskAddress);
-        short getPrefix();
     };
 }
 

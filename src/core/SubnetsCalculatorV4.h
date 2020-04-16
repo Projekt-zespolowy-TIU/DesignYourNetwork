@@ -7,7 +7,7 @@
 #include "IPstructs.h"
 
 namespace core {
-    class SubnetsCalculator
+    class SubnetsCalculatorV4
     {
     public:
         int calcSubnets(const std::shared_ptr<NetworkBase>& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets);

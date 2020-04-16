@@ -1,4 +1,4 @@
-#include "SubnetsCalculator.h"
+#include "SubnetsCalculatorV4.h"
 
 #include <algorithm>
 #include <boost/dynamic_bitset.hpp>
@@ -6,7 +6,7 @@
 #include "coreUtils.h"
 
 namespace core {
-    int SubnetsCalculator::calcSubnets(const std::shared_ptr<NetworkBase>& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets)
+    int SubnetsCalculatorV4::calcSubnets(const std::shared_ptr<NetworkBase>& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets)
     {
         auto _subNets = subNets;
 
@@ -30,7 +30,7 @@ namespace core {
         return 0;
     }
 
-    IPmaskBase SubnetsCalculator::_chooseSubnetMask(const long long& desiredHostsNumber)
+    IPmaskBase SubnetsCalculatorV4::_chooseSubnetMask(const long long& desiredHostsNumber)
     {
         unsigned short numberOfHostBits = 1;
         long long int countHosts = 0;
@@ -44,7 +44,7 @@ namespace core {
         return boost::dynamic_bitset<>(32, 4294967295 - (countHosts - 1));
     }
 
-    IPaddressBase SubnetsCalculator::_chooseSubnetIP(const IPaddressBase& mainNetIP, const IPmaskBase& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs)
+    IPaddressBase SubnetsCalculatorV4::_chooseSubnetIP(const IPaddressBase& mainNetIP, const IPmaskBase& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs)
     {
         IPaddressBase pretenderAddress{mainNetIP};
         unsigned long long int netBits = 1;

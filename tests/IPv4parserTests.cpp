@@ -6,6 +6,7 @@
 #include "IPv4address.h"
 #include "IPv4parser.h"
 #include "IPv4mask.h"
+#include "SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -67,6 +68,40 @@ namespace IPv4parserTest {
             THEN("Ctor throws error"){
                 REQUIRE_THROWS_AS(IPv4mask{bitset_ip}, std::invalid_argument);
             }
+        }
+    }
+
+    TEST_CASE("SubnetsCalculatorV4 Tests"){
+        std::shared_ptr<NetworkBase> net = std::make_shared<Networkv4>();
+        std::vector<std::shared_ptr<Subnet>> subs;
+
+        SECTION("Subneting with constant mask length")
+        {
+            *net->Ip = IPv4address{boost::dynamic_bitset<>(32, 3232235520)}; //192.168.0.0
+            *net->NetMask = IPv4mask{boost::dynamic_bitset<>(32, 4294967232)}; //255.255.255.192 /26
+
+            for(unsigned short i = 0; i <= 4; i++)
+            {
+                subs.push_back(std::make_shared<Subnetv4>());
+                subs.back()->HostNumber = 10;
+            }
+
+            SubnetsCalculatorV4 calc;
+            calc.calcSubnets(net, subs);
+
+            for(const auto& sub : subs)
+                CHECK(sub->NetMask->asStringDec() == "255.255.255.240");
+
+            std::vector<std::string> calculatedNetworks;
+            calculatedNetworks.emplace_back("192.168.0.0");
+            calculatedNetworks.emplace_back("192.168.0.16");
+            calculatedNetworks.emplace_back("192.168.0.32");
+            calculatedNetworks.emplace_back("192.168.0.48");
+
+            for(const auto& var : calculatedNetworks)
+                CHECK(std::any_of(subs.begin(), subs.end(), [&var](std::shared_ptr<Subnet> x){
+                    return x->Ip->asStringDec() == var;
+                }));
         }
     }
 }

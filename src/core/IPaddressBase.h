@@ -16,6 +16,8 @@ namespace core {
         std::string asStringDec() const override final;
 
         IPaddressBase operator& (const IPaddressBase& var) const;
+        IPaddressBase operator| (const IPaddressBase& var) const;
+        bool operator==(const IPaddressBase&);
 
         friend std::istream& operator>>(std::istream&, IPaddressBase&);
     protected:

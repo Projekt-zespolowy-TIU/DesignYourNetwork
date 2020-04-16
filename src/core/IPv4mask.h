@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IIPMASK_H
 #define IIPMASK_H
 

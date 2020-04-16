@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IPV4ADDRESS_H
 #define IPV4ADDRESS_H
 

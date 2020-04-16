@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IIPPARSER_H
 #define IIPPARSER_H
 

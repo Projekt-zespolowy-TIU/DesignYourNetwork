@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IPV4PARSER_H
 #define IPV4PARSER_H
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IPADDRESSBASE_H
 #define IPADDRESSBASE_H
 

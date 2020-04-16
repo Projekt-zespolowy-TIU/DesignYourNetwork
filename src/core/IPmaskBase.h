@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IPMASK_H
 #define IPMASK_H
 

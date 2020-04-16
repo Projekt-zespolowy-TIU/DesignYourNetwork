@@ -1,3 +1,4 @@
+#pragma once
 #ifndef COREUTILS_H
 #define COREUTILS_H
 

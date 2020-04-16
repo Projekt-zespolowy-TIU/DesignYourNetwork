@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IIPADDRESS_H
 #define IIPADDRESS_H
 

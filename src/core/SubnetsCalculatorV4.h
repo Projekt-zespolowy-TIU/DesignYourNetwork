@@ -1,5 +1,6 @@
-#ifndef SUBNETSCALCULATOR_H
-#define SUBNETSCALCULATOR_H
+#pragma once
+#ifndef SUBNETSCALCULATORV4_H
+#define SUBNETSCALCULATORV4_H
 
 #include <vector>
 #include <memory>
@@ -17,4 +18,4 @@ namespace core {
     };
 }
 
-#endif // SUBNETSCALCULATOR_H
+#endif // SUBNETSCALCULATORV4_H

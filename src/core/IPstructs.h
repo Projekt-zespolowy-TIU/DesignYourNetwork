@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IPSTRUCTS_H
 #define IPSTRUCTS_H
 

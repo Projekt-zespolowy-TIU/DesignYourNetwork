@@ -8,6 +8,7 @@ include(../../common.pri)
 SOURCES += \
     IPaddressBase.cpp \
     IPv4mask.cpp \
+    SubnetsCalculator.cpp \
     IPmaskBase.cpp
 
 HEADERS += \
@@ -19,6 +20,7 @@ HEADERS += \
     IPv4address.h \
     IPv4parser.h \
     IPv4mask.h \
+    SubnetsCalculator.h \
     coreUtils.h
 
 TARGET = core

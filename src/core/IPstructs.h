@@ -8,7 +8,7 @@ namespace core {
     struct NetworkBase
     {
         std::shared_ptr<IPaddressBase> Ip;
-        std::shared_ptr<IPaddressBase> NetMask;
+        std::shared_ptr<IPmaskBase> NetMask;
     };
 
     struct Subnet: public NetworkBase

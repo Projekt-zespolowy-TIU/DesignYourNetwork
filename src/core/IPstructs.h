@@ -13,7 +13,7 @@ namespace core {
 
     struct Subnet: public NetworkBase
     {
-        int HostNumber = -1;
+        long long int HostNumber = -10;
     };
 
     struct Networkv4: NetworkBase

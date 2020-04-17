@@ -6,7 +6,7 @@
 #include "coreUtils.h"
 
 namespace core {
-    int SubnetsCalculatorV4::calcSubnets(const std::shared_ptr<NetworkBase>& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets)
+    int SubnetsCalculatorV4::calcSubnets(const NetworkBase& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets)
     {
         auto _subNets = subNets;
 
@@ -15,14 +15,14 @@ namespace core {
         });
 
         //start specific v4 implementation; later should be universaly refactored
-        if(_subNets.size() > std::pow(2, 30 - mainNet->NetMask->getPrefix()) )
+        if(_subNets.size() > std::pow(2, 30 - mainNet.NetMask->getPrefix()) )
             throw NotImplemented{"too much subnets"};
 
         //before enter below loop should check sum of all max_hosts from passed subnets and return error when exceed max
         for(const auto& _subNet : _subNets)
         {
             auto Mask = _chooseSubnetMask(_subNet->HostNumber); //TODO: error handling when choosen mask exceeds main mask, check if such situation's even possible
-            auto Address = _chooseSubnetIP(*mainNet->Ip, Mask, _subNets); //TODO: error handling
+            auto Address = _chooseSubnetIP(*mainNet.Ip, Mask, _subNets); //TODO: error handling
             *_subNet->Ip = Address;
             *_subNet->NetMask = Mask;
         }

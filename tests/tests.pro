@@ -7,7 +7,7 @@ CONFIG += testcase
 include(../common.pri)
 
 SOURCES += \
-    ipv4parserTests.cpp \
+    IPv4parserTests.cpp \
     main.cpp
 
 INCLUDEPATH += \

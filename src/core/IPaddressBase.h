@@ -18,7 +18,8 @@ namespace core {
 
         IPaddressBase operator& (const IPaddressBase& var) const;
         IPaddressBase operator| (const IPaddressBase& var) const;
-        bool operator==(const IPaddressBase&);
+        bool operator==(const IPaddressBase&) const;
+        bool operator!=(const IPaddressBase&) const;
 
         friend std::istream& operator>>(std::istream&, IPaddressBase&);
     protected:

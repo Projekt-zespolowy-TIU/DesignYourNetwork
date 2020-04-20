@@ -48,7 +48,7 @@ namespace core {
         return tempAddress.to_string();
     }
 
-    bool IPaddressBase::operator==(const IPaddressBase& x)
+    bool IPaddressBase::operator==(const IPaddressBase& x) const
     {
         return this->_IpAddress == x._IpAddress;
     }
@@ -56,5 +56,10 @@ namespace core {
     IPaddressBase IPaddressBase::operator| (const IPaddressBase& var) const
     {
         return (this->_IpAddress | var._IpAddress);
+    }
+
+    bool IPaddressBase::operator!=(const IPaddressBase& x) const
+    {
+        return this->_IpAddress != x._IpAddress;
     }
 }

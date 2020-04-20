@@ -12,7 +12,7 @@ using namespace core;
 
 namespace IPv4parserTest {
     TEST_CASE("IPv4parser Tests"){
-        IPv4parser ip4parser;
+        const IPv4parser ip4parser;
 
         SECTION("Parsing string with valid ip address into IP object"){
             REQUIRE_NOTHROW(ip4parser.ipFromString("192.168.0.1"));
@@ -30,9 +30,9 @@ namespace IPv4parserTest {
         , bitset_mask1 {32, 4294967040} //255.255.255.0
         , bitset_mask2 {32, 4293918720}; //255.240.0.0
 
-        IPaddressBase ip4address {bitset_ip};
-        IPaddressBase mask1 {bitset_mask1};
-        IPaddressBase mask2{bitset_mask2};
+        const IPaddressBase ip4address {bitset_ip};
+        const IPaddressBase mask1 {bitset_mask1};
+        const IPaddressBase mask2{bitset_mask2};
 
         SECTION("asStringDec conversion"){
             REQUIRE(ip4address.asStringDec() == "192.168.0.1");
@@ -43,6 +43,13 @@ namespace IPv4parserTest {
             CHECK(expected.asStringDec() == "192.168.0.0");
             expected = ip4address & mask2;
             CHECK(expected.asStringDec() == "192.160.0.0");
+        }
+        SECTION("operator =="){
+            const IPaddressBase compareME{bitset_ip};
+            CHECK(ip4address == compareME);
+        }
+        SECTION("operator !="){
+            CHECK(mask1 != mask2);
         }
     }
 
@@ -72,13 +79,13 @@ namespace IPv4parserTest {
     }
 
     TEST_CASE("SubnetsCalculatorV4 Tests"){
-        std::shared_ptr<NetworkBase> net = std::make_shared<Networkv4>();
+        Networkv4 net;
         std::vector<std::shared_ptr<Subnet>> subs;
 
         SECTION("Subneting with constant mask length")
         {
-            *net->Ip = IPv4address{boost::dynamic_bitset<>(32, 3232235520)}; //192.168.0.0
-            *net->NetMask = IPv4mask{boost::dynamic_bitset<>(32, 4294967232)}; //255.255.255.192 /26
+            *net.Ip = IPv4address{boost::dynamic_bitset<>(32, 3232235520)}; //192.168.0.0
+            *net.NetMask = IPv4mask{boost::dynamic_bitset<>(32, 4294967232)}; //255.255.255.192 /26
 
             for(unsigned short i = 0; i <= 4; i++)
             {

@@ -13,7 +13,7 @@ namespace core{
 
         friend std::ostream& operator<< (std::ostream& out, const IIPaddress& c)
         {
-            out << c.asStringDec() << std::endl;
+            out << c.asStringDec() << std::flush;
             return out;
         };
 

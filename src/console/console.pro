@@ -3,7 +3,7 @@ QT -= gui
 CONFIG += console
 CONFIG -= app_bundle
 
-TARGET = "DesignYourNetwork(console)"
+TARGET = "DesignYourNetwork_console"
 
 include(../../common.pri)
 

@@ -2,7 +2,7 @@
 #ifndef IPV4PARSER_H
 #define IPV4PARSER_H
 
-#include <string>
+#include <QString>
 #include <memory>
 #include <exception>
 #include <boost/dynamic_bitset.hpp>
@@ -16,16 +16,16 @@ namespace core{
     class IPv4parser final: public IIPparser<C>
     {
     public:
-        C ipFromString(const std::string&) const final override;
+        C ipFromString(const QString&) const final override;
     };
 
     template <class C>
-    C IPv4parser<C>::ipFromString(const std::string& IP) const
+    C IPv4parser<C>::ipFromString(const QString& IP) const
     {
         boost::asio::ip::address_v4 converted;
 
         try {
-            converted = boost::asio::ip::make_address_v4(IP);
+            converted = boost::asio::ip::make_address_v4(IP.toStdString());
         } catch (const boost::system::system_error&) {
             std::throw_with_nested(std::runtime_error("Wrong input IP address"));
         }

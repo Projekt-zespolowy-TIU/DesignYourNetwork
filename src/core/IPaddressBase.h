@@ -4,7 +4,7 @@
 
 #include <boost/dynamic_bitset.hpp>
 #include <iostream>
-#include <string>
+#include <QString>
 
 #include "IIPaddress.h"
 
@@ -14,7 +14,7 @@ namespace core {
     public:
         IPaddressBase(const boost::dynamic_bitset<>& ipaddress): _IpAddress{ipaddress} {};
 
-        std::string asStringDec() const override final;
+        QString asStringDec() const override final;
 
         IPaddressBase operator& (const IPaddressBase& var) const;
         IPaddressBase operator| (const IPaddressBase& var) const;

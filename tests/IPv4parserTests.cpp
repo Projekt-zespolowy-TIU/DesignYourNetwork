@@ -61,7 +61,7 @@ namespace IPv4parserTest {
             , boost::dynamic_bitset<> {32, 0} //0.0.0.0
             };
 
-            for(const auto &element : bitsets)
+            for(const auto& element : bitsets)
             {
                 std::string temps;
                 to_string(element, temps);
@@ -99,7 +99,7 @@ namespace IPv4parserTest {
             for(const auto& sub : subs)
                 CHECK(sub->NetMask->asStringDec() == "255.255.255.240");
 
-            std::vector<std::string> calculatedNetworks;
+            std::vector<QString> calculatedNetworks;
             calculatedNetworks.emplace_back("192.168.0.0");
             calculatedNetworks.emplace_back("192.168.0.16");
             calculatedNetworks.emplace_back("192.168.0.32");

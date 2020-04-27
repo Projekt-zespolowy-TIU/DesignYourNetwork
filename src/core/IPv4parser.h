@@ -9,9 +9,10 @@
 #include <boost/asio/ip/address_v4.hpp>
 
 #include "IIPparser.h"
-#include "IPv4address.h"
 
 namespace core{
+    class IPv4address; //forward declaration
+
     template <class C = IPv4address>
     class IPv4parser final: public IIPparser<C>
     {

@@ -2,6 +2,8 @@
 #ifndef IPSTRUCTS_H
 #define IPSTRUCTS_H
 
+#include <memory>
+
 #include "IPv4address.h"
 #include "IPv4mask.h"
 

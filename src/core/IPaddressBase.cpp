@@ -48,6 +48,20 @@ namespace core {
         return tempAddress.to_string().c_str();
     }
 
+    QString IPaddressBase::asStringBin() const
+    {
+        std::string stringBinary;
+        if(_IpAddress.size() == 32)
+        {
+            boost::to_string(_IpAddress, stringBinary);
+            for(short i = 8; i <= 26; i += 9)
+                stringBinary.insert(stringBinary.begin()+ i, '.');
+            return stringBinary.c_str();
+        }
+        else if(_IpAddress.size() == 128) throw NotImplemented{"Printing ipv6 is not implemented"};
+        else throw NotImplemented{}; //TODO: error handling
+    }
+
     bool IPaddressBase::operator==(const IPaddressBase& x) const
     {
         return this->_IpAddress == x._IpAddress;

@@ -14,7 +14,7 @@ namespace core {
     public:
         IPaddressBase(const boost::dynamic_bitset<>& ipaddress): _IpAddress{ipaddress} {};
 
-        QString asStringDec() const override final;
+        QString asStringDec() const final;
         QString asStringBin() const final;
 
         IPaddressBase operator& (const IPaddressBase& var) const;

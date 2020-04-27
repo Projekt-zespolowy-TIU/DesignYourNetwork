@@ -16,7 +16,7 @@ namespace core{
     class IPv4parser final: public IIPparser<C>
     {
     public:
-        C ipFromString(const QString&) const final override;
+        C ipFromString(const QString&) const final;
     };
 
     template <class C>

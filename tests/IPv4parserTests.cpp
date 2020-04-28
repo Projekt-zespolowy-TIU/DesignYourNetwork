@@ -32,11 +32,15 @@ namespace IPv4parserTest {
 
         const IPaddressBase ip4address {bitset_ip};
         const IPaddressBase mask1 {bitset_mask1};
-        const IPaddressBase mask2{bitset_mask2};
+        const IPaddressBase mask2 {bitset_mask2};
 
         SECTION("asStringDec conversion"){
             REQUIRE(ip4address.asStringDec() == "192.168.0.1");
             REQUIRE(mask2.asStringDec() == "255.240.0.0");
+        }
+        SECTION("asStringBin conversion"){
+            REQUIRE(ip4address.asStringBin() == "11000000.10101000.00000000.00000001");
+            REQUIRE(mask2.asStringBin() == "11111111.11110000.00000000.00000000");
         }
         SECTION("AND operation wit IP and mask"){
             IPaddressBase expected = ip4address & mask1;
@@ -61,7 +65,7 @@ namespace IPv4parserTest {
             , boost::dynamic_bitset<> {32, 0} //0.0.0.0
             };
 
-            for(const auto &element : bitsets)
+            for(const auto& element : bitsets)
             {
                 std::string temps;
                 to_string(element, temps);
@@ -99,7 +103,7 @@ namespace IPv4parserTest {
             for(const auto& sub : subs)
                 CHECK(sub->NetMask->asStringDec() == "255.255.255.240");
 
-            std::vector<std::string> calculatedNetworks;
+            std::vector<QString> calculatedNetworks;
             calculatedNetworks.emplace_back("192.168.0.0");
             calculatedNetworks.emplace_back("192.168.0.16");
             calculatedNetworks.emplace_back("192.168.0.32");

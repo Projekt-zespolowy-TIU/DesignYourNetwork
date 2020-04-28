@@ -2,14 +2,14 @@
 #ifndef IIPPARSER_H
 #define IIPPARSER_H
 
-#include <string>
+#include <QString>
 
 namespace core{
     template <class C>
     class IIPparser
     {
     public:
-        virtual C ipFromString(const std::string&) const = 0;
+        virtual C ipFromString(const QString&) const = 0;
         virtual ~IIPparser() = default;
 
     protected:

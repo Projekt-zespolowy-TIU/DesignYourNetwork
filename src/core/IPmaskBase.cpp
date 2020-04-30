@@ -12,13 +12,13 @@ namespace core{
             {
                 bits.flip(i);
                 if(maskAddress == bits) return;
-            }
-        }
+            };
+        };
         throw std::invalid_argument("IP is not a mask");
-    }
+    };
 
     short IPmaskBase::getPrefix() const
     {
         return _IpAddress.count();
-    }
-}
+    };
+};

@@ -16,6 +16,6 @@ namespace core {
         IPmaskBase _chooseSubnetMask(const long long& desiredHostsNumber);
         IPaddressBase _chooseSubnetIP(const IPaddressBase& mainNetIP, const IPmaskBase& pretentMask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs);
     };
-}
+};
 
 #endif // SUBNETSCALCULATORV4_H

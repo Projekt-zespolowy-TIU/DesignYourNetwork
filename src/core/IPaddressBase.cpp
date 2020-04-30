@@ -13,7 +13,7 @@ namespace core {
     IPaddressBase IPaddressBase::operator& (const IPaddressBase& var) const
     {
         return (this->_IpAddress & var._IpAddress);
-    }
+    };
 
     std::istream& operator>>(std::istream& in, IPaddressBase& b)
     {
@@ -35,7 +35,7 @@ namespace core {
         else throw NotImplemented{}; //TODO: error handling
 
         return  in;
-    }
+    };
 
     QString IPaddressBase::asStringDec() const
     {
@@ -46,7 +46,7 @@ namespace core {
         else throw NotImplemented{}; //TODO: error handling
 
         return tempAddress.to_string().c_str();
-    }
+    };
 
     QString IPaddressBase::asStringBin() const
     {
@@ -60,20 +60,20 @@ namespace core {
         }
         else if(_IpAddress.size() == 128) throw NotImplemented{"Printing ipv6 is not implemented"};
         else throw NotImplemented{}; //TODO: error handling
-    }
+    };
 
     bool IPaddressBase::operator==(const IPaddressBase& x) const
     {
         return this->_IpAddress == x._IpAddress;
-    }
+    };
 
     IPaddressBase IPaddressBase::operator| (const IPaddressBase& var) const
     {
         return (this->_IpAddress | var._IpAddress);
-    }
+    };
 
     bool IPaddressBase::operator!=(const IPaddressBase& x) const
     {
         return this->_IpAddress != x._IpAddress;
-    }
-}
+    };
+};

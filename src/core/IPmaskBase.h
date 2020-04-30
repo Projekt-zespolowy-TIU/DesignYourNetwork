@@ -11,5 +11,6 @@ namespace core {
         IPmaskBase(const boost::dynamic_bitset<>& maskAddress);
         short getPrefix() const;
     };
-}
+};
+
 #endif // IPMASK_H

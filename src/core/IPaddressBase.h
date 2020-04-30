@@ -26,8 +26,6 @@ namespace core {
     protected:
         boost::dynamic_bitset<> _IpAddress;
     };
-
-
-}
+};
 
 #endif // IPADDRESSBASE_H

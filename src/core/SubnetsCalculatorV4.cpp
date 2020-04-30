@@ -25,10 +25,10 @@ namespace core {
             auto Address = _chooseSubnetIP(*mainNet.Ip, Mask, _subNets); //TODO: error handling
             *_subNet->Ip = Address;
             *_subNet->NetMask = Mask;
-        }
+        };
         //end of specific v4 implementation
         return 0;
-    }
+    };
 
     IPmaskBase SubnetsCalculatorV4::_chooseSubnetMask(const long long& desiredHostsNumber)
     {
@@ -39,10 +39,10 @@ namespace core {
         {
             countHosts = std::pow(2, numberOfHostBits);
             numberOfHostBits++;
-        }
+        };
 
         return boost::dynamic_bitset<>(32, 4294967295 - (countHosts - 1));
-    }
+    };
 
     IPaddressBase SubnetsCalculatorV4::_chooseSubnetIP(const IPaddressBase& mainNetIP, const IPmaskBase& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs)
     {
@@ -56,7 +56,7 @@ namespace core {
             IPv4address NetWildCard{create};
             pretenderAddress = mainNetIP | NetWildCard;
             netBits++;
-        }
+        };
         return pretenderAddress;
-    }
-}
+    };
+};

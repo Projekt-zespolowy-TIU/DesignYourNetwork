@@ -9,7 +9,8 @@ SOURCES += \
     IPaddressBase.cpp \
     IPv4mask.cpp \
     SubnetsCalculatorV4.cpp \
-    IPmaskBase.cpp
+    IPmaskBase.cpp \
+    coreUtils.cpp
 
 HEADERS += \
     IIPaddress.h \

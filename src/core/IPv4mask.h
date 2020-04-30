@@ -13,6 +13,6 @@ namespace core {
         IPv4mask() : IPmaskBase(boost::dynamic_bitset<>(32)) {};
         IPv4mask(const boost::dynamic_bitset<>& maskAddress);
     };
-}
+};
 
 #endif // IIPMASK_H

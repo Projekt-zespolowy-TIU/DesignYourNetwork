@@ -28,6 +28,6 @@ namespace core {
     {
         Subnetv4() { Ip = std::make_shared<IPv4address>(); NetMask = std::make_shared<IPv4mask>(); };
     };
-}
+};
 
 #endif // IPSTRUCTS_H

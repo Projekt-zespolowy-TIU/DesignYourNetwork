@@ -6,5 +6,5 @@
 
 namespace core {
     IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress): IPmaskBase{maskAddress}
-    {}
-}
+    {};
+};

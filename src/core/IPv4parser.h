@@ -29,11 +29,11 @@ namespace core{
             converted = boost::asio::ip::make_address_v4(IP.toStdString());
         } catch (const boost::system::system_error&) {
             std::throw_with_nested(std::runtime_error("Wrong input IP address"));
-        }
+        };
 
         boost::dynamic_bitset<> octetContainer(32, converted.to_ulong());
         return std::move(octetContainer);
-    }
-}
+    };
+};
 
 #endif // IPV4PARSER_H

@@ -13,6 +13,6 @@ namespace core{
         IPv4address(): IPaddressBase(boost::dynamic_bitset<>(32)) {};
         IPv4address(const boost::dynamic_bitset<>& ipaddress): IPaddressBase(ipaddress) {};
     };
-}
+};
 
 #endif // IPV4ADDRESS_H

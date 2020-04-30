@@ -15,6 +15,6 @@ namespace core{
     protected:
         IIPparser& operator=(const IIPparser&) = default;
     };
-}
+};
 
 #endif // IIPPARSER_H

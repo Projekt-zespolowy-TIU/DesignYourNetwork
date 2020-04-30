@@ -8,7 +8,7 @@ namespace core {
     class IPmaskBase : public IPaddressBase
     {
     public:
-        IPmaskBase(const boost::dynamic_bitset<>& maskAddress): IPaddressBase{maskAddress} {};
+        IPmaskBase(const boost::dynamic_bitset<>& maskAddress);
         short getPrefix() const;
     };
 }

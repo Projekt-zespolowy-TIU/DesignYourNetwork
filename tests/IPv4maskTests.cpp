@@ -22,14 +22,14 @@ namespace IPv4maskTests {
                 std::string temps;
                 to_string(element, temps);
                 THEN(std::string("Object created: ") + temps){
-                    REQUIRE_NOTHROW(IPv4mask{element});
+                    CHECK_NOTHROW(IPv4mask{element});
                 };
             };
         };
         WHEN("Mask is invalid format"){
             boost::dynamic_bitset<> bitset_ip{32, 3232235521}; //192.168.0.1
             THEN("Ctor throws error"){
-                REQUIRE_THROWS_AS(IPv4mask{bitset_ip}, std::invalid_argument);
+                CHECK_THROWS_AS(IPv4mask{bitset_ip}, std::invalid_argument);
             };
         };
     };

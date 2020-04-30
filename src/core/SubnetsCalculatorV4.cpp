@@ -10,7 +10,7 @@ namespace core {
     {
         auto _subNets = subNets;
 
-        std::sort(_subNets.begin(), _subNets.end(),[](const std::shared_ptr<Subnet>& a, const std::shared_ptr<Subnet>& b){
+        std::sort(_subNets.begin(), _subNets.end(),[](const auto& a, const auto& b){
             return a->HostNumber > b->HostNumber;
         });
 
@@ -49,7 +49,7 @@ namespace core {
         IPaddressBase pretenderAddress{mainNetIP};
         unsigned long long int netBits = 1;
 
-        while(std::any_of(alreadyAssignedIPs.begin(), alreadyAssignedIPs.end(), [&](const std::shared_ptr<Subnet>& x){
+        while(std::any_of(alreadyAssignedIPs.begin(), alreadyAssignedIPs.end(), [&](const auto& x){
                        return *x->Ip == pretenderAddress;}))
         {
             auto create = boost::dynamic_bitset<>(32, netBits << (32 - Mask.getPrefix()));

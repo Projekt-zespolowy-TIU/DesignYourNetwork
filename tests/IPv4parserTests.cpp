@@ -110,7 +110,7 @@ namespace IPv4parserTest {
             calculatedNetworks.emplace_back("192.168.0.48");
 
             for(const auto& var : calculatedNetworks)
-                CHECK(std::any_of(subs.begin(), subs.end(), [&var](std::shared_ptr<Subnet> x){
+                CHECK(std::any_of(subs.begin(), subs.end(), [&var](const auto& x){
                     return x->Ip->asStringDec() == var;
                 }));
         }

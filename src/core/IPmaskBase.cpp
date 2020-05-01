@@ -19,6 +19,6 @@ namespace core{
 
     short IPmaskBase::getPrefix() const
     {
-        return _IpAddress.count();
+        return static_cast<short>(_IpAddress.count());
     };
 };

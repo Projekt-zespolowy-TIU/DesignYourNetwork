@@ -32,5 +32,9 @@ namespace IPv4maskTests {
                 CHECK_THROWS_AS(IPv4mask{bitset_ip}, std::invalid_argument);
             };
         };
+        SECTION("Get proper ipv4 prefix"){
+            CHECK(IPv4mask().getPrefix() == 0);
+            CHECK(IPv4mask(boost::dynamic_bitset<> {32, 4294967295}).getPrefix() == 32); //255.255.255.255
+        };
     };
 };

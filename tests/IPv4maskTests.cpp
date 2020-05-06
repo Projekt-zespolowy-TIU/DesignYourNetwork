@@ -2,7 +2,7 @@
 #include <boost/dynamic_bitset.hpp>
 #include <vector>
 #include <string>
-#include <exception>
+#include <stdexcept>
 
 #include "IPv4mask.h"
 

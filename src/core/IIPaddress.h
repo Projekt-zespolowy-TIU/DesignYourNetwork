@@ -3,7 +3,6 @@
 #define IIPADDRESS_H
 
 #include <QString>
-#include <iostream>
 
 namespace core{
     class IIPaddress

@@ -2,11 +2,12 @@
 #ifndef COREUTILS_H
 #define COREUTILS_H
 
-#include <exception>
+#include <stdexcept>
 #include <string>
 
 namespace core {
     class IIPaddress; //forward declaration
+
     class NotImplemented : public std::logic_error
     {
     public:

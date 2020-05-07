@@ -4,36 +4,20 @@
 
 #include <QString>
 #include <memory>
-#include <exception>
 #include <boost/dynamic_bitset.hpp>
-#include <boost/asio/ip/address_v4.hpp>
+#include <string>
 
 #include "IIPparser.h"
 
 namespace core{
-    class IPv4address; //forward declaration
-
-    template <class C = IPv4address>
-    class IPv4parser final: public IIPparser<C>
+    class IPv4parser final: public IIPparser
     {
     public:
-        C ipFromString(const QString&) const final;
+        std::shared_ptr<IPaddressBase> ipFromString(const QString &) const final;
+        std::shared_ptr<IPmaskBase> ipMaskFromString(const QString &) const final;
+    private:
+        boost::dynamic_bitset<> _getBitset(const std::string& addressString) const;
     };
-
-    template <class C>
-    C IPv4parser<C>::ipFromString(const QString& IP) const
-    {
-        boost::asio::ip::address_v4 converted;
-
-        try {
-            converted = boost::asio::ip::make_address_v4(IP.toStdString());
-        } catch (const boost::system::system_error&) {
-            std::throw_with_nested(std::runtime_error("Wrong input IP address"));
-        }
-
-        boost::dynamic_bitset<> octetContainer(32, converted.to_ulong());
-        return std::move(octetContainer);
-    }
-}
+};
 
 #endif // IPV4PARSER_H

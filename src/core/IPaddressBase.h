@@ -3,31 +3,32 @@
 #define IPADDRESSBASE_H
 
 #include <boost/dynamic_bitset.hpp>
-#include <iostream>
-#include <QString>
+#include <memory>
+#include <istream>
 
 #include "IIPaddress.h"
 
 namespace core {
-    class IPaddressBase: public IIPaddress
+    class IPmaskBase; //forward declaration
+
+    class IPaddressBase : public virtual IIPaddress
     {
     public:
         IPaddressBase(const boost::dynamic_bitset<>& ipaddress): _IpAddress{ipaddress} {};
 
-        QString asStringDec() const final;
-        QString asStringBin() const final;
-
-        IPaddressBase operator& (const IPaddressBase& var) const;
-        IPaddressBase operator| (const IPaddressBase& var) const;
+        friend std::shared_ptr<IPaddressBase> operator&(const std::shared_ptr<IPaddressBase>& ip, const std::shared_ptr<IPmaskBase>& mask);
         bool operator==(const IPaddressBase&) const;
         bool operator!=(const IPaddressBase&) const;
 
-        friend std::istream& operator>>(std::istream&, IPaddressBase&);
+
+        friend std::istream& operator>>(std::istream&, std::shared_ptr<IPaddressBase>&);
+
+        virtual ~IPaddressBase() = default;
     protected:
+        virtual std::shared_ptr<IPaddressBase> _applyMask(const boost::dynamic_bitset<>& maskBitset) const = 0;
+
         boost::dynamic_bitset<> _IpAddress;
     };
-
-
-}
+};
 
 #endif // IPADDRESSBASE_H

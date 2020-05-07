@@ -1,5 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
+#include <vector>
+#include <memory>
 
 #include "IPstructs.h"
 #include "SubnetsCalculatorV4.h"
@@ -16,11 +18,11 @@ int main(int argc, char *argv[])
     Networkv4 mainNetwork;
 
     std::cout << "Podaj adres IPv4 sieci glownej: ";
-    std::cin >> *mainNetwork.Ip;
+    std::cin >> mainNetwork.Ip;
     std::cout << "Podaj maske IPv4 sieci glownej: ";
-    std::cin >> *mainNetwork.NetMask;
+    std::cin >> mainNetwork.NetMask;
 
-    if(*mainNetwork.Ip != (*mainNetwork.Ip & *mainNetwork.NetMask))
+    if(*mainNetwork.Ip != *(mainNetwork.Ip & mainNetwork.NetMask))
     {
         throw NotImplemented{"TODO: error handling"}; //check if passed address is network address
     }

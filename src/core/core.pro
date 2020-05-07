@@ -7,12 +7,16 @@ include(../../common.pri)
 
 SOURCES += \
     IPaddressBase.cpp \
+    IPv4address.cpp \
     IPv4mask.cpp \
+    IPv4parser.cpp \
     SubnetsCalculatorV4.cpp \
-    IPmaskBase.cpp
+    IPmaskBase.cpp \
+    coreUtils.cpp
 
 HEADERS += \
     IIPaddress.h \
+    IIPmask.h \
     IIPparser.h \
     IPaddressBase.h \
     IPmaskBase.h \

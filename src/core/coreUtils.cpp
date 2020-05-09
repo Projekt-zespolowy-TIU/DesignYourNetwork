@@ -34,4 +34,8 @@ namespace core {
         return in;
     }
 
+    const char* IPexception::what() const throw()
+    {
+        return _text.c_str();
+    };
 };

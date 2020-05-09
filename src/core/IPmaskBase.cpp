@@ -1,7 +1,6 @@
 #include "IPmaskBase.h"
 
 #include <boost/dynamic_bitset.hpp>
-#include <stdexcept>
 #include <istream>
 #include <memory>
 #include <string>
@@ -24,7 +23,8 @@ namespace core{
                 if(maskAddress == bits) return;
             };
         };
-        throw std::invalid_argument("IP is not a mask");
+
+        throw IPinvalidFormat("Passed value cannot be converted into valid IP version 4 mask");
     };
 
     short IPmaskBase::getPrefix() const

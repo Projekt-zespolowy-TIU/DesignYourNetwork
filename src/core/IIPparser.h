@@ -14,7 +14,6 @@ namespace core{
     public:
         virtual std::shared_ptr<IPaddressBase> ipFromString(const QString&) const = 0;
         virtual std::shared_ptr<IPmaskBase> ipMaskFromString(const QString&) const = 0;
-
     protected:
         IIPparser& operator=(const IIPparser&) = default;
         virtual ~IIPparser() = default;

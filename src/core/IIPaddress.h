@@ -10,7 +10,6 @@ namespace core{
     public:
         virtual QString asStringDec() const = 0;
         virtual QString asStringBin() const = 0;
-
     protected:
         IIPaddress& operator=(const IIPaddress&) = default;
         virtual ~IIPaddress() = default;

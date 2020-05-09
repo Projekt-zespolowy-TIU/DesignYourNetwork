@@ -3,6 +3,7 @@
 
 #include "IPv4address.h"
 #include "IPv4mask.h"
+#include "coreUtils.h"
 
 using namespace core;
 
@@ -45,5 +46,12 @@ namespace IPv4addressTests {
         SECTION("operator !="){
             CHECK(mask1 != mask2);
         };
+        SECTION("Ctors validation should not throw"){
+            CHECK_NOTHROW(IPv4address{bitset_ip});
+        }
+        SECTION("Ctors validation should throw"){
+            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (33, 1)}, IPinvalidFormat);
+            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (25, 1)}, IPinvalidFormat);
+        }
     };
 };

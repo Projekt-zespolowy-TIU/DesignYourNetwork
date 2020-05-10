@@ -21,7 +21,7 @@ namespace IPv4maskTests {
             {
                 std::string temps;
                 to_string(element, temps);
-                THEN(std::string("Object created: ") + temps){
+                THEN(std::string{"Object created: "} + temps){
                     CHECK_NOTHROW(IPv4mask{element});
                 };
             };
@@ -33,8 +33,10 @@ namespace IPv4maskTests {
             };
         };
         SECTION("Get proper ipv4 prefix"){
-            CHECK(IPv4mask().getPrefix() == 0);
-            CHECK(IPv4mask(boost::dynamic_bitset<> {32, 4294967295}).getPrefix() == 32); //255.255.255.255
+            CHECK(IPv4mask(boost::dynamic_bitset<> {32, 4294967232}).getPrefix() == 26); //255.255.255.255
+        };
+        SECTION("Default constructed mask should have all bit set to 1"){
+            CHECK(IPv4mask{}.getPrefix() == 32);
         };
     };
 };

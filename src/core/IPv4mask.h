@@ -11,7 +11,11 @@ namespace core {
     class IPv4mask final: public IPv4address, public IPmaskBase
     {
     public:
-        IPv4mask() : IPaddressBase(boost::dynamic_bitset<>(32)), IPv4address(boost::dynamic_bitset<>(32)), IPmaskBase(boost::dynamic_bitset<>(32)) {};
+        IPv4mask() :
+            IPaddressBase(boost::dynamic_bitset<>(32, 4294967295)),
+            IPv4address(boost::dynamic_bitset<>(32, 4294967295)),
+            IPmaskBase(boost::dynamic_bitset<>(32, 4294967295))
+        {};
         IPv4mask(const boost::dynamic_bitset<>& maskAddress);
 
         QString asStringBin() const override { return IPv4address::asStringBin(); };

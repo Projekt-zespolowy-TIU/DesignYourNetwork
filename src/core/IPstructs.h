@@ -12,6 +12,15 @@ namespace core {
     {
         std::shared_ptr<IPaddressBase> Ip;
         std::shared_ptr<IPmaskBase> NetMask;
+
+        bool isHost(const IPaddressBase& hostIP) const{
+            if(*Ip == *(hostIP & *NetMask) )
+                return true;
+            else
+                return false;
+        };
+
+        virtual ~NetworkBase() = default;
     };
 
     struct Subnet: public NetworkBase

@@ -16,6 +16,8 @@ namespace core {
         friend std::istream& operator>>(std::istream&, std::shared_ptr<IPmaskBase>&);
 
         virtual ~IPmaskBase() = default;
+    protected:
+//        IPmaskBase& operator=(const IPmaskBase&) = default; //no neeed to prevent slicing, as long as derived class doesn't have more members
     };
 };
 

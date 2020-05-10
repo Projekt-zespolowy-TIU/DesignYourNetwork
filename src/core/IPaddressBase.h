@@ -28,6 +28,8 @@ namespace core {
     protected:
         virtual std::shared_ptr<IPaddressBase> _applyMask(const boost::dynamic_bitset<>& maskBitset) const = 0;
 
+//        IPaddressBase& operator=(const IPaddressBase&) = default; //no neeed to prevent slicing, as long as derived class doesn't have more members
+
         boost::dynamic_bitset<> _IpAddress;
     };
 };

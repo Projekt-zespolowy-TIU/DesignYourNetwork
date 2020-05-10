@@ -7,9 +7,14 @@ namespace core {
     {
     public:
         virtual short getPrefix() const = 0;
-    protected:
-        IIPmask& operator=(const IIPmask&) = default;
+
         virtual ~IIPmask() = default;
+    protected:
+        IIPmask() = default;
+        IIPmask(const IIPmask&) = default;
+        IIPmask& operator=(const IIPmask&) = default;
+        IIPmask(IIPmask&&) noexcept = default;
+        IIPmask& operator=(IIPmask&&) noexcept = default;
     };
 };
 

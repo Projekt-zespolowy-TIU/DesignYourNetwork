@@ -16,6 +16,11 @@ namespace core {
         return ip->_applyMask(mask->_IpAddress);
     };
 
+    std::shared_ptr<IPaddressBase> operator&(const IPaddressBase& ip, const IPmaskBase& mask)
+    {
+        return ip._applyMask(mask._IpAddress);
+    };
+
     std::istream& operator>>(std::istream& in, std::shared_ptr<IPaddressBase>& b)
     {
         std::string tempS;

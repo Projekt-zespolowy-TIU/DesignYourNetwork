@@ -16,13 +16,17 @@ namespace core {
 
         bool isHost(const IPaddressBase& hostIP) const
         {
-            return *Ip == *(hostIP & *NetMask) ? true : false;
+            return *(*Ip & *NetMask) == *(hostIP & *NetMask) ? true : false;
         };
         virtual unsigned long long hostsCapacity() const
         {
             auto allAddresses = 1ull << (NetMask->getLength() - NetMask->getPrefix());
             return allAddresses - 1; //without network address
         }
+        void fix()
+        {
+            Ip = *Ip & *NetMask;
+        };
 
         std::shared_ptr<NetworkBase> clone() const
         {

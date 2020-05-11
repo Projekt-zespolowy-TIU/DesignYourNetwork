@@ -10,31 +10,42 @@
 #include "IIPmask.h"
 
 namespace core {
-    int SubnetsCalculatorV4::calcSubnets(const NetworkBase& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets)
+    void SubnetsCalculatorV4::calcSubnets(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const
     {
-        auto _subNets = subNets;
+        std::vector<std::shared_ptr<Subnet>> _subNets;
+        for(const auto& sub : subNets)
+            _subNets.emplace_back() = sub->clone();
 
         std::sort(_subNets.begin(), _subNets.end(),[](const auto& a, const auto& b){
             return a->HostNumber > b->HostNumber;
         });
 
-        //start specific v4 implementation; later should be universaly refactored
         if(_subNets.size() > std::pow(2, 30 - mainNet.NetMask->getPrefix()) )
-            throw NotImplemented{"too much subnets"};
+            throw IPSubnetworkExcept{"Too many subnets passed into calculator within main network"};
 
-        //before enter below loop should check sum of all max_hosts from passed subnets and return error when exceed max
+//        unsigned long long HostSum = 0;
         for(const auto& _subNet : _subNets)
         {
-            auto Mask = _chooseSubnetMask(_subNet->HostNumber); //TODO: error handling when choosen mask exceeds main mask, check if such situation's even possible
-            auto Address = _chooseSubnetIP(*mainNet.Ip, *Mask, _subNets); //TODO: error handling
+            auto Mask = _chooseSubnetMask(_subNet->HostNumber);
+            if(mainNet.NetMask->getPrefix() > Mask->getPrefix())
+                throw IPSubnetworkExcept{"IP mask pool has run out during subnetworks calculations"};
+
+            auto Address = _chooseSubnetIP(*mainNet.Ip, *Mask, _subNets);
+            if(!mainNet.isHost(*Address))
+                throw IPSubnetworkExcept{"IP address pool has run out during subnetworks calculations"};
+
             _subNet->Ip = Address;
             _subNet->NetMask = Mask;
+
+//            HostSum += _subNet->hostsCapacity() + 2; //sum of all hosts should take all addresses into account both net address and broadcast
+//            if(HostSum > std::pow(2, mainNet.NetMask->getPrefix())) //I think that this will never catch with above exceptions
+//                throw IPException{"TODO"};
         };
-        //end of specific v4 implementation
-        return 0;
+
+        subNets = _subNets;
     };
 
-    std::shared_ptr<IPmaskBase> SubnetsCalculatorV4::_chooseSubnetMask(const long long& desiredHostsNumber)
+    std::shared_ptr<IPmaskBase> SubnetsCalculatorV4::_chooseSubnetMask(const long long desiredHostsNumber) const
     {
         unsigned short numberOfHostBits = 1;
         long long int countHosts = 0;
@@ -48,19 +59,19 @@ namespace core {
         return std::make_shared<IPv4mask>(boost::dynamic_bitset<>(32, 4294967295 - (countHosts - 1)));
     };
 
-    std::shared_ptr<IPaddressBase> SubnetsCalculatorV4::_chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs)
+    std::shared_ptr<IPaddressBase> SubnetsCalculatorV4::_chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs) const
     {
-        auto pretenderAddress{*dynamic_cast<const IPv4address*>(&mainNetIP)};
+        auto pretenderAddress{dynamic_cast<const IPv4address&>(mainNetIP)};
 
         unsigned long long int netBits = 1;
 
-        while(std::any_of(alreadyAssignedIPs.begin(), alreadyAssignedIPs.end(), [&](const auto& x){
-                       return *x->Ip == pretenderAddress;}))
+        while(std::any_of(alreadyAssignedIPs.begin(), alreadyAssignedIPs.end(), [&](const auto& subnet){
+                          return subnet->isHost(pretenderAddress) || *subnet->Ip == pretenderAddress; }))
         {
             auto create = boost::dynamic_bitset<>(32, netBits << (32 - Mask.getPrefix()));
 
             IPv4address NetWildCard{create};
-            pretenderAddress = *dynamic_cast<const IPv4address*>(&mainNetIP) | NetWildCard;
+            pretenderAddress = dynamic_cast<const IPv4address&>(mainNetIP) | NetWildCard;
             netBits++;
         };
         return std::make_shared<IPv4address>(pretenderAddress);

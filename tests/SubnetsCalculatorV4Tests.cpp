@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <string>
 
 #include "SubnetsCalculatorV4.h"
 
@@ -18,31 +19,86 @@ namespace SubnetsCalculatorV4Tests {
             *net.Ip = IPv4address{boost::dynamic_bitset<>(32, 3232235520)}; //192.168.0.0
             *net.NetMask = IPv4mask{boost::dynamic_bitset<>(32, 4294967232)}; //255.255.255.192 /26
 
-            for(unsigned short i = 0; i <= 4; i++)
-            {
-                subs.push_back(std::make_shared<Subnetv4>());
-                subs.back()->HostNumber = 10;
+            subs.push_back(std::make_shared<Subnetv4>());
+            subs.back()->HostNumber = 10;
+            subs.push_back(std::make_shared<Subnetv4>());
+            subs.back()->HostNumber = 10;
+            subs.push_back(std::make_shared<Subnetv4>());
+            subs.back()->HostNumber = 10;
+            subs.push_back(std::make_shared<Subnetv4>());
+            subs.back()->HostNumber = 10;
+
+            SubnetsCalculatorV4 calc;
+            CHECK_NOTHROW(calc.calcSubnets(net, subs));
+
+            SECTION("Check mask addresses"){
+                for(const auto& sub : subs)
+                    CHECK(sub->NetMask->asStringDec().toStdString() == "255.255.255.240");
             };
 
-            auto subsCopy = subs;
+            SECTION("Check ip addresses"){
+                std::vector<std::string> calculatedNetworks{
+                    "192.168.0.0",
+                    "192.168.0.16",
+                    "192.168.0.32",
+                    "192.168.0.48"
+                };
+
+                for(const auto& var : calculatedNetworks)
+                    CHECK(std::any_of(subs.begin(), subs.end(), [&var](const auto& x){
+                        return x->Ip->asStringDec().toStdString() == var;
+                    }));
+            };
+        };
+        SECTION("Subneting with the STS exam data")
+        {
+            *net.Ip = IPv4address{boost::dynamic_bitset<>(32, 391851264)}; //23.91.45.0
+            *net.NetMask = IPv4mask{boost::dynamic_bitset<>(32, 4294967040)}; //255.255.255.0 /24
+
+            subs.push_back(std::make_shared<Subnetv4>()); //1
+            subs.back()->HostNumber = 31;
+            subs.push_back(std::make_shared<Subnetv4>()); //2
+            subs.back()->HostNumber = 30;
+            subs.push_back(std::make_shared<Subnetv4>()); //3
+            subs.back()->HostNumber = 7;
+            subs.push_back(std::make_shared<Subnetv4>()); //4
+            subs.back()->HostNumber = 6;
+            subs.push_back(std::make_shared<Subnetv4>()); //5
+            subs.back()->HostNumber = 2;
+            subs.push_back(std::make_shared<Subnetv4>()); //6
+            subs.back()->HostNumber = 2;
+
             SubnetsCalculatorV4 calc;
-            calc.calcSubnets(net, subs);
+            CHECK_NOTHROW(calc.calcSubnets(net, subs));
 
-            CHECK(subs == subsCopy); // calcSubnets shouldn't mix vector's order
+            SECTION("Check mask addresses"){
+                std::vector<std::string> calculatedMasks{
+                    "255.255.255.192", //1
+                    "255.255.255.224", //2
+                    "255.255.255.240", //3
+                    "255.255.255.248", //4
+                    "255.255.255.252", //5
+                    "255.255.255.252" //6
+                };
 
-            for(const auto& sub : subs)
-                CHECK(sub->NetMask->asStringDec() == "255.255.255.240");
+                for(size_t i = 0; i < 6; i++)
+                    CHECK(subs.at(i)->NetMask->asStringDec().toStdString() == calculatedMasks.at(i));
+            };
 
-            std::vector<QString> calculatedNetworks;
-            calculatedNetworks.emplace_back("192.168.0.0");
-            calculatedNetworks.emplace_back("192.168.0.16");
-            calculatedNetworks.emplace_back("192.168.0.32");
-            calculatedNetworks.emplace_back("192.168.0.48");
+            SECTION("Check ip addresses"){
+                std::vector<std::string> calculatedIPs{
+                    "23.91.45.0", //1
+                    "23.91.45.64", //2
+                    "23.91.45.96", //3
+                    "23.91.45.112", //4
+                    "23.91.45.120", //5
+                    "23.91.45.124" //6
+                };
 
-            for(const auto& var : calculatedNetworks)
-                CHECK(std::any_of(subs.begin(), subs.end(), [&var](const auto& x){
-                    return x->Ip->asStringDec() == var;
-                }));
+                for(size_t i = 0; i < 6; i++){
+                    CHECK(subs.at(i)->Ip->asStringDec().toStdString() == calculatedIPs.at(i));
+                };
+            };
         };
     };
 };

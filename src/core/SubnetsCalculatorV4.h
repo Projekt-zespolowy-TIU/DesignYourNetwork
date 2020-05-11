@@ -13,10 +13,10 @@ namespace core {
     class SubnetsCalculatorV4
     {
     public:
-        int calcSubnets(const NetworkBase& mainNet, const std::vector<std::shared_ptr<Subnet>>& subNets);
+        void calcSubnets(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const;
     private:
-        std::shared_ptr<IPmaskBase> _chooseSubnetMask(const long long& desiredHostsNumber);
-        std::shared_ptr<IPaddressBase> _chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs);
+        std::shared_ptr<IPmaskBase> _chooseSubnetMask(const long long desiredHostsNumber) const;
+        std::shared_ptr<IPaddressBase> _chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs) const;
     };
 };
 

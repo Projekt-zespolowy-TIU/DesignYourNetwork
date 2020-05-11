@@ -16,27 +16,35 @@ namespace core {
         NotImplemented(): NotImplemented("Not Implememented", __FUNCTION__) {};
         NotImplemented(const char* message): NotImplemented(message, __FUNCTION__) {};
 
-        virtual const char* what() const throw();
+        virtual const char* what() const noexcept;
     private:
         std::string _text;
 
         NotImplemented(const char* message, const char* function);
     };
 
-    class IPexception : public std::exception
+    class IPException : public std::exception
     {
     public:
-        IPexception(const char* message): _text{message} {};
-
-        virtual const char* what() const throw();
-    private:
-        std::string _text;
+        IPException(const char* message): std::exception{message} {};
     };
 
-    class IPinvalidFormat : public IPexception
+    class IPFormatExcept : public IPException
     {
     public:
-        IPinvalidFormat(const char* message) : IPexception{message} {};
+        IPFormatExcept(const char* message) : IPException{message} {};
+    };
+
+    class IPNetworkExcept : public IPException
+    {
+    public:
+        IPNetworkExcept(const char* message) : IPException{message} {};
+    };
+
+    class IPSubnetworkExcept : public IPException
+    {
+    public:
+        IPSubnetworkExcept(const char* message) : IPException{message} {};
     };
 
     std::ostream& operator<< (std::ostream& out, const IIPaddress& c);

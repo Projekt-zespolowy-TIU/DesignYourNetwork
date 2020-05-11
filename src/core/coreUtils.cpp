@@ -3,7 +3,7 @@
 #include "IIPaddress.h"
 
 namespace core {
-    const char* NotImplemented::what() const throw()
+    const char* NotImplemented::what() const noexcept
     {
         return _text.c_str();
     };
@@ -33,9 +33,4 @@ namespace core {
         c = QString{temp.c_str()};
         return in;
     }
-
-    const char* IPexception::what() const throw()
-    {
-        return _text.c_str();
-    };
 };

@@ -12,7 +12,7 @@ namespace core {
     IPv4address::IPv4address(const boost::dynamic_bitset<> &ipaddress): IPaddressBase(ipaddress)
     {
         if(ipaddress.size() != 32)
-            throw IPinvalidFormat{"Passed value cannot be converted into valid IP version 4"};
+            throw IPFormatExcept{"Passed value cannot be converted into valid IP version 4"};
     }
 
     QString IPv4address::asStringDec() const

@@ -32,11 +32,11 @@ namespace IPv4addressTests {
             std::shared_ptr<IPaddressBase> left = std::make_shared<IPv4address>(ip4address);
             std::shared_ptr<IPmaskBase> right = std::make_shared<IPv4mask>(mask1);
 
-            auto expected = left & right;
+            auto expected = *left & *right;
             CHECK(expected->asStringDec() == "192.168.0.0");
 
             right = std::make_shared<IPv4mask>(mask2);
-            expected = left & right;
+            expected = *left & *right;
             CHECK(expected->asStringDec() == "192.160.0.0");
         };
         SECTION("operator =="){
@@ -50,8 +50,8 @@ namespace IPv4addressTests {
             CHECK_NOTHROW(IPv4address{bitset_ip});
         }
         SECTION("Ctors validation should throw"){
-            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (33, 1)}, IPinvalidFormat);
-            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (25, 1)}, IPinvalidFormat);
+            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (33, 1)}, IPFormatExcept);
+            CHECK_THROWS_AS(IPv4address{boost::dynamic_bitset <> (25, 1)}, IPFormatExcept);
         }
     };
 };

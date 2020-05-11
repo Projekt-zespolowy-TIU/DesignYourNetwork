@@ -24,12 +24,17 @@ namespace core{
             };
         };
 
-        throw IPinvalidFormat("Passed value cannot be converted into valid IP version 4 mask");
+        throw IPFormatExcept("Passed value cannot be converted into valid IP version 4 mask");
     };
 
     short IPmaskBase::getPrefix() const
     {
         return static_cast<short>(_IpAddress.count());
+    }
+
+    short IPmaskBase::getLength() const
+    {
+        return static_cast<short>(_IpAddress.size());
     };
 
     std::istream& operator>>(std::istream& in, std::shared_ptr<IPmaskBase>& b)

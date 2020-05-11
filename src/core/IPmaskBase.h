@@ -12,6 +12,7 @@ namespace core {
         IPmaskBase(const boost::dynamic_bitset<>& maskAddress);
 
         short getPrefix() const final;
+        short getLength() const final;
 
         friend std::istream& operator>>(std::istream&, std::shared_ptr<IPmaskBase>&);
 

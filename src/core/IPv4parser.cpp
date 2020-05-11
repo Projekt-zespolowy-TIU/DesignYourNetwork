@@ -27,7 +27,7 @@ namespace core {
             auto v4address = boost::asio::ip::make_address_v4(addressString);
             return boost::dynamic_bitset<> (32, v4address.to_ulong());
         } catch (const boost::system::system_error&) {
-            throw IPinvalidFormat{"Passed string cannot be converted into valid IP version 4"};
+            throw IPFormatExcept{"Passed string cannot be converted into valid IP version 4"};
         };
     };
 };

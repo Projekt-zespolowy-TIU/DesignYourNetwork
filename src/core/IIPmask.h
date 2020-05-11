@@ -7,6 +7,7 @@ namespace core {
     {
     public:
         virtual short getPrefix() const = 0;
+        virtual short getLength() const = 0;
 
         virtual ~IIPmask() = default;
     protected:

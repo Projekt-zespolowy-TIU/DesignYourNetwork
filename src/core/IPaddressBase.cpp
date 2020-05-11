@@ -11,11 +11,6 @@
 
 
 namespace core {
-    std::shared_ptr<IPaddressBase> operator&(const std::shared_ptr<IPaddressBase>& ip, const std::shared_ptr<IPmaskBase>& mask)
-    {
-        return ip->_applyMask(mask->_IpAddress);
-    };
-
     std::shared_ptr<IPaddressBase> operator&(const IPaddressBase& ip, const IPmaskBase& mask)
     {
         return ip._applyMask(mask._IpAddress);

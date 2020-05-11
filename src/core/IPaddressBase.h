@@ -16,11 +16,9 @@ namespace core {
     public:
         IPaddressBase(const boost::dynamic_bitset<>& ipaddress): _IpAddress{ipaddress} {};
 
-        friend std::shared_ptr<IPaddressBase> operator&(const std::shared_ptr<IPaddressBase>& ip, const std::shared_ptr<IPmaskBase>& mask);
         friend std::shared_ptr<IPaddressBase> operator&(const IPaddressBase& ip, const IPmaskBase& mask);
         bool operator==(const IPaddressBase&) const;
         bool operator!=(const IPaddressBase&) const;
-
 
         friend std::istream& operator>>(std::istream&, std::shared_ptr<IPaddressBase>&);
 

@@ -18,13 +18,24 @@ int main(int argc, char *argv[])
     Networkv4 mainNetwork;
 
     std::cout << "Podaj adres IPv4 sieci glownej: ";
-    std::cin >> mainNetwork.Ip;
-    std::cout << "Podaj maske IPv4 sieci glownej: ";
-    std::cin >> mainNetwork.NetMask;
+    try {
+        std::cin >> mainNetwork.Ip;
+    } catch (const IPFormatExcept& e) {
+        std::cout << "\nException: " << e.what();
+        return 1; //should return something more meaningful
+    }
 
-    if(*mainNetwork.Ip != *(mainNetwork.Ip & mainNetwork.NetMask))
+    std::cout << "Podaj maske IPv4 sieci glownej: ";
+    try {
+        std::cin >> mainNetwork.NetMask;
+    } catch (const IPFormatExcept& e) {
+        std::cout << "\nException: " << e.what();
+        return 1; //TODO: should return something more meaningful
+    }
+
+    if(mainNetwork.isHost(*mainNetwork.Ip)) //without this UNDEFINED BEHAVIOR
     {
-        throw NotImplemented{"TODO: error handling"}; //check if passed address is network address
+        mainNetwork.fix();
     }
 
     std::cout << "Ile sieci zaadresowac?: ";
@@ -33,7 +44,7 @@ int main(int argc, char *argv[])
 
     std::vector<std::shared_ptr<Subnet>> subnets;
 
-    for(int i = 0; i< networkNumber; i++)
+    for(int i = 0; i < networkNumber; i++)
     {
         Subnetv4 tempSubnet;
         std::cout << "Podaj nazwe podsieci [" << i << "]: ";
@@ -45,14 +56,18 @@ int main(int argc, char *argv[])
 
     SubnetsCalculatorV4 calc;
 
-    calc.calcSubnets(mainNetwork, subnets);
+    try {
+        calc.calcSubnets(mainNetwork, subnets);
+    } catch (const IPSubnetworkExcept& e) {
+        std::cout << "\nException: " << e.what();
+        return 1; //TODO: should return something more meaningful
+    }
 
-    for(int i = 0; i < networkNumber; i++)
+    for(const auto& sub : subnets)
     {
-        std::cout << "\nPodsiec [" << i << "] - "
-                  << "Nazwa podsieci: " << subnets.at(i)->SubName
-                  << " IP: " << *subnets.at(i)->Ip
-                  << " Maska: " << *subnets.at(i)->NetMask;
+        std::cout << "\nNazwa podsieci: " << sub->SubName // print subnetwork name instead
+                  << " IP: " << *sub->Ip
+                  << " Maska: " << *sub->NetMask;
     }
 
     return a.exec();

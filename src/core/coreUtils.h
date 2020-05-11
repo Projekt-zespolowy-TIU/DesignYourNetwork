@@ -26,7 +26,11 @@ namespace core {
     class IPException : public std::exception
     {
     public:
-        IPException(const char* message): std::exception{message} {};
+        IPException(const char* message): _text{message} {};
+
+        const char * what() const noexcept override;
+    private:
+        std::string _text;
     };
 
     class IPFormatExcept : public IPException

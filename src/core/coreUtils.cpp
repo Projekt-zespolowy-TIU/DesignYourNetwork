@@ -21,6 +21,11 @@ namespace core {
         return out;
     };
 
+    const char *IPException::what() const noexcept
+    {
+        return _text.c_str();
+    }
+
     std::ostream& operator<<(std::ostream& out, const QString& c)
     {
         return out << c.toStdString();

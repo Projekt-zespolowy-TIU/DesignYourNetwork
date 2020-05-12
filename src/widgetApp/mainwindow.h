@@ -39,12 +39,12 @@ namespace widgetApp{
 
         Ui::MainWindow *ui;
 
-        int subnetCount;
-        bool isHorizontal;
+        int subnetCount = 0;
+        bool isHorizontal = false;
 
         IPv4parser parser;
-        Networkv4 *mainNetwork;
-        SubnetsCalculatorV4 *calculator;
+        Networkv4 mainNetwork;
+        SubnetsCalculatorV4 calculator;
         std::vector<std::shared_ptr<Subnet>> subnets;
 
         QWidget *addressWidget;
@@ -65,7 +65,7 @@ namespace widgetApp{
 
         QList<QSpinBox*> *spinBoxList;
 
-        void initializeData();
+        void resetData();
 
         void displayNetworkInfo();
 

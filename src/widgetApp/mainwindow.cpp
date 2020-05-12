@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
-#include "IPstructs.h"
+
 #include <QSpinBox>
 #include <QLabel>
 #include <QtCore>
+
+#include "IPv4parser.h"
+#include "SubnetsCalculatorV4.h"
+#include "IPstructs.h"
 
 using namespace core;
 
@@ -34,8 +36,6 @@ namespace widgetApp {
         maskWidget = ui->Mask4Widget;
 
         binaryMaskWidget = ui->BinaryMask4Widget;
-
-        initializeData();
     }
 
     MainWindow::~MainWindow()
@@ -44,10 +44,10 @@ namespace widgetApp {
     }
 }
 
-void widgetApp::MainWindow::initializeData()
+void widgetApp::MainWindow::resetData()
 {
-    mainNetwork = new Networkv4();
-    calculator = new SubnetsCalculatorV4();
+    mainNetwork = Networkv4();
+    calculator = SubnetsCalculatorV4();
 
     subnetCount = 0;
     isHorizontal = false;
@@ -66,21 +66,21 @@ void widgetApp::MainWindow::on_radioButton_clicked(bool checked)
 
 void widgetApp::MainWindow::on_CalculateButton_clicked()
 {
-     mainNetwork->Ip = parser.ipFromString(
+     mainNetwork.Ip = parser.ipFromString(
                  takeStringFromInputFields(addressWidget));
 
-     mainNetwork->NetMask = parser.ipMaskFromString(
+     mainNetwork.NetMask = parser.ipMaskFromString(
                  takeStringFromInputFields(maskWidget));
 
-     displayInputInBinary(mainNetwork->Ip.get()->asStringBin(),
+     displayInputInBinary(mainNetwork.Ip.get()->asStringBin(),
                           binaryAddressWidget);
 
-     displayInputInBinary(mainNetwork->NetMask.get()->asStringBin(),
+     displayInputInBinary(mainNetwork.NetMask.get()->asStringBin(),
                           binaryMaskWidget);
 
      setSubnetsHostCount();
 
-     calculator->calcSubnets(*mainNetwork, subnets);
+     calculator.calcSubnets(mainNetwork, subnets);
 
      displayNetworkInfo();
 }
@@ -283,7 +283,7 @@ void widgetApp::MainWindow::displayNetworkInfo()
         frame->layout()->addWidget(subnetLabel);
 
         QLabel *hostLabel = new QLabel(QString::fromStdString(
-                                      "Host number: " + std::to_string((int)subnets.at(i)->HostNumber)));
+                                      "Host number: " + std::to_string(static_cast<int>(subnets.at(i)->HostNumber))));
         hostLabel->setMinimumHeight(20);
 
         QLabel *addressLabel = new QLabel("IP address: " + (subnets.at(i)->Ip->asStringDec()));

@@ -12,12 +12,12 @@ namespace core {
     {
         std::shared_ptr<IPaddressBase> Ip;
         std::shared_ptr<IPmaskBase> NetMask;
-        QString SubName = "blank";
     };
 
     struct Subnet: public NetworkBase
     {
         long long int HostNumber = -10;
+        QString SubName = "blank";
     };
 
     struct Networkv4: NetworkBase

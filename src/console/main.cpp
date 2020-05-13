@@ -4,7 +4,7 @@
 #include "IPstructs.h"
 #include "SubnetsCalculatorV4.h"
 #include "coreUtils.h"
-#include "QTextStream.h"
+#include <QTextStream>
 #include <string>
 
 using namespace core;

@@ -21,22 +21,26 @@ int main(int argc, char *argv[])
     try {
         std::cin >> mainNetwork.Ip;
     } catch (const IPFormatExcept& e) {
-        std::cout << "\nException: " << e.what();
-        return 1; //should return something more meaningful
+        std::cout << "\nException: " << e.what() << '\n';
+        return 1; //TODO: should return something more meaningful
     }
 
     std::cout << "Podaj maske IPv4 sieci glownej: ";
     try {
         std::cin >> mainNetwork.NetMask;
     } catch (const IPFormatExcept& e) {
-        std::cout << "\nException: " << e.what();
+        std::cout << "\nException: " << e.what() << '\n';
         return 1; //TODO: should return something more meaningful
     }
 
-    if(mainNetwork.isHost(*mainNetwork.Ip)) //without this UNDEFINED BEHAVIOR
+    if(mainNetwork.isHost(*mainNetwork.Ip)) //without this UNDEFINED BEHAVIOR until using ctor for object mainNetwork
     {
+        std::cout << "Warning: Podane IP sieci jest IP hosta dla podanej maski!\n";
         mainNetwork.fix();
     }
+
+    std::cout << "IP sieci glownej: " << *mainNetwork.Ip << '\n'
+              << "Maska sieci glownej: " << *mainNetwork.NetMask << '\n';
 
     std::cout << "Ile sieci zaadresowac?: ";
     int networkNumber = 0;
@@ -59,13 +63,13 @@ int main(int argc, char *argv[])
     try {
         calc.calcSubnets(mainNetwork, subnets);
     } catch (const IPSubnetworkExcept& e) {
-        std::cout << "\nException: " << e.what();
+        std::cout << "\nException: " << e.what() << '\n';
         return 1; //TODO: should return something more meaningful
     }
 
     for(const auto& sub : subnets)
     {
-        std::cout << "\nNazwa podsieci: " << sub->SubName // print subnetwork name instead
+        std::cout << "\nNazwa podsieci: " << sub->SubName
                   << " IP: " << *sub->Ip
                   << " Maska: " << *sub->NetMask;
     }

@@ -6,13 +6,22 @@ include(../../common.pri)
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    networkDialog.cpp \
+    subnetDialog.cpp
 
 HEADERS += \
-    mainwindow.h
+    hostButton.h \
+    mainwindow.h \
+    networkButton.h \
+    networkDialog.h \
+    subnetButton.h \
+    subnetDialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    networkdialog.ui \
+    subnetdialog.ui
 
 include(../core/core.pri)
 

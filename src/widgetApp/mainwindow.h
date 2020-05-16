@@ -3,11 +3,17 @@
 
 #include <QMainWindow>
 #include <QtCore>
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
 #include <QSpinBox>
 #include <QLabel>
 #include <QLayout>
+#include <QPushButton>
+
+#include "networkButton.h"
+#include "networkDialog.h"
+#include "subnetButton.h"
+#include "subnetDialog.h"
+#include "IPv4parser.h"
+#include "SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -34,6 +40,11 @@ namespace widgetApp{
 
         void on_radioButton_clicked(bool checked);
 
+        void on_networkButton_clicked(Networkv4 network);
+
+        void on_subnetButton_clicked(std::shared_ptr<Subnet> subnet);
+
+        void on_saveButton_clicked();
 
     private:
 
@@ -64,6 +75,13 @@ namespace widgetApp{
         QHBoxLayout *graphPanelLayout = new QHBoxLayout();
 
         QList<QSpinBox*> *spinBoxList;
+
+        QMap<QPushButton*, std::shared_ptr<Subnet>> subnetMap;
+
+        NetworkDialog networkDialog;
+
+        SubnetDialog subnetDialog;
+
 
         void resetData();
 

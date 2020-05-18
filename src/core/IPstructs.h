@@ -17,6 +17,7 @@ namespace core {
     struct Subnet: public NetworkBase
     {
         long long int HostNumber = -10;
+        QString SubName = "blank";
     };
 
     struct Networkv4: NetworkBase

@@ -2,12 +2,12 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <QTextStream>
+#include <string>
 
 #include "IPstructs.h"
 #include "SubnetsCalculatorV4.h"
 #include "coreUtils.h"
-#include <QTextStream>
-#include <string>
 
 using namespace core;
 

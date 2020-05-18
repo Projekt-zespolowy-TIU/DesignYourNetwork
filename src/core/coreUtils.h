@@ -4,6 +4,8 @@
 
 #include <stdexcept>
 #include <string>
+#include <iostream>
+#include <QString>
 
 namespace core {
     class IIPaddress; //forward declaration
@@ -23,6 +25,8 @@ namespace core {
     };
 
     std::ostream& operator<< (std::ostream& out, const IIPaddress& c);
+    std::ostream& operator<< (std::ostream& out, const QString& c);
+    std::istream& operator>> (std::istream& in, QString& c);
 };
 
 #endif // COREUTILS_H

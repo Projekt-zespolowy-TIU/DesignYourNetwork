@@ -36,12 +36,10 @@ int main(int argc, char *argv[])
     for(int i = 0; i< networkNumber; i++)
     {
         Subnetv4 tempSubnet;
-        std::cout << "Ilosc hostow w sieci [" << i << "]: ";
+        std::cout << "Podaj nazwe podsieci [" << i << "]: ";
+        std::cin >> tempSubnet.SubName;
+        std::cout << "Ilosc hostow w podsieci [" << i << "]: ";
         std::cin >> tempSubnet.HostNumber;
-        std::cout << "Podaj nazwe podsieci : ";
-        std::string name;
-        std::cin >> name;
-        tempSubnet.SubName = QString::fromStdString(name);
         subnets.push_back(std::make_shared<Subnetv4>(tempSubnet));
     }
 
@@ -51,9 +49,10 @@ int main(int argc, char *argv[])
 
     for(int i = 0; i < networkNumber; i++)
     {
-        std::cout << "\nNazwa podsieci: " << subnets.at(i)->SubName.toStdString();
-        std::cout << " Siec [" << i << "] - IP: " << *subnets.at(i)->Ip;
-        std::cout << " Maska: " << *subnets.at(i)->NetMask;
+        std::cout << "\nPodsiec [" << i << "] - "
+                  << "Nazwa podsieci: " << subnets.at(i)->SubName
+                  << " IP: " << *subnets.at(i)->Ip
+                  << " Maska: " << *subnets.at(i)->NetMask;
     }
 
     return a.exec();

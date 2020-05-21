@@ -70,8 +70,11 @@ int main(int argc, char *argv[])
     for(const auto& sub : subnets)
     {
         std::cout << "\nNazwa podsieci: " << sub->SubName
-                  << " IP: " << *sub->Ip
-                  << " Maska: " << *sub->NetMask;
+                  << "\nIP: " << *sub->Ip
+                  << " Maska: " << *sub->NetMask
+                  << " Broadcast: " << *sub->getBroadcast()
+                  << "\nminHost: " << *sub->getMinHost()
+                  << " maxHost: " << *sub->getMaxHost() << '\n';
     }
 
     return a.exec();

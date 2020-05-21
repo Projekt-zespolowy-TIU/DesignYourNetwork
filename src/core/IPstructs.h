@@ -50,6 +50,10 @@ namespace core {
         long long int HostNumber = -10;
         QString SubName = "blank";
 
+        virtual std::unique_ptr<IPaddressBase> getMinHost() = 0;
+        virtual std::unique_ptr<IPaddressBase> getMaxHost() = 0;
+        virtual std::unique_ptr<IPaddressBase> getBroadcast() = 0;
+
         std::shared_ptr<Subnet> clone() const
         {
             return std::shared_ptr<Subnet>(_cloneImpl());
@@ -89,6 +93,23 @@ namespace core {
         virtual unsigned long long hostsCapacity() const override
         {
             return NetworkBase::hostsCapacity() - 1; //without broadcast
+        }
+        std::unique_ptr<IPaddressBase> getMinHost() override
+        {
+            auto x = boost::dynamic_bitset<>(32, 1);
+            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
+        }
+        std::unique_ptr<IPaddressBase> getMaxHost() override
+        {
+            auto x = boost::dynamic_bitset<>(32);
+            x.set(1, 32 - NetMask->getPrefix() - 1, true);
+            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
+        }
+        std::unique_ptr<IPaddressBase> getBroadcast() override
+        {
+            auto x = boost::dynamic_bitset<>(32);
+            x.set(0, 32 - NetMask->getPrefix(), true);
+            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
         }
     private:
         virtual Subnetv4* _cloneImpl() const override

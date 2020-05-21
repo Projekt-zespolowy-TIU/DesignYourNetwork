@@ -18,6 +18,9 @@ namespace IPstructsTests {
         SECTION("Host capacity test"){
             CHECK(network.hostsCapacity() == 2046);
         }
+        SECTION("IP of network treat as non host"){
+            CHECK(network.isHost(*IPv4parser{}.ipFromString("172.16.32.0")) == false);
+        }
         SECTION("Check if IP is a host of network"){
             CHECK(network.isHost(*IPv4parser{}.ipFromString("172.16.32.1")) == true);
         }

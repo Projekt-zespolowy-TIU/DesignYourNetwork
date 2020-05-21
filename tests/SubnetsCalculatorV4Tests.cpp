@@ -29,7 +29,7 @@ namespace SubnetsCalculatorV4Tests {
             subs.back()->HostNumber = 10;
 
             SubnetsCalculatorV4 calc;
-            CHECK_NOTHROW(calc.calcSubnets(net, subs));
+            REQUIRE_NOTHROW(calc.calcSubnets(net, subs));
 
             SECTION("Check mask addresses"){
                 for(const auto& sub : subs)
@@ -69,7 +69,7 @@ namespace SubnetsCalculatorV4Tests {
             subs.back()->HostNumber = 2;
 
             SubnetsCalculatorV4 calc;
-            CHECK_NOTHROW(calc.calcSubnets(net, subs));
+            REQUIRE_NOTHROW(calc.calcSubnets(net, subs));
 
             SECTION("Check mask addresses"){
                 std::vector<std::string> calculatedMasks{

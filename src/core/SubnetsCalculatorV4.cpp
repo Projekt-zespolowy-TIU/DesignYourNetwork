@@ -31,7 +31,7 @@ namespace core {
                 throw IPSubnetworkExcept{"IP mask pool has run out during subnetworks calculations"};
 
             auto Address = _chooseSubnetIP(*mainNet.Ip, *Mask, _subNets);
-            if(!mainNet.isHost(*Address))
+            if( (!mainNet.isHost(*Address)) && (*Address != *mainNet.Ip) )
                 throw IPSubnetworkExcept{"IP address pool has run out during subnetworks calculations"};
 
             _subNet->Ip = Address;

@@ -16,7 +16,7 @@ namespace core {
 
         bool isHost(const IPaddressBase& hostIP) const
         {
-            return *(*Ip & *NetMask) == *(hostIP & *NetMask) ? true : false;
+            return ( (*(*Ip & *NetMask) == *(hostIP & *NetMask)) && (hostIP != *Ip) ) ? true : false;
         };
         virtual unsigned long long hostsCapacity() const
         {

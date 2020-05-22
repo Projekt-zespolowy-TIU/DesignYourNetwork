@@ -3,7 +3,7 @@
 #include "IIPaddress.h"
 
 namespace core {
-    const char* NotImplemented::what() const throw()
+    const char* NotImplemented::what() const noexcept
     {
         return _text.c_str();
     };
@@ -20,4 +20,22 @@ namespace core {
         out << c.asStringDec().toStdString() << std::flush;
         return out;
     };
+
+    const char *IPException::what() const noexcept
+    {
+        return _text.c_str();
+    }
+
+    std::ostream& operator<<(std::ostream& out, const QString& c)
+    {
+        return out << c.toStdString();
+    }
+
+    std::istream& operator>>(std::istream& in, QString& c)
+    {
+        std::string temp;
+        in >> temp;
+        c = QString{temp.c_str()};
+        return in;
+    }
 };

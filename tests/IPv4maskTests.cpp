@@ -2,9 +2,9 @@
 #include <boost/dynamic_bitset.hpp>
 #include <vector>
 #include <string>
-#include <stdexcept>
 
 #include "IPv4mask.h"
+#include "coreUtils.h"
 
 using namespace core;
 
@@ -21,7 +21,7 @@ namespace IPv4maskTests {
             {
                 std::string temps;
                 to_string(element, temps);
-                THEN(std::string("Object created: ") + temps){
+                THEN(std::string{"Object created: "} + temps){
                     CHECK_NOTHROW(IPv4mask{element});
                 };
             };
@@ -29,12 +29,14 @@ namespace IPv4maskTests {
         WHEN("Mask is invalid format"){
             boost::dynamic_bitset<> bitset_ip{32, 3232235521}; //192.168.0.1
             THEN("Ctor throws error"){
-                CHECK_THROWS_AS(IPv4mask{bitset_ip}, std::invalid_argument);
+                CHECK_THROWS_AS(IPv4mask{bitset_ip}, IPFormatExcept);
             };
         };
         SECTION("Get proper ipv4 prefix"){
-            CHECK(IPv4mask().getPrefix() == 0);
-            CHECK(IPv4mask(boost::dynamic_bitset<> {32, 4294967295}).getPrefix() == 32); //255.255.255.255
+            CHECK(IPv4mask(boost::dynamic_bitset<> {32, 4294967232}).getPrefix() == 26); //255.255.255.192
+        };
+        SECTION("Default constructed mask should have all bit set to 1"){
+            CHECK(IPv4mask{}.getPrefix() == 32);
         };
     };
 };

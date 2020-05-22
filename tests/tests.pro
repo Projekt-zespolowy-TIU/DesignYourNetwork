@@ -7,6 +7,7 @@ CONFIG += testcase
 include(../common.pri)
 
 SOURCES += \
+    IPstructsTests.cpp \
     IPv4addressTests.cpp \
     IPv4maskTests.cpp \
     IPv4parserTests.cpp \

@@ -11,9 +11,13 @@ namespace core{
         virtual QString asStringDec() const = 0;
         virtual QString asStringBin() const = 0;
 
-    protected:
-        IIPaddress& operator=(const IIPaddress&) = default;
         virtual ~IIPaddress() = default;
+    protected:
+        IIPaddress() = default;
+        IIPaddress(const IIPaddress&) = default;
+        IIPaddress& operator=(const IIPaddress&) = default;
+        IIPaddress(IIPaddress&&) noexcept = default;
+        IIPaddress& operator=(IIPaddress&&) noexcept = default;
     };
 };
 

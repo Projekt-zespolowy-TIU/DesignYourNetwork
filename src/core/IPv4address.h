@@ -12,13 +12,12 @@ namespace core{
     {
     public:
         IPv4address(): IPaddressBase(boost::dynamic_bitset<>(32)) {};
-        IPv4address(const boost::dynamic_bitset<>& ipaddress): IPaddressBase(ipaddress) {};
+        IPv4address(const boost::dynamic_bitset<>& ipaddress);
 
         QString asStringDec() const override;
         QString asStringBin() const override;
 
         IPv4address operator| (const IPv4address& var) const;
-
     protected:
         std::shared_ptr<IPaddressBase> _applyMask(const boost::dynamic_bitset<>& maskBitset) const override;
     };

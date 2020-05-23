@@ -12,6 +12,7 @@
 #include "networkDialog.h"
 #include "subnetButton.h"
 #include "subnetDialog.h"
+#include "graphDialog.h"
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
 
@@ -76,11 +77,11 @@ namespace widgetApp{
 
         QList<QSpinBox*> *spinBoxList;
 
-        QMap<QPushButton*, std::shared_ptr<Subnet>> subnetMap;
-
         NetworkDialog networkDialog;
 
         SubnetDialog subnetDialog;
+
+        GraphDialog *graphDialog;
 
 
         void resetData();
@@ -89,7 +90,7 @@ namespace widgetApp{
 
         void setSubnetsHostCount();
 
-        void drawNetworkGraph(bool isHorizontal);
+        void drawNetworkGraph();
 
         void deleteLayoutContent(QWidget *content);
 

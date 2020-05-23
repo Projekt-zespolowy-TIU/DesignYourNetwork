@@ -11,7 +11,6 @@
 
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
-#include "IPstructs.h"
 
 using namespace core;
 
@@ -59,13 +58,13 @@ void widgetApp::MainWindow::resetData()
 
 void widgetApp::MainWindow::on_drawButton_clicked()
 {
-    drawNetworkGraph(isHorizontal);
+    drawNetworkGraph();
 }
 
 void widgetApp::MainWindow::on_radioButton_clicked(bool checked)
 {
     isHorizontal = (checked) ? true : false;
-    drawNetworkGraph(isHorizontal);
+    drawNetworkGraph();
 }
 
 void widgetApp::MainWindow::on_CalculateButton_clicked()
@@ -188,119 +187,11 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
     }
 }
 
-void widgetApp::MainWindow::drawNetworkGraph(bool isVertical)
+void widgetApp::MainWindow::drawNetworkGraph()
 {
-    subnetGraphContent->setLayout(graphPanelLayout);
-
-    //subnetMap = new std::map<Subnet, QPushButton*>();
-
-    subnetsGraphFrame = new QFrame();
-
-    QLayoutItem *child;
-    while ((child = subnetGraphContent->layout()->takeAt(0)) != NULL)
-    {
-        if(child->widget() != NULL)
-        {
-            delete child->widget();
-        }
-        delete child;
-    }
-
-    QFrame *graphNetworkFrame = new QFrame();
-    //graphNetworkFrame->setStyleSheet("background-color: rgb(218, 86, 88)");
-    subnetGraphContent->layout()->addWidget(graphNetworkFrame);
-    graphNetworkFrame->setLayout(new QVBoxLayout());
-
-    QString routerButtonText = QString::fromStdString("R" + std::to_string(1));
-    NetworkButton *networkButton = new NetworkButton(mainNetwork);
-    //networkButton->setStyleSheet("background-color: rgb(218, 86, 88)");
-
-
-    QIcon networkIcon;
-    QPixmap pixmap(":/resources/img/router.png");
-    networkIcon.addPixmap(pixmap);
-    networkButton->setIconSize(QSize(50,50));
-    networkButton->setIcon(networkIcon);
-    networkButton->setFlat(true);
-
-    networkButton->setMinimumSize(QSize(50,50));
-    networkButton->setMaximumSize(QSize(50,50));
-    graphNetworkFrame->layout()->addWidget(networkButton);
-
-    connect(networkButton, SIGNAL(clicked(Networkv4)), this, SLOT(on_networkButton_clicked(Networkv4)));
-
-    //subnetsGraphFrame->setStyleSheet("background-color: rgb(227, 229, 115, 100)");
-
-    if(isVertical)
-        subnetsGraphFrame->setLayout(new QVBoxLayout());
-    else  subnetsGraphFrame->setLayout(new QHBoxLayout());
-
-    subnetsGraphFrame->layout()->setSpacing(50);
-    graphNetworkFrame->layout()->addWidget(subnetsGraphFrame);
-
-    for(int i = 0; i < subnetCount; i++)
-    {
-         QVBoxLayout *frameLayout = new QVBoxLayout();
-
-         QFrame *subnetFrame = new QFrame();
-         subnetFrame->setLayout(frameLayout);
-
-         subnetsGraphFrame->layout()->addWidget(subnetFrame);
-
-         QString subButtonText = QString::fromStdString("S" + std::to_string(1 + i));
-         //MyButton *subnetButton = new MyButton();
-         SubnetButton *subnetButton = new SubnetButton(subnets.at(i));
-         //subnetButton->setText(subButtonText);
-
-         //subnetButton->setStyleSheet("background-color: rgb(227, 229, 115)");
-         //subnetButton->setStyleSheet("background-color: rgb(70, 70, 70)");
-         subnetButton->setFlat(true);
-         QIcon subnetIcon;
-         QPixmap pixmap(":/resources/img/switch.png");
-         subnetIcon.addPixmap(pixmap);
-         subnetButton->setIconSize(QSize(40,40));
-         subnetButton->setIcon(subnetIcon);
-
-         subnetButton->setMinimumSize(QSize(40,40));
-         subnetButton->setMaximumSize(QSize(40,40));
-         subnetFrame->layout()->addWidget(subnetButton);
-
-         connect(subnetButton, SIGNAL(clicked(std::shared_ptr<Subnet>)), this, SLOT(on_subnetButton_clicked(std::shared_ptr<Subnet>)));
-
-         subnetMap.insert(subnetButton, subnets.at(i));
-
-         QHBoxLayout *hostsLayout;
-
-         for(int j = 0; j < subnets[i]->HostNumber; j++)
-         {
-            if((j + 8) % 8 == 0)
-            {
-                hostsLayout = new QHBoxLayout();
-                QFrame *hostFrame = new QFrame();
-                frameLayout -> addWidget(hostFrame);
-
-                hostFrame->setLayout(hostsLayout);
-                //hostFrame->setStyleSheet("background-color: rgb(15, 159, 116,100)");
-                hostFrame->setMaximumWidth(300);
-            }
-
-            QString hostButtonText = QString::fromStdString("H" + std::to_string(1 + j));
-            QPushButton *hostButton = new QPushButton();
-            //hostButton->setStyleSheet("background-color: rgb(15, 159, 116)");
-            hostButton->setStyleSheet("background-color: rgb(70, 70, 70)");
-
-            hostButton->setFlat(true);
-            QIcon hostIcon;
-            QPixmap hostPixmap(":/resources/img/host.png");
-            hostIcon.addPixmap(hostPixmap);
-            hostButton->setIconSize(QSize(30,30));
-            hostButton->setIcon(hostIcon);
-
-            hostButton->setMinimumSize(QSize(30,30));
-            hostButton->setMaximumSize(QSize(30,30));
-            hostsLayout->addWidget(hostButton);
-         }
-    }
+     graphDialog = new GraphDialog(mainNetwork, subnets);
+     graphDialog->setModal(true);
+     graphDialog->exec();
 }
 
 void widgetApp::MainWindow::displayNetworkInfo()
@@ -360,6 +251,6 @@ void widgetApp::MainWindow::on_subnetButton_clicked(std::shared_ptr<Subnet> subn
 void widgetApp::MainWindow::on_networkButton_clicked(Networkv4 network)
 {
     networkDialog.setModal(true);
-    networkDialog.InjectData(network);
+    networkDialog.InjectData(network, subnets.size());
     networkDialog.exec();
 }

@@ -24,9 +24,9 @@ void SubnetDialog::InjectData(std::shared_ptr<Subnet> subnet)
 
 void SubnetDialog::SetData()
 {
-    //ui->subnetName->setText();
+    ui->subnetName->setText(subnet->SubName);
     ui->imageLabel->setPixmap(QPixmap(":/resources/img/switch.png").scaled(120,120));
-    //ui->hostCount->setText();
+    ui->hostCount->setText(QString::fromStdString(std::to_string(subnet->hostsCapacity())));
     ui->subnetAddressBinary->setText(subnet->Ip->asStringBin());
     ui->subnetAddressDecimal->setText(subnet->Ip->asStringDec());
     ui->subnetMaskBinary->setText(subnet->Ip->asStringBin());

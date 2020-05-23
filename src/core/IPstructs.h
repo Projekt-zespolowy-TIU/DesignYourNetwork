@@ -14,19 +14,9 @@ namespace core {
         std::shared_ptr<IPaddressBase> Ip;
         std::shared_ptr<IPmaskBase> NetMask;
 
-        bool isHost(const IPaddressBase& hostIP) const
-        {
-            return ( (*(*Ip & *NetMask) == *(hostIP & *NetMask)) && (hostIP != *Ip) ) ? true : false;
-        };
-        virtual unsigned long long hostsCapacity() const
-        {
-            auto allAddresses = 1ull << (NetMask->getLength() - NetMask->getPrefix());
-            return allAddresses - 1; //without network address
-        }
-        void fix()
-        {
-            Ip = *Ip & *NetMask;
-        };
+        bool isHost(const IPaddressBase& hostIP) const;
+        virtual unsigned long long hostsCapacity() const;
+        void fix();
 
         std::shared_ptr<NetworkBase> clone() const
         {
@@ -43,12 +33,20 @@ namespace core {
     private:
         virtual NetworkBase* _cloneImpl() const = 0;
     };
-
+//=============================================================================
     class Subnet: public NetworkBase
     {
     public:
+        struct Host{
+            //explicit Host(long long int number, QString name, std::shared_ptr<IPaddressBase> ip) : Number{number}, Name{name}, Ip{ip} {};
+            long long int Number;
+            QString Name = "noname";
+            std::shared_ptr<IPaddressBase> Ip;
+        };
+
         long long int HostNumber = -10;
         QString SubName = "blank";
+        std::vector<Host> HostsList;
 
         virtual std::unique_ptr<IPaddressBase> getMinHost() = 0;
         virtual std::unique_ptr<IPaddressBase> getMaxHost() = 0;
@@ -67,60 +65,26 @@ namespace core {
     private:
         Subnet* _cloneImpl() const override = 0;
     };
-
+//=============================================================================
     class Networkv4: public NetworkBase
     {
     public:
         Networkv4() { Ip = std::make_shared<IPv4address>(); NetMask = std::make_shared<IPv4mask>(); };
-        virtual unsigned long long hostsCapacity() const override
-        {
-            return NetworkBase::hostsCapacity() - 1; //without broadcast
-        }
+        unsigned long long hostsCapacity() const override;
     private:
-        virtual Networkv4* _cloneImpl() const override
-        {
-            auto ptr = new Networkv4;
-            *ptr->Ip = *this->Ip;
-            *ptr->NetMask = *this->NetMask;
-            return ptr;
-        }
+        Networkv4* _cloneImpl() const override;
     };
-
+//=============================================================================
     class Subnetv4: public Subnet
     {
     public:
         Subnetv4() { Ip = std::make_shared<IPv4address>(); NetMask = std::make_shared<IPv4mask>(); };
-        virtual unsigned long long hostsCapacity() const override
-        {
-            return NetworkBase::hostsCapacity() - 1; //without broadcast
-        }
-        std::unique_ptr<IPaddressBase> getMinHost() override
-        {
-            auto x = boost::dynamic_bitset<>(32, 1);
-            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
-        }
-        std::unique_ptr<IPaddressBase> getMaxHost() override
-        {
-            auto x = boost::dynamic_bitset<>(32);
-            x.set(1, 32 - NetMask->getPrefix() - 1, true);
-            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
-        }
-        std::unique_ptr<IPaddressBase> getBroadcast() override
-        {
-            auto x = boost::dynamic_bitset<>(32);
-            x.set(0, 32 - NetMask->getPrefix(), true);
-            return std::make_unique<IPv4address>(dynamic_cast<IPv4address&>(*Ip) | IPv4address{x});
-        }
+        unsigned long long hostsCapacity() const override;
+        std::unique_ptr<IPaddressBase> getMinHost() override;
+        std::unique_ptr<IPaddressBase> getMaxHost() override;
+        std::unique_ptr<IPaddressBase> getBroadcast() override;
     private:
-        virtual Subnetv4* _cloneImpl() const override
-        {
-            auto ptr = new Subnetv4;
-            *ptr->Ip = *this->Ip;
-            *ptr->NetMask = *this->NetMask;
-            ptr->HostNumber = this->HostNumber;
-            ptr->SubName = this->SubName;
-            return ptr;
-        }
+        Subnetv4* _cloneImpl() const override;
     };
 };
 

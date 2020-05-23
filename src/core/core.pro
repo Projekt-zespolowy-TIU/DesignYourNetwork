@@ -7,6 +7,7 @@ include(../../common.pri)
 
 SOURCES += \
     IPaddressBase.cpp \
+    IPstructs.cpp \
     IPv4address.cpp \
     IPv4mask.cpp \
     IPv4parser.cpp \

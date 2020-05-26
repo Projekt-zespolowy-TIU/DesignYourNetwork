@@ -12,9 +12,17 @@
 namespace core {
     void SubnetsCalculatorV4::calcSubnets(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const
     {
+        _fillSubnetsIps(mainNet, subNets);
+
+        for(auto subnet : subNets)
+            _fillSubnetWithHosts(*subnet);
+    }
+
+    void SubnetsCalculatorV4::_fillSubnetsIps(const NetworkBase &mainNet, std::vector<std::shared_ptr<Subnet> > &subNets) const
+    {
         std::vector<std::shared_ptr<Subnet>> _subNets;
         for(const auto& sub : subNets)
-            _subNets.emplace_back() = sub->clone();
+            _subNets.emplace_back(sub->clone());
 
         std::sort(_subNets.begin(), _subNets.end(),[](const auto& a, const auto& b){
             return a->HostNumber > b->HostNumber;
@@ -43,6 +51,15 @@ namespace core {
         };
 
         subNets = _subNets;
+    };
+
+    void SubnetsCalculatorV4::_fillSubnetWithHosts(Subnet &subnet) const
+    {
+        for(auto i = 1; i <= subnet.HostNumber; i++)
+        {
+            auto host_ip = dynamic_cast<IPv4address&>(*subnet.Ip) | IPv4address{boost::dynamic_bitset<>(32,i)};
+            subnet.HostsList.emplace_back(Subnet::Host{i, QString{"Host nr "} + QString::number(i), std::make_shared<IPv4address>(host_ip)});
+        }
     };
 
     std::shared_ptr<IPmaskBase> SubnetsCalculatorV4::_chooseSubnetMask(const long long desiredHostsNumber) const
@@ -75,5 +92,5 @@ namespace core {
             netBits++;
         };
         return std::make_shared<IPv4address>(pretenderAddress);
-    };
+    }
 };

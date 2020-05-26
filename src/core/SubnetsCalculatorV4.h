@@ -15,6 +15,8 @@ namespace core {
     public:
         void calcSubnets(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const;
     private:
+        void _fillSubnetsIps(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const;
+        void _fillSubnetWithHosts(Subnet& subNet) const;
         std::shared_ptr<IPmaskBase> _chooseSubnetMask(const long long desiredHostsNumber) const;
         std::shared_ptr<IPaddressBase> _chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs) const;
     };

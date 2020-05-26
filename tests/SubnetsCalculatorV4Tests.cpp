@@ -10,7 +10,7 @@
 using namespace core;
 
 namespace SubnetsCalculatorV4Tests {
-    TEST_CASE("SubnetsCalculatorV4 Tests"){
+    TEST_CASE("SubnetsCalculatorV4 Integration Tests"){
         Networkv4 net;
         std::vector<std::shared_ptr<Subnet>> subs;
 
@@ -49,6 +49,7 @@ namespace SubnetsCalculatorV4Tests {
                         return x->Ip->asStringDec().toStdString() == var;
                     }));
             };
+
         };
         SECTION("Subneting with the STS exam data")
         {
@@ -97,8 +98,19 @@ namespace SubnetsCalculatorV4Tests {
 
                 for(size_t i = 0; i < 6; i++){
                     CHECK(subs.at(i)->Ip->asStringDec().toStdString() == calculatedIPs.at(i));
-                };
-            };
+                }
+            }
+
+            SECTION("Check host's IPs"){
+                REQUIRE(subs.at(2)->HostsList.size() == 7);
+                CHECK(subs.at(2)->HostsList.at(0).Ip->asStringDec().toStdString() == "23.91.45.97"); //1
+                CHECK(subs.at(2)->HostsList.at(1).Ip->asStringDec().toStdString() == "23.91.45.98"); //2
+                CHECK(subs.at(2)->HostsList.at(2).Ip->asStringDec().toStdString() == "23.91.45.99"); //3
+                CHECK(subs.at(2)->HostsList.at(3).Ip->asStringDec().toStdString() == "23.91.45.100"); //4
+                CHECK(subs.at(2)->HostsList.at(4).Ip->asStringDec().toStdString() == "23.91.45.101"); //5
+                CHECK(subs.at(2)->HostsList.at(5).Ip->asStringDec().toStdString() == "23.91.45.102"); //6
+                CHECK(subs.at(2)->HostsList.at(6).Ip->asStringDec().toStdString() == "23.91.45.103"); //7
+            }
         };
     };
 };

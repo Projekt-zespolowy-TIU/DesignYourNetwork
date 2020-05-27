@@ -1,4 +1,4 @@
-#include "subnetDialog.h"
+#include "SubnetDialog.h"
 #include "ui_subnetdialog.h"
 
 using namespace core;

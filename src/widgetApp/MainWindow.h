@@ -8,11 +8,11 @@
 #include <QLayout>
 #include <QPushButton>
 
-#include "networkButton.h"
-#include "networkDialog.h"
-#include "subnetButton.h"
-#include "subnetDialog.h"
-#include "graphDialog.h"
+#include "NetworkButton.h"
+#include "NetworkDialog.h"
+#include "SubnetButton.h"
+#include "SubnetDialog.h"
+#include "GraphDialog.h"
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
 

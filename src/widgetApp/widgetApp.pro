@@ -5,26 +5,26 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 include(../../common.pri)
 
 SOURCES += \
-    graphDialog.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    networkDialog.cpp \
-    subnetDialog.cpp
+    GraphDialog.cpp \
+    Main.cpp \
+    MainWindow.cpp \
+    NetworkDialog.cpp \
+    SubnetDialog.cpp
 
 HEADERS += \
-    graphDialog.h \
-    hostButton.h \
-    mainwindow.h \
-    networkButton.h \
-    networkDialog.h \
-    subnetButton.h \
-    subnetDialog.h
+    GraphDialog.h \
+    HostButton.h \
+    MainWindow.h \
+    NetworkButton.h \
+    NetworkDialog.h \
+    SubnetButton.h \
+    SubnetDialog.h
 
 FORMS += \
-    graphdialog.ui \
-    mainwindow.ui \
-    networkdialog.ui \
-    subnetdialog.ui
+    GraphDialog.ui \
+    MainWindow.ui \
+    NetworkDialog.ui \
+    SubnetDialog.ui
 
 include(../core/core.pri)
 

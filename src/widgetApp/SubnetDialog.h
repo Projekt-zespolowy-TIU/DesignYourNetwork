@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QtCore>
 
-
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
 
@@ -27,7 +26,6 @@ public:
     void SetData();
 
 private slots:
-
 
 private:
     Ui::SubnetDialog *ui;

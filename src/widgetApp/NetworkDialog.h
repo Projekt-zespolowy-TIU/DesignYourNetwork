@@ -2,6 +2,7 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
+
 #include "IPstructs.h"
 
 using namespace core;

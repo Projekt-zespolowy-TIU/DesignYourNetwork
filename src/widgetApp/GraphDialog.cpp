@@ -1,7 +1,7 @@
-#include "graphDialog.h"
+#include "GraphDialog.h"
 #include "ui_graphdialog.h"
-#include "networkButton.h"
-#include "subnetButton.h"
+#include "NetworkButton.h"
+#include "SubnetButton.h"
 
 #include <QLayout>
 #include <QPushButton>

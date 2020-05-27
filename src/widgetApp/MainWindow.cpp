@@ -1,9 +1,9 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "ui_mainwindow.h"
-#include "subnetDialog.h"
-#include "subnetButton.h"
-#include "networkDialog.h"
-#include "networkButton.h"
+#include "SubnetDialog.h"
+#include "SubnetButton.h"
+#include "NetworkDialog.h"
+#include "NetworkButton.h"
 
 #include <QSpinBox>
 #include <QLabel>

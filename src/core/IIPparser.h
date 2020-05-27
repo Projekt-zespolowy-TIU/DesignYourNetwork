@@ -3,18 +3,16 @@
 #define IIPPARSER_H
 
 #include <QString>
-#include <memory>
+#include <boost/dynamic_bitset.hpp>
 
 namespace core{
-    class IPaddressBase; //forward declaration
-    class IPmaskBase; //forward declaration
-
     class IIPparser
     {
     public:
-        virtual std::shared_ptr<IPaddressBase> ipFromString(const QString&) const = 0;
-        virtual std::shared_ptr<IPmaskBase> ipMaskFromString(const QString&) const = 0;
+        virtual boost::dynamic_bitset<> ipFromString(const QString&) const = 0;
 
+    //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
+    public:
         virtual ~IIPparser() = default;
     protected:
         IIPparser() = default;
@@ -22,6 +20,7 @@ namespace core{
         IIPparser& operator=(const IIPparser&) = default;
         IIPparser(IIPparser&&) noexcept = default;
         IIPparser& operator=(IIPparser&&) noexcept = default;
+    //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
     };
 };
 

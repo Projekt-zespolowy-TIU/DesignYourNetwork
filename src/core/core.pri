@@ -1,4 +1,4 @@
-BASEDIR = $${PWD}
+BASEDIR = $${PWD}/..
 INCLUDEPATH += $${BASEDIR}
 
 LIBRARY_OUT_PWD = $$clean_path($$OUT_PWD/$$relative_path($$PWD, $$_PRO_FILE_PWD_))

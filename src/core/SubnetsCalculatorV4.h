@@ -3,22 +3,25 @@
 #define SUBNETSCALCULATORV4_H
 
 #include <vector>
-#include <memory>
+#include <boost/dynamic_bitset.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
 
-#include "IPstructs.h"
+#include "Networkv4.h"
 
 namespace core {
-    class IIPmask; //forward declaration
-
     class SubnetsCalculatorV4
     {
     public:
-        void calcSubnets(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const;
+        void calcSubnets(Networkv4& Net) const;
     private:
-        void _fillSubnetsIps(const NetworkBase& mainNet, std::vector<std::shared_ptr<Subnet>>& subNets) const;
-        void _fillSubnetWithHosts(Subnet& subNet) const;
-        std::shared_ptr<IPmaskBase> _chooseSubnetMask(const long long desiredHostsNumber) const;
-        std::shared_ptr<IPaddressBase> _chooseSubnetIP(const IPaddressBase& mainNetIP, const IIPmask& Mask, const std::vector<std::shared_ptr<Subnet>>& alreadyAssignedIPs) const;
+        void _fillSubnetsIps(Networkv4& Net) const;
+        void _fillSubnetWithHosts(Subnetv4& subNet) const;
+        boost::dynamic_bitset<> _chooseSubnetMask(const cpp_int& desiredHostsNumber,
+                                                  const unsigned short maskLength) const;
+        boost::dynamic_bitset<> _chooseSubnetIP(const IPaddress& mainNetIP,
+                                                const IPaddress& Mask,
+                                                const std::vector<Subnetv4>& usedIPsPool
+                                                ) const;
     };
 };
 

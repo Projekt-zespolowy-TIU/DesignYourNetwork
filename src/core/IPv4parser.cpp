@@ -1,24 +1,13 @@
 #include "IPv4parser.h"
 
-#include <QString>
-#include <memory>
-#include <boost/dynamic_bitset.hpp>
 #include <boost/asio/ip/address_v4.hpp>
-#include <string>
 
-#include "IPv4address.h"
-#include "IPv4mask.h"
 #include "coreUtils.h"
 
 namespace core {
-    std::shared_ptr<IPaddressBase> IPv4parser::ipFromString(const QString& IP) const
+    boost::dynamic_bitset<> IPv4parser::ipFromString(const QString& IP) const
     {
-        return std::make_shared<IPv4address>(_getBitset(IP.toStdString()));
-    }
-
-    std::shared_ptr<IPmaskBase> IPv4parser::ipMaskFromString(const QString & mask) const
-    {
-        return std::make_shared<IPv4mask>(_getBitset(mask.toStdString()));
+        return _getBitset(IP.toStdString());
     }
 
     boost::dynamic_bitset<> IPv4parser::_getBitset(const std::string& addressString) const

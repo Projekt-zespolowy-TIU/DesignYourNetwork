@@ -6,6 +6,7 @@ include(../../common.pri)
 
 SOURCES += \
     GraphDialog.cpp \
+    HostDialog.cpp \
     Main.cpp \
     MainWindow.cpp \
     NetworkDialog.cpp \
@@ -14,6 +15,7 @@ SOURCES += \
 HEADERS += \
     GraphDialog.h \
     HostButton.h \
+    HostDialog.h \
     MainWindow.h \
     NetworkButton.h \
     NetworkDialog.h \
@@ -22,6 +24,7 @@ HEADERS += \
 
 FORMS += \
     GraphDialog.ui \
+    HostDialog.ui \
     MainWindow.ui \
     NetworkDialog.ui \
     SubnetDialog.ui

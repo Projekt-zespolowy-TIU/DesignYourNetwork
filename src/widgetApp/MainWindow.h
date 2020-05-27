@@ -12,6 +12,8 @@
 #include "NetworkDialog.h"
 #include "SubnetButton.h"
 #include "SubnetDialog.h"
+#include "HostButton.h"
+#include "HostDialog.h"
 #include "GraphDialog.h"
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
@@ -45,6 +47,8 @@ namespace widgetApp{
 
         void on_subnetButton_clicked(std::shared_ptr<Subnet> subnet);
 
+        void on_hostButton_clicked(Subnet::Host host);
+
         void on_saveButton_clicked();
 
     private:
@@ -55,9 +59,12 @@ namespace widgetApp{
         bool isHorizontal = false;
 
         IPv4parser parser;
-        Networkv4 mainNetwork;
         SubnetsCalculatorV4 calculator;
+
+        Networkv4 mainNetwork;
         std::vector<std::shared_ptr<Subnet>> subnets;
+        std::vector<std::shared_ptr<Subnet::Host>> hosts;
+
 
         QWidget *addressWidget;
         QWidget *maskWidget;
@@ -81,8 +88,9 @@ namespace widgetApp{
 
         SubnetDialog subnetDialog;
 
-        GraphDialog *graphDialog;
+        HostDialog hostDialog;
 
+        GraphDialog *graphDialog;
 
         void resetData();
 

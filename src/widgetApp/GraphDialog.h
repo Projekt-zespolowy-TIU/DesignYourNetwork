@@ -7,6 +7,7 @@
 
 #include "NetworkDialog.h"
 #include "SubnetDialog.h"
+#include "HostDialog.h"
 #include "SubnetsCalculatorV4.h"
 
 using namespace core;
@@ -31,6 +32,8 @@ private slots:
 
      void on_subnetButton_clicked(std::shared_ptr<Subnet> subnet);
 
+     void on_hostButton_clicked(Subnet::Host host);
+
      void on_coloredGraphcheckBox_clicked(bool checked);
 
      void on_verticalViewButton_clicked(bool checked);
@@ -50,6 +53,8 @@ private:
     NetworkDialog networkDialog;
 
     SubnetDialog subnetDialog;
+
+    HostDialog hostDialog;
 
     QWidget *subnetScrollContent;
     QWidget *subnetGraphContent;

@@ -6,7 +6,6 @@
 #pragma once
 
 #include <QPushButton>
-
 #include "IPstructs.h"
 
 using namespace core;

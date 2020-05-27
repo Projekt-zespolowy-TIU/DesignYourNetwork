@@ -92,9 +92,15 @@ void widgetApp::MainWindow::setSubnetsHostCount()
 { 
     for (int i = 0; i < subnetCount; i++)
     {
-       Subnetv4 temp;
-       temp.HostNumber = spinBoxList->at(i)->value();
-       subnets.push_back(std::make_shared<Subnetv4>(temp));
+       Subnetv4 subnet;
+       subnet.HostNumber = spinBoxList->at(i)->value();
+       subnets.push_back(std::make_shared<Subnetv4>(subnet));
+
+       for (int i = 0; i < subnet.HostNumber; i++)
+       {
+           Subnet::Host host;
+           subnet.HostsList.push_back(host);
+       }
     }
 }
 
@@ -241,6 +247,14 @@ void widgetApp::MainWindow::on_saveButton_clicked()
 {
 
 }
+
+void widgetApp::MainWindow::on_hostButton_clicked(Subnet::Host host)
+{
+    hostDialog.setModal(true);
+    hostDialog.InjectData(host);
+    hostDialog.exec();
+}
+
 void widgetApp::MainWindow::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
 {
     subnetDialog.setModal(true);
@@ -254,3 +268,5 @@ void widgetApp::MainWindow::on_networkButton_clicked(Networkv4 network)
     networkDialog.InjectData(network, subnets.size());
     networkDialog.exec();
 }
+
+

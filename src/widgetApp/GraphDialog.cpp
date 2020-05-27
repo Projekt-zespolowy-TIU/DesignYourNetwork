@@ -2,6 +2,7 @@
 #include "ui_graphdialog.h"
 #include "NetworkButton.h"
 #include "SubnetButton.h"
+#include "HostButton.h"
 
 #include <QLayout>
 #include <QPushButton>
@@ -131,7 +132,9 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
 
 
             QString hostButtonText = QString::fromStdString("H" + std::to_string(1 + j));
-            QPushButton *hostButton = new QPushButton();
+
+            HostButton *hostButton = new HostButton(subnets[i]->HostsList.at(j));
+            connect(hostButton, SIGNAL(clicked(Subnet::Host)), this, SLOT(on_hostButton_clicked(Subnet::Host)));
             if(isColored)hostButton->setStyleSheet("background-color: rgb(15, 159, 116)");
 
             hostButton->setFlat(true);
@@ -148,6 +151,13 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
     }
 
 }
+void GraphDialog::on_hostButton_clicked(Subnet::Host host)
+{
+    hostDialog.setModal(true);
+    hostDialog.InjectData(host);
+    hostDialog.exec();
+}
+
 void GraphDialog::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
 {
     subnetDialog.setModal(true);

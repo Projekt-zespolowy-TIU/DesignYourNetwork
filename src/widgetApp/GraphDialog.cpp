@@ -168,7 +168,7 @@ void GraphDialog::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
 void GraphDialog::on_networkButton_clicked(Networkv4 network)
 {
     networkDialog.setModal(true);
-    networkDialog.InjectData(network, subnets.size());
+    networkDialog.InjectData(network, subnets);
     networkDialog.exec();
 }
 

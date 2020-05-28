@@ -43,12 +43,6 @@ namespace widgetApp{
 
         void on_radioButton_clicked(bool checked);
 
-        void on_networkButton_clicked(Networkv4 network);
-
-        void on_subnetButton_clicked(std::shared_ptr<Subnet> subnet);
-
-        void on_hostButton_clicked(Subnet::Host host);
-
         void on_saveButton_clicked();
 
     private:

@@ -18,7 +18,8 @@ public:
     explicit NetworkDialog(QWidget *parent = nullptr);
     ~NetworkDialog();
 
-    void InjectData(Networkv4 network, int subnetCount);
+    void InjectData(Networkv4 network,
+        std::vector<std::shared_ptr<Subnet>> subnets);
 
     void SetData();
 
@@ -31,6 +32,8 @@ private:
     Networkv4 network;
 
     int subnetCount;
+
+    int hostCount;
 };
 
 #endif // NETWORK DIALOG_H

@@ -1,11 +1,11 @@
- #ifndef GRAPHDIALOG_H
+#ifndef GRAPHDIALOG_H
 #define GRAPHDIALOG_H
 
 #include <QDialog>
 #include <QLayout>
 #include <QFrame>
 
-#include "NetworkDialog.h"
+#include "networkDialog.h"
 #include "SubnetDialog.h"
 #include "HostDialog.h"
 #include "SubnetsCalculatorV4.h"

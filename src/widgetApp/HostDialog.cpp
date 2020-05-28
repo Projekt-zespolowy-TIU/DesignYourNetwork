@@ -21,8 +21,17 @@ void HostDialog::InjectData(Subnet::Host host)
 
 void HostDialog::SetData()
 {
+
     ui->hostName->setText(host.Name);
-    ui->hostImageLabel->setPixmap(QPixmap(":/resources/img/host.png").scaled(120,120));
+    ui->hostId->setText(QString::number(host.Number));
+
+    QIcon icon;
+    QPixmap pixmap(":/resources/img/host.png");
+    icon.addPixmap(pixmap);
+    ui->graphImage->setIconSize(QSize(120,120));
+    ui->graphImage->setIcon(icon);
+    ui->idLine->setText(QString::number(host.Number));
+
     ui->hostAddressBinary->setText(host.Ip->asStringBin());
     ui->hostAddressDecimal->setText(host.Ip->asStringDec());
     ui->hostMaskBinary->setText(host.Ip->asStringBin());

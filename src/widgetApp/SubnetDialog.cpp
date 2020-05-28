@@ -1,5 +1,5 @@
 #include "SubnetDialog.h"
-#include "ui_subnetdialog.h"
+#include "ui_SubnetDialog.h"
 
 using namespace core;
 
@@ -18,17 +18,36 @@ SubnetDialog::~SubnetDialog()
 
 void SubnetDialog::InjectData(std::shared_ptr<Subnet> subnet)
 {
-    this->subnet = subnet;
+    this->subnet = subnet; 
     SetData();
 }
 
 void SubnetDialog::SetData()
 {
     ui->subnetName->setText(subnet->SubName);
-    ui->imageLabel->setPixmap(QPixmap(":/resources/img/switch.png").scaled(120,120));
-    ui->hostCount->setText(QString::fromStdString(std::to_string(subnet->hostsCapacity())));
+
+    QIcon icon;
+    QPixmap pixmap(":/resources/img/switch.png");
+    icon.addPixmap(pixmap);
+    ui->graphImage->setIconSize(QSize(120,120));
+    ui->graphImage->setIcon(icon);
+
+    ui->hostCount->setText(QString::number(subnet->HostNumber));
+    ui->hostCapacity->setText(QString::number(subnet->hostsCapacity()));
+    ui->progressBar->setRange(0, subnet->hostsCapacity());
+    ui->progressBar->setValue(subnet->HostNumber);
+
     ui->subnetAddressBinary->setText(subnet->Ip->asStringBin());
     ui->subnetAddressDecimal->setText(subnet->Ip->asStringDec());
-    ui->subnetMaskBinary->setText(subnet->Ip->asStringBin());
-    ui->subnetMaskDecimal->setText(subnet->Ip->asStringDec());
+    ui->subnetMaskBinary->setText(subnet->NetMask->asStringBin());
+    ui->subnetMaskDecimal->setText(subnet->NetMask->asStringDec());
+
+    ui->firstAddressBinary->setText(subnet->getMinHost()->asStringBin());
+    ui->firstAddressDecimal->setText(subnet->getMinHost()->asStringDec());
+    ui->lastAddressBinary->setText(subnet->getMaxHost()->asStringBin());
+    ui->lastAddressDecimal->setText(subnet->getMaxHost()->asStringDec());
+
+    ui->broadcastAddressBinary->setText(subnet->getBroadcast()->asStringBin());
+    ui->broadcastAddressDecimal->setText(subnet->getBroadcast()->asStringDec());
+
 }

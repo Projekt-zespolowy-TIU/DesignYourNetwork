@@ -1,8 +1,8 @@
 #include "MainWindow.h"
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 #include "SubnetDialog.h"
 #include "SubnetButton.h"
-#include "NetworkDialog.h"
+#include "networkDialog.h"
 #include "NetworkButton.h"
 
 #include <QSpinBox>
@@ -248,25 +248,6 @@ void widgetApp::MainWindow::on_saveButton_clicked()
 
 }
 
-void widgetApp::MainWindow::on_hostButton_clicked(Subnet::Host host)
-{
-    hostDialog.setModal(true);
-    hostDialog.InjectData(host);
-    hostDialog.exec();
-}
 
-void widgetApp::MainWindow::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
-{
-    subnetDialog.setModal(true);
-    subnetDialog.InjectData(subnet);
-    subnetDialog.exec();
-}
-
-void widgetApp::MainWindow::on_networkButton_clicked(Networkv4 network)
-{
-    networkDialog.setModal(true);
-    networkDialog.InjectData(network, subnets.size());
-    networkDialog.exec();
-}
 
 

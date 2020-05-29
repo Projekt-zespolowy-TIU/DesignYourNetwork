@@ -24,21 +24,27 @@ namespace widgetApp {
 
         addressWidget = ui->Address4Widget;
 
+        binaryAddressWidget = ui->BinaryAddress4Widget;
+
+        maskWidget = ui->Mask4Widget;
+
+        binaryMaskWidget = ui->BinaryMask4Widget;
+
         subnetScrollContent = ui->subnetScroll;
         subnetScrollContent->setLayout(subnetsPanelLayout);
 
         infoScrollContent = ui->infoScroll;
         infoScrollContent ->setLayout(infoPanelLayout);
 
-        subnetGraphContent = ui->graphScroll;
+        //subnetGraphContent = ui->graphScroll;
 
         subnetCountBox = ui->hostNumberSpinBox;
 
-        binaryAddressWidget = ui->BinaryAddress4Widget;
+        QIcon icon;
+        QPixmap pixmap(":/resources/img/web.png");
+        icon.addPixmap(pixmap.scaled(100,100));
+        ui->toolBox->setItemIcon(0, icon);
 
-        maskWidget = ui->Mask4Widget;
-
-        binaryMaskWidget = ui->BinaryMask4Widget;
     }
 
     MainWindow::~MainWindow()
@@ -167,6 +173,7 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
         QString labelText = QString::fromStdString("Subnet " + std::to_string(1 + i));
         QLabel *subnetLabel = new QLabel(labelText);
+        subnetLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         subnetLabel->setLayout(textLayout);
         subnetLabel->font().bold();
 
@@ -179,9 +186,11 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
         frame->setLayout(frameLayout);
 
         QLabel *label = new QLabel("Hosts number: ");
+        label->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         label->setMinimumHeight(20);
         QSpinBox *spinBox = new QSpinBox();
-        spinBox->setStyleSheet("background-color: rgb(180, 180, 180);\n color: rgb(240, 221, 168)");
+        spinBox->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
+        spinBox->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         spinBox->setMinimumHeight(20);
 
         frameLayout->addWidget(label);

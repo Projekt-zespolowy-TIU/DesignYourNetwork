@@ -15,6 +15,7 @@
 #include "HostButton.h"
 #include "HostDialog.h"
 #include "GraphDialog.h"
+#include "RaportDialog.h"
 #include "IPv4parser.h"
 #include "SubnetsCalculatorV4.h"
 
@@ -83,6 +84,8 @@ namespace widgetApp{
         SubnetDialog subnetDialog;
 
         HostDialog hostDialog;
+
+        RaportDialog *raportDialog;
 
         GraphDialog *graphDialog;
 

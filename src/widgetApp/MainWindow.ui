@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1500</width>
-    <height>603</height>
+    <width>1600</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="font">
@@ -41,8 +41,8 @@ color: rgb(220, 220, 220);</string>
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>371</width>
-      <height>561</height>
+      <width>370</width>
+      <height>558</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -841,8 +841,8 @@ background-color: rgb(60, 60, 60);</string>
    <widget class="QFrame" name="infoFrame">
     <property name="geometry">
      <rect>
-      <x>1471</x>
-      <y>-10</y>
+      <x>1570</x>
+      <y>-20</y>
       <width>20</width>
       <height>591</height>
      </rect>
@@ -957,7 +957,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1500</width>
+     <width>1600</width>
      <height>20</height>
     </rect>
    </property>

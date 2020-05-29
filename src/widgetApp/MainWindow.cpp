@@ -92,6 +92,13 @@ void widgetApp::MainWindow::on_CalculateButton_clicked()
      calculator.calcSubnets(mainNetwork, subnets);
 
      displayNetworkInfo();
+
+     raportDialog = new RaportDialog(mainNetwork, subnets, this);
+     raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60, raportDialog->geometry().width(), raportDialog->geometry().height());
+     //raportDialog->setModal(true);
+     //raportDialog->exec();
+     raportDialog->show();
+
 }
 
 void widgetApp::MainWindow::setSubnetsHostCount()
@@ -204,9 +211,11 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
 void widgetApp::MainWindow::drawNetworkGraph()
 {
-     graphDialog = new GraphDialog(mainNetwork, subnets);
-     graphDialog->setModal(true);
-     graphDialog->exec();
+     graphDialog = new GraphDialog(mainNetwork, subnets, this);
+     graphDialog->setGeometry(this->geometry().x() + 390, this->geometry().y() + 60, graphDialog->geometry().width(), graphDialog->geometry().height());
+     //graphDialog->setModal(true);
+     //graphDialog->exec();
+     graphDialog->show();
 }
 
 void widgetApp::MainWindow::displayNetworkInfo()

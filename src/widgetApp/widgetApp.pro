@@ -10,6 +10,7 @@ SOURCES += \
     Main.cpp \
     MainWindow.cpp \
     NetworkDialog.cpp \
+    RaportDialog.cpp \
     SubnetDialog.cpp
 
 HEADERS += \
@@ -19,6 +20,7 @@ HEADERS += \
     MainWindow.h \
     NetworkButton.h \
     NetworkDialog.h \
+    RaportDialog.h \
     SubnetButton.h \
     SubnetDialog.h
 
@@ -27,6 +29,7 @@ FORMS += \
     HostDialog.ui \
     MainWindow.ui \
     NetworkDialog.ui \
+    RaportDialog.ui \
     SubnetDialog.ui
 
 include(../core/core.pri)

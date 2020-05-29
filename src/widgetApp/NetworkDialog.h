@@ -31,6 +31,8 @@ private:
 
     Networkv4 network;
 
+    std::vector<std::shared_ptr<Subnet>> subnets;
+
     int subnetCount;
 
     int hostCount;

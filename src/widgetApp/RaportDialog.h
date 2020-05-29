@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include <QTextEdit>
 
 #include "IPstructs.h"
 
@@ -21,6 +22,10 @@ public:
                           QWidget *parent = nullptr);
     ~RaportDialog();
 
+private slots:
+
+    void on_saveButton_clicked();
+
 private:
     Ui::RaportDialog *ui;
 
@@ -28,6 +33,8 @@ private:
     std::vector<std::shared_ptr<Subnet>> subnets;
 
     QVBoxLayout *raportLayout = new QVBoxLayout();
+
+    QTextEdit *raportText = new QTextEdit();
 
     void displayNetworkRaport();
 };

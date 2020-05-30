@@ -34,8 +34,8 @@ RaportDialog::~RaportDialog()
 void RaportDialog::displayNetworkRaport()
 {
     ui->raportScrollContent->setLayout(raportLayout);
-
     raportText->setFrameStyle(0);
+    raportText->clear();
 
     raportText->append("Network \n");
     raportText->append("Address: " + network.Ip->asStringDec());
@@ -55,6 +55,17 @@ void RaportDialog::displayNetworkRaport()
         raportText->append("Mask " + subnets.at(i)->NetMask->asStringDec());
         raportText->append(subnets.at(i)->NetMask->asStringBin());
         raportText->append("Hosts: " + QString::number(subnets.at(i)->HostNumber) + "/" + QString::number(subnets.at(i)->hostsCapacity()));
+
+        if(isDetailed)
+        {
+            for(int j = 0; j < static_cast<int>(subnets.at(i)->HostsList.size()); j++)
+            {
+                raportText->append("\n    Host: " + QString::number(subnets.at(i)->HostsList.at(j).Number));
+                raportText->append("    Name: " + subnets.at(i)->HostsList.at(j).Name);
+                raportText->append("    Address: " + subnets.at(i)->HostsList.at(j).Ip->asStringDec());
+                raportText->append("    " + subnets.at(i)->HostsList.at(j).Ip->asStringBin());
+            }
+        }
     }
 }
 
@@ -68,4 +79,10 @@ void RaportDialog::on_saveButton_clicked()
         QTextStream stream(&file);
         stream << raportText->toPlainText() << endl;
     }
+}
+
+void RaportDialog::on_checkBox_toggled(bool checked)
+{
+    isDetailed = checked;
+    displayNetworkRaport();
 }

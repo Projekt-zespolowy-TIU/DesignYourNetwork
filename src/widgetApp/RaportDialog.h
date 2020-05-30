@@ -26,10 +26,15 @@ private slots:
 
     void on_saveButton_clicked();
 
+    void on_checkBox_toggled(bool checked);
+
 private:
     Ui::RaportDialog *ui;
 
+    bool isDetailed = false;
+
     Networkv4 network;
+
     std::vector<std::shared_ptr<Subnet>> subnets;
 
     QVBoxLayout *raportLayout = new QVBoxLayout();

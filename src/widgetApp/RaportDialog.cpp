@@ -13,22 +13,22 @@
 
 using namespace core;
 
-RaportDialog::RaportDialog(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets,
-                           QWidget *parent) :
+RaportDialog::RaportDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RaportDialog)
 {
     ui->setupUi(this);
-
-    this->network = network;
-    this->subnets = subnets;
-
-    displayNetworkRaport();
 }
 
 RaportDialog::~RaportDialog()
 {
     delete ui;
+}
+
+void RaportDialog::injectData(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets)
+{
+    this->network = network;
+    this->subnets = subnets;
 }
 
 void RaportDialog::displayNetworkRaport()

@@ -33,12 +33,9 @@ namespace widgetApp {
         subnetScrollContent = ui->subnetScroll;
         subnetScrollContent->setLayout(subnetsPanelLayout);
 
-        infoScrollContent = ui->infoScroll;
-        infoScrollContent ->setLayout(infoPanelLayout);
-
-        //subnetGraphContent = ui->graphScroll;
-
         subnetCountBox = ui->hostNumberSpinBox;
+
+        raportDialog->hide();
 
         QIcon icon;
         QPixmap pixmap(":/resources/img/web.png");
@@ -59,17 +56,10 @@ void widgetApp::MainWindow::resetData()
     calculator = SubnetsCalculatorV4();
 
     subnetCount = 0;
-    isHorizontal = false;
 }
 
 void widgetApp::MainWindow::on_drawButton_clicked()
 {
-    drawNetworkGraph();
-}
-
-void widgetApp::MainWindow::on_radioButton_clicked(bool checked)
-{
-    isHorizontal = (checked) ? true : false;
     drawNetworkGraph();
 }
 
@@ -89,20 +79,13 @@ void widgetApp::MainWindow::on_CalculateButton_clicked()
 
      setSubnetsHostCount();
 
-     calculator.calcSubnets(mainNetwork, subnets);
-
-     displayNetworkInfo();
-
-     raportDialog = new RaportDialog(mainNetwork, subnets, this);
-     raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60, raportDialog->geometry().width(), raportDialog->geometry().height());
-     //raportDialog->setModal(true);
-     //raportDialog->exec();
-     raportDialog->show();
-
+     calculator.calcSubnets(mainNetwork, subnets);    
 }
 
 void widgetApp::MainWindow::setSubnetsHostCount()
 { 
+     subnets.clear();
+
     for (int i = 0; i < subnetCount; i++)
     {
        Subnetv4 subnet;
@@ -170,9 +153,9 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 {
     this->subnetCount = subnetCount;
 
-    spinBoxList = new QList<QSpinBox*>();
+    spinBoxList->clear();
 
-    subnetNames = new QList<QLineEdit*>();
+    subnetNames->clear();
 
     subnets.clear();
 
@@ -246,54 +229,19 @@ void widgetApp::MainWindow::drawNetworkGraph()
      graphDialog->show();
 }
 
-void widgetApp::MainWindow::displayNetworkInfo()
+void widgetApp::MainWindow::on_raportButton_clicked()
 {
-    deleteLayoutContent(infoScrollContent);
-
-    for(int i = 0; i < subnetCount; i++)
+    if(raportDialog->isHidden())
     {
-        QVBoxLayout *frameLayout = new QVBoxLayout();
-        QFrame *frame = new QFrame();
-        //frame->setStyleSheet("background-color: rgb(15, 159, 116,100)");
-        infoPanelLayout->addWidget(frame);
-        frame->setMinimumHeight(150);
-        frame->setLayout(frameLayout);
-
-        QString labelText = QString::fromStdString("Subnet " + std::to_string(1 + i));
-        QLabel *subnetLabel = new QLabel(labelText);
-        subnetLabel->font().bold();
-        frame->layout()->addWidget(subnetLabel);
-
-        QLabel *hostLabel = new QLabel(QString::fromStdString(
-                                      "Host number: " + std::to_string(static_cast<int>(subnets.at(i)->HostNumber))));
-        hostLabel->setMinimumHeight(20);
-
-        QLabel *addressLabel = new QLabel("IP address: " + (subnets.at(i)->Ip->asStringDec()));
-        QLabel *addressBinaryLabel = new QLabel("Binary IP address: " + (subnets.at(i)->Ip->asStringBin()));
-
-        QLabel *maskLabel = new QLabel("Mask: " + (subnets.at(i)->NetMask->asStringDec()));
-        QLabel *maskBinaryLabel = new QLabel("Binary mask: " + (subnets.at(i)->Ip->asStringBin()));
-
-        QVBoxLayout *detailsLayout = new QVBoxLayout();
-        QFrame *detailsFrame = new QFrame();
-        detailsFrame->setLayout(detailsLayout);
-
-        detailsFrame->layout()->addWidget(hostLabel);
-        detailsFrame->layout()->addWidget(addressLabel);
-        detailsFrame->layout()->addWidget(addressBinaryLabel);
-        detailsFrame->layout()->addWidget(maskLabel);
-        detailsFrame->layout()->addWidget(maskBinaryLabel);
-
-        frame->layout()->addWidget(detailsFrame);
-
-        infoPanelLayout->addWidget(frame);
+        raportDialog = new RaportDialog(this);
+        raportDialog->injectData(mainNetwork, subnets);
+        raportDialog->displayNetworkRaport();
+        raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60, raportDialog->geometry().width(), raportDialog->geometry().height());
+        raportDialog->show();
+    }
+    else
+    {
+        raportDialog->injectData(mainNetwork, subnets);
+        raportDialog->displayNetworkRaport();
     }
 }
-void widgetApp::MainWindow::on_saveButton_clicked()
-{
-
-}
-
-
-
-

@@ -42,11 +42,20 @@ private slots:
 
      void on_scaleSlider_sliderMoved(int position);
 
+     void on_hostNames_toggled(bool checked);
+
+     void on_subnetAddresses_toggled(bool checked);
+
+     void on_networkAddress_toggled(bool checked);
+
 private:
     Ui::GraphDialog *ui;
 
     bool isVertical = false;
     bool isColored = false;
+    bool showsHostNames = false;
+    bool showsSubnetAddresses = false;
+    bool showsNetworkAddress = false;
 
     float scale = 1.0f;
 
@@ -65,7 +74,7 @@ private:
 
     std::vector<std::shared_ptr<Subnet>> subnets;
 
-   void drawNetworkGraph(bool isVertical, bool isColored);
+   void drawNetworkGraph();
 ;
 };
 

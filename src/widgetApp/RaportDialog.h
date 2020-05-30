@@ -18,9 +18,13 @@ class RaportDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit RaportDialog(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets,
-                          QWidget *parent = nullptr);
+    explicit RaportDialog( QWidget *parent = nullptr);
+
     ~RaportDialog();
+
+    void injectData(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets);
+
+    void displayNetworkRaport();
 
 private slots:
 
@@ -40,8 +44,6 @@ private:
     QVBoxLayout *raportLayout = new QVBoxLayout();
 
     QTextEdit *raportText = new QTextEdit();
-
-    void displayNetworkRaport();
 };
 
 #endif // RAPORTDIALOG_H

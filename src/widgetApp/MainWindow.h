@@ -42,9 +42,7 @@ namespace widgetApp{
 
         void on_hostNumberSpinBox_valueChanged(int value);
 
-        void on_radioButton_clicked(bool checked);
-
-        void on_saveButton_clicked();
+        void on_raportButton_clicked();
 
     private:
 
@@ -69,16 +67,14 @@ namespace widgetApp{
         QSpinBox *subnetCountBox;
         QWidget *subnetScrollContent;
         QWidget *subnetGraphContent;
-        QWidget *infoScrollContent;
 
         QFrame *subnetsGraphFrame;
 
         QVBoxLayout *subnetsPanelLayout = new QVBoxLayout();
-        QVBoxLayout *infoPanelLayout = new QVBoxLayout();
         QHBoxLayout *graphPanelLayout = new QHBoxLayout();
 
-        QList<QSpinBox*> *spinBoxList;
-        QList<QLineEdit*> *subnetNames;
+        QList<QSpinBox*> *spinBoxList = new QList<QSpinBox*>();
+        QList<QLineEdit*> *subnetNames = new QList<QLineEdit*>;
 
         NetworkDialog networkDialog;
 
@@ -86,13 +82,11 @@ namespace widgetApp{
 
         HostDialog hostDialog;
 
-        RaportDialog *raportDialog;
+        RaportDialog *raportDialog = new RaportDialog(this);;
 
         GraphDialog *graphDialog;
 
         void resetData();
-
-        void displayNetworkInfo();
 
         void setSubnetsHostCount();
 

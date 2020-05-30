@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Raport</string>
+   <string>Report</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/resources/icons/report.ico</normaloff>:/resources/icons/report.ico</iconset>
   </property>
   <widget class="QFrame" name="infoFrame">
    <property name="geometry">
@@ -102,6 +106,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

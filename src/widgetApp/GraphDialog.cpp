@@ -1,5 +1,5 @@
 #include "GraphDialog.h"
-#include "ui_graphdialog.h"
+#include "ui_GraphDialog.h"
 #include "NetworkButton.h"
 #include "SubnetButton.h"
 #include "HostButton.h"
@@ -20,7 +20,7 @@ GraphDialog::GraphDialog(Networkv4 mainNetwork,
 
     subnetGraphContent = ui-> graphScroll;
 
-    drawNetworkGraph(isVertical, isColored);
+    drawNetworkGraph();
 }
 
 GraphDialog::~GraphDialog()
@@ -28,13 +28,12 @@ GraphDialog::~GraphDialog()
     delete ui;
 }
 
-void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
+void GraphDialog::drawNetworkGraph()
 {
-     //subnetGraphContent->setStyleSheet("background-color: rgb(218, 86, 88)");
-
     subnetGraphContent->setLayout(graphPanelLayout);
 
     subnetsGraphFrame = new QFrame();
+    subnetsGraphFrame->setStyleSheet("border-width : 0px;");
 
 
     QLayoutItem *child;
@@ -49,14 +48,15 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
 
 
     QFrame *graphNetworkFrame = new QFrame();
-    if(isColored)graphNetworkFrame->setStyleSheet("background-color: rgb(218, 86, 88)");
+
+    if(isColored) graphNetworkFrame->
+            setStyleSheet("border-color: rgb(220,220,220);\nborder-width : 4px;\nborder-style:solid;");
+
     subnetGraphContent->layout()->addWidget(graphNetworkFrame);
     graphNetworkFrame->setLayout(new QVBoxLayout());
 
     QString routerButtonText = QString::fromStdString("R" + std::to_string(1));
     NetworkButton *networkButton = new NetworkButton(mainNetwork);
-    if(isColored)networkButton->setStyleSheet("background-color: rgb(218, 86, 88)");
-
 
     QIcon networkIcon;
     QPixmap pixmap(":/resources/img/router.png");
@@ -69,9 +69,17 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
     networkButton->setMaximumSize(QSize(50,50) * scale);
     graphNetworkFrame->layout()->addWidget(networkButton);
 
+    if(showsNetworkAddress)
+    {
+        QLabel *networkAddress = new QLabel(mainNetwork.Ip->asStringDec() + " / " + mainNetwork.NetMask->asStringDec());
+        networkAddress->setAlignment(Qt::AlignTop);
+        graphNetworkFrame->layout()->addWidget(networkAddress);
+    }
+
     connect(networkButton, SIGNAL(clicked(Networkv4)), this, SLOT(on_networkButton_clicked(Networkv4)));
 
-    if(isColored)subnetsGraphFrame->setStyleSheet("background-color: rgb(227, 229, 115, 100)");
+    subnetsGraphFrame->setStyleSheet("border-width : 0px;");
+
 
     if(isVertical)
         subnetsGraphFrame->setLayout(new QVBoxLayout());
@@ -86,17 +94,14 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
 
          QFrame *subnetFrame = new QFrame();
          subnetFrame->setLayout(frameLayout);
-
          subnetsGraphFrame->layout()->addWidget(subnetFrame);
 
-         QString subButtonText = QString::fromStdString("S" + std::to_string(1 + i));
-         //MyButton *subnetButton = new MyButton();
-         SubnetButton *subnetButton = new SubnetButton(subnets.at(i));
-         //subnetButton->setText(subButtonText);
+         if(isColored) subnetFrame->
+                 setStyleSheet("border-color: rgb(38,94,84);\nborder-width : 4px;\nborder-style:solid;");
 
-         //subnetButton->setStyleSheet("background-color: rgb(227, 229, 115)");
-         //subnetButton->setStyleSheet("background-color: rgb(70, 70, 70)");
-         subnetButton->setFlat(true);
+         SubnetButton *subnetButton = new SubnetButton(subnets.at(i));
+         QString subButtonText = QString::fromStdString("S" + std::to_string(1 + i));
+
          QIcon subnetIcon;
          QPixmap pixmap(":/resources/img/switch.png");
          subnetIcon.addPixmap(pixmap);
@@ -106,6 +111,13 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
          subnetButton->setMinimumSize(QSize(40,40) * scale);
          subnetButton->setMaximumSize(QSize(40,40) * scale);
          subnetFrame->layout()->addWidget(subnetButton);
+
+         if(showsSubnetAddresses)
+         {
+             QLabel *subnetAddress = new QLabel(subnets.at(i)->Ip->asStringDec() + " / " + subnets.at(i)->NetMask->asStringDec());
+             subnetAddress->setAlignment(Qt::AlignTop);
+             subnetFrame->layout()->addWidget(subnetAddress);
+         }
 
          connect(subnetButton, SIGNAL(clicked(std::shared_ptr<Subnet>)), this, SLOT(on_subnetButton_clicked(std::shared_ptr<Subnet>)));
 
@@ -118,24 +130,22 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
                 hostsLayout = new QHBoxLayout();
                 QFrame *hostsFrame = new QFrame();
                 frameLayout -> addWidget(hostsFrame);
-
                 hostsFrame->setLayout(hostsLayout);
-                if(isColored)hostsFrame->setStyleSheet("background-color: rgb(15, 159, 116, 100)");
-                hostsFrame->setMaximumWidth(300 * scale);
+                hostsFrame->setMaximumWidth(450 * scale);
+                hostsFrame->setMinimumHeight(100 * scale);
+                hostsFrame->setStyleSheet("border-width : 0px;");
             }
 
             QVBoxLayout *hostLayout = new QVBoxLayout;
-
             QFrame *hostFrame = new QFrame();
-            hostLayout->addWidget(hostFrame);
-            //QLabel *hostName = new QLabel();
-
+            hostFrame->setLayout(hostLayout);
+            hostFrame->setMaximumHeight(100 * scale);
+            hostFrame->setStyleSheet("border-width : 0px;");
 
             QString hostButtonText = QString::fromStdString("H" + std::to_string(1 + j));
 
             HostButton *hostButton = new HostButton(subnets[i]->HostsList.at(j));
             connect(hostButton, SIGNAL(clicked(Subnet::Host)), this, SLOT(on_hostButton_clicked(Subnet::Host)));
-            if(isColored)hostButton->setStyleSheet("background-color: rgb(15, 159, 116)");
 
             hostButton->setFlat(true);
             QIcon hostIcon;
@@ -146,7 +156,20 @@ void GraphDialog::drawNetworkGraph(bool isVertical, bool isColored)
 
             hostButton->setMinimumSize(QSize(30,30) * scale);
             hostButton->setMaximumSize(QSize(30,30) * scale);
-            hostsLayout->addWidget(hostButton);
+            hostLayout->addWidget(hostButton);
+
+            if(showsHostNames)
+            {
+                QLabel *hostName = new QLabel(subnets.at(i)->HostsList.at(j).Name);
+                QFont font;
+                font.setPointSize(7 * scale);
+                hostName->setFont(font);
+                hostName->setMinimumSize(QSize(40,10) * scale);
+                hostName->setMaximumSize(QSize(50,20) * scale);
+                hostName->setAlignment(Qt::AlignHCenter);
+                hostLayout->addWidget(hostName);
+            }
+            hostsLayout->addWidget(hostFrame);
          }
     }
 
@@ -175,23 +198,41 @@ void GraphDialog::on_networkButton_clicked(Networkv4 network)
 void GraphDialog::on_coloredGraphcheckBox_clicked(bool checked)
 {
     isColored = (checked) ? true : false;
-    drawNetworkGraph(isVertical, isColored);
+    drawNetworkGraph();
 }
 
 void GraphDialog::on_verticalViewButton_clicked(bool checked)
 {
     isVertical = checked;
-    drawNetworkGraph(isVertical, isColored);
+    drawNetworkGraph();
 }
 
 void GraphDialog::on_horizontalViewButton_clicked(bool checked)
 {
     isVertical = !checked;
-    drawNetworkGraph(isVertical, isColored);
+    drawNetworkGraph();
 }
 
 void GraphDialog::on_scaleSlider_sliderMoved(int position)
 {
     scale = static_cast<float>(position) / 10.0f;
-    drawNetworkGraph(isVertical, isColored);
+    drawNetworkGraph();
+}
+
+void GraphDialog::on_hostNames_toggled(bool checked)
+{
+    showsHostNames = checked;
+    drawNetworkGraph();
+}
+
+void GraphDialog::on_subnetAddresses_toggled(bool checked)
+{
+    showsSubnetAddresses = checked;
+    drawNetworkGraph();
+}
+
+void GraphDialog::on_networkAddress_toggled(bool checked)
+{
+    showsNetworkAddress = checked;
+    drawNetworkGraph();
 }

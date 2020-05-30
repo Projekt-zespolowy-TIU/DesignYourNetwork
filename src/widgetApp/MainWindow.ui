@@ -202,7 +202,7 @@ background-color: rgb(60, 60, 60);</string>
         <number>0</number>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -466,7 +466,7 @@ background-color: rgb(60, 60, 60);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -762,7 +762,7 @@ background-color: rgb(60, 60, 60);</string>
       </attribute>
      </widget>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -828,7 +828,7 @@ background-color: rgb(60, 60, 60);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="saveButton">
+       <widget class="QPushButton" name="raportButton">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -846,62 +846,17 @@ background-color: rgb(60, 60, 60);</string>
 </string>
         </property>
         <property name="text">
-         <string>Save</string>
+         <string>Report</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </widget>
-   <widget class="QFrame" name="infoFrame">
-    <property name="geometry">
-     <rect>
-      <x>1570</x>
-      <y>-20</y>
-      <width>20</width>
-      <height>591</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(50, 50, 50);</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Panel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QScrollArea" name="infoScrollArea">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>491</width>
-       <height>551</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(70, 70, 70);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="infoScroll">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>491</width>
-        <height>551</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-   </widget>
    <widget class="QPushButton" name="pushButton">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -916,7 +871,7 @@ background-color: rgb(60, 60, 60);</string>
      </font>
     </property>
     <property name="text">
-     <string>\</string>
+     <string/>
     </property>
     <property name="icon">
      <iconset resource="resources.qrc">
@@ -927,6 +882,9 @@ background-color: rgb(60, 60, 60);</string>
       <width>900</width>
       <height>900</height>
      </size>
+    </property>
+    <property name="default">
+     <bool>false</bool>
     </property>
     <property name="flat">
      <bool>true</bool>
@@ -963,7 +921,6 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
    <zorder>pushButton</zorder>
-   <zorder>infoFrame</zorder>
    <zorder>settingsFrame</zorder>
    <zorder>textEdit</zorder>
   </widget>

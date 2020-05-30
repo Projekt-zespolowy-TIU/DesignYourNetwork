@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Network Graph</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/resources/icons/graph.ico</normaloff>:/resources/icons/graph.ico</iconset>
+  </property>
   <widget class="QFrame" name="graphFrame">
    <property name="geometry">
     <rect>
@@ -160,6 +164,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

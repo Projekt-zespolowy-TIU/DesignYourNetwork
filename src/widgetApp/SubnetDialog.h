@@ -27,6 +27,8 @@ public:
 
 private slots:
 
+    void on_subnetName_textEdited(const QString &arg1);
+
 private:
     Ui::SubnetDialog *ui;
 

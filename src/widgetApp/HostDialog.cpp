@@ -38,3 +38,8 @@ void HostDialog::SetData()
     ui->hostMaskDecimal->setText(host.Ip->asStringDec());
 }
 
+
+void HostDialog::on_hostName_textEdited(const QString &arg1)
+{
+    host.Name = arg1;
+}

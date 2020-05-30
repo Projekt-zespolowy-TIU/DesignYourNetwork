@@ -6,5 +6,10 @@
         <file>img/web.png</file>
         <file>img/main.png</file>
         <file>icons/main.ico</file>
+        <file>icons/host.ico</file>
+        <file>icons/router.ico</file>
+        <file>icons/switch.ico</file>
+        <file>icons/graph.ico</file>
+        <file>icons/report.ico</file>
     </qresource>
 </RCC>

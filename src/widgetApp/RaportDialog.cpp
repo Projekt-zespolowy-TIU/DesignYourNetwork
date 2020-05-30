@@ -49,6 +49,7 @@ void RaportDialog::displayNetworkRaport()
     for(int i = 0; i < static_cast<int>(subnets.size()); i++)
     {
         raportText->append("\nSubnet " + QString::number(1 + i) + "\n");
+        raportText->append("Name: " + subnets.at(i)->SubName);
         raportText->append("Address: " + subnets.at(i)->Ip->asStringDec());
         raportText->append(subnets.at(i)->Ip->asStringBin());
         raportText->append("Mask " + subnets.at(i)->NetMask->asStringDec());

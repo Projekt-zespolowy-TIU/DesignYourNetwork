@@ -51,3 +51,8 @@ void SubnetDialog::SetData()
     ui->broadcastAddressDecimal->setText(subnet->getBroadcast()->asStringDec());
 
 }
+
+void SubnetDialog::on_subnetName_textEdited(const QString &arg1)
+{
+    subnet->SubName = arg1;
+}

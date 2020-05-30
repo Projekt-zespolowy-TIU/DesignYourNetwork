@@ -106,6 +106,8 @@ void widgetApp::MainWindow::setSubnetsHostCount()
     for (int i = 0; i < subnetCount; i++)
     {
        Subnetv4 subnet;
+
+       subnet.SubName = subnetNames->at(i)->text();
        subnet.HostNumber = spinBoxList->at(i)->value();
        subnets.push_back(std::make_shared<Subnetv4>(subnet));
 
@@ -170,6 +172,8 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
     spinBoxList = new QList<QSpinBox*>();
 
+    subnetNames = new QList<QLineEdit*>();
+
     subnets.clear();
 
     deleteLayoutContent(subnetScrollContent);
@@ -186,24 +190,48 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
         subnetsPanelLayout->addWidget(subnetLabel);
 
+        QVBoxLayout *subnetLayout = new QVBoxLayout();
+        QFrame *subnetFrame = new QFrame();
+        subnetFrame->setLayout(subnetLayout);
+
         QHBoxLayout *frameLayout = new QHBoxLayout();
-        QFrame *frame = new QFrame();
 
-        frame->setMinimumHeight(30);
-        frame->setLayout(frameLayout);
+        QLabel *nameLabel = new QLabel("Subnet name: ");
+        nameLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
+        nameLabel->setMinimumHeight(23);
+        QFrame *nameFrame = new QFrame();
 
-        QLabel *label = new QLabel("Hosts number: ");
-        label->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
-        label->setMinimumHeight(20);
+        nameFrame->setMinimumHeight(35);
+        nameFrame->setLayout(frameLayout);
+        QLineEdit *subnetNameLine = new QLineEdit();
+        subnetNameLine->setMinimumHeight(23);
+        subnetNameLine->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
+        frameLayout->addWidget(nameLabel);
+        frameLayout->addWidget(subnetNameLine);
+
+        frameLayout = new QHBoxLayout();
+        QFrame *hostCountFrame = new QFrame();
+        hostCountFrame->setMinimumHeight(35);
+        hostCountFrame->setLayout(frameLayout);
+
+        QLabel *hostNumberLabel = new QLabel("Hosts number: ");
+        hostNumberLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
+        hostNumberLabel->setMinimumHeight(23);
         QSpinBox *spinBox = new QSpinBox();
+        spinBox->setRange(0, 999);
         spinBox->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
         spinBox->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
-        spinBox->setMinimumHeight(20);
-
-        frameLayout->addWidget(label);
+        spinBox->setMinimumHeight(23);
+        frameLayout->addWidget(hostNumberLabel);
         frameLayout->addWidget(spinBox);
 
-        subnetsPanelLayout->addWidget(frame);
+        subnetFrame->layout()->addWidget(hostCountFrame);
+
+        subnetFrame->layout()->addWidget(nameFrame);
+
+        subnetsPanelLayout->addWidget(subnetFrame);
+
+        subnetNames->append(subnetNameLine);
 
         spinBoxList->append(spinBox);
     }

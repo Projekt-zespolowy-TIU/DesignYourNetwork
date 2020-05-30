@@ -78,6 +78,7 @@ namespace widgetApp{
         QHBoxLayout *graphPanelLayout = new QHBoxLayout();
 
         QList<QSpinBox*> *spinBoxList;
+        QList<QLineEdit*> *subnetNames;
 
         NetworkDialog networkDialog;
 

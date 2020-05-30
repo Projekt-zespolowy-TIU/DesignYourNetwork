@@ -195,6 +195,9 @@ background-color: rgb(60, 60, 60);</string>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
+       <property name="maximum">
+        <number>999</number>
+       </property>
        <property name="value">
         <number>0</number>
        </property>

@@ -34,8 +34,6 @@ void HostDialog::SetData()
 
     ui->hostAddressBinary->setText(host.Ip->asStringBin());
     ui->hostAddressDecimal->setText(host.Ip->asStringDec());
-    ui->hostMaskBinary->setText(host.Ip->asStringBin());
-    ui->hostMaskDecimal->setText(host.Ip->asStringDec());
 }
 
 

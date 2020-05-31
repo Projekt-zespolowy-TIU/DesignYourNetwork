@@ -47,6 +47,6 @@ void NetworkDialog::SetData()
 
     ui->networkAddressBinary->setText(network.Ip->asStringBin());
     ui->networkAddressDecimal->setText(network.Ip->asStringDec());
-    ui->networkMaskBinary->setText(network.Ip->asStringBin());
-    ui->networkMaskDecimal->setText(network.Ip->asStringDec());
+    ui->networkMaskBinary->setText(network.NetMask->asStringBin());
+    ui->networkMaskDecimal->setText(network.NetMask->asStringDec());
 }

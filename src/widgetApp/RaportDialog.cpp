@@ -8,7 +8,6 @@
 #include <QDir>
 #include <QTextStream>
 
-
 #include "IPstructs.h"
 
 using namespace core;
@@ -37,33 +36,34 @@ void RaportDialog::displayNetworkRaport()
     raportText->setFrameStyle(0);
     raportText->clear();
 
-    raportText->append("Network \n");
-    raportText->append("Address: " + network.Ip->asStringDec());
-    raportText->append(network.Ip->asStringBin());
-    raportText->append("Mask " + network.NetMask->asStringDec());
-    raportText->append(network.NetMask->asStringBin());
-    raportText->append("Host capacity: " + QString::number(network.hostsCapacity()));
+    raportText->append("Network \n"
+                      "\nAddress: " + network.Ip->asStringDec() +
+                      "\n" + network.Ip->asStringBin() +
+                      "\nMask " + network.NetMask->asStringDec() +
+                      "\n" + network.NetMask->asStringBin() +
+                      "\nHost capacity: " + QString::number(network.hostsCapacity()));
 
     raportLayout->addWidget(raportText);
 
     for(int i = 0; i < static_cast<int>(subnets.size()); i++)
     {
-        raportText->append("\nSubnet " + QString::number(1 + i) + "\n");
-        raportText->append("Name: " + subnets.at(i)->SubName);
-        raportText->append("Address: " + subnets.at(i)->Ip->asStringDec());
-        raportText->append(subnets.at(i)->Ip->asStringBin());
-        raportText->append("Mask " + subnets.at(i)->NetMask->asStringDec());
-        raportText->append(subnets.at(i)->NetMask->asStringBin());
-        raportText->append("Hosts: " + QString::number(subnets.at(i)->HostNumber) + "/" + QString::number(subnets.at(i)->hostsCapacity()));
+        raportText->append("\nSubnet " + QString::number(1 + i) + "\n" +
+                          "\nName: " + subnets.at(i)->SubName +
+                          "\nAddress: " + subnets.at(i)->Ip->asStringDec() +
+                          "\n" + subnets.at(i)->Ip->asStringBin() +
+                          "\nMask " + subnets.at(i)->NetMask->asStringDec() +
+                          "\n" + subnets.at(i)->NetMask->asStringBin() +
+                          "\nHosts: " + QString::number(subnets.at(i)->HostNumber) +
+                           "/" + QString::number(subnets.at(i)->hostsCapacity()));
 
         if(isDetailed)
         {
             for(int j = 0; j < static_cast<int>(subnets.at(i)->HostsList.size()); j++)
             {
                 raportText->append("\n    Host: " + QString::number(subnets.at(i)->HostsList.at(j).Number));
-                raportText->append("    Name: " + subnets.at(i)->HostsList.at(j).Name);
-                raportText->append("    Address: " + subnets.at(i)->HostsList.at(j).Ip->asStringDec());
-                raportText->append("    " + subnets.at(i)->HostsList.at(j).Ip->asStringBin());
+                                  ("\n    Name: " + subnets.at(i)->HostsList.at(j).Name);
+                                  ("\n    Address: " + subnets.at(i)->HostsList.at(j).Ip->asStringDec());
+                                  ("\n    " + subnets.at(i)->HostsList.at(j).Ip->asStringBin());
             }
         }
     }
@@ -74,6 +74,7 @@ void RaportDialog::on_saveButton_clicked()
     QString dir = QCoreApplication::applicationDirPath();
     QString filename = dir.append("/raport.txt");
     QFile file(filename);
+
     if ( file.open(QIODevice::ReadWrite) )
     {
         QTextStream stream(&file);

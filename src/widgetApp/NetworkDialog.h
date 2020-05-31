@@ -15,6 +15,7 @@ class NetworkDialog : public QDialog
     Q_OBJECT
 
 public:
+
     explicit NetworkDialog(QWidget *parent = nullptr);
     ~NetworkDialog();
 
@@ -27,6 +28,7 @@ private slots:
 
 
 private:
+
     Ui::NetworkDialog *ui;
 
     Networkv4 network;

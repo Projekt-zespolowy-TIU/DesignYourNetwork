@@ -31,12 +31,13 @@ namespace widgetApp{
         Q_OBJECT
 
     public:
+
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
     private slots:
 
-        void on_CalculateButton_clicked();
+        void on_calculateButton_clicked();
 
         void on_drawButton_clicked();
 
@@ -57,7 +58,6 @@ namespace widgetApp{
         Networkv4 mainNetwork;
         std::vector<std::shared_ptr<Subnet>> subnets;
         std::vector<std::shared_ptr<Subnet::Host>> hosts;
-
 
         QWidget *addressWidget;
         QWidget *maskWidget;
@@ -86,8 +86,6 @@ namespace widgetApp{
 
         GraphDialog *graphDialog;
 
-        void resetData();
-
         void setSubnetsHostCount();
 
         void drawNetworkGraph();
@@ -97,7 +95,6 @@ namespace widgetApp{
         void displayInputInBinary(QString input, QWidget *displayWidget);
 
         QString takeStringFromInputFields(QWidget *inputWidget);
-
     };
 }
 

@@ -16,22 +16,24 @@ class HostButton : public QPushButton
     Q_OBJECT
 
 public:
+
     HostButton(Subnet::Host host)
     {
         this->host = host;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
-
     }
 
 signals:
     void clicked(Subnet::Host);
 
 private slots:
+
     void handleClick()
     {
         emit clicked(host);
     }
 
 private:
+
         Subnet::Host host;
 };

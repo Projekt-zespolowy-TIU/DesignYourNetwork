@@ -39,7 +39,7 @@ void HostDialog::SetData()
 }
 
 
-void HostDialog::on_hostName_textEdited(const QString &arg1)
+void HostDialog::on_hostName_textEdited(const QString &name)
 {
-    host.Name = arg1;
+    host.Name = name;
 }

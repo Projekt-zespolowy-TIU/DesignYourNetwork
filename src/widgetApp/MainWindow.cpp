@@ -2,7 +2,7 @@
 #include "ui_MainWindow.h"
 #include "SubnetDialog.h"
 #include "SubnetButton.h"
-#include "networkDialog.h"
+#include "NetworkDialog.h"
 #include "NetworkButton.h"
 
 #include <QSpinBox>
@@ -36,12 +36,6 @@ namespace widgetApp {
         subnetCountBox = ui->hostNumberSpinBox;
 
         raportDialog->hide();
-
-        QIcon icon;
-        QPixmap pixmap(":/resources/img/web.png");
-        icon.addPixmap(pixmap.scaled(100,100));
-        ui->toolBox->setItemIcon(0, icon);
-
     }
 
     MainWindow::~MainWindow()
@@ -50,20 +44,7 @@ namespace widgetApp {
     }
 }
 
-void widgetApp::MainWindow::resetData()
-{
-    mainNetwork = Networkv4();
-    calculator = SubnetsCalculatorV4();
-
-    subnetCount = 0;
-}
-
-void widgetApp::MainWindow::on_drawButton_clicked()
-{
-    drawNetworkGraph();
-}
-
-void widgetApp::MainWindow::on_CalculateButton_clicked()
+void widgetApp::MainWindow::on_calculateButton_clicked()
 {
      mainNetwork.Ip = parser.ipFromString(
                  takeStringFromInputFields(addressWidget));
@@ -123,13 +104,12 @@ QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
 
     for (int i = 0; i < inputFields.count(); i++)
     {
-        if(inputFields[i] != NULL)
+        if(inputFields.at(i) != NULL)
         {
-            input += inputFields[i]->text();
+            input += inputFields.at(i)->text();
             if(i < inputFields.count() - 1) input += ".";
         }
     }
-
     return input;
 }
 
@@ -164,26 +144,21 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
     for (int i = 0; i < subnetCount; i++)
     {
         QHBoxLayout *textLayout = new QHBoxLayout();
-
         QString labelText = QString::fromStdString("Subnet " + std::to_string(1 + i));
         QLabel *subnetLabel = new QLabel(labelText);
         subnetLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         subnetLabel->setLayout(textLayout);
         subnetLabel->font().bold();
-
         subnetsPanelLayout->addWidget(subnetLabel);
-
         QVBoxLayout *subnetLayout = new QVBoxLayout();
         QFrame *subnetFrame = new QFrame();
         subnetFrame->setLayout(subnetLayout);
 
         QHBoxLayout *frameLayout = new QHBoxLayout();
-
         QLabel *nameLabel = new QLabel("Subnet name: ");
         nameLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         nameLabel->setMinimumHeight(23);
         QFrame *nameFrame = new QFrame();
-
         nameFrame->setMinimumHeight(35);
         nameFrame->setLayout(frameLayout);
         QLineEdit *subnetNameLine = new QLineEdit();
@@ -191,7 +166,6 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
         subnetNameLine->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
         frameLayout->addWidget(nameLabel);
         frameLayout->addWidget(subnetNameLine);
-
         frameLayout = new QHBoxLayout();
         QFrame *hostCountFrame = new QFrame();
         hostCountFrame->setMinimumHeight(35);
@@ -220,12 +194,11 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
     }
 }
 
-void widgetApp::MainWindow::drawNetworkGraph()
+void widgetApp::MainWindow::on_drawButton_clicked()
 {
      graphDialog = new GraphDialog(mainNetwork, subnets, this);
-     graphDialog->setGeometry(this->geometry().x() + 390, this->geometry().y() + 60, graphDialog->geometry().width(), graphDialog->geometry().height());
-     //graphDialog->setModal(true);
-     //graphDialog->exec();
+     graphDialog->setGeometry(this->geometry().x() + 390, this->geometry().y() + 60,
+                              graphDialog->geometry().width(), graphDialog->geometry().height());
      graphDialog->show();
 }
 
@@ -236,7 +209,8 @@ void widgetApp::MainWindow::on_raportButton_clicked()
         raportDialog = new RaportDialog(this);
         raportDialog->injectData(mainNetwork, subnets);
         raportDialog->displayNetworkRaport();
-        raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60, raportDialog->geometry().width(), raportDialog->geometry().height());
+        raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60,
+                                  raportDialog->geometry().width(), raportDialog->geometry().height());
         raportDialog->show();
     }
     else

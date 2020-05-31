@@ -1,4 +1,4 @@
-#include "networkDialog.h"
+#include "NetworkDialog.h"
 #include "ui_NetworkDialog.h"
 
 NetworkDialog::NetworkDialog(QWidget *parent) :

@@ -16,6 +16,7 @@ class SubnetButton : public QPushButton
     Q_OBJECT
 
 public:
+
     SubnetButton(std::shared_ptr<Subnet> subnet)
     {
         this->subnet = subnet;
@@ -24,9 +25,11 @@ public:
     }
 
 signals:
+
     void clicked(std::shared_ptr<Subnet>);
 
 private slots:
+
     void handleClick()
     {
         emit clicked(subnet);

@@ -18,6 +18,7 @@ class RaportDialog : public QDialog
     Q_OBJECT
 
 public:
+
     explicit RaportDialog( QWidget *parent = nullptr);
 
     ~RaportDialog();
@@ -33,6 +34,7 @@ private slots:
     void on_checkBox_toggled(bool checked);
 
 private:
+
     Ui::RaportDialog *ui;
 
     bool isDetailed = false;

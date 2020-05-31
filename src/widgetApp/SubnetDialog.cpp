@@ -15,7 +15,6 @@ SubnetDialog::~SubnetDialog()
     delete ui;
 }
 
-
 void SubnetDialog::InjectData(std::shared_ptr<Subnet> subnet)
 {
     this->subnet = subnet; 

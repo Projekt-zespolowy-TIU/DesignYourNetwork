@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/router.png</file>
+        <file>img/switch.png</file>
+        <file>img/host.png</file>
+        <file>img/web.png</file>
+        <file>img/main.png</file>
+        <file>icons/main.ico</file>
+        <file>icons/host.ico</file>
+        <file>icons/router.ico</file>
+        <file>icons/switch.ico</file>
+        <file>icons/report.ico</file>
+        <file>icons/graph.ico</file>
+    </qresource>
+</RCC>

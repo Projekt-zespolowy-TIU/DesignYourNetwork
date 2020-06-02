@@ -123,7 +123,7 @@ namespace core {
 
     void Subnetv4::addHost(std::unique_ptr<IPaddress> ip, const QString& name)
     {
-        _HostsList.push_back({std::move(ip), name});
+        _HostsList.push_back({std::move(ip), name, _HostsList.size()});
     }
 
     bool Subnetv4::isHost(const IPaddress& hostIP) const

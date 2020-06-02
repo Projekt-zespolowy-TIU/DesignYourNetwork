@@ -17,6 +17,8 @@ namespace core {
     {
     public:
         Networkv4(const IPv4address& ip, const IPv4mask& mask);
+        Networkv4(const Networkv4& rhs);
+        Networkv4& operator=(const Networkv4& rhs);
 
         const IPaddress& Ip() const override;
         const IPaddress& Mask() const override;

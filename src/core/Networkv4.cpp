@@ -8,6 +8,37 @@ namespace core {
         _Ip = std::make_unique<IPv4address>(*_Ip & *_NetMask);
     }
 
+    Networkv4::Networkv4(const Networkv4& rhs)
+    {
+        if(rhs._Ip)
+            this->_Ip.reset(rhs.Ip().clone().release());
+        else
+            this->_Ip.reset();
+
+        if(rhs._NetMask)
+            this->_NetMask.reset(rhs.Mask().clone().release());
+        else
+            this->_NetMask.reset();
+
+        this->_Subnets = rhs._Subnets;
+    }
+
+    Networkv4& Networkv4::operator=(const Networkv4& rhs)
+    {
+        if(rhs._Ip)
+            this->_Ip.reset(rhs.Ip().clone().release());
+        else
+            this->_Ip.reset();
+
+        if(rhs._NetMask)
+            this->_NetMask.reset(rhs.Mask().clone().release());
+        else
+            this->_NetMask.reset();
+
+        this->_Subnets = rhs._Subnets;
+        return *this;
+    }
+
     const IPaddress& Networkv4::Ip() const
     {
         return *_Ip;

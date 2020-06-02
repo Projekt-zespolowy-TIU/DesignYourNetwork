@@ -109,12 +109,12 @@ namespace core {
 
     void Subnetv4::Ip(std::unique_ptr<IPaddress> ip)
     {
-        _Ip.reset(ip.release());
+        _Ip = std::move(ip);
     }
 
     void Subnetv4::Mask(std::unique_ptr<IPaddress> mask)
     {
-        _NetMask.reset(mask.release());
+        _NetMask = std::move(mask);
     }
 
     void Subnetv4::SubName(const QString& newName)
@@ -130,7 +130,7 @@ namespace core {
 
     bool Subnetv4::isHost(const IPaddress& hostIP) const
     {
-        return ( ( (Ip() & Mask()) == (hostIP & Mask()) ) && (hostIP != Ip()) ) ? true : false;
+        return ( (Ip() & Mask()) == (hostIP & Mask()) ) && (hostIP != Ip());
     }
 
     cpp_int Subnetv4::hostsCapacity() const

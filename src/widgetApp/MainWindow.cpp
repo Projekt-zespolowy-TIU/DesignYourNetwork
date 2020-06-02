@@ -96,7 +96,7 @@ QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
     return input;
 }
 
-void widgetApp::MainWindow::displayInputInBinary(QString input, QWidget *displayWidget)
+void widgetApp::MainWindow::displayInputInBinary(const QString &input, QWidget *displayWidget)
 {
     QList<QLineEdit*> displayFields = displayWidget->findChildren<QLineEdit*>();
 

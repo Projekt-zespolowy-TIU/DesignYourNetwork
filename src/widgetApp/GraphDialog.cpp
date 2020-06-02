@@ -24,7 +24,7 @@ GraphDialog::~GraphDialog()
     delete ui;
 }
 
-void GraphDialog::injectData(std::shared_ptr<Networkv4> net4)
+void GraphDialog::injectData(const std::shared_ptr<Networkv4>& net4)
 {
     mainNetwork = net4;
     drawNetworkGraph();
@@ -55,7 +55,6 @@ void GraphDialog::drawNetworkGraph()
     subnetGraphContent->layout()->addWidget(graphNetworkFrame);
     graphNetworkFrame->setLayout(new QVBoxLayout(this));
 
-    QString routerButtonText = QString{'R'} + '1';
     NetworkButton *networkButton = new NetworkButton(mainNetwork, this);
     QIcon networkIcon;
     QPixmap pixmap(":/resources/img/router.png");
@@ -98,8 +97,7 @@ void GraphDialog::drawNetworkGraph()
                  setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
                                " 4px;\nborder-style:solid;");
 
-         SubnetButton *subnetButton = new SubnetButton(mainNetwork->Subnets().at(i));
-         QString subButtonText = 'S' + QString::number(1 + i);
+         SubnetButton *subnetButton = new SubnetButton(mainNetwork->Subnets().at(i), this);
          QIcon subnetIcon;
          QPixmap pixmap(":/resources/img/switch.png");
          subnetIcon.addPixmap(pixmap);
@@ -141,8 +139,6 @@ void GraphDialog::drawNetworkGraph()
             hostFrame->setMaximumHeight(100 * scale);
             hostFrame->setStyleSheet("border-width : 0px;");
 
-            QString hostButtonText = 'H' + QString::number(1 + j);
-
             HostButton *hostButton = new HostButton(mainNetwork->Subnets().at(i)->HostsList().at(j), this);
             connect(hostButton, SIGNAL(clicked(std::shared_ptr<Host>)),
                     this, SLOT(on_hostButton_clicked(std::shared_ptr<Host>)));
@@ -172,21 +168,21 @@ void GraphDialog::drawNetworkGraph()
          }
     }
 }
-void GraphDialog::on_hostButton_clicked(std::shared_ptr<Host> host)
+void GraphDialog::on_hostButton_clicked(const std::shared_ptr<Host>& host)
 {
     hostDialog.setModal(true);
     hostDialog.InjectData(host);
     hostDialog.exec();
 }
 
-void GraphDialog::on_subnetButton_clicked(std::shared_ptr<ISubnet> subnet)
+void GraphDialog::on_subnetButton_clicked(const std::shared_ptr<ISubnet>& subnet)
 {
     subnetDialog.setModal(true);
     subnetDialog.InjectData(subnet);
     subnetDialog.exec();
 }
 
-void GraphDialog::on_networkButton_clicked(std::shared_ptr<Networkv4> network)
+void GraphDialog::on_networkButton_clicked(const std::shared_ptr<Networkv4>& network)
 {
     networkDialog.setModal(true);
     networkDialog.InjectData(network);
@@ -195,7 +191,7 @@ void GraphDialog::on_networkButton_clicked(std::shared_ptr<Networkv4> network)
 
 void GraphDialog::on_coloredGraphcheckBox_clicked(bool checked)
 {
-    isColored = (checked) ? true : false;
+    isColored = checked;
     drawNetworkGraph();
 }
 

@@ -13,7 +13,7 @@ class NetworkButton : public QPushButton
 
 public:
 
-    NetworkButton(std::shared_ptr<Networkv4> net, QWidget* parent):
+    NetworkButton(const std::shared_ptr<Networkv4>& net, QWidget* parent):
         QPushButton(parent),
         network(net)
     {

@@ -25,7 +25,7 @@ public:
 
     void displayNetworkRaport();
 
-    void injectData(std::shared_ptr<Networkv4> net4);
+    void injectData(const std::shared_ptr<Networkv4>& net4);
 
 private slots:
 

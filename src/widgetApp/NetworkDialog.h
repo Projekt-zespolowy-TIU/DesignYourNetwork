@@ -20,7 +20,7 @@ public:
     NetworkDialog(QWidget *parent);
     ~NetworkDialog();
 
-    void InjectData(std::shared_ptr<Networkv4> network);
+    void InjectData(const std::shared_ptr<Networkv4>& network);
 
     void SetData();
 

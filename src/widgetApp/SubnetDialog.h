@@ -20,13 +20,13 @@ public:
     SubnetDialog(QWidget *parent);
     ~SubnetDialog();
 
-    void InjectData(std::shared_ptr<ISubnet> subnet);
+    void InjectData(const std::shared_ptr<ISubnet>& subnet);
 
     void SetData();
 
 private slots:
 
-    void on_subnetName_textEdited(const QString &arg1);
+    void on_subnetName_textEdited(const QString& name);
 
 private:
     Ui::SubnetDialog *ui;

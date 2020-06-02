@@ -24,7 +24,7 @@ namespace core {
 
     void Host::Ip(std::unique_ptr<IPaddress> ip)
     {
-        _Ip.reset(ip.release());
+        _Ip = std::move(ip);
     }
 
     void Host::Name(const QString& name)

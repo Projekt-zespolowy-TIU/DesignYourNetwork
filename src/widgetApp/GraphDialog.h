@@ -26,15 +26,15 @@ public:
     GraphDialog(QWidget *parent);
     ~GraphDialog();
 
-    void injectData(std::shared_ptr<Networkv4> net4);
+    void injectData(const std::shared_ptr<Networkv4>& net4);
 
 private slots:
 
-     void on_networkButton_clicked(std::shared_ptr<Networkv4> network);
+     void on_networkButton_clicked(const std::shared_ptr<Networkv4>& network);
 
-     void on_subnetButton_clicked(std::shared_ptr<ISubnet> subnet);
+     void on_subnetButton_clicked(const std::shared_ptr<ISubnet>& subnet);
 
-     void on_hostButton_clicked(std::shared_ptr<Host> host);
+     void on_hostButton_clicked(const std::shared_ptr<Host>& host);
 
      void on_coloredGraphcheckBox_clicked(bool checked);
 

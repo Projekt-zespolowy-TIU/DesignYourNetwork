@@ -13,7 +13,7 @@ HostDialog::~HostDialog()
     delete ui;
 }
 
-void HostDialog::InjectData(std::shared_ptr<Host> host)
+void HostDialog::InjectData(const std::shared_ptr<Host>& host)
 {
     this->host = host;
     SetData();
@@ -37,7 +37,7 @@ void HostDialog::SetData()
 }
 
 
-void HostDialog::on_hostName_textEdited(const QString &name)
+void HostDialog::on_hostName_textEdited(const QString& name)
 {
     host->Name(name);
 }

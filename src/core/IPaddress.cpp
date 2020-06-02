@@ -3,7 +3,7 @@
 #include "coreUtils.h"
 
 namespace core {
-    IPaddress::IPaddress(boost::dynamic_bitset<> ip):
+    IPaddress::IPaddress(const boost::dynamic_bitset<>& ip):
         _IpAddress{ip}
     {
     }

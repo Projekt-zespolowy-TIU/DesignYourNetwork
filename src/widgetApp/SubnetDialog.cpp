@@ -15,7 +15,7 @@ SubnetDialog::~SubnetDialog()
     delete ui;
 }
 
-void SubnetDialog::InjectData(std::shared_ptr<ISubnet> subnet)
+void SubnetDialog::InjectData(const std::shared_ptr<ISubnet>& subnet)
 {
     this->subnet = subnet;
     SetData();
@@ -51,7 +51,7 @@ void SubnetDialog::SetData()
 
 }
 
-void SubnetDialog::on_subnetName_textEdited(const QString &arg1)
+void SubnetDialog::on_subnetName_textEdited(const QString& name)
 {
-    subnet->SubName(arg1);
+    subnet->SubName(name);
 }

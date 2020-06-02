@@ -20,13 +20,13 @@ public:
     HostDialog(QWidget *parent);
     ~HostDialog();
 
-    void InjectData(std::shared_ptr<Host>);
+    void InjectData(const std::shared_ptr<Host>&);
 
     void SetData();
 
 private slots:
 
-    void on_hostName_textEdited(const QString &arg1);
+    void on_hostName_textEdited(const QString& name);
 
 private:
 

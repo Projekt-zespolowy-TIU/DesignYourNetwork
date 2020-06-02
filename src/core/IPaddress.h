@@ -12,7 +12,7 @@ namespace core {
     class IPaddress: public IIPaddrPrintable
     {
     public:
-        IPaddress(boost::dynamic_bitset<> ip = boost::dynamic_bitset<>());
+        IPaddress(const boost::dynamic_bitset<> &ip = boost::dynamic_bitset<>());
         IPaddress& operator=(const IPaddress&) = delete;
 
         std::unique_ptr<IPaddress> clone() const;
@@ -35,7 +35,7 @@ namespace core {
 
     bool operator==(const IPaddress& lhs, const IPaddress& rhs);
     bool operator!=(const IPaddress& lhs, const IPaddress& rhs);
-    boost::dynamic_bitset<> operator&(const IPaddress& ip, const IPaddress& mask);
+    boost::dynamic_bitset<> operator&(const IPaddress& lhs, const IPaddress& rhs);
     boost::dynamic_bitset<> operator|(const IPaddress& lhs, const IPaddress& rhs);
 }
 

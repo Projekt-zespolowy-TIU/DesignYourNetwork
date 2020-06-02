@@ -63,7 +63,7 @@ void RaportDialog::displayNetworkRaport()
     }
 }
 
-void RaportDialog::injectData(std::shared_ptr<Networkv4> net4)
+void RaportDialog::injectData(const std::shared_ptr<Networkv4>& net4)
 {
     network = net4;
 }

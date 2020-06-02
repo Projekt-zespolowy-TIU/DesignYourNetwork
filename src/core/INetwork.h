@@ -19,7 +19,7 @@ namespace core {
         virtual const IPaddress& Mask() const = 0;
         virtual const std::vector<std::shared_ptr<ISubnet>>& Subnets() const = 0;
 
-        virtual void Subnets(std::vector<std::shared_ptr<ISubnet>> subnets) = 0;
+        virtual void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) = 0;
 
         virtual void addSubnet(const cpp_int& hostNumber, const QString& name) = 0;
 

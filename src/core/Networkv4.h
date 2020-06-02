@@ -24,7 +24,7 @@ namespace core {
         const IPaddress& Mask() const override;
         const std::vector<std::shared_ptr<ISubnet>>& Subnets() const override;
 
-        void Subnets(std::vector<std::shared_ptr<ISubnet>> subnets) override;
+        void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) override;
 
         void addSubnet(const cpp_int& hostNumber,
                        const QString& name = "blank") override;

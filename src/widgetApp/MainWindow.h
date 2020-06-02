@@ -41,7 +41,7 @@ namespace widgetApp{
 
         void on_drawButton_clicked();
 
-        void on_hostNumberSpinBox_valueChanged(int value);
+        void on_hostNumberSpinBox_valueChanged(int subnetCount);
 
         void on_raportButton_clicked();
 
@@ -82,7 +82,7 @@ namespace widgetApp{
 
         void deleteLayoutContent(QWidget *content);
 
-        void displayInputInBinary(QString input, QWidget *displayWidget);
+        void displayInputInBinary(const QString &input, QWidget *displayWidget);
 
         QString takeStringFromInputFields(QWidget *inputWidget);
     };

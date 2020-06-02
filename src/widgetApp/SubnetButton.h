@@ -13,7 +13,8 @@ class SubnetButton : public QPushButton
 
 public:
 
-    SubnetButton(std::shared_ptr<ISubnet> subnet):
+    SubnetButton(const std::shared_ptr<ISubnet>& subnet, QWidget* parent):
+        QPushButton(parent),
         subnet(subnet)
     {
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));

@@ -11,12 +11,12 @@ namespace core {
     Networkv4::Networkv4(const Networkv4& rhs)
     {
         if(rhs._Ip)
-            this->_Ip.reset(rhs.Ip().clone().release());
+            this->_Ip = rhs.Ip().clone();
         else
             this->_Ip.reset();
 
         if(rhs._NetMask)
-            this->_NetMask.reset(rhs.Mask().clone().release());
+            this->_NetMask = rhs.Mask().clone();
         else
             this->_NetMask.reset();
 
@@ -26,12 +26,12 @@ namespace core {
     Networkv4& Networkv4::operator=(const Networkv4& rhs)
     {
         if(rhs._Ip)
-            this->_Ip.reset(rhs.Ip().clone().release());
+            this->_Ip = rhs.Ip().clone();
         else
             this->_Ip.reset();
 
         if(rhs._NetMask)
-            this->_NetMask.reset(rhs.Mask().clone().release());
+            this->_NetMask = rhs.Mask().clone();
         else
             this->_NetMask.reset();
 
@@ -54,7 +54,7 @@ namespace core {
         return _Subnets;
     }
 
-    void Networkv4::Subnets(std::vector<std::shared_ptr<ISubnet>> subnets)
+    void Networkv4::Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets)
     {
         _Subnets = subnets;
     }
@@ -73,6 +73,6 @@ namespace core {
 
     bool Networkv4::isSubnet(const IPaddress& hostIP) const
     {
-        return ((*_Ip & *_NetMask) == (hostIP & *_NetMask)) ? true : false;
+        return (*_Ip & *_NetMask) == (hostIP & *_NetMask);
     }
 }

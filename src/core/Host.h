@@ -15,8 +15,6 @@ namespace core {
     {
     public:
         Host(std::unique_ptr<IPaddress> ip, const QString& name, const cpp_int& id);
-        Host(const Host& rhs);
-        Host& operator=(const Host& rhs);
 
         const IPaddress& Ip() const;
         QString Name() const;

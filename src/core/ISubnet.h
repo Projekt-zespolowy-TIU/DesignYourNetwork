@@ -20,7 +20,7 @@ namespace core {
         virtual cpp_int HostNumber() const = 0;
         virtual const IPaddress& Ip() const = 0;
         virtual const IPaddress& Mask() const = 0;
-        virtual const std::vector<Host>& HostsList() const = 0;
+        virtual const std::vector<std::shared_ptr<Host>>& HostsList() const = 0;
 
         virtual void Ip(std::unique_ptr<IPaddress> ip) = 0;
         virtual void Mask(std::unique_ptr<IPaddress> mask) = 0;

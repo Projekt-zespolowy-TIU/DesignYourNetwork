@@ -1,6 +1,7 @@
 #include "Subnetv4.h"
 
 #include "coreUtils.h"
+#include <memory>
 
 namespace core {
     Subnetv4::Subnetv4(const cpp_int& hostNumber, const QString& name):
@@ -106,7 +107,7 @@ namespace core {
         return *_NetMask;
     }
 
-    const std::vector<Host>& Subnetv4::HostsList() const
+    const std::vector<std::shared_ptr<Host>>& Subnetv4::HostsList() const
     {
         return _HostsList;
     }
@@ -123,7 +124,8 @@ namespace core {
 
     void Subnetv4::addHost(std::unique_ptr<IPaddress> ip, const QString& name)
     {
-        _HostsList.push_back({std::move(ip), name, _HostsList.size()});
+        _HostsList.push_back(std::make_shared<Host>(
+                                 Host{std::move(ip), name, _HostsList.size()}));
     }
 
     bool Subnetv4::isHost(const IPaddress& hostIP) const

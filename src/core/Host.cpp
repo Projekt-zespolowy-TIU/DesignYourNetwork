@@ -5,30 +5,7 @@ namespace core {
             _Ip{std::move(ip)},
             _Name{name},
             _Id{id}
-        {}
-
-    Host::Host(const Host& rhs)
-        {
-            if(rhs._Ip)
-                this->_Ip.reset(rhs._Ip->clone().release());
-            else
-                this->_Ip.reset();
-
-            this->_Name = rhs._Name;
-            this->_Id = rhs._Id;
-    }
-
-    Host& Host::operator=(const Host& rhs)
-    {
-        if(rhs._Ip)
-            this->_Ip.reset(rhs._Ip->clone().release());
-        else
-            this->_Ip.reset();
-
-        this->_Name = rhs._Name;
-        this->_Id = rhs._Id;
-        return *this;
-    }
+    {}
 
     const IPaddress& Host::Ip() const
     {

@@ -28,7 +28,7 @@ namespace core {
         cpp_int HostNumber() const override;
         const IPaddress& Ip() const override;
         const IPaddress& Mask() const override;
-        const std::vector<Host>& HostsList() const override;
+        const std::vector<std::shared_ptr<Host>>& HostsList() const override;
 
         void Ip(std::unique_ptr<IPaddress> ip) override;
         void Mask(std::unique_ptr<IPaddress> mask) override;
@@ -48,7 +48,7 @@ namespace core {
 
         QString _SubName;
         cpp_int _HostNumber;
-        std::vector<Host> _HostsList;
+        std::vector<std::shared_ptr<Host>> _HostsList;
     };
 }
 

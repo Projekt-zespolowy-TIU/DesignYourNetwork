@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
                   << "\nminHost: " << *sub.getMinHost()
                   << " maxHost: " << *sub.getMaxHost() << '\n';
         for(const auto& host : sub.HostsList())
-            std::cout << '\t' << host.Name()
-                      << " " <<host.Ip() << '\n';
+            std::cout << '\t' << host->Name()
+                      << " " <<host->Ip() << '\n';
     }
 
     return a.exec();

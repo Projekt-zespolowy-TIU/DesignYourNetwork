@@ -23,7 +23,7 @@ void NetworkDialog::InjectData(std::shared_ptr<Networkv4> network)
 
     for(int i = 0; i < subnetCount; i++)
     {
-        hostCount += network->Subnets()[i].HostNumber();
+        hostCount += network->Subnets()[i]->HostNumber();
     }
 
     SetData();

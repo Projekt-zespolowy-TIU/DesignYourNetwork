@@ -17,12 +17,10 @@ namespace core {
     {
     public:
         Subnetv4(const cpp_int& hostNumber, const QString& name);
-        Subnetv4(const Subnetv4& rhs);
-        Subnetv4& operator=(const Subnetv4& rhs);
-        Subnetv4(Subnetv4&& rhs) noexcept;
-        Subnetv4& operator=(Subnetv4&& rhs) noexcept;
-
-//        std::unique_ptr<Subnetv4> clone() const;
+//        Subnetv4(const Subnetv4& rhs);
+//        Subnetv4& operator=(const Subnetv4& rhs);
+//        Subnetv4(Subnetv4&& rhs) noexcept;
+//        Subnetv4& operator=(Subnetv4&& rhs) noexcept;
 
         QString SubName() const override;
         cpp_int HostNumber() const override;
@@ -32,6 +30,7 @@ namespace core {
 
         void Ip(std::unique_ptr<IPaddress> ip) override;
         void Mask(std::unique_ptr<IPaddress> mask) override;
+        void SubName(const QString& newName) override;
 
         void addHost(std::unique_ptr<IPaddress> ip,
                      const QString& name = "noname") override;
@@ -41,7 +40,7 @@ namespace core {
         std::unique_ptr<IPaddress> getMaxHost() const override;
         std::unique_ptr<IPaddress> getBroadcast() const;
     private:
-//        Subnetv4* _cloneImpl() const;
+        Subnetv4* _cloneImpl() const override;
 
         std::unique_ptr<IPaddress> _Ip = std::make_unique<IPv4address>();
         std::unique_ptr<IPaddress> _NetMask = std::make_unique<IPv4mask>();

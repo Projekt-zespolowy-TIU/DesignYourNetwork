@@ -20,7 +20,7 @@ public:
     SubnetDialog(QWidget *parent);
     ~SubnetDialog();
 
-    void InjectData(Subnetv4 subnet);
+    void InjectData(std::shared_ptr<ISubnet> subnet);
 
     void SetData();
 
@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::SubnetDialog *ui;
 
-    Subnetv4 subnet;
+    std::shared_ptr<ISubnet> subnet;
 };
 
 #endif // SUBNETDIALOG_H

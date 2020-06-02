@@ -13,7 +13,7 @@
 #include "IPv4mask.h"
 
 namespace core {
-    class Networkv4 final : public INetwork<Subnetv4>
+    class Networkv4 final : public INetwork
     {
     public:
         Networkv4(const IPv4address& ip, const IPv4mask& mask);
@@ -22,10 +22,9 @@ namespace core {
 
         const IPaddress& Ip() const override;
         const IPaddress& Mask() const override;
-        const std::vector<Subnetv4>& Subnets() const override;
-        std::vector<Subnetv4>& Subnets() override;
+        const std::vector<std::shared_ptr<ISubnet>>& Subnets() const override;
 
-        void Subnets(std::vector<Subnetv4> subnets) override;
+        void Subnets(std::vector<std::shared_ptr<ISubnet>> subnets) override;
 
         void addSubnet(const cpp_int& hostNumber,
                        const QString& name = "blank") override;
@@ -35,7 +34,7 @@ namespace core {
     private:
         std::unique_ptr<IPaddress> _Ip;
         std::unique_ptr<IPaddress> _NetMask;
-        std::vector<Subnetv4> _Subnets;
+        std::vector<std::shared_ptr<ISubnet>> _Subnets;
     };
 }
 

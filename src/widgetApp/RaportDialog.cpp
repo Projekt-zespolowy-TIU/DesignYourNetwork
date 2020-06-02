@@ -42,17 +42,17 @@ void RaportDialog::displayNetworkRaport()
     for(size_t i = 0; i < network->Subnets().size(); i++)
     {
         raportText->append("\nSubnet " + QString::number(1 + i) + "\n" +
-                          "\nName: " + network->Subnets().at(i).SubName() +
-                          "\nAddress: " + network->Subnets().at(i).Ip().asStringDec() +
-                          "\n" + network->Subnets().at(i).Ip().asStringBin() +
-                          "\nMask " + network->Subnets().at(i).Mask().asStringDec() +
-                          "\n" + network->Subnets().at(i).Mask().asStringBin() +
-                          "\nHosts: " + QString::fromStdString(network->Subnets().at(i).HostNumber().str()) +
-                           "/" + QString::fromStdString(network->Subnets().at(i).hostsCapacity().str()));
+                          "\nName: " + network->Subnets().at(i)->SubName() +
+                          "\nAddress: " + network->Subnets().at(i)->Ip().asStringDec() +
+                          "\n" + network->Subnets().at(i)->Ip().asStringBin() +
+                          "\nMask " + network->Subnets().at(i)->Mask().asStringDec() +
+                          "\n" + network->Subnets().at(i)->Mask().asStringBin() +
+                          "\nHosts: " + QString::fromStdString(network->Subnets().at(i)->HostNumber().str()) +
+                           "/" + QString::fromStdString(network->Subnets().at(i)->hostsCapacity().str()));
 
         if(isDetailed)
         {
-            for(const auto& host : network->Subnets().at(i).HostsList())
+            for(const auto& host : network->Subnets().at(i)->HostsList())
             {
                 raportText->append("\n    Host: " + QString::fromStdString(host->Id().str()));
                                   ("\n    Name: " + host->Name());

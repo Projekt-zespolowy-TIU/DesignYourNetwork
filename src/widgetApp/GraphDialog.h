@@ -32,7 +32,7 @@ private slots:
 
      void on_networkButton_clicked(std::shared_ptr<Networkv4> network);
 
-     void on_subnetButton_clicked(Subnetv4 subnet);
+     void on_subnetButton_clicked(std::shared_ptr<ISubnet> subnet);
 
      void on_hostButton_clicked(std::shared_ptr<Host> host);
 

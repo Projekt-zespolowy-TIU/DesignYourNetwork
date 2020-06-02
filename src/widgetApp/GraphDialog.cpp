@@ -109,20 +109,20 @@ void GraphDialog::drawNetworkGraph()
          subnetButton->setMaximumSize(QSize(40,40) * scale);
          subnetFrame->layout()->addWidget(subnetButton);
 
-         connect(subnetButton, SIGNAL(clicked(Subnetv4)), this,
-                 SLOT(on_subnetButton_clicked(Subnetv4)));
+         connect(subnetButton, SIGNAL(clicked(std::shared_ptr<ISubnet>)), this,
+                 SLOT(on_subnetButton_clicked(std::shared_ptr<ISubnet>)));
 
          if(showsSubnetAddresses)
          {
-             QLabel *subnetAddress = new QLabel(mainNetwork->Subnets().at(i).Ip().asStringDec() +
-                                                " / " + mainNetwork->Subnets().at(i).Mask().asStringDec(), this);
+             QLabel *subnetAddress = new QLabel(mainNetwork->Subnets().at(i)->Ip().asStringDec() +
+                                                " / " + mainNetwork->Subnets().at(i)->Mask().asStringDec(), this);
              subnetAddress->setAlignment(Qt::AlignTop);
              subnetFrame->layout()->addWidget(subnetAddress);
          }
 
          QHBoxLayout *hostsLayout;
 
-         for(int j = 0; j < mainNetwork->Subnets().at(i).HostNumber(); j++)
+         for(int j = 0; j < mainNetwork->Subnets().at(i)->HostNumber(); j++)
          {
             if((j + 8) % 8 == 0)
             {
@@ -143,7 +143,7 @@ void GraphDialog::drawNetworkGraph()
 
             QString hostButtonText = 'H' + QString::number(1 + j);
 
-            HostButton *hostButton = new HostButton(mainNetwork->Subnets().at(i).HostsList().at(j), this);
+            HostButton *hostButton = new HostButton(mainNetwork->Subnets().at(i)->HostsList().at(j), this);
             connect(hostButton, SIGNAL(clicked(std::shared_ptr<Host>)),
                     this, SLOT(on_hostButton_clicked(std::shared_ptr<Host>)));
 
@@ -160,7 +160,7 @@ void GraphDialog::drawNetworkGraph()
 
             if(showsHostNames)
             {
-                QLabel *hostName = new QLabel(mainNetwork->Subnets().at(i).HostsList().at(j)->Name(), this);
+                QLabel *hostName = new QLabel(mainNetwork->Subnets().at(i)->HostsList().at(j)->Name(), this);
                 QFont font;
                 font.setPointSize(7 * scale);
                 hostName->setFont(font);
@@ -179,7 +179,7 @@ void GraphDialog::on_hostButton_clicked(std::shared_ptr<Host> host)
     hostDialog.exec();
 }
 
-void GraphDialog::on_subnetButton_clicked(Subnetv4 subnet)
+void GraphDialog::on_subnetButton_clicked(std::shared_ptr<ISubnet> subnet)
 {
     subnetDialog.setModal(true);
     subnetDialog.InjectData(subnet);

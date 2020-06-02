@@ -16,6 +16,9 @@ namespace core {
     class ISubnet
     {
     public:
+        std::shared_ptr<ISubnet> clone() const{
+            return std::shared_ptr<ISubnet>{_cloneImpl()};
+        };
         virtual QString SubName() const = 0;
         virtual cpp_int HostNumber() const = 0;
         virtual const IPaddress& Ip() const = 0;
@@ -24,6 +27,7 @@ namespace core {
 
         virtual void Ip(std::unique_ptr<IPaddress> ip) = 0;
         virtual void Mask(std::unique_ptr<IPaddress> mask) = 0;
+        virtual void SubName(const QString& newName) = 0;
 
         virtual void addHost(std::unique_ptr<IPaddress> ip,
                              const QString& name) = 0;
@@ -31,6 +35,8 @@ namespace core {
         virtual cpp_int hostsCapacity() const = 0;
         virtual std::unique_ptr<IPaddress> getMinHost() const = 0;
         virtual std::unique_ptr<IPaddress> getMaxHost() const = 0;
+    private:
+        virtual ISubnet* _cloneImpl() const = 0;
 
     //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
     public:

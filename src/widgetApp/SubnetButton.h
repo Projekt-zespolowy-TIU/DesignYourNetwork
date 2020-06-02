@@ -13,7 +13,7 @@ class SubnetButton : public QPushButton
 
 public:
 
-    SubnetButton(Subnetv4 subnet):
+    SubnetButton(std::shared_ptr<ISubnet> subnet):
         subnet(subnet)
     {
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
@@ -21,7 +21,7 @@ public:
 
 signals:
 
-    void clicked(Subnetv4);
+    void clicked(std::shared_ptr<ISubnet>);
 
 private slots:
 
@@ -31,7 +31,7 @@ private slots:
     }
 
 private:
-        Subnetv4 subnet;
+        std::shared_ptr<ISubnet> subnet;
 };
 
 #endif // SUBNETBUTTON_H

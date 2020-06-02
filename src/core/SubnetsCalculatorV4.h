@@ -20,7 +20,7 @@ namespace core {
                                                   const unsigned short maskLength) const;
         boost::dynamic_bitset<> _chooseSubnetIP(const IPaddress& mainNetIP,
                                                 const IPaddress& Mask,
-                                                const std::vector<Subnetv4>& usedIPsPool
+                                                const std::vector<std::shared_ptr<ISubnet>>& usedIPsPool
                                                 ) const;
     };
 };

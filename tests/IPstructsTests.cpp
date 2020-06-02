@@ -8,9 +8,9 @@ namespace IPstructsTests {
     TEST_CASE("Network4 Tests"){
         Networkv4 network(QString{"172.16.32.0"}, QString{"255.255.248.0"});
 
-//        SECTION("Host capacity test"){
-//            CHECK(network.hostsCapacity() == 2046);
-//        }
+        SECTION("Host capacity test"){
+            CHECK(network.hostsCapacity() == 2046);
+        }
         SECTION("IP of network can be a subnetwork"){
             CHECK(network.isSubnet(IPv4address{"172.16.32.0"}) == true);
         }

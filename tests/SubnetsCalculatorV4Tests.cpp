@@ -29,7 +29,7 @@ namespace SubnetsCalculatorV4Tests {
 
             SECTION("Check mask addresses"){
                 for(const auto& sub : net.Subnets())
-                    CHECK(sub.Mask().asStringDec().toStdString() == "255.255.255.240");
+                    CHECK(sub->Mask().asStringDec().toStdString() == "255.255.255.240");
             };
 
             SECTION("Check ip addresses"){
@@ -44,7 +44,7 @@ namespace SubnetsCalculatorV4Tests {
 
                 for(const auto& var : calculatedNetworks)
                     CHECK(std::any_of(subs.begin(), subs.end(), [&var](const auto& x){
-                        return x.Ip().asStringDec().toStdString() == var;
+                        return x->Ip().asStringDec().toStdString() == var;
                     }));
             };
 
@@ -79,7 +79,7 @@ namespace SubnetsCalculatorV4Tests {
                 };
 
                 for(size_t i = 0; i < 6; i++)
-                    CHECK(subs.at(i).Mask().asStringDec().toStdString() == calculatedMasks.at(i));
+                    CHECK(subs.at(i)->Mask().asStringDec().toStdString() == calculatedMasks.at(i));
             };
 
             SECTION("Check ip addresses"){
@@ -93,19 +93,19 @@ namespace SubnetsCalculatorV4Tests {
                 };
 
                 for(size_t i = 0; i < 6; i++){
-                    CHECK(subs.at(i).Ip().asStringDec().toStdString() == calculatedIPs.at(i));
+                    CHECK(subs.at(i)->Ip().asStringDec().toStdString() == calculatedIPs.at(i));
                 }
             }
 
             SECTION("Check host's IPs"){
-                REQUIRE(subs.at(2).HostsList().size() == 7);
-                CHECK(subs.at(2).HostsList().at(0)->Ip().asStringDec().toStdString() == "23.91.45.97"); //1
-                CHECK(subs.at(2).HostsList().at(1)->Ip().asStringDec().toStdString() == "23.91.45.98"); //2
-                CHECK(subs.at(2).HostsList().at(2)->Ip().asStringDec().toStdString() == "23.91.45.99"); //3
-                CHECK(subs.at(2).HostsList().at(3)->Ip().asStringDec().toStdString() == "23.91.45.100"); //4
-                CHECK(subs.at(2).HostsList().at(4)->Ip().asStringDec().toStdString() == "23.91.45.101"); //5
-                CHECK(subs.at(2).HostsList().at(5)->Ip().asStringDec().toStdString() == "23.91.45.102"); //6
-                CHECK(subs.at(2).HostsList().at(6)->Ip().asStringDec().toStdString() == "23.91.45.103"); //7
+                REQUIRE(subs.at(2)->HostsList().size() == 7);
+                CHECK(subs.at(2)->HostsList().at(0)->Ip().asStringDec().toStdString() == "23.91.45.97"); //1
+                CHECK(subs.at(2)->HostsList().at(1)->Ip().asStringDec().toStdString() == "23.91.45.98"); //2
+                CHECK(subs.at(2)->HostsList().at(2)->Ip().asStringDec().toStdString() == "23.91.45.99"); //3
+                CHECK(subs.at(2)->HostsList().at(3)->Ip().asStringDec().toStdString() == "23.91.45.100"); //4
+                CHECK(subs.at(2)->HostsList().at(4)->Ip().asStringDec().toStdString() == "23.91.45.101"); //5
+                CHECK(subs.at(2)->HostsList().at(5)->Ip().asStringDec().toStdString() == "23.91.45.102"); //6
+                CHECK(subs.at(2)->HostsList().at(6)->Ip().asStringDec().toStdString() == "23.91.45.103"); //7
             }
         };
     };

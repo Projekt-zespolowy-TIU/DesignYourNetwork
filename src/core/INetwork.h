@@ -10,17 +10,16 @@ namespace core {
     using boost::multiprecision::cpp_int;
 
     class IPaddress; //forward declaration
+    class ISubnet; //forward declaration
 
-    template<class T>
     class INetwork
     {
     public:
         virtual const IPaddress& Ip() const = 0;
         virtual const IPaddress& Mask() const = 0;
-        virtual const std::vector<T>& Subnets() const = 0;
-        virtual std::vector<T>& Subnets() = 0;
+        virtual const std::vector<std::shared_ptr<ISubnet>>& Subnets() const = 0;
 
-        virtual void Subnets(std::vector<T> subnets) = 0;
+        virtual void Subnets(std::vector<std::shared_ptr<ISubnet>> subnets) = 0;
 
         virtual void addSubnet(const cpp_int& hostNumber, const QString& name) = 0;
 

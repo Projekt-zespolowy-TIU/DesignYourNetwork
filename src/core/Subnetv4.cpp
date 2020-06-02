@@ -12,79 +12,74 @@ namespace core {
             throw SubnetInvalidExcept{"Can't create subnet with less than one host."};
     }
 
-    Subnetv4::Subnetv4(const Subnetv4& rhs)
-    {
-        if(rhs._Ip)
-            this->_Ip.reset(rhs.Ip().clone().release());
-        else
-            this->_Ip.reset();
-
-        if(rhs._NetMask)
-            this->_NetMask.reset(rhs.Mask().clone().release());
-        else
-            this->_NetMask.reset();
-
-        this->_SubName = rhs._SubName;
-        this->_HostNumber = rhs._HostNumber;
-        this->_HostsList = rhs._HostsList;
-    }
-
-    Subnetv4& Subnetv4::operator=(const Subnetv4& rhs)
-    {
-        if(rhs._Ip)
-            this->_Ip.reset(rhs.Ip().clone().release());
-        else
-            this->_Ip.reset();
-
-        if(rhs._NetMask)
-            this->_NetMask.reset(rhs.Mask().clone().release());
-        else
-            this->_NetMask.reset();
-
-        this->_SubName = rhs._SubName;
-        this->_HostNumber = rhs._HostNumber;
-        this->_HostsList = rhs._HostsList;
-        return *this;
-    }
-
-    Subnetv4::Subnetv4(Subnetv4&& rhs) noexcept
-    {
-        if(rhs._Ip)
-            this->_Ip.reset(rhs._Ip.release());
-        else
-            this->_Ip.reset();
-
-        if(rhs._NetMask)
-            this->_NetMask.reset(rhs._NetMask.release());
-        else
-            this->_NetMask.reset();
-
-        this->_SubName = rhs._SubName;
-        this->_HostNumber = rhs._HostNumber;
-        this->_HostsList = rhs._HostsList;
-    }
-
-    Subnetv4& Subnetv4::operator=(Subnetv4&& rhs) noexcept
-    {
-        if(rhs._Ip)
-            this->_Ip.reset(rhs._Ip.release());
-        else
-            this->_Ip.reset();
-
-        if(rhs._NetMask)
-            this->_NetMask.reset(rhs._NetMask.release());
-        else
-            this->_NetMask.reset();
-
-        this->_SubName = rhs._SubName;
-        this->_HostNumber = rhs._HostNumber;
-        this->_HostsList = rhs._HostsList;
-        return *this;
-    }
-
-//    std::unique_ptr<Subnetv4> Subnetv4::clone() const
+//    Subnetv4::Subnetv4(const Subnetv4& rhs)
 //    {
-//        return std::unique_ptr<Subnetv4>(_cloneImpl());
+//        if(rhs._Ip)
+//            this->_Ip.reset(rhs.Ip().clone().release());
+//        else
+//            this->_Ip.reset();
+
+//        if(rhs._NetMask)
+//            this->_NetMask.reset(rhs.Mask().clone().release());
+//        else
+//            this->_NetMask.reset();
+
+//        this->_SubName = rhs._SubName;
+//        this->_HostNumber = rhs._HostNumber;
+//        this->_HostsList = rhs._HostsList;
+//    }
+
+//    Subnetv4& Subnetv4::operator=(const Subnetv4& rhs)
+//    {
+//        if(rhs._Ip)
+//            this->_Ip.reset(rhs.Ip().clone().release());
+//        else
+//            this->_Ip.reset();
+
+//        if(rhs._NetMask)
+//            this->_NetMask.reset(rhs.Mask().clone().release());
+//        else
+//            this->_NetMask.reset();
+
+//        this->_SubName = rhs._SubName;
+//        this->_HostNumber = rhs._HostNumber;
+//        this->_HostsList = rhs._HostsList;
+//        return *this;
+//    }
+
+//    Subnetv4::Subnetv4(Subnetv4&& rhs) noexcept
+//    {
+//        if(rhs._Ip)
+//            this->_Ip.reset(rhs._Ip.release());
+//        else
+//            this->_Ip.reset();
+
+//        if(rhs._NetMask)
+//            this->_NetMask.reset(rhs._NetMask.release());
+//        else
+//            this->_NetMask.reset();
+
+//        this->_SubName = rhs._SubName;
+//        this->_HostNumber = rhs._HostNumber;
+//        this->_HostsList = rhs._HostsList;
+//    }
+
+//    Subnetv4& Subnetv4::operator=(Subnetv4&& rhs) noexcept
+//    {
+//        if(rhs._Ip)
+//            this->_Ip.reset(rhs._Ip.release());
+//        else
+//            this->_Ip.reset();
+
+//        if(rhs._NetMask)
+//            this->_NetMask.reset(rhs._NetMask.release());
+//        else
+//            this->_NetMask.reset();
+
+//        this->_SubName = rhs._SubName;
+//        this->_HostNumber = rhs._HostNumber;
+//        this->_HostsList = rhs._HostsList;
+//        return *this;
 //    }
 
     QString Subnetv4::SubName() const
@@ -120,6 +115,11 @@ namespace core {
     void Subnetv4::Mask(std::unique_ptr<IPaddress> mask)
     {
         _NetMask.reset(mask.release());
+    }
+
+    void Subnetv4::SubName(const QString& newName)
+    {
+        _SubName = newName;
     }
 
     void Subnetv4::addHost(std::unique_ptr<IPaddress> ip, const QString& name)
@@ -159,11 +159,11 @@ namespace core {
         return std::make_unique<IPv4address>(Ip() | IPv4address{x});
     }
 
-//    Subnetv4* Subnetv4::_cloneImpl() const
-//    {
-//        auto ptr = new Subnetv4{this->_HostNumber, this->_SubName};
-//        ptr->Ip(this->_Ip->clone());
-//        ptr->Mask(this->_NetMask->clone());
-//        return ptr;
-//    }
+    Subnetv4* Subnetv4::_cloneImpl() const
+    {
+        auto ptr = new Subnetv4{this->_HostNumber, this->_SubName};
+        ptr->Ip(this->_Ip->clone());
+        ptr->Mask(this->_NetMask->clone());
+        return ptr;
+    }
 }

@@ -66,13 +66,13 @@ int main(int argc, char *argv[])
 
     for(const auto& sub : mainNetwork.Subnets())
     {
-        std::cout << "\nNazwa podsieci: " << sub.SubName()
-                  << "\nIP: " << sub.Ip()
-                  << " Maska: " << sub.Mask()
-                  << " Broadcast: " << *sub.getBroadcast()
-                  << "\nminHost: " << *sub.getMinHost()
-                  << " maxHost: " << *sub.getMaxHost() << '\n';
-        for(const auto& host : sub.HostsList())
+        std::cout << "\nNazwa podsieci: " << sub->SubName()
+                  << "\nIP: " << sub->Ip()
+                  << " Maska: " << sub->Mask()
+                  << " Broadcast: " << *dynamic_cast<Subnetv4&>(*sub).getBroadcast()
+                  << "\nminHost: " << *sub->getMinHost()
+                  << " maxHost: " << *sub->getMaxHost() << '\n';
+        for(const auto& host : sub->HostsList())
             std::cout << '\t' << host->Name()
                       << " " <<host->Ip() << '\n';
     }

@@ -49,24 +49,19 @@ namespace core {
         return *_NetMask;
     }
 
-    const std::vector<Subnetv4>& Networkv4::Subnets() const
+    const std::vector<std::shared_ptr<ISubnet>>& Networkv4::Subnets() const
     {
         return _Subnets;
     }
 
-    std::vector<Subnetv4>& Networkv4::Subnets()
-    {
-        return _Subnets;
-    }
-
-    void Networkv4::Subnets(std::vector<Subnetv4> subnets)
+    void Networkv4::Subnets(std::vector<std::shared_ptr<ISubnet>> subnets)
     {
         _Subnets = subnets;
     }
 
     void Networkv4::addSubnet(const cpp_int& hostNumber, const QString& name)
     {
-        _Subnets.push_back({hostNumber, name});
+        _Subnets.push_back(std::make_shared<Subnetv4>(hostNumber, name));
     }
 
     cpp_int Networkv4::hostsCapacity() const

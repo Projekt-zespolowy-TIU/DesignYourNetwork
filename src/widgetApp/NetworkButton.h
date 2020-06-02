@@ -13,15 +13,16 @@ class NetworkButton : public QPushButton
 
 public:
 
-    NetworkButton(Networkv4 network):
-        network(network)
+    NetworkButton(std::shared_ptr<Networkv4> net, QWidget* parent):
+        QPushButton(parent),
+        network(net)
     {
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
     }
 
 signals:
 
-    void clicked(Networkv4);
+    void clicked(std::shared_ptr<Networkv4>);
 
 private slots:
 
@@ -32,7 +33,7 @@ private slots:
 
 private:
 
-        Networkv4 network;
+        std::shared_ptr<Networkv4> network;
 };
 
 #endif // NETWORKBUTTON_H

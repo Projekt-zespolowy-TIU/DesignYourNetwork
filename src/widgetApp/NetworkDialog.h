@@ -17,10 +17,10 @@ class NetworkDialog : public QDialog
 
 public:
 
-    explicit NetworkDialog(QWidget *parent = nullptr);
+    NetworkDialog(QWidget *parent);
     ~NetworkDialog();
 
-    void InjectData(Networkv4 network);
+    void InjectData(std::shared_ptr<Networkv4> network);
 
     void SetData();
 
@@ -31,7 +31,7 @@ private:
 
     Ui::NetworkDialog *ui;
 
-    Networkv4 network;
+    std::shared_ptr<Networkv4> network;
 
     cpp_int subnetCount;
 

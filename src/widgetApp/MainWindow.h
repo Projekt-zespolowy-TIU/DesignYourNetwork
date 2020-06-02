@@ -52,9 +52,8 @@ namespace widgetApp{
         int subnetCount = 0;
         bool isHorizontal = false;
 
+        std::shared_ptr<Networkv4> mainNetwork;
         SubnetsCalculatorV4 calculator;
-
-        Networkv4 mainNetwork;
 
         QWidget *addressWidget;
         QWidget *maskWidget;
@@ -67,21 +66,15 @@ namespace widgetApp{
 
         QFrame *subnetsGraphFrame;
 
-        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout();
-        QHBoxLayout *graphPanelLayout = new QHBoxLayout();
+        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout(this);
+        QHBoxLayout *graphPanelLayout = new QHBoxLayout(this);
 
-        QList<QSpinBox*> *spinBoxList = new QList<QSpinBox*>();
-        QList<QLineEdit*> *subnetNames = new QList<QLineEdit*>;
+        QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
+        QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
 
-        NetworkDialog networkDialog;
+        RaportDialog raportDialog{this};
 
-        SubnetDialog subnetDialog;
-
-        HostDialog hostDialog;
-
-        RaportDialog *raportDialog = new RaportDialog(this);;
-
-        GraphDialog *graphDialog;
+        GraphDialog graphDialog{this};
 
         void setSubnetsHostCount();
 

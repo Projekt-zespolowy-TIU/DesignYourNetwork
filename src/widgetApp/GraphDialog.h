@@ -23,17 +23,18 @@ class GraphDialog : public QDialog
 
 public:
 
-    explicit GraphDialog(Networkv4 mainNetwork, QWidget *parent = nullptr);
+    GraphDialog(QWidget *parent);
     ~GraphDialog();
 
+    void injectData(std::shared_ptr<Networkv4> net4);
 
 private slots:
 
-     void on_networkButton_clicked(Networkv4 network);
+     void on_networkButton_clicked(std::shared_ptr<Networkv4> network);
 
      void on_subnetButton_clicked(Subnetv4 subnet);
 
-     void on_hostButton_clicked(Host host);
+     void on_hostButton_clicked(std::shared_ptr<Host> host);
 
      void on_coloredGraphcheckBox_clicked(bool checked);
 
@@ -61,19 +62,19 @@ private:
 
     float scale = 1.0f;
 
-    NetworkDialog networkDialog;
+    NetworkDialog networkDialog{this};
 
-    SubnetDialog subnetDialog;
+    SubnetDialog subnetDialog{this};
 
-    HostDialog hostDialog;
+    HostDialog hostDialog{this};
 
     QWidget *subnetScrollContent;
     QWidget *subnetGraphContent;
     QFrame *subnetsGraphFrame; 
 
-    Networkv4 mainNetwork;
+    std::shared_ptr<Networkv4> mainNetwork;
 
-    QHBoxLayout *graphPanelLayout = new QHBoxLayout();
+    QHBoxLayout *graphPanelLayout = new QHBoxLayout(this);
 
     void drawNetworkGraph();
 };

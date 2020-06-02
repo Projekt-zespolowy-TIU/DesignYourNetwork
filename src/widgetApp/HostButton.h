@@ -13,15 +13,15 @@ class HostButton : public QPushButton
 
 public:
 
-    HostButton(Host host):
+    HostButton(std::shared_ptr<Host> host, QWidget* parent):
+        QPushButton(parent),
         host(host)
     {
-        this->host = host;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
     }
 
 signals:
-    void clicked(Host);
+    void clicked(std::shared_ptr<Host>);
 
 private slots:
 
@@ -32,7 +32,7 @@ private slots:
 
 private:
 
-        Host host;
+        std::shared_ptr<Host> host;
 };
 
 #endif // HOSTBUTTON_H

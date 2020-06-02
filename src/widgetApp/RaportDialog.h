@@ -19,13 +19,13 @@ class RaportDialog : public QDialog
 
 public:
 
-    explicit RaportDialog( QWidget *parent = nullptr);
+    RaportDialog(QWidget *parent);
 
     ~RaportDialog();
 
-    void injectData(Networkv4 network);
-
     void displayNetworkRaport();
+
+    void injectData(std::shared_ptr<Networkv4> net4);
 
 private slots:
 
@@ -39,11 +39,11 @@ private:
 
     bool isDetailed = false;
 
-    Networkv4 network;
+    std::shared_ptr<Networkv4> network;
 
-    QVBoxLayout *raportLayout = new QVBoxLayout();
+    QVBoxLayout *raportLayout = new QVBoxLayout(this);
 
-    QTextEdit *raportText = new QTextEdit();
+    QTextEdit *raportText = new QTextEdit(this);
 };
 
 #endif // RAPORTDIALOG_H

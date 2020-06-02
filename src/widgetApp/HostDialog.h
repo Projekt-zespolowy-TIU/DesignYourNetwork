@@ -17,10 +17,10 @@ class HostDialog : public QDialog
 
 public:
 
-    explicit HostDialog(QWidget *parent = nullptr);
+    HostDialog(QWidget *parent);
     ~HostDialog();
 
-    void InjectData(Host);
+    void InjectData(std::shared_ptr<Host>);
 
     void SetData();
 
@@ -32,7 +32,7 @@ private:
 
     Ui::HostDialog *ui;
 
-    Host host;
+    std::shared_ptr<Host> host;
 };
 
 #endif // HOSTDIALOG_H

@@ -17,7 +17,7 @@ class SubnetDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SubnetDialog(QWidget *parent = nullptr);
+    SubnetDialog(QWidget *parent);
     ~SubnetDialog();
 
     void InjectData(Subnetv4 subnet);

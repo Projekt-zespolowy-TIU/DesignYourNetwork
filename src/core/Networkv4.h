@@ -30,6 +30,7 @@ namespace core {
         void addSubnet(const cpp_int& hostNumber,
                        const QString& name = "blank") override;
 
+        cpp_int hostsCapacity() const override;
         bool isSubnet(const IPaddress& hostIP) const override;
     private:
         std::unique_ptr<IPaddress> _Ip;

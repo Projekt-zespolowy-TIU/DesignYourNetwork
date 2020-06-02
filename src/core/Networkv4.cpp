@@ -69,6 +69,13 @@ namespace core {
         _Subnets.push_back({hostNumber, name});
     }
 
+    cpp_int Networkv4::hostsCapacity() const
+    {
+        cpp_int allAddresses = ( cpp_int{1} << (Mask().getAddressLength() - Mask().getPrefix()) );
+        auto withNoNetAddr =  --allAddresses; //without network address
+        return --withNoNetAddr; //without broadcast
+    }
+
     bool Networkv4::isSubnet(const IPaddress& hostIP) const
     {
         return ((*_Ip & *_NetMask) == (hostIP & *_NetMask)) ? true : false;

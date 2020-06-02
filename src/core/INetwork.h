@@ -24,7 +24,7 @@ namespace core {
 
         virtual void addSubnet(const cpp_int& hostNumber, const QString& name) = 0;
 
-//        cpp_int hostsCapacity() const = 0;
+        virtual cpp_int hostsCapacity() const = 0;
         virtual bool isSubnet(const IPaddress& hostIP) const = 0;
 
     //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//

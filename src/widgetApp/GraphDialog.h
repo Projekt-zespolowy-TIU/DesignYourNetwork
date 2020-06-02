@@ -8,7 +8,8 @@
 #include "NetworkDialog.h"
 #include "SubnetDialog.h"
 #include "HostDialog.h"
-#include "SubnetsCalculatorV4.h"
+
+#include "core/SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -22,8 +23,7 @@ class GraphDialog : public QDialog
 
 public:
 
-    explicit GraphDialog(Networkv4 mainNetwork,
-        std::vector<std::shared_ptr<Subnet>> subnets, QWidget *parent = nullptr);
+    explicit GraphDialog(Networkv4 mainNetwork, QWidget *parent = nullptr);
     ~GraphDialog();
 
 
@@ -31,9 +31,9 @@ private slots:
 
      void on_networkButton_clicked(Networkv4 network);
 
-     void on_subnetButton_clicked(std::shared_ptr<Subnet> subnet);
+     void on_subnetButton_clicked(Subnetv4 subnet);
 
-     void on_hostButton_clicked(Subnet::Host host);
+     void on_hostButton_clicked(Host host);
 
      void on_coloredGraphcheckBox_clicked(bool checked);
 
@@ -72,8 +72,6 @@ private:
     QFrame *subnetsGraphFrame; 
 
     Networkv4 mainNetwork;
-
-    std::vector<std::shared_ptr<Subnet>> subnets;
 
     QHBoxLayout *graphPanelLayout = new QHBoxLayout();
 

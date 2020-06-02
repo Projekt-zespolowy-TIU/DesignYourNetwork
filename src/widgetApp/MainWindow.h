@@ -16,8 +16,8 @@
 #include "HostDialog.h"
 #include "GraphDialog.h"
 #include "RaportDialog.h"
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
+
+#include "core/SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -52,12 +52,9 @@ namespace widgetApp{
         int subnetCount = 0;
         bool isHorizontal = false;
 
-        IPv4parser parser;
         SubnetsCalculatorV4 calculator;
 
         Networkv4 mainNetwork;
-        std::vector<std::shared_ptr<Subnet>> subnets;
-        std::vector<std::shared_ptr<Subnet::Host>> hosts;
 
         QWidget *addressWidget;
         QWidget *maskWidget;

@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 
-#include "IPstructs.h"
+#include "core/Networkv4.h"
 
 using namespace core;
 
@@ -23,7 +23,7 @@ public:
 
     ~RaportDialog();
 
-    void injectData(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets);
+    void injectData(Networkv4 network);
 
     void displayNetworkRaport();
 
@@ -40,8 +40,6 @@ private:
     bool isDetailed = false;
 
     Networkv4 network;
-
-    std::vector<std::shared_ptr<Subnet>> subnets;
 
     QVBoxLayout *raportLayout = new QVBoxLayout();
 

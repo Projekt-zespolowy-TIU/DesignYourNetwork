@@ -1,12 +1,9 @@
 #ifndef NETWORKBUTTON_H
 #define NETWORKBUTTON_H
 
-#endif // NETWORKBUTTON_H
-
-#pragma once
-
 #include <QPushButton>
-#include "IPstructs.h"
+
+#include "core/Networkv4.h"
 
 using namespace core;
 
@@ -16,9 +13,9 @@ class NetworkButton : public QPushButton
 
 public:
 
-    NetworkButton(Networkv4 network)
+    NetworkButton(Networkv4 network):
+        network(network)
     {
-        this->network = network;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
     }
 
@@ -37,3 +34,5 @@ private:
 
         Networkv4 network;
 };
+
+#endif // NETWORKBUTTON_H

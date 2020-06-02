@@ -4,8 +4,7 @@
 #include <QDialog>
 #include <QtCore>
 
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
+#include "core/SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -21,7 +20,7 @@ public:
     explicit SubnetDialog(QWidget *parent = nullptr);
     ~SubnetDialog();
 
-    void InjectData(std::shared_ptr<Subnet> subnet);
+    void InjectData(Subnetv4 subnet);
 
     void SetData();
 
@@ -32,7 +31,7 @@ private slots:
 private:
     Ui::SubnetDialog *ui;
 
-    std::shared_ptr<Subnet> subnet;
+    Subnetv4 subnet;
 };
 
 #endif // SUBNETDIALOG_H

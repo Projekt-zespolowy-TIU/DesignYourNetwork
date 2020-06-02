@@ -8,13 +8,12 @@
 #include <QPushButton>
 #include <QLabel>
 
-GraphDialog::GraphDialog(Networkv4 mainNetwork,
-    std::vector<std::shared_ptr<Subnet>> subnets, QWidget *parent) :
+GraphDialog::GraphDialog(Networkv4 mainNetwork, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::GraphDialog)
+    ui(new Ui::GraphDialog),
+    mainNetwork{IPv4address{}, IPv4mask{}}
 {
     this->mainNetwork = mainNetwork;
-    this->subnets = subnets;
 
     ui->setupUi(this);
 
@@ -55,7 +54,7 @@ void GraphDialog::drawNetworkGraph()
     subnetGraphContent->layout()->addWidget(graphNetworkFrame);
     graphNetworkFrame->setLayout(new QVBoxLayout());
 
-    QString routerButtonText = QString::fromStdString("R" + std::to_string(1));
+    QString routerButtonText = QString{'R'} + '1';
     NetworkButton *networkButton = new NetworkButton(mainNetwork);
     QIcon networkIcon;
     QPixmap pixmap(":/resources/img/router.png");
@@ -72,8 +71,8 @@ void GraphDialog::drawNetworkGraph()
 
     if(showsNetworkAddress)
     {
-        QLabel *networkAddress = new QLabel(mainNetwork.Ip->asStringDec() +
-                                            " / " + mainNetwork.NetMask->asStringDec());
+        QLabel *networkAddress = new QLabel(mainNetwork.Ip().asStringDec() +
+                                            " / " + mainNetwork.Mask().asStringDec());
         networkAddress->setAlignment(Qt::AlignTop);
         graphNetworkFrame->layout()->addWidget(networkAddress);
     }
@@ -86,7 +85,7 @@ void GraphDialog::drawNetworkGraph()
     subnetsGraphFrame->layout()->setSpacing(50 * scale);
     graphNetworkFrame->layout()->addWidget(subnetsGraphFrame);
 
-    for(int i = 0; i < static_cast<int>(subnets.size()); i++)
+    for(size_t i = 0; i < mainNetwork.Subnets().size(); i++)
     {
          QVBoxLayout *frameLayout = new QVBoxLayout();
 
@@ -98,8 +97,8 @@ void GraphDialog::drawNetworkGraph()
                  setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
                                " 4px;\nborder-style:solid;");
 
-         SubnetButton *subnetButton = new SubnetButton(subnets.at(i));
-         QString subButtonText = QString::fromStdString("S" + std::to_string(1 + i));
+         SubnetButton *subnetButton = new SubnetButton(mainNetwork.Subnets().at(i));
+         QString subButtonText = 'S' + QString::number(1 + i);
          QIcon subnetIcon;
          QPixmap pixmap(":/resources/img/switch.png");
          subnetIcon.addPixmap(pixmap);
@@ -109,20 +108,20 @@ void GraphDialog::drawNetworkGraph()
          subnetButton->setMaximumSize(QSize(40,40) * scale);
          subnetFrame->layout()->addWidget(subnetButton);
 
-         connect(subnetButton, SIGNAL(clicked(std::shared_ptr<Subnet>)), this,
-                 SLOT(on_subnetButton_clicked(std::shared_ptr<Subnet>)));
+         connect(subnetButton, SIGNAL(clicked(Subnetv4)), this,
+                 SLOT(on_subnetButton_clicked(Subnetv4)));
 
          if(showsSubnetAddresses)
          {
-             QLabel *subnetAddress = new QLabel(subnets.at(i)->Ip->asStringDec() +
-                                                " / " + subnets.at(i)->NetMask->asStringDec());
+             QLabel *subnetAddress = new QLabel(mainNetwork.Subnets().at(i).Ip().asStringDec() +
+                                                " / " + mainNetwork.Subnets().at(i).Mask().asStringDec());
              subnetAddress->setAlignment(Qt::AlignTop);
              subnetFrame->layout()->addWidget(subnetAddress);
          }
 
          QHBoxLayout *hostsLayout;
 
-         for(int j = 0; j < subnets.at(i)->HostNumber; j++)
+         for(int j = 0; j < mainNetwork.Subnets().at(i).HostNumber(); j++)
          {
             if((j + 8) % 8 == 0)
             {
@@ -143,9 +142,9 @@ void GraphDialog::drawNetworkGraph()
 
             QString hostButtonText = QString::fromStdString("H" + std::to_string(1 + j));
 
-            HostButton *hostButton = new HostButton(subnets.at(i)->HostsList.at(j));
-            connect(hostButton, SIGNAL(clicked(Subnet::Host)),
-                    this, SLOT(on_hostButton_clicked(Subnet::Host)));
+            HostButton *hostButton = new HostButton(mainNetwork.Subnets().at(i).HostsList().at(j));
+            connect(hostButton, SIGNAL(clicked(Host)),
+                    this, SLOT(on_hostButton_clicked(Host)));
 
             hostButton->setFlat(true);
             QIcon hostIcon;
@@ -160,7 +159,7 @@ void GraphDialog::drawNetworkGraph()
 
             if(showsHostNames)
             {
-                QLabel *hostName = new QLabel(subnets.at(i)->HostsList.at(j).Name);
+                QLabel *hostName = new QLabel(mainNetwork.Subnets().at(i).HostsList().at(j).Name());
                 QFont font;
                 font.setPointSize(7 * scale);
                 hostName->setFont(font);
@@ -172,14 +171,14 @@ void GraphDialog::drawNetworkGraph()
          }
     }
 }
-void GraphDialog::on_hostButton_clicked(Subnet::Host host)
+void GraphDialog::on_hostButton_clicked(Host host)
 {
     hostDialog.setModal(true);
     hostDialog.InjectData(host);
     hostDialog.exec();
 }
 
-void GraphDialog::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
+void GraphDialog::on_subnetButton_clicked(Subnetv4 subnet)
 {
     subnetDialog.setModal(true);
     subnetDialog.InjectData(subnet);
@@ -189,7 +188,7 @@ void GraphDialog::on_subnetButton_clicked(std::shared_ptr<Subnet> subnet)
 void GraphDialog::on_networkButton_clicked(Networkv4 network)
 {
     networkDialog.setModal(true);
-    networkDialog.InjectData(network, subnets);
+    networkDialog.InjectData(network);
     networkDialog.exec();
 }
 

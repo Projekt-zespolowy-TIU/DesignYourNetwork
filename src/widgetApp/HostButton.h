@@ -1,13 +1,9 @@
 #ifndef HOSTBUTTON_H
 #define HOSTBUTTON_H
 
-#endif // HOSTBUTTON_H
-
-#pragma once
-
 #include <QPushButton>
 
-#include "IPstructs.h"
+#include "core/Host.h"
 
 using namespace core;
 
@@ -17,14 +13,15 @@ class HostButton : public QPushButton
 
 public:
 
-    HostButton(Subnet::Host host)
+    HostButton(Host host):
+        host(host)
     {
         this->host = host;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
     }
 
 signals:
-    void clicked(Subnet::Host);
+    void clicked(Host);
 
 private slots:
 
@@ -35,5 +32,7 @@ private slots:
 
 private:
 
-        Subnet::Host host;
+        Host host;
 };
+
+#endif // HOSTBUTTON_H

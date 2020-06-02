@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "IPstructs.h"
+#include "core/Host.h"
 
 using namespace core;
 
@@ -20,7 +20,7 @@ public:
     explicit HostDialog(QWidget *parent = nullptr);
     ~HostDialog();
 
-    void InjectData(Subnet::Host);
+    void InjectData(Host);
 
     void SetData();
 
@@ -32,7 +32,7 @@ private:
 
     Ui::HostDialog *ui;
 
-    Subnet::Host host;
+    Host host;
 };
 
 #endif // HOSTDIALOG_H

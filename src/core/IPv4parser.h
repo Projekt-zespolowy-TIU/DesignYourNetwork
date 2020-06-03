@@ -2,19 +2,17 @@
 #ifndef IPV4PARSER_H
 #define IPV4PARSER_H
 
-#include <QString>
-#include <memory>
-#include <boost/dynamic_bitset.hpp>
 #include <string>
+#include <QString>
+#include <boost/dynamic_bitset.hpp>
 
 #include "IIPparser.h"
 
 namespace core{
-    class IPv4parser final: public IIPparser
+    class IPv4parser: public IIPparser
     {
     public:
-        std::shared_ptr<IPaddressBase> ipFromString(const QString &) const final;
-        std::shared_ptr<IPmaskBase> ipMaskFromString(const QString &) const final;
+        boost::dynamic_bitset<> ipFromString(const QString &) const override;
     private:
         boost::dynamic_bitset<> _getBitset(const std::string& addressString) const;
     };

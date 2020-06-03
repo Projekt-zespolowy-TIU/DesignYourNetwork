@@ -9,13 +9,11 @@
 #include <QLabel>
 #include <QtCore>
 
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
+#include "core/Networkv4.h"
 
 using namespace core;
 
 namespace widgetApp {
-
     MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
         , ui(new Ui::MainWindow)
@@ -34,8 +32,6 @@ namespace widgetApp {
         subnetScrollContent->setLayout(subnetsPanelLayout);
 
         subnetCountBox = ui->hostNumberSpinBox;
-
-        raportDialog->hide();
     }
 
     MainWindow::~MainWindow()
@@ -46,49 +42,38 @@ namespace widgetApp {
 
 void widgetApp::MainWindow::on_calculateButton_clicked()
 {
-     mainNetwork.Ip = parser.ipFromString(
-                 takeStringFromInputFields(addressWidget));
+    mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget),
+                  takeStringFromInputFields(maskWidget));
 
-     mainNetwork.NetMask = parser.ipMaskFromString(
-                 takeStringFromInputFields(maskWidget));
-
-     displayInputInBinary(mainNetwork.Ip.get()->asStringBin(),
+     displayInputInBinary(mainNetwork->Ip().asStringBin(),
                           binaryAddressWidget);
 
-     displayInputInBinary(mainNetwork.NetMask.get()->asStringBin(),
+     displayInputInBinary(mainNetwork->Mask().asStringBin(),
                           binaryMaskWidget);
 
      setSubnetsHostCount();
 
-     calculator.calcSubnets(mainNetwork, subnets);    
+     calculator.calcSubnets(*mainNetwork);
+
+     graphDialog.injectData(mainNetwork);
+     raportDialog.injectData(mainNetwork);
 }
 
 void widgetApp::MainWindow::setSubnetsHostCount()
 { 
-     subnets.clear();
-
     for (int i = 0; i < subnetCount; i++)
     {
-       Subnetv4 subnet;
-
-       subnet.SubName = subnetNames->at(i)->text();
-       subnet.HostNumber = spinBoxList->at(i)->value();
-       subnets.push_back(std::make_shared<Subnetv4>(subnet));
-
-       for (int i = 0; i < subnet.HostNumber; i++)
-       {
-           Subnet::Host host;
-           subnet.HostsList.push_back(host);
-       }
+        mainNetwork->addSubnet(spinBoxList.at(i)->value(),
+                              subnetNames.at(i)->text());
     }
 }
 
 void widgetApp::MainWindow::deleteLayoutContent(QWidget *content)
 {
     QLayoutItem *child;
-    while ((child = content->layout()->takeAt(0)) != NULL)
+    while ((child = content->layout()->takeAt(0)) != nullptr)
     {
-        if(child->widget() != NULL)
+        if(child->widget())
         {
             delete child->widget();
         }
@@ -104,7 +89,7 @@ QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
 
     for (int i = 0; i < inputFields.count(); i++)
     {
-        if(inputFields.at(i) != NULL)
+        if(inputFields.at(i))
         {
             input += inputFields.at(i)->text();
             if(i < inputFields.count() - 1) input += ".";
@@ -113,15 +98,15 @@ QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
     return input;
 }
 
-void widgetApp::MainWindow::displayInputInBinary(QString input, QWidget *displayWidget)
+void widgetApp::MainWindow::displayInputInBinary(const QString &input, QWidget *displayWidget)
 {
     QList<QLineEdit*> displayFields = displayWidget->findChildren<QLineEdit*>();
 
-    std::string bitsetString = input.toUtf8().constData();
+    std::string bitsetString = input.toStdString();
 
     for (int i = 0; i < displayFields.count(); i++)
     {
-        if(displayFields[i] != NULL)
+        if(displayFields[i])
         {
             QString octText = QString::fromStdString(bitsetString.substr(i * 9, 8));
             displayFields[i]->setText(octText);
@@ -133,49 +118,48 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 {
     this->subnetCount = subnetCount;
 
-    spinBoxList->clear();
+    spinBoxList.clear();
 
-    subnetNames->clear();
-
-    subnets.clear();
+    subnetNames.clear();
 
     deleteLayoutContent(subnetScrollContent);
 
     for (int i = 0; i < subnetCount; i++)
     {
-        QHBoxLayout *textLayout = new QHBoxLayout();
-        QString labelText = QString::fromStdString("Subnet " + std::to_string(1 + i));
-        QLabel *subnetLabel = new QLabel(labelText);
+        QHBoxLayout *textLayout = new QHBoxLayout;
+        QString labelText = {"Subnet " + QString::number(1 + i)};
+        QLabel *subnetLabel = new QLabel(labelText, this);
         subnetLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         subnetLabel->setLayout(textLayout);
         subnetLabel->font().bold();
         subnetsPanelLayout->addWidget(subnetLabel);
-        QVBoxLayout *subnetLayout = new QVBoxLayout();
-        QFrame *subnetFrame = new QFrame();
+        QVBoxLayout *subnetLayout = new QVBoxLayout;
+        QFrame *subnetFrame = new QFrame(this);
         subnetFrame->setLayout(subnetLayout);
 
-        QHBoxLayout *frameLayout = new QHBoxLayout();
-        QLabel *nameLabel = new QLabel("Subnet name: ");
+        QHBoxLayout *frameLayout = new QHBoxLayout;
+        QLabel *nameLabel = new QLabel("Subnet name: ", this);
         nameLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         nameLabel->setMinimumHeight(23);
-        QFrame *nameFrame = new QFrame();
+        QFrame *nameFrame = new QFrame(this);
         nameFrame->setMinimumHeight(35);
         nameFrame->setLayout(frameLayout);
-        QLineEdit *subnetNameLine = new QLineEdit();
+        QLineEdit *subnetNameLine = new QLineEdit(this);
         subnetNameLine->setMinimumHeight(23);
         subnetNameLine->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
         frameLayout->addWidget(nameLabel);
         frameLayout->addWidget(subnetNameLine);
-        frameLayout = new QHBoxLayout();
-        QFrame *hostCountFrame = new QFrame();
+        frameLayout = new QHBoxLayout;
+        QFrame *hostCountFrame = new QFrame(this);
         hostCountFrame->setMinimumHeight(35);
         hostCountFrame->setLayout(frameLayout);
 
-        QLabel *hostNumberLabel = new QLabel("Hosts number: ");
+        QLabel *hostNumberLabel = new QLabel("Hosts number: ", this);
         hostNumberLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         hostNumberLabel->setMinimumHeight(23);
-        QSpinBox *spinBox = new QSpinBox();
+        QSpinBox *spinBox = new QSpinBox(this);
         spinBox->setRange(0, 999);
+        spinBox->setValue(1);
         spinBox->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
         spinBox->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         spinBox->setMinimumHeight(23);
@@ -188,34 +172,30 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
         subnetsPanelLayout->addWidget(subnetFrame);
 
-        subnetNames->append(subnetNameLine);
+        subnetNames.append(subnetNameLine);
 
-        spinBoxList->append(spinBox);
+        spinBoxList.append(spinBox);
     }
 }
 
 void widgetApp::MainWindow::on_drawButton_clicked()
 {
-     graphDialog = new GraphDialog(mainNetwork, subnets, this);
-     graphDialog->setGeometry(this->geometry().x() + 390, this->geometry().y() + 60,
-                              graphDialog->geometry().width(), graphDialog->geometry().height());
-     graphDialog->show();
+     graphDialog.setGeometry(this->geometry().x() + 390, this->geometry().y() + 60,
+                              graphDialog.geometry().width(), graphDialog.geometry().height());
+     graphDialog.show();
 }
 
 void widgetApp::MainWindow::on_raportButton_clicked()
 {
-    if(raportDialog->isHidden())
+    if(raportDialog.isHidden())
     {
-        raportDialog = new RaportDialog(this);
-        raportDialog->injectData(mainNetwork, subnets);
-        raportDialog->displayNetworkRaport();
-        raportDialog->setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60,
-                                  raportDialog->geometry().width(), raportDialog->geometry().height());
-        raportDialog->show();
+        raportDialog.displayNetworkRaport();
+        raportDialog.setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60,
+                                  raportDialog.geometry().width(), raportDialog.geometry().height());
+        raportDialog.show();
     }
     else
     {
-        raportDialog->injectData(mainNetwork, subnets);
-        raportDialog->displayNetworkRaport();
+        raportDialog.displayNetworkRaport();
     }
 }

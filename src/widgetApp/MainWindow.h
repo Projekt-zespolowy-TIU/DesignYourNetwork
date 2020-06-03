@@ -16,8 +16,9 @@
 #include "HostDialog.h"
 #include "GraphDialog.h"
 #include "RaportDialog.h"
-#include "IPv4parser.h"
-#include "SubnetsCalculatorV4.h"
+
+#include "core/INetwork.h"
+#include "core/SubnetsCalculatorV4.h"
 
 using namespace core;
 
@@ -41,7 +42,7 @@ namespace widgetApp{
 
         void on_drawButton_clicked();
 
-        void on_hostNumberSpinBox_valueChanged(int value);
+        void on_hostNumberSpinBox_valueChanged(int subnetCount);
 
         void on_raportButton_clicked();
 
@@ -52,12 +53,8 @@ namespace widgetApp{
         int subnetCount = 0;
         bool isHorizontal = false;
 
-        IPv4parser parser;
+        std::shared_ptr<INetwork> mainNetwork;
         SubnetsCalculatorV4 calculator;
-
-        Networkv4 mainNetwork;
-        std::vector<std::shared_ptr<Subnet>> subnets;
-        std::vector<std::shared_ptr<Subnet::Host>> hosts;
 
         QWidget *addressWidget;
         QWidget *maskWidget;
@@ -70,21 +67,14 @@ namespace widgetApp{
 
         QFrame *subnetsGraphFrame;
 
-        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout();
-        QHBoxLayout *graphPanelLayout = new QHBoxLayout();
+        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
 
-        QList<QSpinBox*> *spinBoxList = new QList<QSpinBox*>();
-        QList<QLineEdit*> *subnetNames = new QList<QLineEdit*>;
+        QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
+        QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
 
-        NetworkDialog networkDialog;
+        RaportDialog raportDialog{this};
 
-        SubnetDialog subnetDialog;
-
-        HostDialog hostDialog;
-
-        RaportDialog *raportDialog = new RaportDialog(this);;
-
-        GraphDialog *graphDialog;
+        GraphDialog graphDialog{this};
 
         void setSubnetsHostCount();
 
@@ -92,7 +82,7 @@ namespace widgetApp{
 
         void deleteLayoutContent(QWidget *content);
 
-        void displayInputInBinary(QString input, QWidget *displayWidget);
+        void displayInputInBinary(const QString &input, QWidget *displayWidget);
 
         QString takeStringFromInputFields(QWidget *inputWidget);
     };

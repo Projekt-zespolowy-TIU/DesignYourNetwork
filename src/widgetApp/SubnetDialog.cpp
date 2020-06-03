@@ -15,15 +15,15 @@ SubnetDialog::~SubnetDialog()
     delete ui;
 }
 
-void SubnetDialog::InjectData(std::shared_ptr<Subnet> subnet)
+void SubnetDialog::InjectData(const std::shared_ptr<ISubnet>& subnet)
 {
-    this->subnet = subnet; 
+    this->subnet = subnet;
     SetData();
 }
 
 void SubnetDialog::SetData()
 {
-    ui->subnetName->setText(subnet->SubName);
+    ui->subnetName->setText(subnet->SubName());
 
     QIcon icon;
     QPixmap pixmap(":/resources/img/switch.png");
@@ -31,27 +31,27 @@ void SubnetDialog::SetData()
     ui->graphImage->setIconSize(QSize(120,120));
     ui->graphImage->setIcon(icon);
 
-    ui->hostCount->setText(QString::number(subnet->HostNumber));
-    ui->hostCapacity->setText(QString::number(subnet->hostsCapacity()));
-    ui->progressBar->setRange(0, subnet->hostsCapacity());
-    ui->progressBar->setValue(subnet->HostNumber);
+    ui->hostCount->setText(QString::fromStdString(subnet->HostNumber().str()));
+    ui->hostCapacity->setText(QString::fromStdString(subnet->hostsCapacity().str()));
+    ui->progressBar->setRange(0, subnet->hostsCapacity().convert_to<unsigned long long>());
+    ui->progressBar->setValue(subnet->HostNumber().convert_to<unsigned long long>());
 
-    ui->subnetAddressBinary->setText(subnet->Ip->asStringBin());
-    ui->subnetAddressDecimal->setText(subnet->Ip->asStringDec());
-    ui->subnetMaskBinary->setText(subnet->NetMask->asStringBin());
-    ui->subnetMaskDecimal->setText(subnet->NetMask->asStringDec());
+    ui->subnetAddressBinary->setText(subnet->Ip().asStringBin());
+    ui->subnetAddressDecimal->setText(subnet->Ip().asStringDec());
+    ui->subnetMaskBinary->setText(subnet->Mask().asStringBin());
+    ui->subnetMaskDecimal->setText(subnet->Mask().asStringDec());
 
     ui->firstAddressBinary->setText(subnet->getMinHost()->asStringBin());
     ui->firstAddressDecimal->setText(subnet->getMinHost()->asStringDec());
     ui->lastAddressBinary->setText(subnet->getMaxHost()->asStringBin());
     ui->lastAddressDecimal->setText(subnet->getMaxHost()->asStringDec());
 
-    ui->broadcastAddressBinary->setText(subnet->getBroadcast()->asStringBin());
-    ui->broadcastAddressDecimal->setText(subnet->getBroadcast()->asStringDec());
+    ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
+    ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
 
 }
 
-void SubnetDialog::on_subnetName_textEdited(const QString &arg1)
+void SubnetDialog::on_subnetName_textEdited(const QString& name)
 {
-    subnet->SubName = arg1;
+    subnet->SubName(name);
 }

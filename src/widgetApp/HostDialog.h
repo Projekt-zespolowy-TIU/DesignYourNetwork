@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "IPstructs.h"
+#include "core/Host.h"
 
 using namespace core;
 
@@ -17,22 +17,22 @@ class HostDialog : public QDialog
 
 public:
 
-    explicit HostDialog(QWidget *parent = nullptr);
+    HostDialog(QWidget *parent);
     ~HostDialog();
 
-    void InjectData(Subnet::Host);
+    void InjectData(const std::shared_ptr<Host>&);
 
     void SetData();
 
 private slots:
 
-    void on_hostName_textEdited(const QString &arg1);
+    void on_hostName_textEdited(const QString& name);
 
 private:
 
     Ui::HostDialog *ui;
 
-    Subnet::Host host;
+    std::shared_ptr<Host> host;
 };
 
 #endif // HOSTDIALOG_H

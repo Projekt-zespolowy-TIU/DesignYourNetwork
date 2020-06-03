@@ -8,7 +8,7 @@
 #include <QDir>
 #include <QTextStream>
 
-#include "IPstructs.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -24,12 +24,6 @@ RaportDialog::~RaportDialog()
     delete ui;
 }
 
-void RaportDialog::injectData(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets)
-{
-    this->network = network;
-    this->subnets = subnets;
-}
-
 void RaportDialog::displayNetworkRaport()
 {
     ui->raportScrollContent->setLayout(raportLayout);
@@ -37,36 +31,41 @@ void RaportDialog::displayNetworkRaport()
     raportText->clear();
 
     raportText->append("Network \n"
-                      "\nAddress: " + network.Ip->asStringDec() +
-                      "\n" + network.Ip->asStringBin() +
-                      "\nMask " + network.NetMask->asStringDec() +
-                      "\n" + network.NetMask->asStringBin() +
-                      "\nHost capacity: " + QString::number(network.hostsCapacity()));
+                      "\nAddress: " + network->Ip().asStringDec() +
+                      "\n" + network->Ip().asStringBin() +
+                      "\nMask " + network->Mask().asStringDec() +
+                      "\n" + network->Mask().asStringBin() +
+                      "\nHost capacity: " + QString::fromStdString(network->hostsCapacity().str()));
 
     raportLayout->addWidget(raportText);
 
-    for(int i = 0; i < static_cast<int>(subnets.size()); i++)
+    for(size_t i = 0; i < network->Subnets().size(); i++)
     {
         raportText->append("\nSubnet " + QString::number(1 + i) + "\n" +
-                          "\nName: " + subnets.at(i)->SubName +
-                          "\nAddress: " + subnets.at(i)->Ip->asStringDec() +
-                          "\n" + subnets.at(i)->Ip->asStringBin() +
-                          "\nMask " + subnets.at(i)->NetMask->asStringDec() +
-                          "\n" + subnets.at(i)->NetMask->asStringBin() +
-                          "\nHosts: " + QString::number(subnets.at(i)->HostNumber) +
-                           "/" + QString::number(subnets.at(i)->hostsCapacity()));
+                          "\nName: " + network->Subnets().at(i)->SubName() +
+                          "\nAddress: " + network->Subnets().at(i)->Ip().asStringDec() +
+                          "\n" + network->Subnets().at(i)->Ip().asStringBin() +
+                          "\nMask " + network->Subnets().at(i)->Mask().asStringDec() +
+                          "\n" + network->Subnets().at(i)->Mask().asStringBin() +
+                          "\nHosts: " + QString::fromStdString(network->Subnets().at(i)->HostNumber().str()) +
+                           "/" + QString::fromStdString(network->Subnets().at(i)->hostsCapacity().str()));
 
         if(isDetailed)
         {
-            for(int j = 0; j < static_cast<int>(subnets.at(i)->HostsList.size()); j++)
+            for(const auto& host : network->Subnets().at(i)->HostsList())
             {
-                raportText->append("\n    Host: " + QString::number(subnets.at(i)->HostsList.at(j).Number));
-                                  ("\n    Name: " + subnets.at(i)->HostsList.at(j).Name);
-                                  ("\n    Address: " + subnets.at(i)->HostsList.at(j).Ip->asStringDec());
-                                  ("\n    " + subnets.at(i)->HostsList.at(j).Ip->asStringBin());
+                raportText->append("\n    Host: " + QString::fromStdString(host->Id().str()));
+                                  ("\n    Name: " + host->Name());
+                                  ("\n    Address: " + host->Ip().asStringDec());
+                                  ("\n    " + host->Ip().asStringBin());
             }
         }
     }
+}
+
+void RaportDialog::injectData(const std::shared_ptr<INetwork>& net4)
+{
+    network = net4;
 }
 
 void RaportDialog::on_saveButton_clicked()

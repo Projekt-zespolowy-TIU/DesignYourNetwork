@@ -2,7 +2,8 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
-#include "IPstructs.h"
+
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -16,11 +17,10 @@ class NetworkDialog : public QDialog
 
 public:
 
-    explicit NetworkDialog(QWidget *parent = nullptr);
+    NetworkDialog(QWidget *parent);
     ~NetworkDialog();
 
-    void InjectData(Networkv4 network,
-        std::vector<std::shared_ptr<Subnet>> subnets);
+    void InjectData(const std::shared_ptr<INetwork>& network);
 
     void SetData();
 
@@ -31,13 +31,11 @@ private:
 
     Ui::NetworkDialog *ui;
 
-    Networkv4 network;
+    std::shared_ptr<INetwork> network;
 
-    std::vector<std::shared_ptr<Subnet>> subnets;
+    cpp_int subnetCount;
 
-    int subnetCount;
-
-    int hostCount;
+    cpp_int hostCount;
 };
 
 #endif // NETWORK DIALOG_H

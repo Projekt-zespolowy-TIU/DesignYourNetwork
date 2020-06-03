@@ -15,15 +15,15 @@ NetworkDialog::~NetworkDialog()
     delete ui;
 }
 
-void NetworkDialog::InjectData(Networkv4 network,
-    std::vector<std::shared_ptr<Subnet>> subnets)
+void NetworkDialog::InjectData(const std::shared_ptr<INetwork>& network)
 {
     this->network = network;
-    this->subnetCount = static_cast<int>(subnets.size());
+    this->subnetCount = static_cast<int>(network->Subnets().size());
+    hostCount = 0;
 
     for(int i = 0; i < subnetCount; i++)
     {
-        hostCount += subnets[i]->HostNumber;
+        hostCount += network->Subnets()[i]->HostNumber();
     }
 
     SetData();
@@ -32,7 +32,7 @@ void NetworkDialog::InjectData(Networkv4 network,
 void NetworkDialog::SetData()
 {
     ui->networkName->setText("Main network");
-    ui->subnetCount->setText(QString::fromStdString(std::to_string(subnetCount)));
+    ui->subnetCount->setText(QString::fromStdString(subnetCount.str()));
 
     QIcon icon;
     QPixmap pixmap(":/resources/img/router.png");
@@ -40,13 +40,13 @@ void NetworkDialog::SetData()
     ui->graphImage->setIconSize(QSize(120,120));
     ui->graphImage->setIcon(icon);
 
-    ui->hostCapacity->setText(QString::number(network.hostsCapacity()));
-    ui->hostCount->setText(QString::number(hostCount));
-    ui->progressBar->setRange(0, network.hostsCapacity());
-    ui->progressBar->setValue(hostCount);
+    ui->hostCapacity->setText(QString::fromStdString(network->hostsCapacity().str()));
+    ui->hostCount->setText(QString::fromStdString(hostCount.str()));
+    ui->progressBar->setRange(0, network->hostsCapacity().convert_to<unsigned long long>());
+    ui->progressBar->setValue(hostCount.convert_to<unsigned long long>());
 
-    ui->networkAddressBinary->setText(network.Ip->asStringBin());
-    ui->networkAddressDecimal->setText(network.Ip->asStringDec());
-    ui->networkMaskBinary->setText(network.NetMask->asStringBin());
-    ui->networkMaskDecimal->setText(network.NetMask->asStringDec());
+    ui->networkAddressBinary->setText(network->Ip().asStringBin());
+    ui->networkAddressDecimal->setText(network->Ip().asStringDec());
+    ui->networkMaskBinary->setText(network->Mask().asStringBin());
+    ui->networkMaskDecimal->setText(network->Mask().asStringDec());
 }

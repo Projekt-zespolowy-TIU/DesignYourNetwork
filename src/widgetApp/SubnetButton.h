@@ -1,13 +1,9 @@
 #ifndef SUBNETBUTTON_H
 #define SUBNETBUTTON_H
 
-#endif // SUBNETBUTTON_H
-
-#pragma once
-
 #include <QPushButton>
 
-#include "IPstructs.h"
+#include "core/Subnetv4.h"
 
 using namespace core;
 
@@ -17,16 +13,16 @@ class SubnetButton : public QPushButton
 
 public:
 
-    SubnetButton(std::shared_ptr<Subnet> subnet)
+    SubnetButton(const std::shared_ptr<ISubnet>& subnet, QWidget* parent):
+        QPushButton(parent),
+        subnet(subnet)
     {
-        this->subnet = subnet;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
-
     }
 
 signals:
 
-    void clicked(std::shared_ptr<Subnet>);
+    void clicked(std::shared_ptr<ISubnet>);
 
 private slots:
 
@@ -36,5 +32,7 @@ private slots:
     }
 
 private:
-        std::shared_ptr<Subnet> subnet;
+        std::shared_ptr<ISubnet> subnet;
 };
+
+#endif // SUBNETBUTTON_H

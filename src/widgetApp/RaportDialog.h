@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 
-#include "IPstructs.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -19,13 +19,13 @@ class RaportDialog : public QDialog
 
 public:
 
-    explicit RaportDialog( QWidget *parent = nullptr);
+    RaportDialog(QWidget *parent);
 
     ~RaportDialog();
 
-    void injectData(Networkv4 network, std::vector<std::shared_ptr<Subnet>> subnets);
-
     void displayNetworkRaport();
+
+    void injectData(const std::shared_ptr<INetwork>& net4);
 
 private slots:
 
@@ -39,13 +39,11 @@ private:
 
     bool isDetailed = false;
 
-    Networkv4 network;
+    std::shared_ptr<INetwork> network;
 
-    std::vector<std::shared_ptr<Subnet>> subnets;
+    QVBoxLayout *raportLayout = new QVBoxLayout;
 
-    QVBoxLayout *raportLayout = new QVBoxLayout();
-
-    QTextEdit *raportText = new QTextEdit();
+    QTextEdit *raportText = new QTextEdit(this);
 };
 
 #endif // RAPORTDIALOG_H

@@ -8,7 +8,7 @@
 #include <QString>
 
 namespace core {
-    class IIPaddress; //forward declaration
+    class IIPaddrPrintable; //forward declaration
 
     class NotImplemented : public std::logic_error
     {
@@ -23,35 +23,47 @@ namespace core {
         NotImplemented(const char* message, const char* function);
     };
 
-    class IPException : public std::exception
+    class CoreException : public std::exception
     {
     public:
-        IPException(const char* message): _text{message} {};
+        CoreException(const char* message): _text{message} {};
 
-        const char * what() const noexcept override;
+        const char* what() const noexcept override;
     private:
         std::string _text;
     };
 
-    class IPFormatExcept : public IPException
+    class IPFormatExcept : public CoreException
     {
     public:
-        IPFormatExcept(const char* message) : IPException{message} {};
+        IPFormatExcept(const char* message) : CoreException{message} {};
     };
 
-    class IPNetworkExcept : public IPException
+    class NetworkExcept : public CoreException
     {
     public:
-        IPNetworkExcept(const char* message) : IPException{message} {};
+        NetworkExcept(const char* message) : CoreException{message} {};
     };
 
-    class IPSubnetworkExcept : public IPException
+    class NetworkFullExcept : public NetworkExcept
     {
     public:
-        IPSubnetworkExcept(const char* message) : IPException{message} {};
+        NetworkFullExcept(const char* message) : NetworkExcept{message} {};
     };
 
-    std::ostream& operator<< (std::ostream& out, const IIPaddress& c);
+    class SubnetExcept : public CoreException
+    {
+    public:
+        SubnetExcept(const char* message) : CoreException{message} {};
+    };
+
+    class SubnetInvalidExcept : public SubnetExcept
+    {
+    public:
+        SubnetInvalidExcept(const char* message) : SubnetExcept{message} {};
+    };
+
+    std::ostream& operator<< (std::ostream& out, const IIPaddrPrintable& c);
     std::ostream& operator<< (std::ostream& out, const QString& c);
     std::istream& operator>> (std::istream& in, QString& c);
 };

@@ -1,17 +1,18 @@
 #include <catch2/catch.hpp>
+
 #include <boost/dynamic_bitset.hpp>
 
-#include "IPv4address.h"
-#include "IPv4mask.h"
-#include "coreUtils.h"
+#include "core/IPv4address.h"
+#include "core/IPv4mask.h"
+#include "core/coreUtils.h"
 
 using namespace core;
 
 namespace IPv4addressTests {
     TEST_CASE("IPv4address Tests"){
-        const boost::dynamic_bitset <> bitset_ip {32, 3232235521} //192.168.0.1
-        , bitset_mask1 {32, 4294967040} //255.255.255.0
-        , bitset_mask2 {32, 4293918720}; //255.240.0.0
+        const boost::dynamic_bitset <> bitset_ip {32, 3'232'235'521} //192.168.0.1
+        , bitset_mask1 {32, 4'294'967'040} //255.255.255.0
+        , bitset_mask2 {32, 4'293'918'720}; //255.240.0.0
 
         const IPv4address ip4address {bitset_ip};
         const IPv4address mask1 {bitset_mask1};
@@ -29,15 +30,15 @@ namespace IPv4addressTests {
             const IPv4mask mask1 {bitset_mask1};
             const IPv4mask mask2 {bitset_mask2};
 
-            std::shared_ptr<IPaddressBase> left = std::make_shared<IPv4address>(ip4address);
-            std::shared_ptr<IPmaskBase> right = std::make_shared<IPv4mask>(mask1);
+            IPv4address left = ip4address;
+            IPv4mask right = mask1;
 
-            auto expected = *left & *right;
-            CHECK(expected->asStringDec() == "192.168.0.0");
+            IPv4address expected = left & right;
+            CHECK(expected.asStringDec() == "192.168.0.0");
 
-            right = std::make_shared<IPv4mask>(mask2);
-            expected = *left & *right;
-            CHECK(expected->asStringDec() == "192.160.0.0");
+            right = mask2;
+            expected = left & right;
+            CHECK(expected.asStringDec() == "192.160.0.0");
         };
         SECTION("operator =="){
             IPv4address compareME{bitset_ip};

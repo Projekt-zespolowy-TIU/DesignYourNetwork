@@ -1,12 +1,9 @@
 #ifndef NETWORKBUTTON_H
 #define NETWORKBUTTON_H
 
-#endif // NETWORKBUTTON_H
-
-#pragma once
-
 #include <QPushButton>
-#include "IPstructs.h"
+
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -16,15 +13,16 @@ class NetworkButton : public QPushButton
 
 public:
 
-    NetworkButton(Networkv4 network)
+    NetworkButton(const std::shared_ptr<INetwork>& net, QWidget* parent):
+        QPushButton(parent),
+        network(net)
     {
-        this->network = network;
         connect(this, SIGNAL(clicked()), this, SLOT(handleClick()));
     }
 
 signals:
 
-    void clicked(Networkv4);
+    void clicked(std::shared_ptr<INetwork>);
 
 private slots:
 
@@ -35,5 +33,7 @@ private slots:
 
 private:
 
-        Networkv4 network;
+        std::shared_ptr<INetwork> network;
 };
+
+#endif // NETWORKBUTTON_H

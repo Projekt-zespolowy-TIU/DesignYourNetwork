@@ -9,6 +9,8 @@
 #include <QLabel>
 #include <QtCore>
 
+#include "core/Networkv4.h"
+
 using namespace core;
 
 namespace widgetApp {
@@ -124,18 +126,18 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
     for (int i = 0; i < subnetCount; i++)
     {
-        QHBoxLayout *textLayout = new QHBoxLayout();
+        QHBoxLayout *textLayout = new QHBoxLayout;
         QString labelText = {"Subnet " + QString::number(1 + i)};
         QLabel *subnetLabel = new QLabel(labelText, this);
         subnetLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         subnetLabel->setLayout(textLayout);
         subnetLabel->font().bold();
         subnetsPanelLayout->addWidget(subnetLabel);
-        QVBoxLayout *subnetLayout = new QVBoxLayout(this);
+        QVBoxLayout *subnetLayout = new QVBoxLayout;
         QFrame *subnetFrame = new QFrame(this);
         subnetFrame->setLayout(subnetLayout);
 
-        QHBoxLayout *frameLayout = new QHBoxLayout(this);
+        QHBoxLayout *frameLayout = new QHBoxLayout;
         QLabel *nameLabel = new QLabel("Subnet name: ", this);
         nameLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         nameLabel->setMinimumHeight(23);
@@ -147,7 +149,7 @@ void widgetApp::MainWindow::on_hostNumberSpinBox_valueChanged(int subnetCount)
         subnetNameLine->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
         frameLayout->addWidget(nameLabel);
         frameLayout->addWidget(subnetNameLine);
-        frameLayout = new QHBoxLayout(this);
+        frameLayout = new QHBoxLayout;
         QFrame *hostCountFrame = new QFrame(this);
         hostCountFrame->setMinimumHeight(35);
         hostCountFrame->setLayout(frameLayout);

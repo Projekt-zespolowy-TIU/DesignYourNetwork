@@ -8,9 +8,9 @@
 #include "IPv4mask.h"
 
 namespace core {
-    void SubnetsCalculatorV4::calcSubnets(Networkv4& Net) const
+    void SubnetsCalculatorV4::calcSubnets(INetwork& Net) const
     {
-        _fillSubnetsIps(Net);
+        _fillSubnetsIps(dynamic_cast<Networkv4&>(Net));
 
         for(auto& subnet : Net.Subnets())
             _fillSubnetWithHosts(dynamic_cast<Subnetv4&>(*subnet));

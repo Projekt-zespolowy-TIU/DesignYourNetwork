@@ -8,7 +8,7 @@
 #include <QDir>
 #include <QTextStream>
 
-#include "core/Networkv4.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -63,7 +63,7 @@ void RaportDialog::displayNetworkRaport()
     }
 }
 
-void RaportDialog::injectData(const std::shared_ptr<Networkv4>& net4)
+void RaportDialog::injectData(const std::shared_ptr<INetwork>& net4)
 {
     network = net4;
 }

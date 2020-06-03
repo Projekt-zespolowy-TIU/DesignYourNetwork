@@ -6,11 +6,11 @@
 #include <QString>
 #include <boost/multiprecision/cpp_int.hpp>
 
+#include "IPaddress.h"
+#include "ISubnet.h"
+
 namespace core {
     using boost::multiprecision::cpp_int;
-
-    class IPaddress; //forward declaration
-    class ISubnet; //forward declaration
 
     class INetwork
     {

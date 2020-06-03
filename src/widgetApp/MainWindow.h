@@ -17,6 +17,7 @@
 #include "GraphDialog.h"
 #include "RaportDialog.h"
 
+#include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
 
 using namespace core;
@@ -52,7 +53,7 @@ namespace widgetApp{
         int subnetCount = 0;
         bool isHorizontal = false;
 
-        std::shared_ptr<Networkv4> mainNetwork;
+        std::shared_ptr<INetwork> mainNetwork;
         SubnetsCalculatorV4 calculator;
 
         QWidget *addressWidget;
@@ -66,8 +67,7 @@ namespace widgetApp{
 
         QFrame *subnetsGraphFrame;
 
-        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout(this);
-        QHBoxLayout *graphPanelLayout = new QHBoxLayout(this);
+        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
 
         QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
         QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};

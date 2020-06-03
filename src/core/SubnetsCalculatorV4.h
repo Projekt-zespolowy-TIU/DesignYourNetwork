@@ -12,7 +12,7 @@ namespace core {
     class SubnetsCalculatorV4
     {
     public:
-        void calcSubnets(Networkv4& Net) const;
+        void calcSubnets(INetwork& Net) const;
     private:
         void _fillSubnetsIps(Networkv4& Net) const;
         void _fillSubnetWithHosts(Subnetv4& subNet) const;

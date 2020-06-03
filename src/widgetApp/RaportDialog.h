@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 
-#include "core/Networkv4.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -25,7 +25,7 @@ public:
 
     void displayNetworkRaport();
 
-    void injectData(const std::shared_ptr<Networkv4>& net4);
+    void injectData(const std::shared_ptr<INetwork>& net4);
 
 private slots:
 
@@ -39,9 +39,9 @@ private:
 
     bool isDetailed = false;
 
-    std::shared_ptr<Networkv4> network;
+    std::shared_ptr<INetwork> network;
 
-    QVBoxLayout *raportLayout = new QVBoxLayout(this);
+    QVBoxLayout *raportLayout = new QVBoxLayout;
 
     QTextEdit *raportText = new QTextEdit(this);
 };

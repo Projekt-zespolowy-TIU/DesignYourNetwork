@@ -3,7 +3,7 @@
 
 #include <QPushButton>
 
-#include "core/Networkv4.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -13,7 +13,7 @@ class NetworkButton : public QPushButton
 
 public:
 
-    NetworkButton(const std::shared_ptr<Networkv4>& net, QWidget* parent):
+    NetworkButton(const std::shared_ptr<INetwork>& net, QWidget* parent):
         QPushButton(parent),
         network(net)
     {
@@ -22,7 +22,7 @@ public:
 
 signals:
 
-    void clicked(std::shared_ptr<Networkv4>);
+    void clicked(std::shared_ptr<INetwork>);
 
 private slots:
 
@@ -33,7 +33,7 @@ private slots:
 
 private:
 
-        std::shared_ptr<Networkv4> network;
+        std::shared_ptr<INetwork> network;
 };
 
 #endif // NETWORKBUTTON_H

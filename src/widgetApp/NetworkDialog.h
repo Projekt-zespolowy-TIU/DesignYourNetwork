@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "core/Networkv4.h"
+#include "core/INetwork.h"
 
 using namespace core;
 
@@ -20,7 +20,7 @@ public:
     NetworkDialog(QWidget *parent);
     ~NetworkDialog();
 
-    void InjectData(const std::shared_ptr<Networkv4>& network);
+    void InjectData(const std::shared_ptr<INetwork>& network);
 
     void SetData();
 
@@ -31,7 +31,7 @@ private:
 
     Ui::NetworkDialog *ui;
 
-    std::shared_ptr<Networkv4> network;
+    std::shared_ptr<INetwork> network;
 
     cpp_int subnetCount;
 

@@ -15,7 +15,7 @@ NetworkDialog::~NetworkDialog()
     delete ui;
 }
 
-void NetworkDialog::InjectData(const std::shared_ptr<Networkv4>& network)
+void NetworkDialog::InjectData(const std::shared_ptr<INetwork>& network)
 {
     this->network = network;
     this->subnetCount = static_cast<int>(network->Subnets().size());

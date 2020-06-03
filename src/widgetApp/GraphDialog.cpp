@@ -24,7 +24,7 @@ GraphDialog::~GraphDialog()
     delete ui;
 }
 
-void GraphDialog::injectData(const std::shared_ptr<Networkv4>& net4)
+void GraphDialog::injectData(const std::shared_ptr<INetwork>& net4)
 {
     mainNetwork = net4;
     drawNetworkGraph();
@@ -53,7 +53,7 @@ void GraphDialog::drawNetworkGraph()
                           " 4px;\nborder-style:solid;");
 
     subnetGraphContent->layout()->addWidget(graphNetworkFrame);
-    graphNetworkFrame->setLayout(new QVBoxLayout(this));
+    graphNetworkFrame->setLayout(new QVBoxLayout);
 
     NetworkButton *networkButton = new NetworkButton(mainNetwork, this);
     QIcon networkIcon;
@@ -66,8 +66,8 @@ void GraphDialog::drawNetworkGraph()
     networkButton->setMaximumSize(QSize(50,50) * scale);
     graphNetworkFrame->layout()->addWidget(networkButton);
 
-    connect(networkButton, SIGNAL(clicked(std::shared_ptr<Networkv4>)), this,
-            SLOT(on_networkButton_clicked(std::shared_ptr<Networkv4>)));
+    connect(networkButton, SIGNAL(clicked(std::shared_ptr<INetwork>)), this,
+            SLOT(on_networkButton_clicked(std::shared_ptr<INetwork>)));
 
     if(showsNetworkAddress)
     {
@@ -79,15 +79,15 @@ void GraphDialog::drawNetworkGraph()
 
     subnetsGraphFrame->setStyleSheet("border-width : 0px;");
     if(isVertical)
-        subnetsGraphFrame->setLayout(new QVBoxLayout(this));
-    else  subnetsGraphFrame->setLayout(new QHBoxLayout(this));
+        subnetsGraphFrame->setLayout(new QVBoxLayout);
+    else  subnetsGraphFrame->setLayout(new QHBoxLayout);
 
     subnetsGraphFrame->layout()->setSpacing(50 * scale);
     graphNetworkFrame->layout()->addWidget(subnetsGraphFrame);
 
     for(size_t i = 0; i < mainNetwork->Subnets().size(); i++)
     {
-         QVBoxLayout *frameLayout = new QVBoxLayout(this);
+         QVBoxLayout *frameLayout = new QVBoxLayout;
 
          QFrame *subnetFrame = new QFrame(this);
          subnetFrame->setLayout(frameLayout);
@@ -124,7 +124,7 @@ void GraphDialog::drawNetworkGraph()
          {
             if((j + 8) % 8 == 0)
             {
-                hostsLayout = new QHBoxLayout(this);
+                hostsLayout = new QHBoxLayout;
                 QFrame *hostsFrame = new QFrame(this);
                 frameLayout -> addWidget(hostsFrame);
                 hostsFrame->setLayout(hostsLayout);
@@ -133,7 +133,7 @@ void GraphDialog::drawNetworkGraph()
                 hostsFrame->setStyleSheet("border-width : 0px;");
             }
 
-            QVBoxLayout *hostLayout = new QVBoxLayout(this);
+            QVBoxLayout *hostLayout = new QVBoxLayout;
             QFrame *hostFrame = new QFrame(this);
             hostFrame->setLayout(hostLayout);
             hostFrame->setMaximumHeight(100 * scale);
@@ -182,7 +182,7 @@ void GraphDialog::on_subnetButton_clicked(const std::shared_ptr<ISubnet>& subnet
     subnetDialog.exec();
 }
 
-void GraphDialog::on_networkButton_clicked(const std::shared_ptr<Networkv4>& network)
+void GraphDialog::on_networkButton_clicked(const std::shared_ptr<INetwork>& network)
 {
     networkDialog.setModal(true);
     networkDialog.InjectData(network);

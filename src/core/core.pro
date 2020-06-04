@@ -17,6 +17,7 @@ SOURCES += \
     Networkv4.cpp \
     SubnetsCalculatorV4.cpp \
     Subnetv4.cpp \
+    Subnetv6.cpp \
     coreUtils.cpp
 
 HEADERS += \
@@ -35,6 +36,7 @@ HEADERS += \
     Networkv4.h \
     SubnetsCalculatorV4.h \
     Subnetv4.h \
+    Subnetv6.h \
     coreUtils.h
 
 TARGET = core

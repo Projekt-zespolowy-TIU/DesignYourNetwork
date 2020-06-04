@@ -12,6 +12,7 @@ SOURCES += \
     IPv4mask.cpp \
     IPv4parser.cpp \
     IPv6address.cpp \
+    IPv6mask.cpp \
     IPv6parser.cpp \
     Networkv4.cpp \
     SubnetsCalculatorV4.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     IPv4parser.h \
     IPv4mask.h \
     IPv6address.h \
+    IPv6mask.h \
     IPv6parser.h \
     ISubnet.h \
     Networkv4.h \

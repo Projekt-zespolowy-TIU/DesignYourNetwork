@@ -1,25 +1,25 @@
 #pragma once
-#ifndef SUBNETSCALCULATORV4_H
-#define SUBNETSCALCULATORV4_H
+#ifndef SUBNETSCALCULATORV6_H
+#define SUBNETSCALCULATORV6_H
 
 #include <vector>
 #include <boost/dynamic_bitset.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
-#include "Networkv4.h"
+#include "Networkv6.h"
 #include "IPprotocolAlgorithm.h"
 
 namespace core {
-    class SubnetsCalculatorV4
+    class SubnetsCalculatorV6
     {
     public:
         void calcSubnets(INetwork& Net) const;
     private:
-        void _fillSubnetsIps(Networkv4& Net) const;
-        void _fillSubnetWithHosts(Subnetv4& subNet) const;
+        void _fillSubnetsIps(Networkv6& Net) const;
+        void _fillSubnetWithHosts(Subnetv6& subNet) const;
 
         IPprotocolAlgorithm alg;
     };
 };
 
-#endif // SUBNETSCALCULATORV4_H
+#endif // SUBNETSCALCULATORV6_H

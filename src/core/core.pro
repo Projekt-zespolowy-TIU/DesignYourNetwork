@@ -18,6 +18,7 @@ SOURCES += \
     Networkv4.cpp \
     Networkv6.cpp \
     SubnetsCalculatorV4.cpp \
+    SubnetsCalculatorV6.cpp \
     Subnetv4.cpp \
     Subnetv6.cpp \
     coreUtils.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     Networkv4.h \
     Networkv6.h \
     SubnetsCalculatorV4.h \
+    SubnetsCalculatorV6.h \
     Subnetv4.h \
     Subnetv6.h \
     coreUtils.h

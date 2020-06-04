@@ -8,6 +8,7 @@ include(../../common.pri)
 SOURCES += \
     Host.cpp \
     IPaddress.cpp \
+    IPprotocolAlgorithm.cpp \
     IPv4address.cpp \
     IPv4mask.cpp \
     IPv4parser.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     IIPparser.h \
     INetwork.h \
     IPaddress.h \
+    IPprotocolAlgorithm.h \
     IPv4address.h \
     IPv4parser.h \
     IPv4mask.h \

@@ -27,17 +27,16 @@ namespace core {
             return lhs->HostNumber() > rhs->HostNumber();
         });
 
-        if(cpp_int{_subNets.size()} > ( cpp_int{1} << (Net.Ip().getAddressLength() - 2) -
-                                                     Net.Mask().getPrefix() ) )
+        if(cpp_int{_subNets.size()} > Net.hostsCapacity() )
             throw SubnetExcept{"Too many subnets passed into calculator within main network"};
 
-        for(auto& _subNet : _subNets)
+        for(const auto& _subNet : _subNets)
         {
-            IPv4mask Mask = _chooseSubnetMask(_subNet->HostNumber(), Net.Ip().getAddressLength());
+            IPv4mask Mask = alg.chooseMask(_subNet->HostNumber(), Net.Ip().getAddressLength());
             if(Net.Mask().getPrefix() > Mask.getPrefix())
                 throw SubnetExcept{"IP mask pool has run out during subnetworks calculations"};
 
-            IPv4address Address = _chooseSubnetIP(Net.Ip(), Mask, _subNets);
+            IPv4address Address = alg.chooseIP(Net.Ip(), Mask, _subNets);
             if(!Net.isSubnet(Address))
                 throw SubnetExcept{"IP address pool has run out during subnetworks calculations"};
 
@@ -58,41 +57,4 @@ namespace core {
                            QString{"Host nr "} + (i.str().c_str()));
         }
     };
-
-    boost::dynamic_bitset<> SubnetsCalculatorV4::_chooseSubnetMask(const cpp_int& desiredHostsNumber,
-                                                                   const unsigned short maskLength) const
-    {
-        unsigned short numberOfHostBits = 1;
-        cpp_int countHosts = 0;
-
-        while( !((countHosts -2) >= desiredHostsNumber) )
-        {
-            countHosts = (cpp_int{1} << numberOfHostBits);
-            numberOfHostBits++;
-        };
-
-        return boost::dynamic_bitset<>(maskLength, 4294967295 - (countHosts.convert_to<unsigned long long>() - 1));
-    };
-
-    boost::dynamic_bitset<> SubnetsCalculatorV4::_chooseSubnetIP(const IPaddress& mainNetIP,
-                                                                 const IPaddress& Mask,
-                                                                 const std::vector<std::shared_ptr<ISubnet>>& usedIPsPool) const
-    {
-        auto pretenderAddress = mainNetIP.raw();
-        auto len = static_cast<unsigned short>(pretenderAddress.size());
-
-        cpp_int netBits{1};
-
-        while(std::any_of(usedIPsPool.begin(), usedIPsPool.end(), [&](const auto& subnet) {
-                          return subnet->isHost(pretenderAddress) ||
-                          subnet->Ip().raw() == pretenderAddress; }))
-        {
-            auto create = boost::dynamic_bitset<>(len, ( netBits << (len - Mask.getPrefix()))
-                                                        .convert_to<unsigned long long>() );
-
-            pretenderAddress = (mainNetIP | create);
-            netBits++;
-        };
-        return pretenderAddress;
-    }
 };

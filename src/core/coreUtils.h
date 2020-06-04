@@ -6,9 +6,14 @@
 #include <string>
 #include <iostream>
 #include <QString>
+#include <boost/multiprecision/cpp_int.hpp>
 
 namespace core {
+    using boost::multiprecision::cpp_int;
+
     class IIPaddrPrintable; //forward declaration
+
+    std::string toBinary(cpp_int n);
 
     class NotImplemented : public std::logic_error
     {

@@ -6,7 +6,7 @@
 #include "IIPparser.h"
 
 namespace core {
-    class IPv6parser : public IIPparser
+    class IPv6parser final : public IIPparser
     {
     public:
         boost::dynamic_bitset<> ipFromString(const QString& ip) const override;

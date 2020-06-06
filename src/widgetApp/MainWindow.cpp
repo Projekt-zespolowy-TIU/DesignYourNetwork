@@ -42,34 +42,34 @@ namespace widgetApp {
 void widgetApp::MainWindow::on_calculateButton_clicked()
 {
 
-     //mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
-                  //takeStringFromInputFields(maskWidget, '.'));
+     mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
+                  takeStringFromInputFields(maskWidget, '.'));
 
-     mainNetwork = std::make_shared<Networkv6>(takeStringFromInputFields(address6Widget,':'),
-                  takeStringFromInputFields(mask6Widget, ':'));
+     //mainNetwork = std::make_shared<Networkv6>(takeStringFromInputFields(address6Widget,':'),
+                  //takeStringFromInputFields(mask6Widget, ':'));
 
-      mainNetwork = std::make_shared<Networkv6>(QString("4ffe:2900:5545:3210:2000:f8ff:fe21:67cf"),
-                                               QString("ffff:ffff:0000:0000:0000:0000:0000:0000"));
+      //mainNetwork = std::make_shared<Networkv6>(QString("4ffe:2900:5545:3210:2000:f8ff:fe21:67cf"),
+                                               //QString("ffff:ffff:0000:0000:0000:0000:0000:0000"));
 
-      mainNetwork->addSubnet(1, "test");
-
-
-     //displayInputInBinary(mainNetwork->Ip().asStringBin(),
-      //                    binaryAddressWidget);
-
-     //displayInputInBinary(mainNetwork->Mask().asStringBin(),
-                          //binaryMaskWidget);
-
-     //setSubnetsHostCount();
-     calculatorv6.calcSubnets(*mainNetwork);
+     //mainNetwork->addSubnet(1, "test");
 
 
-     //isIpv6 = false;
-     //if(isIpv6)
-     //{
-     //    calculatorv6.calcSubnets(*mainNetwork);
-     //}
-     //else calculatorv4.calcSubnets(*mainNetwork);
+     displayInputInBinary(mainNetwork->Ip().asStringBin(),
+                          binaryAddressWidget);
+
+     displayInputInBinary(mainNetwork->Mask().asStringBin(),
+                          binaryMaskWidget);
+
+     setSubnetsHostCount();
+     //calculatorv6.calcSubnets(*mainNetwork);
+
+
+     isIpv6 = false;
+     if(isIpv6)
+     {
+         calculatorv6.calcSubnets(*mainNetwork);
+     }
+     else calculatorv4.calcSubnets(*mainNetwork);
 
 
 

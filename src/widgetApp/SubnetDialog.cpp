@@ -46,8 +46,8 @@ void SubnetDialog::SetData()
     ui->lastAddressBinary->setText(subnet->getMaxHost()->asStringBin());
     ui->lastAddressDecimal->setText(subnet->getMaxHost()->asStringDec());
 
-    //ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
-    //ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
+    ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
+    ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
 
 }
 

@@ -36,7 +36,7 @@ void GraphDialog::injectData(const std::shared_ptr<INetwork>& net4)
 void GraphDialog::drawNetworkGraph()
 {
     subnetsGraphFrame = new QFrame(this);
-    subnetsGraphFrame->setStyleSheet("border-width : 0px;");
+    //subnetsGraphFrame->setStyleSheet("border-width : 0px;");
     //subnetsGraphFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
     QList<SubnetButton*> subnetButtons = QList<SubnetButton*>();
@@ -62,6 +62,7 @@ void GraphDialog::drawNetworkGraph()
 
     graphNetworkFrame->setLayout(new QVBoxLayout);
     NetworkButton *networkButton = new NetworkButton(mainNetwork, this);
+    networkButton->setStyleSheet("background-color: rgb(70,70,70)");
     QIcon networkIcon;
     QPixmap pixmap(":/resources/img/router.png");
     networkIcon.addPixmap(pixmap);
@@ -75,36 +76,46 @@ void GraphDialog::drawNetworkGraph()
     connect(networkButton, SIGNAL(clicked(std::shared_ptr<INetwork>)), this,
             SLOT(on_networkButton_clicked(std::shared_ptr<INetwork>)));
 
-    if(showsNetworkAddress)
-    {
-        QLabel *networkAddress = new QLabel(mainNetwork->Ip().asStringDec() +
-                                            " / " + mainNetwork->Mask().asStringDec(), this);
-        networkAddress->setAlignment(Qt::AlignTop);
-        graphNetworkFrame->layout()->addWidget(networkAddress);
-    }
 
-    subnetsGraphFrame->setStyleSheet("border-width : 0px;");
+
+     QLabel *networkAddress = new QLabel(mainNetwork->Ip().asStringDec() +
+                                            " / " + mainNetwork->Mask().asStringDec(), this);
+     graphNetworkFrame->layout()->addWidget(networkAddress);
+
+     networkAddress->setStyleSheet("font-weight: bold");
+     networkAddress->setAlignment(Qt::AlignTop);
+
     if(isVertical)
         subnetsGraphFrame->setLayout(new QVBoxLayout);
-    else  subnetsGraphFrame->setLayout(new QHBoxLayout);
+    else
+    {
+        subnetsGraphFrame->setLayout(new QHBoxLayout);
+        graphNetworkFrame->layout()->setAlignment(Qt::AlignHCenter);
+    }
 
     subnetsGraphFrame->layout()->setSpacing(50 * scale);
     graphNetworkFrame->layout()->addWidget(subnetsGraphFrame);
 
     for(size_t i = 0; i < mainNetwork->Subnets().size(); i++)
     {
-         QVBoxLayout *frameLayout = new QVBoxLayout;
-
          QFrame *subnetFrame = new QFrame(this);
-         subnetFrame->setLayout(frameLayout);
+         subnetFrame->setLayout(new QVBoxLayout());
+         //subnetFrame->layout()->setAlignment(Qt::AlignHCenter);
+
          subnetsGraphFrame->layout()->addWidget(subnetFrame);
-         subnetFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
+         //subnetsGraphFrame->layout()->setAlignment(Qt::AlignHCenter);
+        // subnetFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
          if(isColored) subnetFrame->
-                 setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
+                 setStyleSheet("border-color: rgb(38,14,84);\nborder-width :"
                                " 4px;\nborder-style:solid;");
+         QFrame *subnetButtonFrame = new QFrame(this);
+         subnetButtonFrame->setLayout(new QBoxLayout(QBoxLayout::LeftToRight));
+         subnetFrame->layout()->addWidget(subnetButtonFrame);
 
          SubnetButton *subnetButton = new SubnetButton(mainNetwork->Subnets().at(i), this);
+         subnetButton->setStyleSheet("background-color: rgb(70,70,70)");
+
          QIcon subnetIcon;
          QPixmap pixmap(":/resources/img/switch.png");
          subnetIcon.addPixmap(pixmap);
@@ -112,20 +123,28 @@ void GraphDialog::drawNetworkGraph()
          subnetButton->setIcon(subnetIcon);
          subnetButton->setMinimumSize(QSize(40,40) * scale);
          subnetButton->setMaximumSize(QSize(40,40) * scale);
-         subnetFrame->layout()->addWidget(subnetButton);
+         subnetButtonFrame->layout()->addWidget(subnetButton);
+         subnetButtonFrame->layout()->setAlignment(subnetButton, Qt::AlignVCenter);
 
          connect(subnetButton, SIGNAL(clicked(std::shared_ptr<ISubnet>)), this,
                  SLOT(on_subnetButton_clicked(std::shared_ptr<ISubnet>)));
 
-         if(showsSubnetAddresses)
-         {
-             QLabel *subnetAddress = new QLabel(mainNetwork->Subnets().at(i)->Ip().asStringDec() +
-                                                " / " + mainNetwork->Subnets().at(i)->Mask().asStringDec(), this);
-             subnetAddress->setAlignment(Qt::AlignTop);
-             subnetFrame->layout()->addWidget(subnetAddress);
-         }
+
+
+         QLabel *subnetAddress = new QLabel(mainNetwork->Subnets().at(i)->Ip().asStringDec() +
+                                            " / " + mainNetwork->Subnets().at(i)->Mask().asStringDec(), this);
+         subnetAddress->setStyleSheet("font-weight: bold");
+         subnetAddress->setAlignment(Qt::AlignHCenter);
+         subnetFrame->layout()->addWidget(subnetAddress);
+         subnetFrame->layout()->setAlignment(Qt::AlignVCenter);
+
 
          subnetButtons.append(subnetButton);
+
+         QFrame *hostsFrame = new QFrame(this);
+         hostsFrame->setLayout(new QVBoxLayout());
+         subnetFrame->layout()->addWidget(hostsFrame);
+         hostsFrames.append(subnetAddress);
 
          QHBoxLayout *hostsLayout;
 
@@ -134,21 +153,25 @@ void GraphDialog::drawNetworkGraph()
             if((j + 8) % 8 == 0)
             {
                 hostsLayout = new QHBoxLayout;
-                QFrame *hostsFrame = new QFrame(this);
-                frameLayout -> addWidget(hostsFrame);
-                hostsFrame->setLayout(hostsLayout);
-                hostsFrame->setMaximumWidth(450 * scale);
-                hostsFrame->setMinimumHeight(100 * scale);
-                hostsFrame->setStyleSheet("border-width : 0px;");
-
-                hostsFrames.append(hostsFrame);
+                QFrame *hostsRow = new QFrame(this);
+                subnetFrame->layout()->addWidget(hostsRow);
+                hostsRow->setLayout(hostsLayout);
+                hostsFrame->layout()->addWidget(hostsRow);
+                hostsRow->layout()->setAlignment(Qt::AlignCenter);
+                hostsRow->setMaximumWidth(450 * scale);
+                hostsRow->setMinimumHeight(100 * scale);
+                //hostsRow->setStyleSheet("border-width : 0px;");
             }
 
             QVBoxLayout *hostLayout = new QVBoxLayout;
             QFrame *hostFrame = new QFrame(this);
             hostFrame->setLayout(hostLayout);
             hostFrame->setMaximumHeight(100 * scale);
-            hostFrame->setStyleSheet("border-width : 0px;");
+            //hostFrame->setStyleSheet("border-width : 0px;");
+
+            if(isColored) hostFrame->
+                    setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
+                                  " 4px;\nborder-style:solid;");
 
             HostButton *hostButton = new HostButton(mainNetwork->Subnets().at(i)->HostsList().at(j), this);
             connect(hostButton, SIGNAL(clicked(std::shared_ptr<Host>)),

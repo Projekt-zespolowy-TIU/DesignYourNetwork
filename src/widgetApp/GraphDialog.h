@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QLayout>
 #include <QFrame>
+#include <QPainter>
+#include <QPen>
 
 #include "NetworkDialog.h"
 #include "SubnetDialog.h"

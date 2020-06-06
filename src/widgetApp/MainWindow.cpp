@@ -190,7 +190,7 @@ void widgetApp::MainWindow::on_raportButton_clicked()
     if(raportDialog.isHidden())
     {
         raportDialog.displayNetworkRaport();
-        raportDialog.setGeometry(this->geometry().x() + 1180, this->geometry().y() + 60,
+        raportDialog.setGeometry(this->geometry().x() + 0, this->geometry().y() + 600,
                                   raportDialog.geometry().width(), raportDialog.geometry().height());
         raportDialog.show();
     }

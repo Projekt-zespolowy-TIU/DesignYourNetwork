@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QDir>
 #include <QTextStream>
+#include <QFileDialog>
 
 #include "core/INetwork.h"
 
@@ -71,7 +72,7 @@ void RaportDialog::injectData(const std::shared_ptr<INetwork>& net4)
 void RaportDialog::on_saveButton_clicked()
 {
     QString dir = QCoreApplication::applicationDirPath();
-    QString filename = dir.append("/raport.txt");
+    QString filename = QFileDialog::getSaveFileName(this);
     QFile file(filename);
 
     if ( file.open(QIODevice::ReadWrite) )

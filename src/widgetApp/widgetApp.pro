@@ -16,6 +16,7 @@ SOURCES += \
 
 HEADERS += \
     GraphDialog.h \
+    GraphFrame.h \
     HostButton.h \
     HostDialog.h \
     MainWindow.h \

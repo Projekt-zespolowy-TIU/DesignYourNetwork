@@ -3,10 +3,13 @@
 #include "NetworkButton.h"
 #include "SubnetButton.h"
 #include "HostButton.h"
+#include "GraphFrame.h"
 
 #include <QLayout>
 #include <QPushButton>
 #include <QLabel>
+
+
 
 GraphDialog::GraphDialog(QWidget *parent) :
     QDialog(parent),
@@ -32,9 +35,11 @@ void GraphDialog::injectData(const std::shared_ptr<INetwork>& net4)
 
 void GraphDialog::drawNetworkGraph()
 {
-
     subnetsGraphFrame = new QFrame(this);
     subnetsGraphFrame->setStyleSheet("border-width : 0px;");
+    subnetsGraphFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
+
+    QList<SubnetButton*> subnetButtons = QList<SubnetButton*>();
 
     QLayoutItem *child;
     while ((child = subnetGraphContent->layout()->takeAt(0)) != nullptr)
@@ -48,13 +53,12 @@ void GraphDialog::drawNetworkGraph()
 
 
     QFrame *graphNetworkFrame = new QFrame(this);
+    graphNetworkFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
     if(isColored) graphNetworkFrame->
             setStyleSheet("border-color: rgb(220,220,220);\nborder-width :"
                           " 4px;\nborder-style:solid;");
 
-    subnetGraphContent->layout()->addWidget(graphNetworkFrame);
     graphNetworkFrame->setLayout(new QVBoxLayout);
-
     NetworkButton *networkButton = new NetworkButton(mainNetwork, this);
     QIcon networkIcon;
     QPixmap pixmap(":/resources/img/router.png");
@@ -92,6 +96,7 @@ void GraphDialog::drawNetworkGraph()
          QFrame *subnetFrame = new QFrame(this);
          subnetFrame->setLayout(frameLayout);
          subnetsGraphFrame->layout()->addWidget(subnetFrame);
+         subnetFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
          if(isColored) subnetFrame->
                  setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
@@ -117,6 +122,8 @@ void GraphDialog::drawNetworkGraph()
              subnetAddress->setAlignment(Qt::AlignTop);
              subnetFrame->layout()->addWidget(subnetAddress);
          }
+
+         subnetButtons.append(subnetButton);
 
          QHBoxLayout *hostsLayout;
 
@@ -165,8 +172,18 @@ void GraphDialog::drawNetworkGraph()
                 hostName->setAlignment(Qt::AlignHCenter);
                 hostLayout->addWidget(hostName);            
             }
-         }
+         }      
     }
+
+    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, graphNetworkFrame, this);
+
+    graphFrame->setLayout(new QVBoxLayout());
+
+    subnetGraphContent->layout()->addWidget(graphFrame);
+
+    graphFrame->layout()->addWidget(graphNetworkFrame);
+
+
 }
 void GraphDialog::on_hostButton_clicked(const std::shared_ptr<Host>& host)
 {
@@ -230,3 +247,4 @@ void GraphDialog::on_networkAddress_toggled(bool checked)
     showsNetworkAddress = checked;
     drawNetworkGraph();
 }
+

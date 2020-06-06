@@ -42,8 +42,8 @@ void NetworkDialog::SetData()
 
     ui->hostCapacity->setText(QString::fromStdString(network->hostsCapacity().str()));
     ui->hostCount->setText(QString::fromStdString(hostCount.str()));
-    ui->progressBar->setRange(0, network->hostsCapacity().convert_to<unsigned long long>());
-    ui->progressBar->setValue(hostCount.convert_to<unsigned long long>());
+    //ui->progressBar->setRange(0, network->hostsCapacity().convert_to<unsigned long long>());
+    //ui->progressBar->setValue(hostCount.convert_to<unsigned long long>());
 
     ui->networkAddressBinary->setText(network->Ip().asStringBin());
     ui->networkAddressDecimal->setText(network->Ip().asStringDec());

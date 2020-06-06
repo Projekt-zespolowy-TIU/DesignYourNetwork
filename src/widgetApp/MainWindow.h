@@ -19,6 +19,7 @@
 
 #include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
+#include "core/SubnetsCalculatorV6.h"
 
 using namespace core;
 
@@ -46,20 +47,30 @@ namespace widgetApp{
 
         void on_raportButton_clicked();
 
+        void on_toolBox_currentChanged(int index);
+
     private:
 
         Ui::MainWindow *ui;
 
         int subnetCount = 0;
+
+        bool isIpv6 = false;
         bool isHorizontal = false;
 
         std::shared_ptr<INetwork> mainNetwork;
-        SubnetsCalculatorV4 calculator;
+        SubnetsCalculatorV4 calculatorv4;
+        SubnetsCalculatorV6 calculatorv6;
 
         QWidget *addressWidget;
         QWidget *maskWidget;
         QWidget *binaryAddressWidget;
         QWidget *binaryMaskWidget;
+
+        QWidget *address6Widget;
+        QWidget *mask6Widget;
+        QWidget *binaryAddress6Widget;
+        QWidget *binaryMask6Widget;
 
         QSpinBox *subnetCountBox;
         QWidget *subnetScrollContent;
@@ -84,7 +95,7 @@ namespace widgetApp{
 
         void displayInputInBinary(const QString &input, QWidget *displayWidget);
 
-        QString takeStringFromInputFields(QWidget *inputWidget);
+        QString takeStringFromInputFields(QWidget *inputWidget, char separator);
     };
 }
 

@@ -21,16 +21,15 @@ namespace widgetApp {
         ui->setupUi(this);
 
         addressWidget = ui->Address4Widget;
-
         binaryAddressWidget = ui->BinaryAddress4Widget;
-
         maskWidget = ui->Mask4Widget;
-
         binaryMaskWidget = ui->BinaryMask4Widget;
+
+        address6Widget = ui->Address6Widget;
+        mask6Widget = ui->Mask6Widget;
 
         subnetScrollContent = ui->subnetScroll;
         subnetScrollContent->setLayout(subnetsPanelLayout);
-
         subnetCountBox = ui->hostNumberSpinBox;
     }
 
@@ -42,18 +41,37 @@ namespace widgetApp {
 
 void widgetApp::MainWindow::on_calculateButton_clicked()
 {
-    mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget),
-                  takeStringFromInputFields(maskWidget));
 
-     displayInputInBinary(mainNetwork->Ip().asStringBin(),
-                          binaryAddressWidget);
+     //mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
+                  //takeStringFromInputFields(maskWidget, '.'));
 
-     displayInputInBinary(mainNetwork->Mask().asStringBin(),
-                          binaryMaskWidget);
+     mainNetwork = std::make_shared<Networkv6>(takeStringFromInputFields(address6Widget,':'),
+                  takeStringFromInputFields(mask6Widget, ':'));
 
-     setSubnetsHostCount();
+      mainNetwork = std::make_shared<Networkv6>(QString("4ffe:2900:5545:3210:2000:f8ff:fe21:67cf"),
+                                               QString("ffff:ffff:0000:0000:0000:0000:0000:0000"));
 
-     calculator.calcSubnets(*mainNetwork);
+      mainNetwork->addSubnet(1, "test");
+
+
+     //displayInputInBinary(mainNetwork->Ip().asStringBin(),
+      //                    binaryAddressWidget);
+
+     //displayInputInBinary(mainNetwork->Mask().asStringBin(),
+                          //binaryMaskWidget);
+
+     //setSubnetsHostCount();
+     calculatorv6.calcSubnets(*mainNetwork);
+
+
+     //isIpv6 = false;
+     //if(isIpv6)
+     //{
+     //    calculatorv6.calcSubnets(*mainNetwork);
+     //}
+     //else calculatorv4.calcSubnets(*mainNetwork);
+
+
 
      graphDialog.injectData(mainNetwork);
      raportDialog.injectData(mainNetwork);
@@ -81,7 +99,7 @@ void widgetApp::MainWindow::deleteLayoutContent(QWidget *content)
     }
 }
 
-QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
+QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget, char separator)
 {
     QList<QLineEdit*> inputFields = inputWidget->findChildren<QLineEdit*>();
 
@@ -92,7 +110,7 @@ QString widgetApp::MainWindow::takeStringFromInputFields(QWidget *inputWidget)
         if(inputFields.at(i))
         {
             input += inputFields.at(i)->text();
-            if(i < inputFields.count() - 1) input += ".";
+            if(i < inputFields.count() - 1) input += separator;
         }
     }
     return input;
@@ -198,4 +216,9 @@ void widgetApp::MainWindow::on_raportButton_clicked()
     {
         raportDialog.displayNetworkRaport();
     }
+}
+
+void widgetApp::MainWindow::on_toolBox_currentChanged(int index)
+{
+    isIpv6 = (index == 0) ? false : true;
 }

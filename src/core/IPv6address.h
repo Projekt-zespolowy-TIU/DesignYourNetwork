@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #ifndef IPV6ADDRESS_H
 #define IPV6ADDRESS_H
 

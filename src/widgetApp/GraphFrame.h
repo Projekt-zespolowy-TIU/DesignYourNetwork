@@ -18,10 +18,11 @@ class GraphFrame : public QFrame
 
 public:
 
-    GraphFrame( NetworkButton *networkButton, QList<SubnetButton*> subnetButtons, QWidget *scrollArea, QWidget *parent = NULL) : QFrame(parent){
+    GraphFrame( NetworkButton *networkButton, QList<SubnetButton*> subnetButtons, QList<QWidget*> hostsFrames, QWidget *scrollArea, QWidget *parent = NULL) : QFrame(parent){
          this->networkButton = networkButton;
          this->subnetButtons = subnetButtons;
          this->scrollArea = scrollArea;
+         this->hostsFrames = hostsFrames;
      }
 
 protected:
@@ -54,6 +55,12 @@ protected:
 
              painter.drawLine(a, b);
              painter.drawLine(b, subnetButtons.at(i)->mapTo(this, subnetButtons.at(i)->rect().center()));
+
+             //for(int j = 0; j < static_cast<int>(hostsFrames.size()); i++)
+             //{
+              //   QPoint c = hostsFrames.at(i)->mapTo(this, hostsFrames.at(i)->rect().center());
+              //   painter.drawLine(b, c);
+             //}
         }
     }
 private:
@@ -63,6 +70,7 @@ private:
 
     NetworkButton *networkButton;
     QList<SubnetButton*> subnetButtons;
+    QList<QWidget*> hostsFrames;
 
 };
 

@@ -37,9 +37,11 @@ void GraphDialog::drawNetworkGraph()
 {
     subnetsGraphFrame = new QFrame(this);
     subnetsGraphFrame->setStyleSheet("border-width : 0px;");
-    subnetsGraphFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
+    //subnetsGraphFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
     QList<SubnetButton*> subnetButtons = QList<SubnetButton*>();
+
+    QList<QWidget*> hostsFrames = QList<QWidget*>();
 
     QLayoutItem *child;
     while ((child = subnetGraphContent->layout()->takeAt(0)) != nullptr)
@@ -138,6 +140,8 @@ void GraphDialog::drawNetworkGraph()
                 hostsFrame->setMaximumWidth(450 * scale);
                 hostsFrame->setMinimumHeight(100 * scale);
                 hostsFrame->setStyleSheet("border-width : 0px;");
+
+                hostsFrames.append(hostsFrame);
             }
 
             QVBoxLayout *hostLayout = new QVBoxLayout;
@@ -175,7 +179,7 @@ void GraphDialog::drawNetworkGraph()
          }      
     }
 
-    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, graphNetworkFrame, this);
+    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, graphNetworkFrame, this);
 
     graphFrame->setLayout(new QVBoxLayout());
 

@@ -9,7 +9,7 @@
 #include "IIPparser.h"
 
 namespace core{
-    class IPv4parser: public IIPparser
+    class IPv4parser final: public IIPparser
     {
     public:
         boost::dynamic_bitset<> ipFromString(const QString &) const override;

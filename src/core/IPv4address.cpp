@@ -1,6 +1,7 @@
 #include "IPv4address.h"
 
 #include <string>
+#include <sstream>
 #include <boost/asio/ip/address.hpp>
 
 #include "coreUtils.h"
@@ -19,12 +20,12 @@ namespace core {
         *this = _Parser->ipFromString(ip);
     }
 
-    IPv4address::IPv4address(const IPv4address &rhs)
+    IPv4address::IPv4address(const IPv4address& rhs)
     {
         this->_IpAddress = rhs._IpAddress;
     }
 
-    IPv4address& IPv4address::operator=(const IPv4address &rhs)
+    IPv4address& IPv4address::operator=(const IPv4address& rhs)
     {
         this->_IpAddress = rhs._IpAddress;
         this->_Parser = rhs._Parser;
@@ -41,10 +42,18 @@ namespace core {
         std::string stringBinary;
         boost::to_string(_IpAddress, stringBinary);
 
-        for(short i = 8; i <= 26; i += 9)
-            stringBinary.insert(stringBinary.begin()+ i, '.');
+        std::stringstream ss;
+        ss << stringBinary.at(0);
 
-        return stringBinary.c_str();
+        for(size_t i = 1; i < stringBinary.size(); i++)
+        {
+            if((i % 8) == 0)
+            {
+                ss << '.';
+            }
+            ss << stringBinary.at(i);
+        }
+        return ss.str().c_str();
     }
 
     IPv4address* IPv4address::_cloneImpl() const

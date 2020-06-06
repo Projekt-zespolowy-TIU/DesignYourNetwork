@@ -1,10 +1,10 @@
-#include "IPv4mask.h"
+#include "IPv6mask.h"
 
 #include "coreUtils.h"
 
 namespace core {
-    IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress):
-        IPv4address{maskAddress}
+    IPv6mask::IPv6mask(const boost::dynamic_bitset<>& maskAddress):
+        IPv6address{maskAddress}
     {
         boost::dynamic_bitset<> bits(maskAddress.size());
         bits.set();
@@ -18,20 +18,20 @@ namespace core {
             };
         };
 
-        throw IPFormatExcept("Passed value cannot be converted into valid IP version 4 mask");
+        throw IPFormatExcept("Passed value cannot be converted into valid IP version 6 mask");
     }
 
-    IPv4mask::IPv4mask(const QString& ipAddress)
+    IPv6mask::IPv6mask(const QString& ipAddress)
     {
         *this = _Parser->ipFromString(ipAddress);
     }
 
-    IPv4mask *IPv4mask::_cloneImpl() const
+    IPv6mask *IPv6mask::_cloneImpl() const
     {
-        return new IPv4mask(*this);
+        return new IPv6mask(*this);
     }
 
-    std::istream& operator>>(std::istream& in, IPv4mask& rhs)
+    std::istream& operator>>(std::istream& in, IPv6mask& rhs)
     {
         QString tempS;
         in >> tempS;

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Network Settings</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/resources/icons/netSettings.ico</normaloff>:/resources/icons/netSettings.ico</iconset>
+  </property>
   <widget class="QFrame" name="settingsFrame">
    <property name="geometry">
     <rect>

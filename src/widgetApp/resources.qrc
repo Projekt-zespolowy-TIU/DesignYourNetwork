@@ -11,5 +11,7 @@
         <file>icons/switch.ico</file>
         <file>icons/report.ico</file>
         <file>icons/graph.ico</file>
+        <file>icons/netSettings.ico</file>
+        <file>icons/manual.ico</file>
     </qresource>
 </RCC>

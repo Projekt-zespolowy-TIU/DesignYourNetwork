@@ -17,6 +17,7 @@
 #include "GraphDialog.h"
 #include "RaportDialog.h"
 #include "NetSettingsDialog.h"
+#include "ManualDialog.h"
 
 #include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
@@ -41,6 +42,14 @@ namespace widgetApp{
     private slots:
 
         void on_actionNew_triggered();
+
+        void on_actionRead_triggered();
+
+        void on_actionSave_triggered();
+
+        void on_actionManual_triggered();
+
+        void on_actionAbout_triggered();
 
     private:
 
@@ -81,6 +90,8 @@ namespace widgetApp{
         GraphDialog graphDialog{this};
 
         NetSettingsDialog netSettingsDialog{this};
+
+        ManualDialog manualDialog{this};
 
         void setSubnetsHostCount();
 

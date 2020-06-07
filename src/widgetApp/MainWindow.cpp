@@ -9,6 +9,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include <QtCore>
+#include <QDesktopServices>
 
 #include "core/Networkv4.h"
 
@@ -19,7 +20,11 @@ namespace widgetApp {
         : QMainWindow(parent)
         , ui(new Ui::MainWindow)
     {
-        ui->setupUi(this);
+        ui->setupUi(this);;
+
+        ui->menuNewFile->actions().at(0)->setShortcut(Qt::Key_N | Qt::CTRL);
+        ui->menuNewFile->actions().at(1)->setShortcut(Qt::Key_R | Qt::CTRL);
+        ui->menuNewFile->actions().at(2)->setShortcut(Qt::Key_S | Qt::CTRL);
     }
 
     MainWindow::~MainWindow()
@@ -28,10 +33,29 @@ namespace widgetApp {
     }
 }
 
-
-
 void widgetApp::MainWindow::on_actionNew_triggered()
 {
     netSettingsDialog.clearData();
     netSettingsDialog.show();
+}
+
+void widgetApp::MainWindow::on_actionRead_triggered()
+{
+
+}
+
+void widgetApp::MainWindow::on_actionSave_triggered()
+{
+
+}
+
+void widgetApp::MainWindow::on_actionManual_triggered()
+{
+    manualDialog.open();
+}
+
+void widgetApp::MainWindow::on_actionAbout_triggered()
+{
+    QString link = "https://github.com/Projekt-zespolowy-TIU/DesignYourNetwork";
+    QDesktopServices::openUrl(QUrl(link));
 }

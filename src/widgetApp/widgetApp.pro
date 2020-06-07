@@ -10,6 +10,7 @@ SOURCES += \
     HostDialog.cpp \
     Main.cpp \
     MainWindow.cpp \
+    NetSettingsDialog.cpp \
     NetworkDialog.cpp \
     RaportDialog.cpp \
     SubnetDialog.cpp
@@ -20,6 +21,7 @@ HEADERS += \
     HostButton.h \
     HostDialog.h \
     MainWindow.h \
+    NetSettingsDialog.h \
     NetworkButton.h \
     NetworkDialog.h \
     RaportDialog.h \
@@ -30,6 +32,7 @@ FORMS += \
     GraphDialog.ui \
     HostDialog.ui \
     MainWindow.ui \
+    NetSettingsDialog.ui \
     NetworkDialog.ui \
     RaportDialog.ui \
     SubnetDialog.ui

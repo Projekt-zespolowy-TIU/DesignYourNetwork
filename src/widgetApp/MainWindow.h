@@ -16,6 +16,7 @@
 #include "HostDialog.h"
 #include "GraphDialog.h"
 #include "RaportDialog.h"
+#include "NetSettingsDialog.h"
 
 #include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
@@ -39,15 +40,7 @@ namespace widgetApp{
 
     private slots:
 
-        void on_calculateButton_clicked();
-
-        void on_drawButton_clicked();
-
-        void on_hostNumberSpinBox_valueChanged(int subnetCount);
-
-        void on_raportButton_clicked();
-
-        void on_toolBox_currentChanged(int index);
+        void on_actionNew_triggered();
 
     private:
 
@@ -86,6 +79,8 @@ namespace widgetApp{
         RaportDialog raportDialog{this};
 
         GraphDialog graphDialog{this};
+
+        NetSettingsDialog netSettingsDialog{this};
 
         void setSubnetsHostCount();
 

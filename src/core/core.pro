@@ -36,6 +36,7 @@ HEADERS += \
     IPv6address.h \
     IPv6mask.h \
     IPv6parser.h \
+    IReportGenerator.h \
     ISubnet.h \
     Networkv4.h \
     Networkv6.h \

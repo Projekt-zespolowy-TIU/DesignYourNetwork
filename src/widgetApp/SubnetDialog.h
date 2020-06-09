@@ -34,6 +34,14 @@ private:
 
     std::shared_ptr<ISubnet> subnet;
 
+    QLineEdit *firstHostDecimal;
+    QLineEdit *lastHostDecimal;
+    QLineEdit *broadcastDecimal;
+
+    QLineEdit *firstHostBinary;
+    QLineEdit *lastHostBinary;
+    QLineEdit *broadcastBinary;
+
     void adjustDataDisplay();
 
     void resizeEditLine(QLineEdit *editLine, int width, int adjust);

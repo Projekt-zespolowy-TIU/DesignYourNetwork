@@ -6,6 +6,8 @@ HostDialog::HostDialog(QWidget *parent) :
     ui(new Ui::HostDialog)
 {
     ui->setupUi(this);
+
+
 }
 
 HostDialog::~HostDialog()

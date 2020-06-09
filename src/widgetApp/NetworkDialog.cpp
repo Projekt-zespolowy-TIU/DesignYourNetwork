@@ -2,12 +2,16 @@
 #include "ui_NetworkDialog.h"
 
 NetworkDialog::NetworkDialog(QWidget *parent) :
-    QDialog(parent),
+    GraphEntityDialog(parent),
     ui(new Ui::NetworkDialog)
 {
     ui->setupUi(this);
 
     hostCount = 0;
+
+    addressBinary = ui->networkAddressBinary;
+    maskBinary = ui->networkMaskBinary;
+    addressFrame = ui->addressFrame;
 }
 
 NetworkDialog::~NetworkDialog()
@@ -57,23 +61,17 @@ void NetworkDialog::adjustDataDisplay()
 {
     int editLineAdjust = 15;
 
-    QFontMetrics fm(ui->networkAddressBinary->font());
-    QString myText = ui->networkAddressBinary->text();
+    QFontMetrics fm(addressBinary->font());
+    QString myText = addressBinary->text();
     int calcWidth = fm.width(myText);
 
-    ui->addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
+    addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
 
-    resizeEditLine(ui->networkAddressBinary, calcWidth, editLineAdjust);
-    resizeEditLine(ui->networkMaskBinary, calcWidth, editLineAdjust);
+    resizeEditLine(addressBinary, calcWidth, editLineAdjust);
+    resizeEditLine(maskBinary, calcWidth, editLineAdjust);
 
     //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
 }
 
-void NetworkDialog::resizeEditLine(QLineEdit *lineEdit, int width, int adjust)
-{
-    lineEdit->setGeometry(lineEdit->geometry().x(),
-                            lineEdit->geometry().y(),
-                            width + adjust,
-                            lineEdit->geometry().height());
-}
+
 

@@ -9,8 +9,6 @@
 #include <QPushButton>
 #include <QLabel>
 
-
-
 GraphDialog::GraphDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GraphDialog)
@@ -36,8 +34,6 @@ void GraphDialog::injectData(const std::shared_ptr<INetwork>& net4)
 void GraphDialog::drawNetworkGraph()
 {
     subnetsGraphFrame = new QFrame(this);
-    //subnetsGraphFrame->setStyleSheet("border-width : 0px;");
-    //subnetsGraphFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
     QList<SubnetButton*> subnetButtons = QList<SubnetButton*>();
 
@@ -75,13 +71,10 @@ void GraphDialog::drawNetworkGraph()
 
     connect(networkButton, SIGNAL(clicked(std::shared_ptr<INetwork>)), this,
             SLOT(on_networkButton_clicked(std::shared_ptr<INetwork>)));
-
-
-
      QLabel *networkAddress = new QLabel(mainNetwork->Ip().asStringDec() +
                                             " / " + mainNetwork->Mask().asStringDec(), this);
-     graphNetworkFrame->layout()->addWidget(networkAddress);
 
+     graphNetworkFrame->layout()->addWidget(networkAddress);
      networkAddress->setStyleSheet("font-weight: bold");
      networkAddress->setAlignment(Qt::AlignTop);
 
@@ -100,11 +93,8 @@ void GraphDialog::drawNetworkGraph()
     {
          QFrame *subnetFrame = new QFrame(this);
          subnetFrame->setLayout(new QVBoxLayout());
-         //subnetFrame->layout()->setAlignment(Qt::AlignHCenter);
 
          subnetsGraphFrame->layout()->addWidget(subnetFrame);
-         //subnetsGraphFrame->layout()->setAlignment(Qt::AlignHCenter);
-        // subnetFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
 
          if(isColored) subnetFrame->
                  setStyleSheet("border-color: rgb(38,14,84);\nborder-width :"
@@ -129,15 +119,17 @@ void GraphDialog::drawNetworkGraph()
          connect(subnetButton, SIGNAL(clicked(std::shared_ptr<ISubnet>)), this,
                  SLOT(on_subnetButton_clicked(std::shared_ptr<ISubnet>)));
 
-
-
+         QLabel *subnetName = new QLabel(mainNetwork->Subnets().at(i)->SubName());
          QLabel *subnetAddress = new QLabel(mainNetwork->Subnets().at(i)->Ip().asStringDec() +
                                             " / " + mainNetwork->Subnets().at(i)->Mask().asStringDec(), this);
+
          subnetAddress->setStyleSheet("font-weight: bold");
          subnetAddress->setAlignment(Qt::AlignHCenter);
+         subnetName->setStyleSheet("font-weight: bold");
+         subnetName->setAlignment(Qt::AlignHCenter);
          subnetFrame->layout()->addWidget(subnetAddress);
+         subnetFrame->layout()->addWidget(subnetName);
          subnetFrame->layout()->setAlignment(Qt::AlignVCenter);
-
 
          subnetButtons.append(subnetButton);
 
@@ -160,14 +152,12 @@ void GraphDialog::drawNetworkGraph()
                 hostsRow->layout()->setAlignment(Qt::AlignCenter);
                 hostsRow->setMaximumWidth(450 * scale);
                 hostsRow->setMinimumHeight(100 * scale);
-                //hostsRow->setStyleSheet("border-width : 0px;");
             }
 
             QVBoxLayout *hostLayout = new QVBoxLayout;
             QFrame *hostFrame = new QFrame(this);
             hostFrame->setLayout(hostLayout);
             hostFrame->setMaximumHeight(100 * scale);
-            //hostFrame->setStyleSheet("border-width : 0px;");
 
             if(isColored) hostFrame->
                     setStyleSheet("border-color: rgb(38,94,84);\nborder-width :"
@@ -202,7 +192,7 @@ void GraphDialog::drawNetworkGraph()
          }      
     }
 
-    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, subnetGraphContent, this);
+    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, graphNetworkFrame, this);
 
     graphFrame->setLayout(new QVBoxLayout());
 

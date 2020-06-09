@@ -93,7 +93,7 @@ color: rgb(0, 0, 0);</string>
      <attribute name="label">
       <string>IPv4</string>
      </attribute>
-     <widget class="QScrollArea" name="subnetScrollArea">
+     <widget class="QScrollArea" name="subnetScrollAreav4">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -745,78 +745,7 @@ color: rgb(0, 0, 0);</string>
      <attribute name="label">
       <string>IPv6</string>
      </attribute>
-     <widget class="QWidget" name="layoutWidget_33">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>371</width>
-        <height>75</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <layout class="QFormLayout" name="formLayout_3">
-       <item row="0" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="maskLAbel_14">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(220, 220, 220);</string>
-           </property>
-           <property name="text">
-            <string>Mask:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QWidget" name="Mask6Widget" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_75">
-            <item>
-             <widget class="QLineEdit" name="Oct4Mask4LineEdit_3">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QSpinBox" name="hostNumberSpinBox_2">
+     <widget class="QSpinBox" name="hostNumberSpinBoxv6">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -849,7 +778,7 @@ background-color: rgb(60, 60, 60);</string>
        <number>0</number>
       </property>
      </widget>
-     <widget class="QScrollArea" name="subnetScrollArea_2">
+     <widget class="QScrollArea" name="subnetScrollAreav6">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -872,7 +801,7 @@ background-color: rgb(60, 60, 60);</string>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
-      <widget class="QWidget" name="subnetScroll_2">
+      <widget class="QWidget" name="subnetScrollv6">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -882,69 +811,6 @@ background-color: rgb(60, 60, 60);</string>
         </rect>
        </property>
       </widget>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_34">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>371</width>
-        <height>75</height>
-       </rect>
-      </property>
-      <layout class="QFormLayout" name="formLayout_4">
-       <item row="0" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="addressLabel_2">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(220, 220, 220);</string>
-           </property>
-           <property name="text">
-            <string>Address:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QWidget" name="Address6Widget" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_77">
-            <item>
-             <widget class="QLineEdit" name="Oct1Add4LineEdit_2">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>4ffe</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
      </widget>
      <widget class="QLabel" name="subnetLabel">
       <property name="geometry">
@@ -967,6 +833,115 @@ background-color: rgb(60, 60, 60);</string>
       </property>
       <property name="text">
        <string>Subnet count:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="addressv6">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>281</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(220, 220, 220);
+background-color: rgb(60, 60, 60);</string>
+      </property>
+      <property name="text">
+       <string>4ffe:2900:5545:3210:2000:f8ff:fe21:67cf</string>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="maskv6">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>80</y>
+        <width>301</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(220, 220, 220);
+background-color: rgb(60, 60, 60);</string>
+      </property>
+      <property name="text">
+       <string>ffff:ffff:0000:0000:0000:0000:0000:0000</string>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="addressLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>66</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(220, 220, 220);</string>
+      </property>
+      <property name="text">
+       <string>Address:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="maskLAbel_14">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>82</y>
+        <width>44</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(220, 220, 220);</string>
+      </property>
+      <property name="text">
+       <string>Mask:</string>
       </property>
      </widget>
     </widget>

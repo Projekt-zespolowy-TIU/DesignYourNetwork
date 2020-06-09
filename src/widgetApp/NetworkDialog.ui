@@ -104,7 +104,7 @@ color: rgb(220, 220, 220);</string>
         <x>10</x>
         <y>10</y>
         <width>401</width>
-        <height>54</height>
+        <height>61</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -185,7 +185,7 @@ color: rgb(220, 220, 220);</string>
         <x>10</x>
         <y>0</y>
         <width>401</width>
-        <height>101</height>
+        <height>121</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -200,7 +200,7 @@ color: rgb(220, 220, 220);</string>
          <x>0</x>
          <y>0</y>
          <width>401</width>
-         <height>101</height>
+         <height>121</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">

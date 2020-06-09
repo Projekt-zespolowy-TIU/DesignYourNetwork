@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>478</width>
-    <height>302</height>
+    <height>282</height>
    </rect>
   </property>
   <property name="font">
@@ -34,7 +34,7 @@ color: rgb(220, 220, 220);</string>
      <x>9</x>
      <y>9</y>
      <width>461</width>
-     <height>281</height>
+     <height>261</height>
     </rect>
    </property>
    <property name="font">
@@ -98,7 +98,7 @@ color: rgb(220, 220, 220);</string>
       <x>19</x>
       <y>140</y>
       <width>431</width>
-      <height>131</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -169,7 +169,7 @@ color: rgb(220, 220, 220);</string>
         <x>0</x>
         <y>0</y>
         <width>431</width>
-        <height>91</height>
+        <height>71</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -184,7 +184,7 @@ color: rgb(220, 220, 220);</string>
          <x>0</x>
          <y>0</y>
          <width>431</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">

@@ -8,6 +8,13 @@ SubnetDialog::SubnetDialog(QWidget *parent) :
     ui(new Ui::SubnetDialog)
 {
     ui->setupUi(this);
+
+    firstHostBinary = ui->firstAddressBinary;
+    firstHostDecimal = ui->firstAddressDecimal;
+    lastHostBinary = ui->firstAddressBinary;
+    lastHostDecimal = ui->firstAddressDecimal;
+    broadcastBinary = ui->broadcastAddressBinary;
+    broadcastDecimal = ui->broadcastAddressDecimal;
 }
 
 SubnetDialog::~SubnetDialog()

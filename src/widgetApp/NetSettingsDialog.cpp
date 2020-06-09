@@ -14,12 +14,13 @@ NetSettingsDialog::NetSettingsDialog(QWidget *parent) :
     maskWidget = ui->Mask4Widget;
     binaryMaskWidget = ui->BinaryMask4Widget;
 
-    address6Widget = ui->Address6Widget;
-    mask6Widget = ui->Mask6Widget;
-
     subnetScrollContent = ui->subnetScroll;
     subnetScrollContent->setLayout(subnetsPanelLayout);
     subnetCountBox = ui->hostNumberSpinBox;
+
+    subnetScrollContentv6 = ui->subnetScrollv6;
+    subnetScrollContentv6->setLayout(new QVBoxLayout());
+    subnetCountBoxv6 = ui->hostNumberSpinBoxv6;
 }
 
 NetSettingsDialog::~NetSettingsDialog()
@@ -29,12 +30,17 @@ NetSettingsDialog::~NetSettingsDialog()
 
 void NetSettingsDialog::clearData()
 {
-    subnetCount = 0;
     ui->hostNumberSpinBox->setValue(0);
+    ui->hostNumberSpinBoxv6->setValue(0);
+
     deleteLayoutContent(subnetScrollContent);
+    deleteLayoutContent(subnetScrollContentv6);
 
     spinBoxList.clear();
     subnetNames.clear();
+
+    spinBoxListv6.clear();
+    subnetNamesv6.clear();
 
     graphDialog.close();
     raportDialog.close();
@@ -43,30 +49,18 @@ void NetSettingsDialog::clearData()
 
 void NetSettingsDialog::on_calculateButton_clicked()
 {
-
-
-
-     //mainNetwork = std::make_shared<Networkv6>(takeStringFromInputFields(address6Widget,':'),
-                  //takeStringFromInputFields(mask6Widget, ':'));
-
-
-
      if(isIpv6)
      {
+       mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
 
-       mainNetwork = std::make_shared<Networkv6>(QString("4ffe:2900:5545:3210:2000:f8ff:fe21:67cf"),
-                                                        QString("ffff:ffff:0000:0000:0000:0000:0000:0000"));
-       mainNetwork->addSubnet(1, "test");
+       setSubnets(spinBoxListv6, subnetNamesv6);
 
        calculatorv6.calcSubnets(*mainNetwork);
-
      }
      else
      {
-
          mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
                       takeStringFromInputFields(maskWidget, '.'));
-
 
           displayInputInBinary(mainNetwork->Ip().asStringBin(),
                                binaryAddressWidget);
@@ -74,21 +68,22 @@ void NetSettingsDialog::on_calculateButton_clicked()
           displayInputInBinary(mainNetwork->Mask().asStringBin(),
                                binaryMaskWidget);
 
-          setSubnetsHostCount();
+          setSubnets(spinBoxList, subnetNames);
 
           calculatorv4.calcSubnets(*mainNetwork);
      }
 
      graphDialog.injectData(mainNetwork);
+
      raportDialog.injectData(mainNetwork);
 }
 
-void NetSettingsDialog::setSubnetsHostCount()
+void NetSettingsDialog::setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines)
 {
-    for (int i = 0; i < subnetCount; i++)
+    for (int i = 0; i < countWidgets.count(); i++)
     {
-        mainNetwork->addSubnet(spinBoxList.at(i)->value(),
-                              subnetNames.at(i)->text());
+        mainNetwork->addSubnet(countWidgets.at(i)->value(),
+                              nameLines.at(i)->text());
     }
 }
 
@@ -137,12 +132,9 @@ void NetSettingsDialog::displayInputInBinary(const QString &input, QWidget *disp
         }
     }
 }
-
-
-
 void NetSettingsDialog::on_drawButton_clicked()
 {
-     graphDialog.setGeometry(this->geometry().x() + 390, this->geometry().y() + 60,
+     graphDialog.setGeometry(this->geometry().x() + 430, this->geometry().y(),
                               graphDialog.geometry().width(), graphDialog.geometry().height());
      graphDialog.show();
 }
@@ -169,11 +161,22 @@ void NetSettingsDialog::on_toolBox_currentChanged(int index)
 
 void NetSettingsDialog::on_hostNumberSpinBox_valueChanged(int subnetCount)
 {
-    this->subnetCount = subnetCount;
+    updateSubnetsPanel(&spinBoxList, &subnetNames,
+                       subnetScrollContent, subnetCount);
+}
 
-    spinBoxList.clear();
+void NetSettingsDialog::on_hostNumberSpinBoxv6_valueChanged(int subnetCount)
+{
+    updateSubnetsPanel(&spinBoxListv6, &subnetNamesv6,
+                       subnetScrollContentv6, subnetCount);
+}
 
-    subnetNames.clear();
+void NetSettingsDialog::updateSubnetsPanel(QList<QSpinBox*> *countWidgets, QList<QLineEdit*> *nameLines,
+                                           QWidget *subnetScrollContent, int subnetCount)
+{
+    countWidgets->clear();
+
+    nameLines->clear();
 
     deleteLayoutContent(subnetScrollContent);
 
@@ -185,7 +188,7 @@ void NetSettingsDialog::on_hostNumberSpinBox_valueChanged(int subnetCount)
         subnetLabel->setFont(QFont("MS Shell dlg", 13, QFont::Normal));
         subnetLabel->setLayout(textLayout);
         subnetLabel->font().bold();
-        subnetsPanelLayout->addWidget(subnetLabel);
+        subnetScrollContent->layout()->addWidget(subnetLabel);
         QVBoxLayout *subnetLayout = new QVBoxLayout;
         QFrame *subnetFrame = new QFrame(this);
         subnetFrame->setLayout(subnetLayout);
@@ -200,6 +203,7 @@ void NetSettingsDialog::on_hostNumberSpinBox_valueChanged(int subnetCount)
         QLineEdit *subnetNameLine = new QLineEdit(this);
         subnetNameLine->setMinimumHeight(23);
         subnetNameLine->setStyleSheet("background-color: rgb(60, 60, 60);\n color: rgb(220, 220, 220)");
+        subnetNameLine->setText(labelText);
         frameLayout->addWidget(nameLabel);
         frameLayout->addWidget(subnetNameLine);
         frameLayout = new QHBoxLayout;
@@ -223,10 +227,10 @@ void NetSettingsDialog::on_hostNumberSpinBox_valueChanged(int subnetCount)
 
         subnetFrame->layout()->addWidget(nameFrame);
 
-        subnetsPanelLayout->addWidget(subnetFrame);
+        subnetScrollContent->layout()->addWidget(subnetFrame);
 
-        subnetNames.append(subnetNameLine);
+        nameLines->append(subnetNameLine);
 
-        spinBoxList.append(spinBox);
+        countWidgets->append(spinBox);
     }
 }

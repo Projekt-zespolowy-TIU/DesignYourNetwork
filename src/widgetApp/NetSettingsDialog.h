@@ -50,11 +50,11 @@ private slots:
 
     void on_toolBox_currentChanged(int index);
 
+    void on_hostNumberSpinBoxv6_valueChanged(int subnetCount);
+
 private:
 
     Ui::NetSettingsDialog *ui;
-
-    int subnetCount = 0;
 
     bool isIpv6 = false;
     bool isHorizontal = false;
@@ -77,6 +77,10 @@ private:
     QWidget *subnetScrollContent;
     QWidget *subnetGraphContent;
 
+    QSpinBox *subnetCountBoxv6;
+    QWidget *subnetScrollContentv6;
+    QWidget *subnetGraphContentv6;
+
     QFrame *subnetsGraphFrame;
 
     QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
@@ -84,11 +88,14 @@ private:
     QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
     QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
 
+    QList<QSpinBox*> spinBoxListv6 = QList<QSpinBox*>{};
+    QList<QLineEdit*> subnetNamesv6 = QList<QLineEdit*>{};
+
     RaportDialog raportDialog{this};
 
     GraphDialog graphDialog{this};
 
-    void setSubnetsHostCount();
+    void setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines);
 
     void drawNetworkGraph();
 
@@ -98,7 +105,8 @@ private:
 
     QString takeStringFromInputFields(QWidget *inputWidget, char separator);
 
-
+    void updateSubnetsPanel(QList<QSpinBox*> *countWidgets, QList<QLineEdit*> *nameLines,
+                            QWidget *subnetScrollContent, int subnetCount);
 };
 
 #endif // NETSETTINGSDIALOG_H

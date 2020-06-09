@@ -26,10 +26,6 @@ public:
          this->hostsFrames = hostsFrames;
      }
 
-    void Paint()
-    {
-    }
-
 protected:
 
     void paintEvent(QPaintEvent * event){
@@ -38,14 +34,14 @@ protected:
         QPen pen = QPen(QColor(38,94,84).lighter());
         painter.setPen(pen);
 
-        for(int i = 0 ; i < scrollArea->width(); i += 30)
+        for(int i = 0 ; i < scrollArea->width() * 2; i += 30)
         {
-                painter.drawLine(QPoint(0, i), QPoint(1000, i));
+            painter.drawLine(QPoint(0, i), QPoint(scrollArea->height() * 2,i));
         }
 
-        for(int i = 0 ; i < scrollArea->height(); i += 30)
+        for(int i = 0 ; i < scrollArea->height() * 2; i += 30)
         {
-                painter.drawLine(QPoint(i, 0), QPoint(i, 1000));
+            painter.drawLine(QPoint(i, 0), QPoint(i, scrollArea->width() * 2));
         }
 
         pen.setColor(QColor(255,255,255));

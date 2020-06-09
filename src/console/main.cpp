@@ -9,6 +9,7 @@
 #include "core/Networkv4.h"
 #include "core/SubnetsCalculatorV4.h"
 #include "core/coreUtils.h"
+#include "core/ReportGeneratorV4.h"
 
 using namespace core;
 
@@ -64,18 +65,13 @@ int main(int argc, char *argv[])
         return 1; //TODO: should return something more meaningful
     }
 
-    for(const auto& sub : mainNetwork.Subnets())
-    {
-        std::cout << "\nNazwa podsieci: " << sub->SubName()
-                  << "\nIP: " << sub->Ip()
-                  << " Maska: " << sub->Mask()
-                  << " Broadcast: " << *dynamic_cast<Subnetv4&>(*sub).getBroadcast()
-                  << "\nminHost: " << *sub->getMinHost()
-                  << " maxHost: " << *sub->getMaxHost() << '\n';
-        for(const auto& host : sub->HostsList())
-            std::cout << '\t' << host->Name()
-                      << " " <<host->Ip() << '\n';
-    }
+    std::unique_ptr<IReportGenerator> reportGenerator = std::make_unique<ReportGeneratorV4>();
+
+    reportGenerator->generate(mainNetwork, DetaiLevel::Detailed);
+
+    std::cout << reportGenerator->getReport();
+
+    reportGenerator->save("mainNetwork.txt");
 
     return a.exec();
 }

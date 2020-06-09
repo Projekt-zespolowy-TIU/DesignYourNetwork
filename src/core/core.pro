@@ -17,6 +17,8 @@ SOURCES += \
     IPv6parser.cpp \
     Networkv4.cpp \
     Networkv6.cpp \
+    ReportGeneratorV4.cpp \
+    ReportGeneratorV6.cpp \
     SubnetsCalculatorV4.cpp \
     SubnetsCalculatorV6.cpp \
     Subnetv4.cpp \
@@ -36,9 +38,12 @@ HEADERS += \
     IPv6address.h \
     IPv6mask.h \
     IPv6parser.h \
+    IReportGenerator.h \
     ISubnet.h \
     Networkv4.h \
     Networkv6.h \
+    ReportGeneratorV4.h \
+    ReportGeneratorV6.h \
     SubnetsCalculatorV4.h \
     SubnetsCalculatorV6.h \
     Subnetv4.h \

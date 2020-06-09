@@ -49,4 +49,31 @@ void NetworkDialog::SetData()
     ui->networkAddressDecimal->setText(network->Ip().asStringDec());
     ui->networkMaskBinary->setText(network->Mask().asStringBin());
     ui->networkMaskDecimal->setText(network->Mask().asStringDec());
+
+    adjustDataDisplay();
 }
+
+void NetworkDialog::adjustDataDisplay()
+{
+    int editLineAdjust = 15;
+
+    QFontMetrics fm(ui->networkAddressBinary->font());
+    QString myText = ui->networkAddressBinary->text();
+    int calcWidth = fm.width(myText);
+
+    ui->addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
+
+    resizeEditLine(ui->networkAddressBinary, calcWidth, editLineAdjust);
+    resizeEditLine(ui->networkMaskBinary, calcWidth, editLineAdjust);
+
+    //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
+}
+
+void NetworkDialog::resizeEditLine(QLineEdit *lineEdit, int width, int adjust)
+{
+    lineEdit->setGeometry(lineEdit->geometry().x(),
+                            lineEdit->geometry().y(),
+                            width + adjust,
+                            lineEdit->geometry().height());
+}
+

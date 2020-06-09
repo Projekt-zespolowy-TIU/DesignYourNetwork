@@ -202,7 +202,7 @@ void GraphDialog::drawNetworkGraph()
          }      
     }
 
-    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, graphNetworkFrame, this);
+    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, subnetGraphContent, this);
 
     graphFrame->setLayout(new QVBoxLayout());
 

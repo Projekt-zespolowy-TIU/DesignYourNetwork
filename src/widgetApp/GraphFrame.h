@@ -26,9 +26,13 @@ public:
          this->hostsFrames = hostsFrames;
      }
 
+    void Paint()
+    {
+    }
+
 protected:
 
-    void paintEvent( QPaintEvent * event){
+    void paintEvent(QPaintEvent * event){
         QFrame::paintEvent(event);
         QPainter painter = QPainter(this);
         QPen pen = QPen(QColor(38,94,84).lighter());
@@ -66,7 +70,7 @@ protected:
 private:
     QPoint a;
     QPoint b;
-    QWidget *scrollArea;
+    QWidget *scrollArea;    
 
     NetworkButton *networkButton;
     QList<SubnetButton*> subnetButtons;

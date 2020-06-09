@@ -46,11 +46,38 @@ void SubnetDialog::SetData()
     ui->lastAddressBinary->setText(subnet->getMaxHost()->asStringBin());
     ui->lastAddressDecimal->setText(subnet->getMaxHost()->asStringDec());
 
-    ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
-    ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
 
+    //ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
+    //ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
+
+    adjustDataDisplay();
 }
 
+void SubnetDialog::adjustDataDisplay()
+{
+    int editLineAdjust = 15;
+
+    QFontMetrics fm(ui->subnetAddressBinary->font());
+    QString myText = ui->subnetAddressBinary->text();
+    int calcWidth = fm.width(myText);
+
+    ui->addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
+
+    resizeEditLine(ui->subnetAddressBinary, calcWidth, editLineAdjust);
+    resizeEditLine(ui->subnetMaskBinary, calcWidth, editLineAdjust);
+    resizeEditLine(ui->firstAddressBinary, calcWidth, editLineAdjust);
+    resizeEditLine(ui->lastAddressBinary, calcWidth, editLineAdjust);
+
+    //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
+}
+
+void SubnetDialog::resizeEditLine(QLineEdit *lineEdit, int width, int adjust)
+{
+    lineEdit->setGeometry(lineEdit->geometry().x(),
+                            lineEdit->geometry().y(),
+                            width + adjust,
+                            lineEdit->geometry().height());
+}
 void SubnetDialog::on_subnetName_textEdited(const QString& name)
 {
     subnet->SubName(name);

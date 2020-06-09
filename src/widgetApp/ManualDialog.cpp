@@ -1,3 +1,4 @@
+
 #include "ManualDialog.h"
 #include "ui_ManualDialog.h"
 

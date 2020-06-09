@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>371</width>
+    <width>400</width>
     <height>559</height>
    </rect>
   </property>
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>371</width>
-     <height>557</height>
+     <width>401</width>
+     <height>561</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -35,12 +35,12 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QToolBox" name="toolBox_8">
+   <widget class="QToolBox" name="toolBox">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>351</width>
+      <width>381</width>
       <height>481</height>
      </rect>
     </property>
@@ -75,7 +75,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>351</width>
+       <width>381</width>
        <height>387</height>
       </rect>
      </property>
@@ -98,7 +98,7 @@ color: rgb(0, 0, 0);</string>
        <rect>
         <x>10</x>
         <y>190</y>
-        <width>331</width>
+        <width>361</width>
         <height>191</height>
        </rect>
       </property>
@@ -121,7 +121,7 @@ color: rgb(0, 0, 0);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>329</width>
+         <width>359</width>
          <height>189</height>
         </rect>
        </property>
@@ -153,7 +153,7 @@ color: rgb(0, 0, 0);</string>
      <widget class="QSpinBox" name="hostNumberSpinBox">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>120</x>
         <y>160</y>
         <width>71</width>
         <height>21</height>
@@ -188,7 +188,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>0</y>
-        <width>331</width>
+        <width>371</width>
         <height>75</height>
        </rect>
       </property>
@@ -452,7 +452,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>331</width>
+        <width>371</width>
         <height>75</height>
        </rect>
       </property>
@@ -730,9 +730,13 @@ background-color: rgb(60, 60, 60);</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>351</width>
+       <width>381</width>
        <height>387</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(70, 70, 70);
+color: rgb(0, 0, 0);</string>
      </property>
      <attribute name="icon">
       <iconset resource="resources.qrc">
@@ -746,7 +750,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>531</width>
+        <width>371</width>
         <height>75</height>
        </rect>
       </property>
@@ -779,196 +783,7 @@ background-color: rgb(60, 60, 60);</string>
           <widget class="QWidget" name="Mask6Widget" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_75">
             <item>
-             <widget class="QLineEdit" name="Oct1Mask4LineEdit_2">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>ffff</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct2Mask4LineEdit_2">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>ffff</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct3Mask4LineEdit_2">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct4Mask4LineEdit_2">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct2Mask4LineEdit_3">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct3Mask4LineEdit_3">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLineEdit" name="Oct4Mask4LineEdit_3">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>0000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct1Mask4LineEdit_3">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -1004,7 +819,7 @@ background-color: rgb(60, 60, 60);</string>
      <widget class="QSpinBox" name="hostNumberSpinBox_2">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>120</x>
         <y>160</y>
         <width>71</width>
         <height>21</height>
@@ -1039,7 +854,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>190</y>
-        <width>331</width>
+        <width>361</width>
         <height>191</height>
        </rect>
       </property>
@@ -1062,7 +877,7 @@ background-color: rgb(60, 60, 60);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>329</width>
+         <width>359</width>
          <height>189</height>
         </rect>
        </property>
@@ -1073,7 +888,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>0</y>
-        <width>531</width>
+        <width>371</width>
         <height>75</height>
        </rect>
       </property>
@@ -1124,174 +939,6 @@ background-color: rgb(60, 60, 60);</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="Oct2Add4LineEdit_2">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>2900</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct3Add4LineEdit_2">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>5545</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct4Add4LineEdit_2">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>3210</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct1Add4LineEdit_3">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>2000</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct3Add4LineEdit_3">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>f8ff</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct2Add4LineEdit_3">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>fe21</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="Oct4Add4LineEdit_3">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(220, 220, 220);
-background-color: rgb(60, 60, 60);</string>
-              </property>
-              <property name="text">
-               <string>67cf</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>
@@ -1304,7 +951,7 @@ background-color: rgb(60, 60, 60);</string>
        <rect>
         <x>10</x>
         <y>160</y>
-        <width>131</width>
+        <width>101</width>
         <height>16</height>
        </rect>
       </property>
@@ -1327,7 +974,7 @@ background-color: rgb(60, 60, 60);</string>
    <widget class="QWidget" name="layoutWidget_35">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>60</x>
       <y>500</y>
       <width>281</width>
       <height>41</height>

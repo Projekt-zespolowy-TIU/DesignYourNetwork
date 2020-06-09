@@ -36,6 +36,8 @@ namespace widgetApp {
 void widgetApp::MainWindow::on_actionNew_triggered()
 {
     netSettingsDialog.clearData();
+     netSettingsDialog.setGeometry(this->geometry().x() + 10, this->geometry().y() + 60,
+                              netSettingsDialog.geometry().width(),  netSettingsDialog.geometry().height());
     netSettingsDialog.show();
 }
 

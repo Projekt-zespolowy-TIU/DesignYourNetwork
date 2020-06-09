@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QtCore>
+#include <QLineEdit>
 
 #include "core/SubnetsCalculatorV4.h"
 
@@ -32,6 +33,10 @@ private:
     Ui::SubnetDialog *ui;
 
     std::shared_ptr<ISubnet> subnet;
+
+    void adjustDataDisplay();
+
+    void resizeEditLine(QLineEdit *editLine, int width, int adjust);
 };
 
 #endif // SUBNETDIALOG_H

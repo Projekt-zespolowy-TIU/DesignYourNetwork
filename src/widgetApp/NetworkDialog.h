@@ -2,6 +2,7 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
+#include <QLineEdit>
 
 #include "core/INetwork.h"
 
@@ -36,6 +37,10 @@ private:
     cpp_int subnetCount;
 
     cpp_int hostCount;
+
+    void adjustDataDisplay();
+
+    void resizeEditLine(QLineEdit *editLine, int width, int adjust);
 };
 
 #endif // NETWORK DIALOG_H

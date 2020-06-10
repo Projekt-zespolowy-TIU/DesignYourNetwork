@@ -97,6 +97,10 @@ private:
 
     void setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines);
 
+    void takeDataFromInput();
+
+    void calculateNetwork();
+
     void drawNetworkGraph();
 
     void deleteLayoutContent(QWidget *content);

@@ -59,46 +59,18 @@ void NetSettingsDialog::readData()
     QString path = QFileDialog::getOpenFileName(this);
 
     if(path != nullptr)
+    {
         fileIO.loadIPv4(mainNetwork, path);
-        //graphDialog.injectData(mainNetwork);
-        //graphDialog.show();
+        calculateNetwork();
+        graphDialog.injectData(mainNetwork);
+        graphDialog.show();
+    }
 }
 void NetSettingsDialog::on_calculateButton_clicked()
 {
-     if(isIpv6)
-     {
-        mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
+    takeDataFromInput();
 
-        setSubnets(spinBoxListv6, subnetNamesv6);
-
-        calculatorv6.calcSubnets(*mainNetwork);
-     }
-     else
-     {
-         mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
-                      takeStringFromInputFields(maskWidget, '.'));
-
-         displayInputInBinary(mainNetwork->Ip().asStringBin(),
-                               binaryAddressWidget);
-
-         displayInputInBinary(mainNetwork->Mask().asStringBin(),
-                               binaryMaskWidget);
-
-         setSubnets(spinBoxList, subnetNames);
-
-         calculatorv4.calcSubnets(*mainNetwork);
-     }
-
-     graphDialog.injectData(mainNetwork);
-
-     if(auto x = std::dynamic_pointer_cast<Networkv4>(mainNetwork); x)
-     {
-         raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV4>());
-     }
-     else if(auto x = std::dynamic_pointer_cast<Networkv6>(mainNetwork); x)
-     {
-         raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV6>());
-     }
+    calculateNetwork();
 }
 
 void NetSettingsDialog::setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines)
@@ -110,16 +82,51 @@ void NetSettingsDialog::setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdi
     }
 }
 
-void NetSettingsDialog::deleteLayoutContent(QWidget *content)
+void NetSettingsDialog::calculateNetwork()
 {
-    QLayoutItem *child;
-    while ((child = content->layout()->takeAt(0)) != nullptr)
+    auto networkv6 = dynamic_cast<Networkv6*>(mainNetwork.get());
+
+    if(networkv6)
     {
-        if(child->widget())
-        {
-            delete child->widget();
-        }
-        delete child;
+       setSubnets(spinBoxListv6, subnetNamesv6);
+
+       calculatorv6.calcSubnets(*mainNetwork);
+    }
+    else
+    {
+        displayInputInBinary(mainNetwork->Ip().asStringBin(),
+                              binaryAddressWidget);
+
+        displayInputInBinary(mainNetwork->Mask().asStringBin(),
+                              binaryMaskWidget);
+
+        setSubnets(spinBoxList, subnetNames);
+
+        calculatorv4.calcSubnets(*mainNetwork);
+    }
+
+    graphDialog.injectData(mainNetwork);
+
+    if(auto x = std::dynamic_pointer_cast<Networkv4>(mainNetwork); x)
+    {
+        raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV4>());
+    }
+    else if(auto x = std::dynamic_pointer_cast<Networkv6>(mainNetwork); x)
+    {
+        raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV6>());
+    }
+}
+
+void NetSettingsDialog::takeDataFromInput()
+{
+    if(isIpv6)
+    {
+       mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
+    }
+    else
+    {
+       mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
+                     takeStringFromInputFields(maskWidget, '.'));
     }
 }
 
@@ -167,8 +174,6 @@ void NetSettingsDialog::on_raportButton_clicked()
     if(raportDialog.isHidden())
     {
         raportDialog.displayNetworkRaport();
-        //raportDialog.setGeometry(this->geometry().x() + 0, this->geometry().y() + 600,
-        //                          raportDialog.geometry().width(), raportDialog.geometry().height());
         raportDialog.show();
     }
     else
@@ -192,6 +197,19 @@ void NetSettingsDialog::on_hostNumberSpinBoxv6_valueChanged(int subnetCount)
 {
     updateSubnetsPanel(&spinBoxListv6, &subnetNamesv6,
                        subnetScrollContentv6, subnetCount);
+}
+
+void NetSettingsDialog::deleteLayoutContent(QWidget *content)
+{
+    QLayoutItem *child;
+    while ((child = content->layout()->takeAt(0)) != nullptr)
+    {
+        if(child->widget())
+        {
+            delete child->widget();
+        }
+        delete child;
+    }
 }
 
 void NetSettingsDialog::updateSubnetsPanel(QList<QSpinBox*> *countWidgets, QList<QLineEdit*> *nameLines,

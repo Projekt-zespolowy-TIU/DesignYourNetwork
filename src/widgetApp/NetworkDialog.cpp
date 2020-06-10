@@ -2,16 +2,12 @@
 #include "ui_NetworkDialog.h"
 
 NetworkDialog::NetworkDialog(QWidget *parent) :
-    GraphEntityDialog(parent),
+    QDialog(parent),
     ui(new Ui::NetworkDialog)
 {
     ui->setupUi(this);
 
     hostCount = 0;
-
-    addressBinary = ui->networkAddressBinary;
-    maskBinary = ui->networkMaskBinary;
-    addressFrame = ui->addressFrame;
 }
 
 NetworkDialog::~NetworkDialog()
@@ -53,25 +49,9 @@ void NetworkDialog::SetData()
     ui->networkAddressDecimal->setText(network->Ip().asStringDec());
     ui->networkMaskBinary->setText(network->Mask().asStringBin());
     ui->networkMaskDecimal->setText(network->Mask().asStringDec());
-
-    adjustDataDisplay();
 }
 
-void NetworkDialog::adjustDataDisplay()
-{
-    int editLineAdjust = 15;
 
-    QFontMetrics fm(addressBinary->font());
-    QString myText = addressBinary->text();
-    int calcWidth = fm.width(myText);
-
-    addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
-
-    resizeEditLine(addressBinary, calcWidth, editLineAdjust);
-    resizeEditLine(maskBinary, calcWidth, editLineAdjust);
-
-    //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
-}
 
 
 

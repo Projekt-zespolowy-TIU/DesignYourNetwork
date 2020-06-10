@@ -5,7 +5,6 @@
 #include <QLineEdit>
 
 #include "core/INetwork.h"
-#include "GraphEntityDialog.h"
 
 using namespace core;
 
@@ -13,7 +12,7 @@ namespace Ui {
 class NetworkDialog;
 }
 
-class NetworkDialog : public GraphEntityDialog
+class NetworkDialog : public QDialog
 {
     Q_OBJECT
 
@@ -39,10 +38,6 @@ private:
 
     cpp_int hostCount;
 
-    QLineEdit *maskDecimal;
-    QLineEdit *maskBinary;
-
-    void adjustDataDisplay();
 };
 
 #endif // NETWORK DIALOG_H

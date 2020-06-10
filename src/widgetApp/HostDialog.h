@@ -35,10 +35,6 @@ private:
     Ui::HostDialog *ui;
 
     std::shared_ptr<Host> host;
-
-    void adjustDataDisplay();
-
-    void resizeEditLine(QLineEdit *editLine, int width, int adjust);
 };
 
 #endif // HOSTDIALOG_H

@@ -7,7 +7,6 @@ include(../../common.pri)
 
 SOURCES += \
     GraphDialog.cpp \
-    GraphEntityDialog.cpp \
     HostDialog.cpp \
     Main.cpp \
     MainWindow.cpp \
@@ -19,7 +18,6 @@ SOURCES += \
 
 HEADERS += \
     GraphDialog.h \
-    GraphEntityDialog.h \
     GraphFrame.h \
     HostButton.h \
     HostDialog.h \

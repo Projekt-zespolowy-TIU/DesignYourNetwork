@@ -51,26 +51,26 @@ void NetSettingsDialog::on_calculateButton_clicked()
 {
      if(isIpv6)
      {
-       mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
+        mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
 
-       setSubnets(spinBoxListv6, subnetNamesv6);
+        setSubnets(spinBoxListv6, subnetNamesv6);
 
-       calculatorv6.calcSubnets(*mainNetwork);
+        calculatorv6.calcSubnets(*mainNetwork);
      }
      else
      {
          mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
                       takeStringFromInputFields(maskWidget, '.'));
 
-          displayInputInBinary(mainNetwork->Ip().asStringBin(),
+         displayInputInBinary(mainNetwork->Ip().asStringBin(),
                                binaryAddressWidget);
 
-          displayInputInBinary(mainNetwork->Mask().asStringBin(),
+         displayInputInBinary(mainNetwork->Mask().asStringBin(),
                                binaryMaskWidget);
 
-          setSubnets(spinBoxList, subnetNames);
+         setSubnets(spinBoxList, subnetNames);
 
-          calculatorv4.calcSubnets(*mainNetwork);
+         calculatorv4.calcSubnets(*mainNetwork);
      }
 
      graphDialog.injectData(mainNetwork);

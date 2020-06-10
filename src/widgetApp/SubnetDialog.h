@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <QtCore>
-#include <QLineEdit>
 
 #include "core/SubnetsCalculatorV4.h"
 
@@ -30,21 +29,12 @@ private slots:
     void on_subnetName_textEdited(const QString& name);
 
 private:
+
+    bool isIpv4 = false;
+
     Ui::SubnetDialog *ui;
 
     std::shared_ptr<ISubnet> subnet;
-
-    QLineEdit *firstHostDecimal;
-    QLineEdit *lastHostDecimal;
-    QLineEdit *broadcastDecimal;
-
-    QLineEdit *firstHostBinary;
-    QLineEdit *lastHostBinary;
-    QLineEdit *broadcastBinary;
-
-    void adjustDataDisplay();
-
-    void resizeEditLine(QLineEdit *editLine, int width, int adjust);
 };
 
 #endif // SUBNETDIALOG_H

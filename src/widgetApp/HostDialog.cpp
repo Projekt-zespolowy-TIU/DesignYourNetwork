@@ -36,31 +36,6 @@ void HostDialog::SetData()
 
     ui->hostAddressBinary->setText(host->Ip().asStringBin());
     ui->hostAddressDecimal->setText(host->Ip().asStringDec());
-
-    adjustDataDisplay();
-}
-
-void HostDialog::adjustDataDisplay()
-{
-    int editLineAdjust = 15;
-
-    QFontMetrics fm(ui->hostAddressBinary->font());
-    QString myText = ui->hostAddressBinary->text();
-    int calcWidth = fm.width(myText);
-
-    ui->addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
-
-    resizeEditLine(ui->hostAddressBinary, calcWidth, editLineAdjust);
-
-    //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
-}
-
-void HostDialog::resizeEditLine(QLineEdit *lineEdit, int width, int adjust)
-{
-    lineEdit->setGeometry(lineEdit->geometry().x(),
-                            lineEdit->geometry().y(),
-                            width + adjust,
-                            lineEdit->geometry().height());
 }
 
 void HostDialog::on_hostName_textEdited(const QString& name)

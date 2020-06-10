@@ -8,13 +8,6 @@ SubnetDialog::SubnetDialog(QWidget *parent) :
     ui(new Ui::SubnetDialog)
 {
     ui->setupUi(this);
-
-    firstHostBinary = ui->firstAddressBinary;
-    firstHostDecimal = ui->firstAddressDecimal;
-    lastHostBinary = ui->firstAddressBinary;
-    lastHostDecimal = ui->firstAddressDecimal;
-    broadcastBinary = ui->broadcastAddressBinary;
-    broadcastDecimal = ui->broadcastAddressDecimal;
 }
 
 SubnetDialog::~SubnetDialog()
@@ -40,8 +33,6 @@ void SubnetDialog::SetData()
 
     ui->hostCount->setText(QString::fromStdString(subnet->HostNumber().str()));
     ui->hostCapacity->setText(QString::fromStdString(subnet->hostsCapacity().str()));
-    //ui->progressBar->setRange(0, subnet->hostsCapacity().convert_to<unsigned long long>());
-    //ui->progressBar->setValue(subnet->HostNumber().convert_to<unsigned long long>());
 
     ui->subnetAddressBinary->setText(subnet->Ip().asStringBin());
     ui->subnetAddressDecimal->setText(subnet->Ip().asStringDec());
@@ -53,38 +44,30 @@ void SubnetDialog::SetData()
     ui->lastAddressBinary->setText(subnet->getMaxHost()->asStringBin());
     ui->lastAddressDecimal->setText(subnet->getMaxHost()->asStringDec());
 
+    auto subnetv4 = dynamic_cast<Subnetv4*>(subnet.get());
 
-    //ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
-    //ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
+    if(subnetv4)
+    {
+        isIpv4 = true;
 
-    adjustDataDisplay();
+        ui->progressBar->setRange(0, subnet->hostsCapacity().convert_to<unsigned long long>());
+        ui->progressBar->setValue(subnet->HostNumber().convert_to<unsigned long long>());
+        ui->broadcastAddressBinary->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringBin());
+        ui->broadcastAddressDecimal->setText(dynamic_cast<Subnetv4&>(*subnet).getBroadcast()->asStringDec());
+
+    }
+    else
+    {
+        isIpv4 = false;
+    }
+
+    ui->progressBar->setVisible(isIpv4);
+    ui->broadcastAddressBinary->setVisible(isIpv4);
+    ui->broadcastAddressDecimal->setVisible(isIpv4);
+    ui->broadcastBinLabel->setVisible(isIpv4);
+    ui->broadcastDecLabel->setVisible(isIpv4);
 }
 
-void SubnetDialog::adjustDataDisplay()
-{
-    int editLineAdjust = 15;
-
-    QFontMetrics fm(ui->subnetAddressBinary->font());
-    QString myText = ui->subnetAddressBinary->text();
-    int calcWidth = fm.width(myText);
-
-    ui->addressFrame->setMinimumWidth(calcWidth + editLineAdjust * 2);
-
-    resizeEditLine(ui->subnetAddressBinary, calcWidth, editLineAdjust);
-    resizeEditLine(ui->subnetMaskBinary, calcWidth, editLineAdjust);
-    resizeEditLine(ui->firstAddressBinary, calcWidth, editLineAdjust);
-    resizeEditLine(ui->lastAddressBinary, calcWidth, editLineAdjust);
-
-    //ui->addressFrame->setGeometry(ui->scrollAreaWidgetContents->geometry());
-}
-
-void SubnetDialog::resizeEditLine(QLineEdit *lineEdit, int width, int adjust)
-{
-    lineEdit->setGeometry(lineEdit->geometry().x(),
-                            lineEdit->geometry().y(),
-                            width + adjust,
-                            lineEdit->geometry().height());
-}
 void SubnetDialog::on_subnetName_textEdited(const QString& name)
 {
     subnet->SubName(name);

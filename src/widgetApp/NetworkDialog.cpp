@@ -1,6 +1,8 @@
 #include "NetworkDialog.h"
 #include "ui_NetworkDialog.h"
 
+#include "core/SubnetsCalculatorV4.h"
+
 NetworkDialog::NetworkDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NetworkDialog)
@@ -42,13 +44,27 @@ void NetworkDialog::SetData()
 
     ui->hostCapacity->setText(QString::fromStdString(network->hostsCapacity().str()));
     ui->hostCount->setText(QString::fromStdString(hostCount.str()));
-    //ui->progressBar->setRange(0, network->hostsCapacity().convert_to<unsigned long long>());
-    //ui->progressBar->setValue(hostCount.convert_to<unsigned long long>());
 
     ui->networkAddressBinary->setText(network->Ip().asStringBin());
     ui->networkAddressDecimal->setText(network->Ip().asStringDec());
     ui->networkMaskBinary->setText(network->Mask().asStringBin());
     ui->networkMaskDecimal->setText(network->Mask().asStringDec());
+
+    auto networkv4 = dynamic_cast<Networkv4*>(network.get());
+
+    if(networkv4)
+    {
+        isIpv4 = true;
+
+        ui->progressBar->setRange(0, network->hostsCapacity().convert_to<unsigned long long>());
+        ui->progressBar->setValue(hostCount.convert_to<unsigned long long>());
+    }
+    else
+    {
+        isIpv4 = false;
+    }
+
+    ui->progressBar->setVisible(isIpv4);
 }
 
 

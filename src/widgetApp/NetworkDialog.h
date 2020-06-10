@@ -30,6 +30,8 @@ private slots:
 
 private:
 
+    bool isIpv4;
+
     Ui::NetworkDialog *ui;
 
     std::shared_ptr<INetwork> network;

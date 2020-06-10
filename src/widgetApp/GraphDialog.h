@@ -38,12 +38,6 @@ private slots:
 
      void on_hostButton_clicked(const std::shared_ptr<Host>& host);
 
-     void on_coloredGraphcheckBox_clicked(bool checked);
-
-     void on_verticalViewButton_clicked(bool checked);
-
-     void on_horizontalViewButton_clicked(bool checked);
-
      void on_scaleSlider_sliderMoved(int position);
 
      void on_hostNames_toggled(bool checked);
@@ -59,16 +53,17 @@ private slots:
 
      void on_hostsInRowSlider_valueChanged(int value);
 
+     void on_subnetsNamesCheckBox_toggled(bool checked);
+
 private:
 
     Ui::GraphDialog *ui;
 
-    bool isVertical = false;
-    bool isColored = false;
     bool showsHostNames = false;
-    bool showsSubnetAddresses = false;
-    bool showsNetworkAddress = false;
-    bool showsGrid;
+    bool showsSubnetsNames = true;
+    bool showsSubnetsAddresses = true;
+    bool showsNetworkAddress = true;
+    bool showsGrid = true;
 
     int hostsInRow = 8;
     float scale = 1.0f;

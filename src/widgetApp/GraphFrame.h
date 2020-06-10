@@ -19,15 +19,14 @@ class GraphFrame : public QFrame
 public:
 
     GraphFrame(NetworkButton *networkButton, QList<SubnetButton*> subnetButtons,
-                QList<QWidget*> hostsFrames, QWidget *scrollArea, bool draw, float gridSize,
+               QWidget *scrollArea, bool draw, float gridSize, float scale,
                QWidget *parent) : QFrame(parent){
-
          this->networkButton = networkButton;
          this->subnetButtons = subnetButtons;
          this->scrollArea = scrollArea;
-         this->hostsFrames = hostsFrames;
          this->draw = draw;
          this->gridSize = gridSize;
+         this->scale = scale;
      }
 
 protected:
@@ -52,22 +51,18 @@ protected:
             }
 
             pen.setColor(QColor(255,255,255));
-            pen.setWidth(3);
+            pen.setWidth(3 * scale);
             painter.setPen(pen);
-
 
             for(int i = 0; i < static_cast<int>(subnetButtons.size()); i++)
             {
                  QPoint a = networkButton->mapTo(this, networkButton->rect().center());
                  QPoint b = networkButton->mapTo(this, QPoint(0, networkButton->rect().center().y()));
                  QPoint c = subnetButtons.at(i)->mapTo(this, QPoint(subnetButtons.at(i)->rect().center().x(), 0));
-
                  QPoint d = QPoint(c.x(), b.y());
-                 QPoint e = hostsFrames.at(i)->mapTo(this, QPoint(hostsFrames.at(i)->rect().center().x(),
-                                                                    hostsFrames.at(i)->rect().topRight().y()));
+
                  painter.drawLine(a, d);
                  painter.drawLine(d, subnetButtons.at(i)->mapTo(this, subnetButtons.at(i)->rect().center()));
-                 painter.drawLine(subnetButtons.at(i)->mapTo(this, subnetButtons.at(i)->rect().center()), e);
             }
         }
     }
@@ -75,6 +70,7 @@ private:
 
     bool draw = false;
     float gridSize = 1.0f;
+    float scale = 1.0f;
 
     QPoint a;
     QPoint b;
@@ -82,8 +78,6 @@ private:
 
     NetworkButton *networkButton;
     QList<SubnetButton*> subnetButtons;
-    QList<QWidget*> hostsFrames;
-
 };
 
 #endif // GRAPHFRAME_H

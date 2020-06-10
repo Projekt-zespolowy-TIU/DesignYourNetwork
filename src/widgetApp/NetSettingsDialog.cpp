@@ -63,6 +63,8 @@ void NetSettingsDialog::readData()
 
     if(path != nullptr)
         fileIO.loadIPv4(mainNetwork, path);
+        //graphDialog.injectData(mainNetwork);
+        //graphDialog.show();
 }
 void NetSettingsDialog::on_calculateButton_clicked()
 {

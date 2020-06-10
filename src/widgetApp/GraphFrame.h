@@ -20,7 +20,7 @@ public:
 
     GraphFrame(NetworkButton *networkButton, QList<SubnetButton*> subnetButtons,
                 QList<QWidget*> hostsFrames, QWidget *scrollArea, bool draw, float gridSize,
-               QWidget *parent = NULL) : QFrame(parent){
+               QWidget *parent) : QFrame(parent){
 
          this->networkButton = networkButton;
          this->subnetButtons = subnetButtons;

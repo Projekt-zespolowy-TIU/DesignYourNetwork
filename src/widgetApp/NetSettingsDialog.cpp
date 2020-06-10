@@ -1,10 +1,13 @@
 #include "NetSettingsDialog.h"
 #include "ui_NetSettingsDialog.h"
+
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include "core/ReportGeneratorV4.h"
 #include "core/ReportGeneratorV6.h"
 #include "core/FileIO.h"
-
-#include <QFileDialog>
+#include "core/coreUtils.h"
 
 NetSettingsDialog::NetSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -65,16 +68,44 @@ void NetSettingsDialog::on_calculateButton_clicked()
 {
      if(isIpv6)
      {
-        mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
+         try {
+             mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
+         } catch (const IPFormatExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
 
-        setSubnets(spinBoxListv6, subnetNamesv6);
+         try {
+             setSubnets(spinBoxListv6, subnetNamesv6);
+         } catch (const SubnetInvalidExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
 
-        calculatorv6.calcSubnets(*mainNetwork);
+         try {
+             calculatorv6.calcSubnets(*mainNetwork);
+         } catch (const SubnetExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
      }
      else
      {
-         mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
-                      takeStringFromInputFields(maskWidget, '.'));
+         try {
+             mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
+                          takeStringFromInputFields(maskWidget, '.'));
+         } catch (const IPFormatExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
 
          displayInputInBinary(mainNetwork->Ip().asStringBin(),
                                binaryAddressWidget);
@@ -82,9 +113,25 @@ void NetSettingsDialog::on_calculateButton_clicked()
          displayInputInBinary(mainNetwork->Mask().asStringBin(),
                                binaryMaskWidget);
 
-         setSubnets(spinBoxList, subnetNames);
+         try
+         {
+             setSubnets(spinBoxList, subnetNames);
+         } catch (const SubnetInvalidExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
 
-         calculatorv4.calcSubnets(*mainNetwork);
+         try
+         {
+            calculatorv4.calcSubnets(*mainNetwork);
+         } catch (const SubnetExcept& e) {
+             QMessageBox error;
+             error.setText(e.what());
+             error.exec();
+             return;
+         }
      }
 
      graphDialog.injectData(mainNetwork);

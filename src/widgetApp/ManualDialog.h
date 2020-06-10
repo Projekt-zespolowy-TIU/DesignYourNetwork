@@ -12,7 +12,7 @@ class ManualDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ManualDialog(QWidget *parent = nullptr);
+    ManualDialog(QWidget *parent);
     ~ManualDialog();
 
 private:

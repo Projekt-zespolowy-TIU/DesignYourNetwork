@@ -1,8 +1,10 @@
 #include "NetSettingsDialog.h"
 #include "ui_NetSettingsDialog.h"
-
 #include "core/ReportGeneratorV4.h"
 #include "core/ReportGeneratorV6.h"
+#include "core/FileIO.h"
+
+#include <QFileDialog>
 
 NetSettingsDialog::NetSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -49,7 +51,14 @@ void NetSettingsDialog::clearData()
     raportDialog.close();
 }
 
+void NetSettingsDialog::readData()
+{
+    FileIO fileIO;
+    QString path = QFileDialog::getOpenFileName(this);
 
+    if(path != nullptr)
+        fileIO.loadIPv4(dynamic_cast<Networkv4&>(*mainNetwork), path);
+}
 void NetSettingsDialog::on_calculateButton_clicked()
 {
      if(isIpv6)

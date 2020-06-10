@@ -51,57 +51,19 @@ namespace widgetApp{
 
         void on_actionAbout_triggered();
 
+    protected:
+
+          void showEvent(QShowEvent *event);
+
     private:
 
         Ui::MainWindow *ui;
-
-        int subnetCount = 0;
-
-        bool isIpv6 = false;
-        bool isHorizontal = false;
-
-        std::shared_ptr<INetwork> mainNetwork;
-        SubnetsCalculatorV4 calculatorv4;
-        SubnetsCalculatorV6 calculatorv6;
-
-        QWidget *addressWidget;
-        QWidget *maskWidget;
-        QWidget *binaryAddressWidget;
-        QWidget *binaryMaskWidget;
-
-        QWidget *address6Widget;
-        QWidget *mask6Widget;
-        QWidget *binaryAddress6Widget;
-        QWidget *binaryMask6Widget;
-
-        QSpinBox *subnetCountBox;
-        QWidget *subnetScrollContent;
-        QWidget *subnetGraphContent;
-
-        QFrame *subnetsGraphFrame;
-
-        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
-
-        QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
-        QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
-
-        RaportDialog raportDialog{this};
-
-        GraphDialog graphDialog{this};
 
         NetSettingsDialog netSettingsDialog{this};
 
         ManualDialog manualDialog{this};
 
-        void setSubnetsHostCount();
-
-        void drawNetworkGraph();
-
-        void deleteLayoutContent(QWidget *content);
-
-        void displayInputInBinary(const QString &input, QWidget *displayWidget);
-
-        QString takeStringFromInputFields(QWidget *inputWidget, char separator);
+        void openNetSettings();
     };
 }
 

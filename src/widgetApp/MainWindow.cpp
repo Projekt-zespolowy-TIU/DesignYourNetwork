@@ -20,7 +20,7 @@ namespace widgetApp {
         : QMainWindow(parent)
         , ui(new Ui::MainWindow)
     {
-        ui->setupUi(this);;
+        ui->setupUi(this);
 
         ui->menuNewFile->actions().at(0)->setShortcut(Qt::Key_N | Qt::CTRL);
         ui->menuNewFile->actions().at(1)->setShortcut(Qt::Key_R | Qt::CTRL);
@@ -33,17 +33,22 @@ namespace widgetApp {
     }
 }
 
-void widgetApp::MainWindow::on_actionNew_triggered()
+void widgetApp::MainWindow::openNetSettings()
 {
     netSettingsDialog.clearData();
-     netSettingsDialog.setGeometry(this->geometry().x() + 10, this->geometry().y() + 60,
+    netSettingsDialog.setGeometry(this->window()->geometry().x() + 10, this->window()->geometry().y() + 60,
                               netSettingsDialog.geometry().width(),  netSettingsDialog.geometry().height());
     netSettingsDialog.show();
 }
 
+void widgetApp::MainWindow::on_actionNew_triggered()
+{
+    openNetSettings();
+}
+
 void widgetApp::MainWindow::on_actionRead_triggered()
 {
-
+    netSettingsDialog.readData();
 }
 
 void widgetApp::MainWindow::on_actionSave_triggered()
@@ -61,3 +66,11 @@ void widgetApp::MainWindow::on_actionAbout_triggered()
     QString link = "https://github.com/Projekt-zespolowy-TIU/DesignYourNetwork";
     QDesktopServices::openUrl(QUrl(link));
 }
+
+void widgetApp::MainWindow::showEvent(QShowEvent *event)
+{
+    QMainWindow::showEvent(event);
+    openNetSettings();
+}
+
+

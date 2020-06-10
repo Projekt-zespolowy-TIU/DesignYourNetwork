@@ -38,6 +38,8 @@ public:
 
     void clearData();
 
+    void readData();
+
 private slots:
 
     void on_calculateButton_clicked();

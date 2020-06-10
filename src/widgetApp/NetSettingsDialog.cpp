@@ -59,7 +59,7 @@ void NetSettingsDialog::readData()
     QString path = QFileDialog::getOpenFileName(this);
 
     if(path != nullptr)
-        fileIO.loadIPv4(dynamic_cast<Networkv4&>(*mainNetwork), path);
+        fileIO.loadIPv4(mainNetwork, path);
 }
 void NetSettingsDialog::on_calculateButton_clicked()
 {

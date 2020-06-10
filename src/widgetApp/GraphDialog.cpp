@@ -49,13 +49,11 @@ void GraphDialog::drawNetworkGraph()
         delete child;
     }
 
-
     QFrame *graphNetworkFrame = new QFrame(this);
     graphNetworkFrame->setStyleSheet("background-color: rgb(0,0,0,0)");
     if(isColored) graphNetworkFrame->
             setStyleSheet("border-color: rgb(220,220,220);\nborder-width :"
                           " 4px;\nborder-style:solid;");
-
     graphNetworkFrame->setLayout(new QVBoxLayout);
     NetworkButton *networkButton = new NetworkButton(mainNetwork, this);
     networkButton->setStyleSheet("background-color: rgb(70,70,70)");
@@ -142,7 +140,7 @@ void GraphDialog::drawNetworkGraph()
 
          for(int j = 0; j < mainNetwork->Subnets().at(i)->HostNumber(); j++)
          {
-            if((j + 8) % 8 == 0)
+            if((j + hostsInRow) % hostsInRow == 0)
             {
                 hostsLayout = new QHBoxLayout;
                 QFrame *hostsRow = new QFrame(this);
@@ -150,8 +148,9 @@ void GraphDialog::drawNetworkGraph()
                 hostsRow->setLayout(hostsLayout);
                 hostsFrame->layout()->addWidget(hostsRow);
                 hostsRow->layout()->setAlignment(Qt::AlignCenter);
-                hostsRow->setMaximumWidth(450 * scale);
-                hostsRow->setMinimumHeight(100 * scale);
+
+                float scaleAdjust = hostsInRow / 4;
+                hostsRow->setMaximumWidth((450 * scale) * scaleAdjust);
             }
 
             QVBoxLayout *hostLayout = new QVBoxLayout;
@@ -276,5 +275,11 @@ void GraphDialog::on_gridCheckBox_toggled(bool checked)
 void GraphDialog::on_gridScaleSlider_sliderMoved(int position)
 {
     gridSize = static_cast<float>(position) / 10.0f;
+    drawNetworkGraph();
+}
+
+void GraphDialog::on_hostsInRowSlider_valueChanged(int value)
+{
+    hostsInRow = value;
     drawNetworkGraph();
 }

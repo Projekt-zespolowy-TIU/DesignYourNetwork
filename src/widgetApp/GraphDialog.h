@@ -57,6 +57,8 @@ private slots:
 
      void on_gridScaleSlider_sliderMoved(int position);
 
+     void on_hostsInRowSlider_valueChanged(int value);
+
 private:
 
     Ui::GraphDialog *ui;
@@ -68,6 +70,7 @@ private:
     bool showsNetworkAddress = false;
     bool showsGrid;
 
+    int hostsInRow = 8;
     float scale = 1.0f;
     float gridSize = 1.0f;
 

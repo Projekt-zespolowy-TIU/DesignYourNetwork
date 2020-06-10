@@ -85,8 +85,6 @@ private:
 
     QFrame *subnetsGraphFrame;
 
-    QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
-
     QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
     QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
 

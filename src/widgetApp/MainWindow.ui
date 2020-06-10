@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1600</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="font">
@@ -42,10 +42,10 @@ color: rgb(220, 220, 220);</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>-180</x>
-      <y>-30</y>
-      <width>941</width>
-      <height>1371</height>
+      <x>10</x>
+      <y>-10</y>
+      <width>961</width>
+      <height>791</height>
      </rect>
     </property>
     <property name="font">
@@ -76,8 +76,8 @@ color: rgb(220, 220, 220);</string>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>720</y>
+      <x>960</x>
+      <y>290</y>
       <width>541</width>
       <height>231</height>
      </rect>
@@ -109,7 +109,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1920</width>
+     <width>1600</width>
      <height>20</height>
     </rect>
    </property>

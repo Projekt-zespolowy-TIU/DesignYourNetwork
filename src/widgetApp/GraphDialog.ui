@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1450</width>
-    <height>1000</height>
+    <width>1130</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1261</width>
-     <height>1001</height>
+     <width>921</width>
+     <height>701</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -40,8 +40,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1241</width>
-      <height>981</height>
+      <width>901</width>
+      <height>681</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -67,8 +67,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1241</width>
-       <height>981</height>
+       <width>901</width>
+       <height>681</height>
       </rect>
      </property>
      <property name="layoutDirection">
@@ -83,10 +83,10 @@
   <widget class="QFrame" name="settingsFrame">
    <property name="geometry">
     <rect>
-     <x>1260</x>
+     <x>940</x>
      <y>0</y>
      <width>191</width>
-     <height>1001</height>
+     <height>701</height>
     </rect>
    </property>
    <property name="styleSheet">

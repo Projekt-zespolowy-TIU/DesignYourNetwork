@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>559</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      <x>0</x>
      <y>0</y>
      <width>401</width>
-     <height>561</height>
+     <height>701</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -41,7 +41,7 @@
       <x>10</x>
       <y>10</y>
       <width>381</width>
-      <height>481</height>
+      <height>621</height>
      </rect>
     </property>
     <property name="font">
@@ -68,7 +68,7 @@
      <number>1</number>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_13">
      <property name="geometry">
@@ -76,7 +76,7 @@
        <x>0</x>
        <y>0</y>
        <width>381</width>
-       <height>387</height>
+       <height>527</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -99,7 +99,7 @@ color: rgb(0, 0, 0);</string>
         <x>10</x>
         <y>190</y>
         <width>361</width>
-        <height>191</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="font">
@@ -122,7 +122,7 @@ color: rgb(0, 0, 0);</string>
          <x>0</x>
          <y>0</y>
          <width>359</width>
-         <height>189</height>
+         <height>319</height>
         </rect>
        </property>
       </widget>
@@ -731,7 +731,7 @@ background-color: rgb(60, 60, 60);</string>
        <x>0</x>
        <y>0</y>
        <width>381</width>
-       <height>387</height>
+       <height>527</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -784,7 +784,7 @@ background-color: rgb(60, 60, 60);</string>
         <x>10</x>
         <y>190</y>
         <width>361</width>
-        <height>191</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="font">
@@ -807,7 +807,7 @@ background-color: rgb(60, 60, 60);</string>
          <x>0</x>
          <y>0</y>
          <width>359</width>
-         <height>189</height>
+         <height>319</height>
         </rect>
        </property>
       </widget>
@@ -950,9 +950,9 @@ background-color: rgb(60, 60, 60);</string>
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>500</y>
+      <y>640</y>
       <width>281</width>
-      <height>41</height>
+      <height>51</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">

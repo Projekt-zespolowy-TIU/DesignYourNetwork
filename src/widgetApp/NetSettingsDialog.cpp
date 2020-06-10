@@ -20,7 +20,7 @@ NetSettingsDialog::NetSettingsDialog(QWidget *parent) :
     binaryMaskWidget = ui->BinaryMask4Widget;
 
     subnetScrollContent = ui->subnetScroll;
-    subnetScrollContent->setLayout(subnetsPanelLayout);
+    subnetScrollContent->setLayout(new QVBoxLayout());
     subnetCountBox = ui->hostNumberSpinBox;
 
     subnetScrollContentv6 = ui->subnetScrollv6;
@@ -35,6 +35,8 @@ NetSettingsDialog::~NetSettingsDialog()
 
 void NetSettingsDialog::clearData()
 {
+    mainNetwork = std::shared_ptr<INetwork>();
+
     ui->hostNumberSpinBox->setValue(0);
     ui->hostNumberSpinBoxv6->setValue(0);
 
@@ -163,8 +165,8 @@ void NetSettingsDialog::on_raportButton_clicked()
     if(raportDialog.isHidden())
     {
         raportDialog.displayNetworkRaport();
-        raportDialog.setGeometry(this->geometry().x() + 0, this->geometry().y() + 600,
-                                  raportDialog.geometry().width(), raportDialog.geometry().height());
+        //raportDialog.setGeometry(this->geometry().x() + 0, this->geometry().y() + 600,
+        //                          raportDialog.geometry().width(), raportDialog.geometry().height());
         raportDialog.show();
     }
     else

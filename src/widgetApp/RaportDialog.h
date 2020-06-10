@@ -6,6 +6,7 @@
 #include <QTextEdit>
 
 #include "core/INetwork.h"
+#include "core/IReportGenerator.h"
 
 using namespace core;
 
@@ -25,7 +26,7 @@ public:
 
     void displayNetworkRaport();
 
-    void injectData(const std::shared_ptr<INetwork>& net4);
+    void injectData(const std::shared_ptr<INetwork>& net4, std::unique_ptr<IReportGenerator> reportEngine);
 
 private slots:
 
@@ -40,6 +41,8 @@ private:
     bool isDetailed = false;
 
     std::shared_ptr<INetwork> network;
+
+    std::unique_ptr<IReportGenerator> reportGenerator;
 
     QVBoxLayout *raportLayout = new QVBoxLayout;
 

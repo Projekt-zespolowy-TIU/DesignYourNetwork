@@ -1,6 +1,9 @@
 #include "NetSettingsDialog.h"
 #include "ui_NetSettingsDialog.h"
 
+#include "core/ReportGeneratorV4.h"
+#include "core/ReportGeneratorV6.h"
+
 NetSettingsDialog::NetSettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NetSettingsDialog)
@@ -75,7 +78,14 @@ void NetSettingsDialog::on_calculateButton_clicked()
 
      graphDialog.injectData(mainNetwork);
 
-     raportDialog.injectData(mainNetwork);
+     if(auto x = std::dynamic_pointer_cast<Networkv4>(mainNetwork); x)
+     {
+         raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV4>());
+     }
+     else if(auto x = std::dynamic_pointer_cast<Networkv6>(mainNetwork); x)
+     {
+         raportDialog.injectData(mainNetwork, std::make_unique<ReportGeneratorV6>());
+     }
 }
 
 void NetSettingsDialog::setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines)

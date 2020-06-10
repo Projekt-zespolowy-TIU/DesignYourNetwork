@@ -20,17 +20,17 @@ namespace core {
         Networkv6(const Networkv6& rhs);
         Networkv6& operator=(const Networkv6& rhs);
 
-        const IPaddress& Ip() const override;
-        const IPaddress& Mask() const override;
-        const std::vector<std::shared_ptr<ISubnet>>& Subnets() const override;
+        const IPaddress& Ip() const noexcept override;
+        const IPaddress& Mask() const noexcept override;
+        const std::vector<std::shared_ptr<ISubnet>>& Subnets() const noexcept override;
 
-        void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) override;
+        void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) noexcept override;
 
         void addSubnet(const cpp_int& hostNumber,
                        const QString& name = "blank") override;
 
         cpp_int hostsCapacity() const override;
-        bool isSubnet(const IPaddress& hostIP) const override;
+        bool isSubnet(const IPaddress& hostIP) const noexcept override;
     private:
         std::unique_ptr<IPaddress> _Ip;
         std::unique_ptr<IPaddress> _NetMask;

@@ -19,14 +19,14 @@ namespace core{
         IPv4address(const IPv4address& rhs);
         IPv4address& operator=(const IPv4address& rhs); //if inheritance evolve more, it should be deleted
 
-        QString asStringDec() const override;
-        QString asStringBin() const override;
+        QString asStringDec() const noexcept override;
+        QString asStringBin() const noexcept override;
 
         friend std::istream& operator>>(std::istream&, IPv4address&);
     protected:
         std::shared_ptr<IIPparser> _Parser = std::make_shared<IPv4parser>();
     private:
-        IPv4address* _cloneImpl() const override;
+        IPv4address* _cloneImpl() const noexcept override;
     };
 };
 

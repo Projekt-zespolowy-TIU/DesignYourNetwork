@@ -39,22 +39,22 @@ namespace core {
         return *this;
     }
 
-    const IPaddress& Networkv6::Ip() const
+    const IPaddress& Networkv6::Ip() const noexcept
     {
         return *_Ip;
     }
 
-    const IPaddress& Networkv6::Mask() const
+    const IPaddress& Networkv6::Mask() const noexcept
     {
         return *_NetMask;
     }
 
-    const std::vector<std::shared_ptr<ISubnet>>& Networkv6::Subnets() const
+    const std::vector<std::shared_ptr<ISubnet>>& Networkv6::Subnets() const noexcept
     {
         return _Subnets;
     }
 
-    void Networkv6::Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets)
+    void Networkv6::Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) noexcept
     {
         _Subnets = subnets;
     }
@@ -71,7 +71,7 @@ namespace core {
         return withNoNetAddr;
     }
 
-    bool Networkv6::isSubnet(const IPaddress& hostIP) const
+    bool Networkv6::isSubnet(const IPaddress& hostIP) const noexcept
     {
         return (*_Ip & *_NetMask) == (hostIP & *_NetMask);
     }

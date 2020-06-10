@@ -12,53 +12,53 @@ namespace core {
             throw SubnetInvalidExcept{"Can't create subnet with less than one host."};
     }
 
-    QString Subnetv6::SubName() const
+    QString Subnetv6::SubName() const noexcept
     {
         return _SubName;
     }
 
-    cpp_int Subnetv6::HostNumber() const
+    cpp_int Subnetv6::HostNumber() const noexcept
     {
         return _HostNumber;
     }
 
-    const IPaddress& Subnetv6::Ip() const
+    const IPaddress& Subnetv6::Ip() const noexcept
     {
         return *_Ip;
     }
 
-    const IPaddress& Subnetv6::Mask() const
+    const IPaddress& Subnetv6::Mask() const noexcept
     {
         return *_NetMask;
     }
 
-    const std::vector<std::shared_ptr<Host>>& Subnetv6::HostsList() const
+    const std::vector<std::shared_ptr<Host>>& Subnetv6::HostsList() const noexcept
     {
         return _HostsList;
     }
 
-    void Subnetv6::Ip(std::unique_ptr<IPaddress> ip)
+    void Subnetv6::Ip(std::unique_ptr<IPaddress> ip) noexcept
     {
         _Ip = std::move(ip);
     }
 
-    void Subnetv6::Mask(std::unique_ptr<IPaddress> mask)
+    void Subnetv6::Mask(std::unique_ptr<IPaddress> mask) noexcept
     {
         _NetMask = std::move(mask);
     }
 
-    void Subnetv6::SubName(const QString& newName)
+    void Subnetv6::SubName(const QString& newName) noexcept
     {
         _SubName = newName;
     }
 
-    void Subnetv6::addHost(std::unique_ptr<IPaddress> ip, const QString& name)
+    void Subnetv6::addHost(std::unique_ptr<IPaddress> ip, const QString& name) noexcept
     {
         _HostsList.push_back(std::make_shared<Host>(
                                  Host{std::move(ip), name, _HostsList.size()}));
     }
 
-    bool Subnetv6::isHost(const IPaddress& hostIP) const
+    bool Subnetv6::isHost(const IPaddress& hostIP) const noexcept
     {
         return ( (Ip() & Mask()) == (hostIP & Mask()) ) && (hostIP != Ip());
     }
@@ -82,7 +82,7 @@ namespace core {
         return std::make_unique<IPv6address>(*_Ip | IPv6address{x});
     }
 
-    Subnetv6* Subnetv6::_cloneImpl() const
+    Subnetv6* Subnetv6::_cloneImpl() const noexcept
     {
         auto ptr = new Subnetv6{this->_HostNumber, this->_SubName};
         ptr->Ip(this->_Ip->clone());

@@ -50,7 +50,7 @@ namespace core {
     {
         for(cpp_int i{1}; i <= subnet.HostNumber(); i++)
         {
-            auto ipv6Bitset = boost::dynamic_bitset<>{i.str()};
+            auto ipv6Bitset = boost::dynamic_bitset<>{toBinary(i)};
             ipv6Bitset.resize(128, false);
 
             IPv6address host_ip = subnet.Ip() | ipv6Bitset;

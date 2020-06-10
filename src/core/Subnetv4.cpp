@@ -82,53 +82,53 @@ namespace core {
 //        return *this;
 //    }
 
-    QString Subnetv4::SubName() const
+    QString Subnetv4::SubName() const noexcept
     {
         return _SubName;
     }
 
-    cpp_int Subnetv4::HostNumber() const
+    cpp_int Subnetv4::HostNumber() const noexcept
     {
         return _HostNumber;
     }
 
-    const IPaddress& Subnetv4::Ip() const
+    const IPaddress& Subnetv4::Ip() const noexcept
     {
         return *_Ip;
     }
 
-    const IPaddress& Subnetv4::Mask() const
+    const IPaddress& Subnetv4::Mask() const noexcept
     {
         return *_NetMask;
     }
 
-    const std::vector<std::shared_ptr<Host>>& Subnetv4::HostsList() const
+    const std::vector<std::shared_ptr<Host>>& Subnetv4::HostsList() const noexcept
     {
         return _HostsList;
     }
 
-    void Subnetv4::Ip(std::unique_ptr<IPaddress> ip)
+    void Subnetv4::Ip(std::unique_ptr<IPaddress> ip) noexcept
     {
         _Ip = std::move(ip);
     }
 
-    void Subnetv4::Mask(std::unique_ptr<IPaddress> mask)
+    void Subnetv4::Mask(std::unique_ptr<IPaddress> mask) noexcept
     {
         _NetMask = std::move(mask);
     }
 
-    void Subnetv4::SubName(const QString& newName)
+    void Subnetv4::SubName(const QString& newName) noexcept
     {
         _SubName = newName;
     }
 
-    void Subnetv4::addHost(std::unique_ptr<IPaddress> ip, const QString& name)
+    void Subnetv4::addHost(std::unique_ptr<IPaddress> ip, const QString& name) noexcept
     {
         _HostsList.push_back(std::make_shared<Host>(
                                  Host{std::move(ip), name, _HostsList.size()}));
     }
 
-    bool Subnetv4::isHost(const IPaddress& hostIP) const
+    bool Subnetv4::isHost(const IPaddress& hostIP) const noexcept
     {
         return ( (Ip() & Mask()) == (hostIP & Mask()) ) && (hostIP != Ip());
     }
@@ -159,7 +159,7 @@ namespace core {
         return std::make_unique<IPv4address>(Ip() | IPv4address{x});
     }
 
-    Subnetv4* Subnetv4::_cloneImpl() const
+    Subnetv4* Subnetv4::_cloneImpl() const noexcept
     {
         auto ptr = new Subnetv4{this->_HostNumber, this->_SubName};
         ptr->Ip(this->_Ip->clone());

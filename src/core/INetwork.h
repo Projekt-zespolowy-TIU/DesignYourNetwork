@@ -15,16 +15,16 @@ namespace core {
     class INetwork
     {
     public:
-        virtual const IPaddress& Ip() const = 0;
-        virtual const IPaddress& Mask() const = 0;
-        virtual const std::vector<std::shared_ptr<ISubnet>>& Subnets() const = 0;
+        virtual const IPaddress& Ip() const noexcept = 0;
+        virtual const IPaddress& Mask() const noexcept = 0;
+        virtual const std::vector<std::shared_ptr<ISubnet>>& Subnets() const noexcept = 0;
 
-        virtual void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) = 0;
+        virtual void Subnets(const std::vector<std::shared_ptr<ISubnet>>& subnets) noexcept = 0;
 
         virtual void addSubnet(const cpp_int& hostNumber, const QString& name) = 0;
 
         virtual cpp_int hostsCapacity() const = 0;
-        virtual bool isSubnet(const IPaddress& hostIP) const = 0;
+        virtual bool isSubnet(const IPaddress& hostIP) const noexcept = 0;
 
     //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
     public:

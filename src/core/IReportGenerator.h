@@ -16,8 +16,8 @@ namespace core {
     class IReportGenerator
     {
     public:
-        virtual void generate(const INetwork& network, DetaiLevel level = DetaiLevel::NoDetails) = 0;
-        virtual QString getReport() const = 0;
+        virtual void generate(const INetwork& network, DetaiLevel level = DetaiLevel::NoDetails) noexcept = 0;
+        virtual QString getReport() const noexcept = 0;
         virtual void save(const QString& path) const = 0;
 
         //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//

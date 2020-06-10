@@ -23,7 +23,8 @@ SOURCES += \
     SubnetsCalculatorV6.cpp \
     Subnetv4.cpp \
     Subnetv6.cpp \
-    coreUtils.cpp
+    coreUtils.cpp \
+    FileIO.cpp
 
 HEADERS += \
     Host.h \
@@ -48,6 +49,7 @@ HEADERS += \
     SubnetsCalculatorV6.h \
     Subnetv4.h \
     Subnetv6.h \
-    coreUtils.h
+    coreUtils.h \
+    FileIO.h
 
 TARGET = core

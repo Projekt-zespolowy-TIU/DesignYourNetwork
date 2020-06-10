@@ -9,7 +9,7 @@ namespace core {
     void ReportGeneratorV4::generate(const INetwork& network, DetaiLevel level)
     {
 ////////////////////////////////////////////////////////////NETWORK///////////
-        _Report += QString{"Network - IP protocol v4:\n"}
+        _Report = QString{"Network - IP protocol v4:\n"}
                 + "\tIP: " + network.Ip().asStringDec()
                 + " Mask: " + network.Mask().asStringDec() + '\n';
 

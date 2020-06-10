@@ -17,7 +17,7 @@ namespace core {
             auto v6address = boost::asio::ip::make_address_v6(addressString);
             return _convertArrayUCharIPv6ToBitsetIPv6(v6address.to_bytes());
         } catch (const boost::system::system_error&) {
-            throw IPFormatExcept{"Passed string cannot be converted into valid IP version 4"};
+            throw IPFormatExcept{"Passed string cannot be converted into valid IP version 6"};
         }
     }
 

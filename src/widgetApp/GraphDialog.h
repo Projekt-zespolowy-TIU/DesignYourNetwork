@@ -52,6 +52,11 @@ private slots:
 
      void on_networkAddress_toggled(bool checked);
 
+     void on_gridCheckBox_toggled(bool checked);
+
+
+     void on_gridScaleSlider_sliderMoved(int position);
+
 private:
 
     Ui::GraphDialog *ui;
@@ -61,8 +66,10 @@ private:
     bool showsHostNames = false;
     bool showsSubnetAddresses = false;
     bool showsNetworkAddress = false;
+    bool showsGrid;
 
     float scale = 1.0f;
+    float gridSize = 1.0f;
 
     NetworkDialog networkDialog{this};
 

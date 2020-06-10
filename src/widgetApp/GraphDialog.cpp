@@ -192,7 +192,8 @@ void GraphDialog::drawNetworkGraph()
          }      
     }
 
-    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames, graphNetworkFrame, this);
+    GraphFrame *graphFrame = new GraphFrame(networkButton, subnetButtons, hostsFrames,
+                                            graphNetworkFrame, showsGrid, gridSize, this);
 
     graphFrame->setLayout(new QVBoxLayout());
 
@@ -244,7 +245,7 @@ void GraphDialog::on_horizontalViewButton_clicked(bool checked)
 void GraphDialog::on_scaleSlider_sliderMoved(int position)
 {
     scale = static_cast<float>(position) / 10.0f;
-    drawNetworkGraph();
+
 }
 
 void GraphDialog::on_hostNames_toggled(bool checked)
@@ -265,3 +266,15 @@ void GraphDialog::on_networkAddress_toggled(bool checked)
     drawNetworkGraph();
 }
 
+void GraphDialog::on_gridCheckBox_toggled(bool checked)
+{
+    showsGrid = checked;
+    drawNetworkGraph();
+}
+
+
+void GraphDialog::on_gridScaleSlider_sliderMoved(int position)
+{
+    gridSize = static_cast<float>(position) / 10.0f;
+    drawNetworkGraph();
+}

@@ -289,7 +289,7 @@ background-color: rgba(255, 255, 255, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Host name</string>
+        <string>Host name:</string>
        </property>
       </widget>
      </item>
@@ -305,7 +305,7 @@ background-color: rgba(255, 255, 255, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Host Id</string>
+        <string>Host Id:</string>
        </property>
       </widget>
      </item>

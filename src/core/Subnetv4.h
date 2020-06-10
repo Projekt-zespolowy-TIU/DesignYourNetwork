@@ -22,25 +22,25 @@ namespace core {
 //        Subnetv4(Subnetv4&& rhs) noexcept;
 //        Subnetv4& operator=(Subnetv4&& rhs) noexcept;
 
-        QString SubName() const override;
-        cpp_int HostNumber() const override;
-        const IPaddress& Ip() const override;
-        const IPaddress& Mask() const override;
-        const std::vector<std::shared_ptr<Host>>& HostsList() const override;
+        QString SubName() const noexcept override;
+        cpp_int HostNumber() const noexcept override;
+        const IPaddress& Ip() const noexcept override;
+        const IPaddress& Mask() const noexcept override;
+        const std::vector<std::shared_ptr<Host>>& HostsList() const noexcept override;
 
-        void Ip(std::unique_ptr<IPaddress> ip) override;
-        void Mask(std::unique_ptr<IPaddress> mask) override;
-        void SubName(const QString& newName) override;
+        void Ip(std::unique_ptr<IPaddress> ip) noexcept override;
+        void Mask(std::unique_ptr<IPaddress> mask) noexcept override;
+        void SubName(const QString& newName) noexcept override;
 
         void addHost(std::unique_ptr<IPaddress> ip,
-                     const QString& name = "noname") override;
-        bool isHost(const IPaddress& hostIP) const override;
+                     const QString& name = "noname") noexcept override;
+        bool isHost(const IPaddress& hostIP) const noexcept override;
         cpp_int hostsCapacity() const override;
         std::unique_ptr<IPaddress> getMinHost() const override;
         std::unique_ptr<IPaddress> getMaxHost() const override;
         std::unique_ptr<IPaddress> getBroadcast() const;
     private:
-        Subnetv4* _cloneImpl() const override;
+        Subnetv4* _cloneImpl() const noexcept override;
 
         std::unique_ptr<IPaddress> _Ip = std::make_unique<IPv4address>();
         std::unique_ptr<IPaddress> _NetMask = std::make_unique<IPv4mask>();

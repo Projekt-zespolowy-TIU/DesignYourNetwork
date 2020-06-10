@@ -13,7 +13,7 @@ namespace core {
 
     class IIPaddrPrintable; //forward declaration
 
-    std::string toBinary(cpp_int n);
+    std::string toBinary(cpp_int n) noexcept;
 
     class NotImplemented : public std::logic_error
     {
@@ -68,9 +68,9 @@ namespace core {
         SubnetInvalidExcept(const char* message) : SubnetExcept{message} {};
     };
 
-    std::ostream& operator<< (std::ostream& out, const IIPaddrPrintable& c);
-    std::ostream& operator<< (std::ostream& out, const QString& c);
-    std::istream& operator>> (std::istream& in, QString& c);
+    std::ostream& operator<< (std::ostream& out, const IIPaddrPrintable& c) noexcept;
+    std::ostream& operator<< (std::ostream& out, const QString& c) noexcept;
+    std::istream& operator>> (std::istream& in, QString& c) noexcept;
 };
 
 #endif // COREUTILS_H

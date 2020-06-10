@@ -6,7 +6,7 @@
 
 namespace core {
     boost::dynamic_bitset<> IPprotocolAlgorithm::chooseMask(const cpp_int& desiredHostsNumber,
-                                                                   const unsigned short maskLength) const
+                                                                   const unsigned short maskLength) const noexcept
     {
         unsigned short numberOfHostBits = 1;
         cpp_int countHosts = 0;

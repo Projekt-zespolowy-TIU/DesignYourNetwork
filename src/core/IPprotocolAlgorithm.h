@@ -17,7 +17,7 @@ namespace core {
     {
     public:
         boost::dynamic_bitset<> chooseMask(const cpp_int& desiredHostsNumber,
-                                                  const unsigned short maskLength) const;
+                                                  const unsigned short maskLength) const noexcept;
         boost::dynamic_bitset<> chooseIP(const IPaddress& mainNetIP,
                                                 const IPaddress& Mask,
                                                 const std::vector<std::shared_ptr<ISubnet>>& usedIPsPool

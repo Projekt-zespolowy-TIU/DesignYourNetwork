@@ -32,12 +32,12 @@ namespace core {
         return *this;
     }
 
-    QString IPv4address::asStringDec() const
+    QString IPv4address::asStringDec() const noexcept
     {
         return boost::asio::ip::make_address_v4(_IpAddress.to_ulong()).to_string().c_str();
     }
 
-    QString IPv4address::asStringBin() const
+    QString IPv4address::asStringBin() const noexcept
     {
         std::string stringBinary;
         boost::to_string(_IpAddress, stringBinary);
@@ -56,7 +56,7 @@ namespace core {
         return ss.str().c_str();
     }
 
-    IPv4address* IPv4address::_cloneImpl() const
+    IPv4address* IPv4address::_cloneImpl() const noexcept
     {
         return new IPv4address(*this);
     }

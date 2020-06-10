@@ -15,28 +15,28 @@ namespace core {
         IPaddress(const boost::dynamic_bitset<> &ip = boost::dynamic_bitset<>());
         IPaddress& operator=(const IPaddress&) = delete;
 
-        std::unique_ptr<IPaddress> clone() const;
+        std::unique_ptr<IPaddress> clone() const noexcept;
 
         short getPrefix() const;
-        short getAddressLength() const;
-        boost::dynamic_bitset<> raw() const;
+        short getAddressLength() const noexcept;
+        boost::dynamic_bitset<> raw() const noexcept;
 
-        QString asStringBin() const override;
-        QString asStringDec() const override;
+        QString asStringBin() const noexcept override;
+        QString asStringDec() const noexcept override;
     protected:
         boost::dynamic_bitset<> _IpAddress;
     private:
-        bool isMask() const;
-        virtual IPaddress* _cloneImpl() const;
+        bool isMask() const noexcept;
+        virtual IPaddress* _cloneImpl() const noexcept;
 
     public:
         virtual ~IPaddress() = default;
     };
 
-    bool operator==(const IPaddress& lhs, const IPaddress& rhs);
-    bool operator!=(const IPaddress& lhs, const IPaddress& rhs);
-    boost::dynamic_bitset<> operator&(const IPaddress& lhs, const IPaddress& rhs);
-    boost::dynamic_bitset<> operator|(const IPaddress& lhs, const IPaddress& rhs);
+    bool operator==(const IPaddress& lhs, const IPaddress& rhs) noexcept;
+    bool operator!=(const IPaddress& lhs, const IPaddress& rhs) noexcept;
+    boost::dynamic_bitset<> operator&(const IPaddress& lhs, const IPaddress& rhs) noexcept;
+    boost::dynamic_bitset<> operator|(const IPaddress& lhs, const IPaddress& rhs) noexcept;
 }
 
 #endif // IPADDRESS_H

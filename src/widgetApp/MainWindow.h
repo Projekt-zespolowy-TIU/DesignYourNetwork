@@ -16,9 +16,12 @@
 #include "HostDialog.h"
 #include "GraphDialog.h"
 #include "RaportDialog.h"
+#include "NetSettingsDialog.h"
+#include "ManualDialog.h"
 
 #include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
+#include "core/SubnetsCalculatorV6.h"
 
 using namespace core;
 
@@ -38,53 +41,29 @@ namespace widgetApp{
 
     private slots:
 
-        void on_calculateButton_clicked();
+        void on_actionNew_triggered();
 
-        void on_drawButton_clicked();
+        void on_actionRead_triggered();
 
-        void on_hostNumberSpinBox_valueChanged(int subnetCount);
+        void on_actionSave_triggered();
 
-        void on_raportButton_clicked();
+        void on_actionManual_triggered();
+
+        void on_actionAbout_triggered();
+
+    protected:
+
+          void showEvent(QShowEvent *event);
 
     private:
 
         Ui::MainWindow *ui;
 
-        int subnetCount = 0;
-        bool isHorizontal = false;
+        NetSettingsDialog netSettingsDialog{this};
 
-        std::shared_ptr<INetwork> mainNetwork;
-        SubnetsCalculatorV4 calculator;
+        ManualDialog manualDialog{this};
 
-        QWidget *addressWidget;
-        QWidget *maskWidget;
-        QWidget *binaryAddressWidget;
-        QWidget *binaryMaskWidget;
-
-        QSpinBox *subnetCountBox;
-        QWidget *subnetScrollContent;
-        QWidget *subnetGraphContent;
-
-        QFrame *subnetsGraphFrame;
-
-        QVBoxLayout *subnetsPanelLayout = new QVBoxLayout;
-
-        QList<QSpinBox*> spinBoxList = QList<QSpinBox*>{};
-        QList<QLineEdit*> subnetNames = QList<QLineEdit*>{};
-
-        RaportDialog raportDialog{this};
-
-        GraphDialog graphDialog{this};
-
-        void setSubnetsHostCount();
-
-        void drawNetworkGraph();
-
-        void deleteLayoutContent(QWidget *content);
-
-        void displayInputInBinary(const QString &input, QWidget *displayWidget);
-
-        QString takeStringFromInputFields(QWidget *inputWidget);
+        void openNetSettings();
     };
 }
 

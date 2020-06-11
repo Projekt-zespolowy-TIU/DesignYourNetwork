@@ -19,12 +19,12 @@ namespace IPv4addressTests {
         const IPv4address mask2 {bitset_mask2};
 
         SECTION("asStringDec conversion"){
-            CHECK(ip4address.asStringDec() == "192.168.0.1");
-            CHECK(mask2.asStringDec() == "255.240.0.0");
+            CHECK(ip4address.asStringDec().toStdString() == "192.168.0.1");
+            CHECK(mask2.asStringDec().toStdString() == "255.240.0.0");
         };
         SECTION("asStringBin conversion"){
-            CHECK(ip4address.asStringBin() == "11000000.10101000.00000000.00000001");
-            CHECK(mask2.asStringBin() == "11111111.11110000.00000000.00000000");
+            CHECK(ip4address.asStringBin().toStdString() == "11000000.10101000.00000000.00000001");
+            CHECK(mask2.asStringBin().toStdString() == "11111111.11110000.00000000.00000000");
         };
         SECTION("AND operation wit IP and mask"){
             const IPv4mask mask1 {bitset_mask1};
@@ -34,11 +34,11 @@ namespace IPv4addressTests {
             IPv4mask right = mask1;
 
             IPv4address expected = left & right;
-            CHECK(expected.asStringDec() == "192.168.0.0");
+            CHECK(expected.asStringDec().toStdString() == "192.168.0.0");
 
             right = mask2;
             expected = left & right;
-            CHECK(expected.asStringDec() == "192.160.0.0");
+            CHECK(expected.asStringDec().toStdString() == "192.160.0.0");
         };
         SECTION("operator =="){
             IPv4address compareME{bitset_ip};

@@ -2,6 +2,7 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
+#include <QLineEdit>
 
 #include "core/INetwork.h"
 
@@ -29,6 +30,8 @@ private slots:
 
 private:
 
+    bool isIpv4;
+
     Ui::NetworkDialog *ui;
 
     std::shared_ptr<INetwork> network;
@@ -36,6 +39,7 @@ private:
     cpp_int subnetCount;
 
     cpp_int hostCount;
+
 };
 
 #endif // NETWORK DIALOG_H

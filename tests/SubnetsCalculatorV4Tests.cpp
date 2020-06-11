@@ -7,11 +7,34 @@
 #include <boost/dynamic_bitset.hpp>
 
 #include "core/SubnetsCalculatorV4.h"
+#include "core/coreUtils.h"
 
 using namespace core;
 
 namespace SubnetsCalculatorV4Tests {
+    TEST_CASE("SubnetsCalculatorV4 Tests"){
+        SubnetsCalculatorV4 calc;
+
+        SECTION("Too many subnets case"){
+            auto ip = IPv4address{"192.168.255.0"};
+            auto mask = IPv4mask{"255.255.255.248"};
+
+            Networkv4 net{ip, mask};
+
+            net.addSubnet(1);
+            net.addSubnet(2);
+            net.addSubnet(3);
+            net.addSubnet(4);
+            net.addSubnet(5);
+            net.addSubnet(6);
+            net.addSubnet(7);
+
+            CHECK_THROWS_AS(calc.calcSubnets(net), SubnetExcept);
+        }
+    }
     TEST_CASE("SubnetsCalculatorV4 Integration Tests"){
+        SubnetsCalculatorV4 calc;
+
         SECTION("Subneting with the same number of hosts")
         {
             auto ip = IPv4address{boost::dynamic_bitset<>(32, 3'232'235'520)}; //192.168.0.0
@@ -24,7 +47,6 @@ namespace SubnetsCalculatorV4Tests {
             net.addSubnet(10);
             net.addSubnet(10);
 
-            SubnetsCalculatorV4 calc;
             REQUIRE_NOTHROW(calc.calcSubnets(net));
 
             SECTION("Check mask addresses"){
@@ -63,7 +85,6 @@ namespace SubnetsCalculatorV4Tests {
             net.addSubnet(2); //5
             net.addSubnet(2); //6
 
-            SubnetsCalculatorV4 calc;
             REQUIRE_NOTHROW(calc.calcSubnets(net));
 
             auto subs = net.Subnets();

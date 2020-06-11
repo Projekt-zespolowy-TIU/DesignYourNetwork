@@ -11,6 +11,8 @@ SOURCES += \
     IPv4addressTests.cpp \
     IPv4maskTests.cpp \
     IPv4parserTests.cpp \
+    IPv6addressTests.cpp \
+    IPv6parserTests.cpp \
     SubnetsCalculatorV4Tests.cpp \
     main.cpp
 

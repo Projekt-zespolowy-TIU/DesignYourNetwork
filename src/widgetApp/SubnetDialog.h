@@ -29,6 +29,9 @@ private slots:
     void on_subnetName_textEdited(const QString& name);
 
 private:
+
+    bool isIpv4 = false;
+
     Ui::SubnetDialog *ui;
 
     std::shared_ptr<ISubnet> subnet;

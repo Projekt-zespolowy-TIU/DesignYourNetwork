@@ -3,7 +3,8 @@
 #include "coreUtils.h"
 
 namespace core {
-    IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress): IPv4address{maskAddress}
+    IPv4mask::IPv4mask(const boost::dynamic_bitset<>& maskAddress):
+        IPv4address{maskAddress}
     {
         boost::dynamic_bitset<> bits(maskAddress.size());
         bits.set();
@@ -20,12 +21,12 @@ namespace core {
         throw IPFormatExcept("Passed value cannot be converted into valid IP version 4 mask");
     }
 
-    IPv4mask::IPv4mask(const QString& ipAddress): IPv4address(ipAddress)
+    IPv4mask::IPv4mask(const QString& ipAddress)
     {
         *this = _Parser->ipFromString(ipAddress);
     }
 
-    IPv4mask *IPv4mask::_cloneImpl() const
+    IPv4mask *IPv4mask::_cloneImpl() const noexcept
     {
         return new IPv4mask(*this);
     }

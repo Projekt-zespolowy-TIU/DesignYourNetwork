@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>399</height>
+    <width>469</width>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,16 +21,15 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(50, 50, 50);
-color: rgb(255, 255, 255);</string>
+   <string notr="true">background-color: rgb(50, 50, 50);</string>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>441</width>
-     <height>381</height>
+     <x>9</x>
+     <y>9</y>
+     <width>451</width>
+     <height>391</height>
     </rect>
    </property>
    <property name="font">
@@ -51,7 +50,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>300</x>
       <y>140</y>
       <width>91</width>
       <height>31</height>
@@ -80,8 +79,8 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>10</x>
       <y>180</y>
-      <width>421</width>
-      <height>191</height>
+      <width>431</width>
+      <height>201</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -105,7 +104,10 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="4" column="0">
-        <widget class="QLabel" name="label_23">
+        <widget class="QLabel" name="broadcastDecLabel">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="font">
           <font>
            <family>Segoe UI Emoji</family>
@@ -201,6 +203,9 @@ color: rgb(255, 255, 255);</string>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="1">
@@ -219,6 +224,9 @@ color: rgb(255, 255, 255);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -239,6 +247,9 @@ color: rgb(255, 255, 255);</string>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="3" column="1">
@@ -257,6 +268,9 @@ color: rgb(255, 255, 255);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -277,6 +291,9 @@ color: rgb(255, 255, 255);</string>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
       </layout>
@@ -286,13 +303,13 @@ color: rgb(255, 255, 255);</string>
      <attribute name="title">
       <string>Binary</string>
      </attribute>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>11</y>
+        <x>11</x>
+        <y>12</y>
         <width>401</width>
-        <height>143</height>
+        <height>146</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -312,19 +329,25 @@ color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_21">
-         <property name="font">
-          <font>
-           <family>Segoe UI Emoji</family>
-           <pointsize>13</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="subnetAddressBinary">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 60, 60);</string>
          </property>
          <property name="text">
-          <string>First host:</string>
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -344,8 +367,30 @@ color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_22">
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="subnetMaskBinary">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 60, 60);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_21">
          <property name="font">
           <font>
            <family>Segoe UI Emoji</family>
@@ -356,7 +401,29 @@ color: rgb(255, 255, 255);</string>
           </font>
          </property>
          <property name="text">
-          <string>Broadcast:</string>
+          <string>First host:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="firstAddressBinary">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 60, 60);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -376,67 +443,10 @@ color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="subnetAddressBinary">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 60, 60);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="subnetMaskBinary">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 60, 60);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="firstAddressBinary">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 60, 60);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="1">
         <widget class="QLineEdit" name="lastAddressBinary">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -448,14 +458,33 @@ color: rgb(255, 255, 255);</string>
           <bool>true</bool>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="broadcastBinLabel">
+         <property name="font">
+          <font>
+           <family>Segoe UI Emoji</family>
+           <pointsize>13</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Broadcast:</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
         <widget class="QLineEdit" name="broadcastAddressBinary">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -467,7 +496,10 @@ color: rgb(255, 255, 255);</string>
           <bool>true</bool>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -481,7 +513,7 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>290</x>
       <y>20</y>
       <width>120</width>
       <height>120</height>
@@ -498,7 +530,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>130</y>
+      <y>140</y>
       <width>211</width>
       <height>25</height>
      </rect>
@@ -511,7 +543,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>40</y>
+      <y>48</y>
       <width>211</width>
       <height>20</height>
      </rect>
@@ -524,7 +556,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>70</y>
       <width>211</width>
       <height>56</height>
      </rect>
@@ -565,7 +597,7 @@ color: rgb(255, 255, 255);</string>
      <item row="0" column="1">
       <widget class="QLineEdit" name="hostCount">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -575,13 +607,16 @@ color: rgb(255, 255, 255);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="hostCapacity">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -591,6 +626,9 @@ color: rgb(255, 255, 255);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -619,6 +657,9 @@ color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="subnetName">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>82</x>
@@ -636,7 +677,32 @@ color: rgb(255, 255, 255);</string>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>211</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>line_4</zorder>
+   <zorder>progressBar</zorder>
+   <zorder>label_10</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>graphImage</zorder>
+   <zorder>line_3</zorder>
+   <zorder>layoutWidget_4</zorder>
+   <zorder>label_9</zorder>
+   <zorder>subnetName</zorder>
   </widget>
  </widget>
  <resources>

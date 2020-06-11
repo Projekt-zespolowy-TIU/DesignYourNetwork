@@ -2,6 +2,8 @@
 #define HOSTDIALOG_H
 
 #include <QDialog>
+#include <QLineEdit>
+
 
 #include "core/Host.h"
 

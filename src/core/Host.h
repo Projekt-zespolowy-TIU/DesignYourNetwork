@@ -14,14 +14,14 @@ namespace core {
     class Host final
     {
     public:
-        Host(std::unique_ptr<IPaddress> ip, const QString& name, const cpp_int& id);
+        Host(std::unique_ptr<IPaddress> ip, const QString& name, const cpp_int& id) noexcept;
 
-        const IPaddress& Ip() const;
-        QString Name() const;
-        cpp_int Id() const;
+        const IPaddress& Ip() const noexcept;
+        QString Name() const noexcept;
+        cpp_int Id() const noexcept;
 
-        void Ip(std::unique_ptr<IPaddress> ip);
-        void Name(const QString& name);
+        void Ip(std::unique_ptr<IPaddress> ip) noexcept;
+        void Name(const QString& name) noexcept;
     private:
         std::unique_ptr<IPaddress> _Ip;
         QString _Name;

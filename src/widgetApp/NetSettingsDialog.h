@@ -33,7 +33,7 @@ class NetSettingsDialog : public QDialog
 
 public:
 
-    explicit NetSettingsDialog(QWidget *parent = nullptr);
+    NetSettingsDialog(QWidget *parent);
     ~NetSettingsDialog();
 
     void clearData();

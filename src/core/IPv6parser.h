@@ -12,7 +12,7 @@ namespace core {
         boost::dynamic_bitset<> ipFromString(const QString& ip) const override;
     private:
         boost::dynamic_bitset<> _getBitset(const std::string& addressString) const;
-        boost::dynamic_bitset<> _convertArrayUCharIPv6ToBitsetIPv6(std::array<unsigned char, 16> table) const;
+        boost::dynamic_bitset<> _convertArrayUCharIPv6ToBitsetIPv6(std::array<unsigned char, 16> table) const noexcept;
     };
 }
 

@@ -15,7 +15,7 @@ namespace core {
         IPv4mask(const boost::dynamic_bitset<>& maskAddress = boost::dynamic_bitset<>(32, 4294967295));
         IPv4mask(const QString& ipAddress);
     private:
-        IPv4mask* _cloneImpl() const override;
+        IPv4mask* _cloneImpl() const noexcept override;
         friend std::istream& operator>>(std::istream&, IPv4mask&);
        };
 };

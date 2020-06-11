@@ -6,7 +6,7 @@
 #include "coreUtils.h"
 
 namespace core {
-    void ReportGeneratorV6::generate(const INetwork& network, DetaiLevel level)
+    void ReportGeneratorV6::generate(const INetwork& network, DetaiLevel level) noexcept
     {
 ////////////////////////////////////////////////////////////NETWORK///////////
         _Report = QString{"Network - IP protocol v6:\n"}
@@ -63,7 +63,7 @@ namespace core {
         }
     }
 
-    QString ReportGeneratorV6::getReport() const
+    QString ReportGeneratorV6::getReport() const noexcept
     {
         return _Report;
     }

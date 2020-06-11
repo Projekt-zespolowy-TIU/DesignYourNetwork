@@ -32,7 +32,7 @@ namespace core {
         return *this;
     }
 
-    QString IPv6address::asStringDec() const
+    QString IPv6address::asStringDec() const noexcept
     {
         auto bitsetArray =
                 this->_convertBitsetIPv6ToArrayUCharIPv6(this->_IpAddress);
@@ -40,7 +40,7 @@ namespace core {
         return addv6.to_string().c_str();
     }
 
-    QString IPv6address::asStringBin() const
+    QString IPv6address::asStringBin() const noexcept
     {
         std::string stringBinary;
         boost::to_string(_IpAddress, stringBinary);
@@ -60,7 +60,7 @@ namespace core {
     }
 
     std::array<unsigned char, 16> IPv6address::_convertBitsetIPv6ToArrayUCharIPv6(
-            const boost::dynamic_bitset<>& bitset) const
+            const boost::dynamic_bitset<>& bitset) const noexcept
     {
         std::string tempString;
         boost::to_string(bitset, tempString);
@@ -96,7 +96,7 @@ namespace core {
         return tableBitsetReturnType;
     }
 
-    IPv6address* IPv6address::_cloneImpl() const
+    IPv6address* IPv6address::_cloneImpl() const noexcept
     {
         return new IPv6address(*this);
     }

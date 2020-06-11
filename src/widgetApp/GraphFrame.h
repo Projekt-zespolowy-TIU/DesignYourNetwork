@@ -20,7 +20,6 @@ public:
     GraphFrame(NetworkButton *networkButton, QList<SubnetButton*> subnetButtons,
                QWidget *scrollArea, bool draw, float gridSize, float scale,
                QWidget *parent);
-
 protected:
 
     void paintEvent(QPaintEvent * event);

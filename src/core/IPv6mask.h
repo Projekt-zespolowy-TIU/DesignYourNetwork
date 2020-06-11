@@ -21,7 +21,7 @@ namespace core {
                                 "11111111111111111111111111111111"}));
         IPv6mask(const QString& ipAddress);
     private:
-        IPv6mask* _cloneImpl() const override;
+        IPv6mask* _cloneImpl() const noexcept override;
         friend std::istream& operator>>(std::istream&, IPv6mask&);
        };
 };

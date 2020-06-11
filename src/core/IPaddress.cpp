@@ -8,7 +8,7 @@ namespace core {
     {
     }
 
-    std::unique_ptr<IPaddress> IPaddress::clone() const
+    std::unique_ptr<IPaddress> IPaddress::clone() const noexcept
     {
         return std::unique_ptr<IPaddress>(_cloneImpl());
     }
@@ -20,29 +20,29 @@ namespace core {
         return static_cast<short>(_IpAddress.count());
     }
 
-    short IPaddress::getAddressLength() const
+    short IPaddress::getAddressLength() const noexcept
     {
         return static_cast<short>(_IpAddress.size());
     }
 
-    boost::dynamic_bitset<> IPaddress::raw() const
+    boost::dynamic_bitset<> IPaddress::raw() const noexcept
     {
         return _IpAddress;
     }
 
-    QString IPaddress::asStringBin() const
+    QString IPaddress::asStringBin() const noexcept
     {
         std::string temp;
         boost::to_string(_IpAddress, temp);
         return temp.c_str();
     }
 
-    QString IPaddress::asStringDec() const
+    QString IPaddress::asStringDec() const noexcept
     {
         return asStringBin();
     }
 
-    bool IPaddress::isMask() const
+    bool IPaddress::isMask() const noexcept
     {
         boost::dynamic_bitset<> bits(_IpAddress.size());
         bits.set();
@@ -59,27 +59,27 @@ namespace core {
         return false;
     }
 
-    IPaddress* IPaddress::_cloneImpl() const
+    IPaddress* IPaddress::_cloneImpl() const noexcept
     {
         return new IPaddress(*this);
     }
 
-    bool operator==(const IPaddress& lhs, const IPaddress& rhs)
+    bool operator==(const IPaddress& lhs, const IPaddress& rhs) noexcept
     {
         return lhs.raw() == rhs.raw();
     }
 
-    bool operator!=(const IPaddress& lhs, const IPaddress& rhs)
+    bool operator!=(const IPaddress& lhs, const IPaddress& rhs) noexcept
     {
         return !(lhs == rhs);
     }
 
-    boost::dynamic_bitset<> operator&(const IPaddress& lhs, const IPaddress& rhs)
+    boost::dynamic_bitset<> operator&(const IPaddress& lhs, const IPaddress& rhs) noexcept
     {
         return lhs.raw() & rhs.raw();
     };
 
-    boost::dynamic_bitset<> operator|(const IPaddress& lhs, const IPaddress& rhs)
+    boost::dynamic_bitset<> operator|(const IPaddress& lhs, const IPaddress& rhs) noexcept
     {
         return lhs.raw() | rhs.raw();
     }

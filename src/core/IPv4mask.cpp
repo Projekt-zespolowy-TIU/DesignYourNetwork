@@ -26,7 +26,7 @@ namespace core {
         *this = _Parser->ipFromString(ipAddress);
     }
 
-    IPv4mask *IPv4mask::_cloneImpl() const
+    IPv4mask *IPv4mask::_cloneImpl() const noexcept
     {
         return new IPv4mask(*this);
     }

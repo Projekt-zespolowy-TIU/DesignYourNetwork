@@ -8,8 +8,8 @@ namespace core {
     class ReportGeneratorV4 final: public IReportGenerator
     {
     public:
-        void generate(const INetwork &network, DetaiLevel level = DetaiLevel::NoDetails) override;
-        QString getReport() const override;
+        void generate(const INetwork &network, DetaiLevel level = DetaiLevel::NoDetails) noexcept override;
+        QString getReport() const noexcept override;
         void save(const QString &path) const override;
     private:
         QString _Report;

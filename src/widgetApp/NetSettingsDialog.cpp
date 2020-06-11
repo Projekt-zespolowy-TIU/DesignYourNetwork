@@ -203,7 +203,7 @@ void NetSettingsDialog::on_raportButton_clicked()
 {
     if(raportDialog.isHidden())
     {
-        raportDialog.setGeometry(this->geometry().x() + 700, this->geometry().y() + 150,
+        raportDialog.setGeometry(this->geometry().x() + 600, this->geometry().y() + 50,
                                  raportDialog.geometry().width(), raportDialog.geometry().height());
 
         raportDialog.displayNetworkRaport();

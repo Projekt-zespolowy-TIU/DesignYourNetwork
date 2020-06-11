@@ -28,14 +28,14 @@ void GraphFrame::paintEvent(QPaintEvent * event){
 
     if(draw)
     {
-        for(int i = 0 ; i < scrollArea->width() * subnetButtons.count(); i += 30 * gridSize)
+        for(int i = 0 ; i < scrollArea->width() * (2 + subnetButtons.count()); i += 30 * gridSize)
         {
-            painter.drawLine(QPoint(0, i), QPoint(scrollArea->height() * subnetButtons.count(), i));
+            painter.drawLine(QPoint(0, i), QPoint(scrollArea->height() * (2 + subnetButtons.count()), i));
         }
 
-        for(int i = 0 ; i < scrollArea->height() * subnetButtons.count(); i += 30 * gridSize)
+        for(int i = 0 ; i < scrollArea->height() * (2 + subnetButtons.count()); i += 30 * gridSize)
         {
-            painter.drawLine(QPoint(i, 0), QPoint(i, scrollArea->width() * subnetButtons.count()));
+            painter.drawLine(QPoint(i, 0), QPoint(i, scrollArea->width() * (subnetButtons.count() + 2)));
         }
     }
 

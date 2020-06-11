@@ -84,9 +84,25 @@ void NetSettingsDialog::saveData()
 
 void NetSettingsDialog::on_calculateButton_clicked()
 {
-    takeDataFromInput();
+    try{
+        takeDataFromInput();
+    } catch (const IPFormatExcept& e) {
+        QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
+        error.exec();
+        return;
+    }
 
-    calculateNetwork();
+    try {
+        calculateNetwork();
+    } catch (const SubnetInvalidExcept& e){
+        QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
+        error.exec();
+        return;
+    } catch (const SubnetExcept& e) {
+        QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
+        error.exec();
+        return;
+    }
 }
 
 void NetSettingsDialog::setSubnets(QList<QSpinBox*> countWidgets, QList<QLineEdit*> nameLines)
@@ -104,21 +120,8 @@ void NetSettingsDialog::calculateNetwork()
 
     if(networkv6)
     {
-        try {
             setSubnets(spinBoxListv6, subnetNamesv6);
-        } catch (const SubnetInvalidExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
-
-        try {
             calculatorv6.calcSubnets(*mainNetwork);
-        } catch (const SubnetExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
     }
     else
     {
@@ -128,23 +131,8 @@ void NetSettingsDialog::calculateNetwork()
         displayInputInBinary(mainNetwork->Mask().asStringBin(),
                               binaryMaskWidget);
 
-        try
-        {
             setSubnets(spinBoxList, subnetNames);
-        } catch (const SubnetInvalidExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
-
-        try
-        {
            calculatorv4.calcSubnets(*mainNetwork);
-        } catch (const SubnetExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
     }
 
     graphDialog.injectData(mainNetwork);
@@ -163,24 +151,12 @@ void NetSettingsDialog::takeDataFromInput()
 {
     if(isIpv6)
     {
-        try {
-            mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
-        } catch (const IPFormatExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
+        mainNetwork = std::make_shared<Networkv6>(ui->addressv6->text(), ui->maskv6->text());
     }
     else
     {
-        try {
-            mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
-                         takeStringFromInputFields(maskWidget, '.'));
-        } catch (const IPFormatExcept& e) {
-            QMessageBox error{QMessageBox::Information, "Wrong inputs", e.what(), QMessageBox::Ok, this};
-            error.exec();
-            return;
-        }
+        mainNetwork = std::make_shared<Networkv4>(takeStringFromInputFields(addressWidget, '.'),
+                     takeStringFromInputFields(maskWidget, '.'));
     }
 }
 

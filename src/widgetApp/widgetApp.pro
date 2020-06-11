@@ -7,6 +7,7 @@ include(../../common.pri)
 
 SOURCES += \
     GraphDialog.cpp \
+    GraphFrame.cpp \
     HostDialog.cpp \
     Main.cpp \
     MainWindow.cpp \

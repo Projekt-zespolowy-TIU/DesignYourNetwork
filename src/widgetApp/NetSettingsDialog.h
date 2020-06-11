@@ -40,6 +40,8 @@ public:
 
     void readData();
 
+    void saveData();
+
 private slots:
 
     void on_calculateButton_clicked();

@@ -60,12 +60,25 @@ void NetSettingsDialog::readData()
 
     if(path != nullptr)
     {
+        clearData();
         fileIO.loadIPv4(mainNetwork, path);
         calculateNetwork();
         graphDialog.injectData(mainNetwork);
         graphDialog.show();
     }
 }
+
+void NetSettingsDialog::saveData()
+{
+    FileIO fileIO;
+    QString path = QFileDialog::getSaveFileName(this);
+
+    if(path != nullptr)
+    {
+        fileIO.saveIPv4(*mainNetwork, path);
+    }
+}
+
 void NetSettingsDialog::on_calculateButton_clicked()
 {
     takeDataFromInput();
@@ -164,8 +177,8 @@ void NetSettingsDialog::displayInputInBinary(const QString &input, QWidget *disp
 }
 void NetSettingsDialog::on_drawButton_clicked()
 {
-     graphDialog.setGeometry(this->geometry().x() + 430, this->geometry().y(),
-                              graphDialog.geometry().width(), graphDialog.geometry().height());
+     graphDialog.setGeometry(this->geometry().x() + 425, this->geometry().y(),
+                                graphDialog.geometry().width(), graphDialog.geometry().height());
      graphDialog.show();
 }
 
@@ -173,6 +186,9 @@ void NetSettingsDialog::on_raportButton_clicked()
 {
     if(raportDialog.isHidden())
     {
+        raportDialog.setGeometry(this->geometry().x() + 700, this->geometry().y() + 150,
+                                 raportDialog.geometry().width(), raportDialog.geometry().height());
+
         raportDialog.displayNetworkRaport();
         raportDialog.show();
     }

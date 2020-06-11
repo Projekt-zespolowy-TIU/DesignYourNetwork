@@ -53,7 +53,7 @@ void widgetApp::MainWindow::on_actionRead_triggered()
 
 void widgetApp::MainWindow::on_actionSave_triggered()
 {
-
+    netSettingsDialog.saveData();
 }
 
 void widgetApp::MainWindow::on_actionManual_triggered()

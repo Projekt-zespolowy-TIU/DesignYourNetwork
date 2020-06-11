@@ -31,6 +31,8 @@ void RaportDialog::displayNetworkRaport()
     raportText->setFrameStyle(0);
     raportText->clear();
 
+    if(!network) return;
+
     if(isDetailed)
     {
         reportGenerator->generate(*network, DetaiLevel::SuperDetailed);

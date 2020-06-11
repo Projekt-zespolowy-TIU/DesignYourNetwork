@@ -44,7 +44,7 @@ private:
 
     std::unique_ptr<IReportGenerator> reportGenerator;
 
-    QVBoxLayout *raportLayout = new QVBoxLayout;
+    QBoxLayout *raportLayout = new QBoxLayout(QBoxLayout::LeftToRight);
 
     QTextEdit *raportText = new QTextEdit(this);
 };

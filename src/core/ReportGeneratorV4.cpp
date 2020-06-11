@@ -6,17 +6,17 @@
 #include "coreUtils.h"
 
 namespace core {
-    void ReportGeneratorV4::generate(const INetwork& network, DetaiLevel level)
+    void ReportGeneratorV4::generate(const INetwork& network, DetaiLevel level) noexcept
     {
 ////////////////////////////////////////////////////////////NETWORK///////////
-        _Report += QString{"Network - IP protocol v4:\n"}
+        _Report = QString{"Network - IP protocol v4:\n"}
                 + "\tIP: " + network.Ip().asStringDec()
                 + " Mask: " + network.Mask().asStringDec() + '\n';
 
         if(level == DetaiLevel::SuperDetailed)
         {
-            _Report += QString{"\tIP(binary): "} + network.Ip().asStringBin()
-                    + " Mask(binary): " + network.Mask().asStringBin() + '\n';
+            _Report += QString{"\tIP(binary): "} + network.Ip().asStringBin() + '\n'
+                    + "Mask(binary): " + network.Mask().asStringBin() + '\n';
         }
 ////////////////////////////////////////////////////////////~NETWORK//////////
 
@@ -29,8 +29,8 @@ namespace core {
 
             if(level == DetaiLevel::SuperDetailed)
             {
-                _Report += "\tIP(binary): " + sub->Ip().asStringBin()
-                          + " Mask(binary): " + sub->Mask().asStringBin() + '\n';
+                _Report += "\tIP(binary): " + sub->Ip().asStringBin() + '\n'
+                          + "\tMask(binary): " + sub->Mask().asStringBin() + '\n';
             }
 
             _Report += "\tBroadcast: " + dynamic_cast<Subnetv4&>(*sub).getBroadcast()->asStringDec()
@@ -39,9 +39,9 @@ namespace core {
 
             if(level == DetaiLevel::SuperDetailed)
             {
-                _Report += "\tBroadcast(binary): " + dynamic_cast<Subnetv4&>(*sub).getBroadcast()->asStringBin()
-                        + " minHost(binary): " + sub->getMinHost()->asStringBin()
-                        + " maxHost(binary): " + sub->getMaxHost()->asStringBin() + '\n';
+                _Report += "\tBroadcast(binary): " + dynamic_cast<Subnetv4&>(*sub).getBroadcast()->asStringBin() + '\n'
+                        + "\tminHost(binary): " + sub->getMinHost()->asStringBin() + '\n'
+                        + "\tmaxHost(binary): " + sub->getMaxHost()->asStringBin() + '\n';
             }
 
             _Report += QString{"\tHost capacity: "} + sub->HostNumber().str().c_str() + '\n';
@@ -65,7 +65,7 @@ namespace core {
         }
     }
 
-    QString ReportGeneratorV4::getReport() const
+    QString ReportGeneratorV4::getReport() const noexcept
     {
         return _Report;
     }

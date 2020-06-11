@@ -8,8 +8,8 @@ namespace core{
     class IIPaddrPrintable
     {
     public:
-        virtual QString asStringDec() const = 0;
-        virtual QString asStringBin() const = 0;
+        virtual QString asStringDec() const noexcept = 0;
+        virtual QString asStringBin() const noexcept = 0;
 
     //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
     public:

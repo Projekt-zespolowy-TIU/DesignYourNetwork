@@ -6,17 +6,17 @@
 #include "coreUtils.h"
 
 namespace core {
-    void ReportGeneratorV6::generate(const INetwork& network, DetaiLevel level)
+    void ReportGeneratorV6::generate(const INetwork& network, DetaiLevel level) noexcept
     {
 ////////////////////////////////////////////////////////////NETWORK///////////
-        _Report += QString{"Network - IP protocol v6:\n"}
+        _Report = QString{"Network - IP protocol v6:\n"}
                 + "\tIP: " + network.Ip().asStringDec()
                 + " Mask: " + network.Mask().asStringDec() + '\n';
 
         if(level == DetaiLevel::SuperDetailed)
         {
-            _Report += QString{"\tIP(binary): "} + network.Ip().asStringBin()
-                    + " Mask(binary): " + network.Mask().asStringBin() + '\n';
+            _Report += QString{"\tIP(binary): "} + network.Ip().asStringBin() + '\n'
+                    + "\tMask(binary): " + network.Mask().asStringBin() + '\n';
         }
 ////////////////////////////////////////////////////////////~NETWORK//////////
 
@@ -29,8 +29,8 @@ namespace core {
 
             if(level == DetaiLevel::SuperDetailed)
             {
-                _Report += "\tIP(binary): " + sub->Ip().asStringBin()
-                          + " Mask(binary): " + sub->Mask().asStringBin() + '\n';
+                _Report += "\tIP(binary): " + sub->Ip().asStringBin() + '\n'
+                          + "\tMask(binary): " + sub->Mask().asStringBin() + '\n';
             }
 
             _Report += "\tminHost: " + sub->getMinHost()->asStringDec()
@@ -38,8 +38,8 @@ namespace core {
 
             if(level == DetaiLevel::SuperDetailed)
             {
-                _Report += "\tminHost(binary): " + sub->getMinHost()->asStringBin()
-                        + " maxHost(binary): " + sub->getMaxHost()->asStringBin() + '\n';
+                _Report += "\tminHost(binary): " + sub->getMinHost()->asStringBin() + '\n'
+                        + "\tmaxHost(binary): " + sub->getMaxHost()->asStringBin() + '\n';
             }
 
             _Report += QString{"\tHost capacity: "} + sub->HostNumber().str().c_str() + '\n';
@@ -63,7 +63,7 @@ namespace core {
         }
     }
 
-    QString ReportGeneratorV6::getReport() const
+    QString ReportGeneratorV6::getReport() const noexcept
     {
         return _Report;
     }

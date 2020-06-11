@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QLayout>
 #include <QFrame>
+#include <QPainter>
+#include <QPen>
 
 #include "NetworkDialog.h"
 #include "SubnetDialog.h"
@@ -36,12 +38,6 @@ private slots:
 
      void on_hostButton_clicked(const std::shared_ptr<Host>& host);
 
-     void on_coloredGraphcheckBox_clicked(bool checked);
-
-     void on_verticalViewButton_clicked(bool checked);
-
-     void on_horizontalViewButton_clicked(bool checked);
-
      void on_scaleSlider_sliderMoved(int position);
 
      void on_hostNames_toggled(bool checked);
@@ -50,17 +46,28 @@ private slots:
 
      void on_networkAddress_toggled(bool checked);
 
+     void on_gridCheckBox_toggled(bool checked);
+
+
+     void on_gridScaleSlider_sliderMoved(int position);
+
+     void on_hostsInRowSlider_valueChanged(int value);
+
+     void on_subnetsNamesCheckBox_toggled(bool checked);
+
 private:
 
     Ui::GraphDialog *ui;
 
-    bool isVertical = false;
-    bool isColored = false;
     bool showsHostNames = false;
-    bool showsSubnetAddresses = false;
-    bool showsNetworkAddress = false;
+    bool showsSubnetsNames = true;
+    bool showsSubnetsAddresses = true;
+    bool showsNetworkAddress = true;
+    bool showsGrid = true;
 
+    int hostsInRow = 8;
     float scale = 1.0f;
+    float gridSize = 1.0f;
 
     NetworkDialog networkDialog{this};
 

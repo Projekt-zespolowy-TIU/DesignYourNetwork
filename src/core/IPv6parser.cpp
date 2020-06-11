@@ -13,17 +13,15 @@ namespace core {
 
     boost::dynamic_bitset<> IPv6parser::_getBitset(const std::string& addressString) const
     {
-//        throw NotImplemented{};////////////////////////////////////////////////////////////////////////////////////////////////////
-
         try {
             auto v6address = boost::asio::ip::make_address_v6(addressString);
             return _convertArrayUCharIPv6ToBitsetIPv6(v6address.to_bytes());
         } catch (const boost::system::system_error&) {
-            throw IPFormatExcept{"Passed string cannot be converted into valid IP version 4"};
+            throw IPFormatExcept{"Passed string cannot be converted into valid IP version 6"};
         }
     }
 
-    boost::dynamic_bitset<> IPv6parser::_convertArrayUCharIPv6ToBitsetIPv6(std::array<unsigned char, 16> table) const
+    boost::dynamic_bitset<> IPv6parser::_convertArrayUCharIPv6ToBitsetIPv6(std::array<unsigned char, 16> table) const noexcept
     {
         std::string bitsetBuffer;
         for(const auto& element : table)

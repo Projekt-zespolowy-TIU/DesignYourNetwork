@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>460</width>
-    <height>320</height>
+    <height>333</height>
    </rect>
   </property>
   <property name="font">
@@ -34,7 +34,7 @@ color: rgb(220, 220, 220);</string>
      <x>10</x>
      <y>10</y>
      <width>441</width>
-     <height>301</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="font">
@@ -85,14 +85,14 @@ color: rgb(220, 220, 220);</string>
       <x>10</x>
       <y>190</y>
       <width>420</width>
-      <height>101</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="tabPosition">
      <enum>QTabWidget::North</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -103,8 +103,8 @@ color: rgb(220, 220, 220);</string>
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>401</width>
-        <height>54</height>
+        <width>391</width>
+        <height>61</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -143,7 +143,7 @@ color: rgb(220, 220, 220);</string>
        <item row="0" column="1">
         <widget class="QLineEdit" name="networkAddressDecimal">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -153,13 +153,16 @@ color: rgb(220, 220, 220);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="networkMaskDecimal">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -169,6 +172,9 @@ color: rgb(220, 220, 220);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -179,32 +185,16 @@ color: rgb(220, 220, 220);</string>
      <attribute name="title">
       <string>Binary</string>
      </attribute>
-     <widget class="QWidget" name="layoutWidget_2">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>9</y>
-        <width>401</width>
-        <height>54</height>
+        <y>10</y>
+        <width>391</width>
+        <height>61</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_14">
-         <property name="font">
-          <font>
-           <family>Segoe UI Emoji</family>
-           <pointsize>13</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Address:</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_15">
          <property name="font">
@@ -224,7 +214,7 @@ color: rgb(220, 220, 220);</string>
        <item row="0" column="1">
         <widget class="QLineEdit" name="networkAddressBinary">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -233,14 +223,17 @@ color: rgb(220, 220, 220);</string>
           <bool>true</bool>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="networkMaskBinary">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -249,7 +242,26 @@ color: rgb(220, 220, 220);</string>
           <bool>true</bool>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="font">
+          <font>
+           <family>Segoe UI Emoji</family>
+           <pointsize>13</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Address:</string>
          </property>
         </widget>
        </item>
@@ -308,7 +320,7 @@ color: rgb(220, 220, 220);</string>
       <x>21</x>
       <y>10</y>
       <width>211</width>
-      <height>54</height>
+      <height>56</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
@@ -347,7 +359,7 @@ color: rgb(220, 220, 220);</string>
      <item row="0" column="2">
       <widget class="QLineEdit" name="networkName">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -357,13 +369,16 @@ color: rgb(220, 220, 220);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
       <widget class="QLineEdit" name="subnetCount">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -373,6 +388,9 @@ color: rgb(220, 220, 220);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -423,7 +441,7 @@ color: rgb(220, 220, 220);</string>
      <item row="0" column="1">
       <widget class="QLineEdit" name="hostCount">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -433,13 +451,16 @@ color: rgb(220, 220, 220);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="hostCapacity">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(60, 60, 60);</string>
@@ -449,6 +470,9 @@ color: rgb(220, 220, 220);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

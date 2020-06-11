@@ -16,27 +16,27 @@ namespace core {
     class ISubnet
     {
     public:
-        std::shared_ptr<ISubnet> clone() const{
+        std::shared_ptr<ISubnet> clone() const noexcept{
             return std::shared_ptr<ISubnet>{_cloneImpl()};
         };
-        virtual QString SubName() const = 0;
-        virtual cpp_int HostNumber() const = 0;
-        virtual const IPaddress& Ip() const = 0;
-        virtual const IPaddress& Mask() const = 0;
-        virtual const std::vector<std::shared_ptr<Host>>& HostsList() const = 0;
+        virtual QString SubName() const noexcept = 0;
+        virtual cpp_int HostNumber() const noexcept = 0;
+        virtual const IPaddress& Ip() const noexcept = 0;
+        virtual const IPaddress& Mask() const noexcept = 0;
+        virtual const std::vector<std::shared_ptr<Host>>& HostsList() const noexcept = 0;
 
-        virtual void Ip(std::unique_ptr<IPaddress> ip) = 0;
-        virtual void Mask(std::unique_ptr<IPaddress> mask) = 0;
-        virtual void SubName(const QString& newName) = 0;
+        virtual void Ip(std::unique_ptr<IPaddress> ip) noexcept = 0;
+        virtual void Mask(std::unique_ptr<IPaddress> mask) noexcept = 0;
+        virtual void SubName(const QString& newName) noexcept = 0;
 
         virtual void addHost(std::unique_ptr<IPaddress> ip,
-                             const QString& name) = 0;
-        virtual bool isHost(const IPaddress& hostIP) const = 0;
+                             const QString& name) noexcept = 0;
+        virtual bool isHost(const IPaddress& hostIP) const noexcept = 0;
         virtual cpp_int hostsCapacity() const = 0;
         virtual std::unique_ptr<IPaddress> getMinHost() const = 0;
         virtual std::unique_ptr<IPaddress> getMaxHost() const = 0;
     private:
-        virtual ISubnet* _cloneImpl() const = 0;
+        virtual ISubnet* _cloneImpl() const noexcept = 0;
 
     //~~~~~~~~~~~~~~~~INTERFACE OVERHEAD~~~~~~~~~~~~~~~~//
     public:

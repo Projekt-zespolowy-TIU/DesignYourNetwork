@@ -6,6 +6,8 @@ HostDialog::HostDialog(QWidget *parent) :
     ui(new Ui::HostDialog)
 {
     ui->setupUi(this);
+
+
 }
 
 HostDialog::~HostDialog()
@@ -35,7 +37,6 @@ void HostDialog::SetData()
     ui->hostAddressBinary->setText(host->Ip().asStringBin());
     ui->hostAddressDecimal->setText(host->Ip().asStringDec());
 }
-
 
 void HostDialog::on_hostName_textEdited(const QString& name)
 {

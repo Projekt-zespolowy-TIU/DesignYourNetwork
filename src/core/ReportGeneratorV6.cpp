@@ -51,11 +51,11 @@ namespace core {
                 for(const auto& host : sub->HostsList())
                 {
                     _Report += "\t\t" + host->Name();
-                    _Report += " " + host->Ip().asStringDec() + '\n';
+                    _Report += " IP: " + host->Ip().asStringDec() + '\n';
 
                     if(level == DetaiLevel::SuperDetailed)
                     {
-                         _Report += "\t\t\t" + host->Ip().asStringBin() + '\n';
+                         _Report += "\t\t\tIP(binary): " + host->Ip().asStringBin() + '\n';
                     }
                 }
             }

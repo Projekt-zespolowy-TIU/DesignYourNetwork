@@ -18,6 +18,11 @@ RaportDialog::RaportDialog(QWidget *parent) :
     ui(new Ui::RaportDialog)
 {
     ui->setupUi(this);
+    ui->raportScrollContent->setLayout(raportLayout);
+
+    raportText->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
+    raportText->setFrameStyle(0);
+    raportLayout->addWidget(raportText);
 }
 
 RaportDialog::~RaportDialog()
@@ -27,8 +32,6 @@ RaportDialog::~RaportDialog()
 
 void RaportDialog::displayNetworkRaport()
 {
-    ui->raportScrollContent->setLayout(raportLayout);
-    raportText->setFrameStyle(0);
     raportText->clear();
 
     if(!network) return;
@@ -43,8 +46,6 @@ void RaportDialog::displayNetworkRaport()
     }
 
     raportText->append(reportGenerator->getReport());
-
-    raportLayout->addWidget(raportText);
 }
 
 void RaportDialog::injectData(const std::shared_ptr<INetwork>& net4, std::unique_ptr<IReportGenerator> reportEngine)

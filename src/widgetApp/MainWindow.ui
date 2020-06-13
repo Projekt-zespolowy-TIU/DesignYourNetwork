@@ -137,11 +137,6 @@ p, li { white-space: pre-wrap; }
     <string>New</string>
    </property>
   </action>
-  <action name="actionRead">
-   <property name="text">
-    <string>Read</string>
-   </property>
-  </action>
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
@@ -155,6 +150,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionRead">
+   <property name="text">
+    <string>Read</string>
    </property>
   </action>
  </widget>

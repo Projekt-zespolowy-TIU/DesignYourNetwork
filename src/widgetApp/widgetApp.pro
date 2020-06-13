@@ -15,6 +15,8 @@ SOURCES += \
     NetSettingsDialog.cpp \
     NetworkDialog.cpp \
     RaportDialog.cpp \
+    ReadDialog.cpp \
+    SaveDialog.cpp \
     SubnetDialog.cpp
 
 HEADERS += \
@@ -28,6 +30,8 @@ HEADERS += \
     NetworkButton.h \
     NetworkDialog.h \
     RaportDialog.h \
+    ReadDialog.h \
+    SaveDialog.h \
     SubnetButton.h \
     SubnetDialog.h
 
@@ -39,6 +43,8 @@ FORMS += \
     NetSettingsDialog.ui \
     NetworkDialog.ui \
     RaportDialog.ui \
+    ReadDialog.ui \
+    SaveDialog.ui \
     SubnetDialog.ui
 
 include(../core/core.pri)

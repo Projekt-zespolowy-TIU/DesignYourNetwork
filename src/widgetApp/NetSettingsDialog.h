@@ -38,9 +38,9 @@ public:
 
     void clearData();
 
-    void readData();
+    void readData(bool isIpv6);
 
-    void saveData();
+    void saveData(bool isIpv6);
 
 private slots:
 

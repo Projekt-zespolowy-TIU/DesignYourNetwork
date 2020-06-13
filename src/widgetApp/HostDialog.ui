@@ -10,6 +10,18 @@
     <height>259</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>478</width>
+    <height>259</height>
+   </size>
+  </property>
   <property name="font">
    <font>
     <pointsize>12</pointsize>
@@ -166,7 +178,7 @@ color: rgb(220, 220, 220);</string>
      <attribute name="title">
       <string>Binary</string>
      </attribute>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>

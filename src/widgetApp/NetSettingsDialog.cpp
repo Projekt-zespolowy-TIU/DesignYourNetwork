@@ -56,7 +56,7 @@ void NetSettingsDialog::clearData()
     raportDialog.close();
 }
 
-void NetSettingsDialog::readData()
+void NetSettingsDialog::readData(bool isIpv6)
 {
     FileIO fileIO;
     QString path = QFileDialog::getOpenFileName(this);
@@ -64,21 +64,32 @@ void NetSettingsDialog::readData()
     if(path != nullptr)
     {
         clearData();
-        fileIO.loadIPv4(mainNetwork, path);
+
+        if(isIpv6)
+          fileIO.loadIPv6(mainNetwork, path);
+        else fileIO.loadIPv4(mainNetwork,path);
+
         calculateNetwork();
         graphDialog.injectData(mainNetwork);
         graphDialog.show();
     }
 }
 
-void NetSettingsDialog::saveData()
+void NetSettingsDialog::saveData(bool isIpv6)
 {
     FileIO fileIO;
     QString path = QFileDialog::getSaveFileName(this);
 
     if(path != nullptr)
     {
-        fileIO.saveIPv4(*mainNetwork, path);
+        if(isIpv6)
+        {
+            fileIO.saveIPv6(*mainNetwork, path);
+        }
+        else
+        {
+            fileIO.saveIPv4(*mainNetwork, path);
+        }
     }
 }
 

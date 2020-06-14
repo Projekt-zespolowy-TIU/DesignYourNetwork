@@ -8,16 +8,10 @@
 #include <QLayout>
 #include <QPushButton>
 
-#include "NetworkButton.h"
-#include "NetworkDialog.h"
-#include "SubnetButton.h"
-#include "SubnetDialog.h"
-#include "HostButton.h"
-#include "HostDialog.h"
-#include "GraphDialog.h"
-#include "RaportDialog.h"
 #include "NetSettingsDialog.h"
 #include "ManualDialog.h"
+#include "ReadDialog.h"
+#include "SaveDialog.h"
 
 #include "core/INetwork.h"
 #include "core/SubnetsCalculatorV4.h"
@@ -62,6 +56,10 @@ namespace widgetApp{
         NetSettingsDialog netSettingsDialog{this};
 
         ManualDialog manualDialog{this};
+
+        ReadDialog readDialog{&netSettingsDialog, this};
+
+        SaveDialog saveDialog{&netSettingsDialog, this};
 
         void openNetSettings();
     };

@@ -17,7 +17,7 @@ GraphDialog::GraphDialog(QWidget *parent) :
 
     subnetGraphContent = ui-> graphScroll;
 
-    subnetGraphContent->setLayout(graphPanelLayout);    
+    subnetGraphContent->setLayout(graphPanelLayout);
 }
 
 GraphDialog::~GraphDialog()

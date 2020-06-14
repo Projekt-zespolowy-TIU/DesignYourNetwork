@@ -13,5 +13,7 @@
         <file>icons/graph.ico</file>
         <file>icons/netSettings.ico</file>
         <file>icons/manual.ico</file>
+        <file>icons/save.ico</file>
+        <file>icons/load.ico</file>
     </qresource>
 </RCC>

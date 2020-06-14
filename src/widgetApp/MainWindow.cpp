@@ -1,9 +1,5 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "SubnetDialog.h"
-#include "SubnetButton.h"
-#include "NetworkDialog.h"
-#include "NetworkButton.h"
 #include "NetSettingsDialog.h"
 
 #include <QSpinBox>
@@ -48,12 +44,16 @@ void widgetApp::MainWindow::on_actionNew_triggered()
 
 void widgetApp::MainWindow::on_actionRead_triggered()
 {
-    netSettingsDialog.readData();
+    readDialog.show();
+    readDialog.setFocus();
+    readDialog.setModal(true);
 }
 
 void widgetApp::MainWindow::on_actionSave_triggered()
 {
-    netSettingsDialog.saveData();
+    saveDialog.show();
+    readDialog.setFocus();
+    saveDialog.setModal(true);
 }
 
 void widgetApp::MainWindow::on_actionManual_triggered()

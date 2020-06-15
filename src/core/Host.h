@@ -1,6 +1,6 @@
 #pragma once
 #ifndef HOST_H
-#define HOSTH
+#define HOST_H
 
 #include <memory>
 #include <QString>

@@ -58,8 +58,13 @@ void NetSettingsDialog::clearData()
 
 void NetSettingsDialog::readData(bool isIpv6)
 {
+    QString dir = QCoreApplication::applicationDirPath();
+
+    QString filters("JSON files (*.json);;All files (*.*)");
+    QString defaultFilter("JSON files (*.json)");
+
     FileIO fileIO;
-    QString path = QFileDialog::getOpenFileName(this);
+    QString path = QFileDialog::getOpenFileName(nullptr, tr("Load state..."), dir, filters, &defaultFilter);
 
     if(path != nullptr)
     {
@@ -77,8 +82,13 @@ void NetSettingsDialog::readData(bool isIpv6)
 
 void NetSettingsDialog::saveData(bool isIpv6)
 {
+    QString dir = QCoreApplication::applicationDirPath();
+
+    QString filters("JSON files (*.json);;All files (*.*)");
+    QString defaultFilter("JSON files (*.json)");
+
     FileIO fileIO;
-    QString path = QFileDialog::getSaveFileName(this);
+    QString path = QFileDialog::getSaveFileName(nullptr, tr("Save state..."), dir, filters, &defaultFilter);
 
     if(path != nullptr)
     {

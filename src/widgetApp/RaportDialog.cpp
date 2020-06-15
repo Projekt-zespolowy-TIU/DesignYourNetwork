@@ -55,11 +55,17 @@ void RaportDialog::injectData(const std::shared_ptr<INetwork>& net4, std::unique
 }
 
 void RaportDialog::on_saveButton_clicked()
-{
+{    
     QString dir = QCoreApplication::applicationDirPath();
-    QString filename = QFileDialog::getSaveFileName(this);
+    QString fileName = "DesignYourNetwork_report.txt";
+    QString fullPath = dir + '/' + fileName;
 
-    reportGenerator->save(filename);
+    QString filters("Text files (*.txt);;All files (*.*)");
+    QString defaultFilter("Text files (*.txt)");
+
+    QString saveFileName = QFileDialog::getSaveFileName(nullptr, tr("Save report as..."), fullPath, filters, &defaultFilter);
+
+    reportGenerator->save(saveFileName);
 }
 
 void RaportDialog::on_checkBox_toggled(bool checked)
